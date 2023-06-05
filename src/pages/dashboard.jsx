@@ -17,6 +17,7 @@ import MenuOpenIcon from '@mui/icons-material/MenuOpen';
 import WidgetsIcon from '@mui/icons-material/Widgets';
 import VerticalStepper from '../components/verticalstepper';
 import Calendar from '../components/calendarcomponent';
+import SearchComponent from '../components/searchcomponent';
 
 const Dashboard = () => {
 
@@ -71,7 +72,7 @@ const Dashboard = () => {
               <MenuItem value="Admin">Admin</MenuItem>
             </Select>
           </FormControl>
-          <div className="yourOrders"><a href="#">Your Order</a><ArrowForwardIosIcon /></div>
+          <div className="yourOrders"><a href="#">Your Order</a><ArrowForwardIosIcon fontSize='15px' sx={{marginLeft: "5px"}} /></div>
           <Divider sx={{ margin: '1rem 0' }} />
           <VerticalStepper />
         </div>
@@ -94,10 +95,7 @@ const Dashboard = () => {
           </div>
         </div>
         <div className="right-dashboard" id='Right-Bar'>
-          <Typography variant="h4" component="h2">
-            Be Productive
-          </Typography>
-          <Divider sx={{ marginBottom: '1rem' }} />
+          <SearchComponent/>
           <Calendar />
         </div>
       </div>
