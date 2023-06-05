@@ -15,10 +15,7 @@ import {
 import VerticalStepper from '../components/verticalstepper';
 
 const Dashboard = () => {
-  function ShowTime(){
-    document.getElementById('time').innerHTML= new Date();
-  }
-  setInterval(ShowTime, 100)
+  const ShowTime = new Date().toLocaleString();
 
   return (
 
@@ -46,7 +43,7 @@ const Dashboard = () => {
           <div className="welcome-message" style={{background: `url(${BackgroundImage})`}}>
             <div className="left-message">
             <h1>Welcome Back User</h1>
-            <h4 id="time"></h4>
+            <h4>{ShowTime}</h4>
             <p>"Quotes From Rapid API Realted To HealthCare"</p>
             </div>
             <div className="right-message">
