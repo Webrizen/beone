@@ -30,65 +30,74 @@ const Dashboard = () => {
     };
   }, []);
 
-  function ToggleLeftSideBar(){
+  function ToggleLeftSideBar() {
     const LeftBar = document.getElementById('Left-Bar');
     if (LeftBar.style.transform === "translateX(-200%)") {
-      LeftBar.style.transform="translateX(3%)"
+      LeftBar.style.transform = "translateX(3%)"
     } else {
-      LeftBar.style.transform="translateX(-200%)"
+      LeftBar.style.transform = "translateX(-200%)"
     }
   }
 
-  function ToggleRightSideBar(){
+  function ToggleRightSideBar() {
     const RightBar = document.getElementById('Right-Bar');
     if (RightBar.style.transform === "translateX(200%)") {
-      RightBar.style.transform="translateX(3%)"
+      RightBar.style.transform = "translateX(3%)"
     } else {
-      RightBar.style.transform="translateX(200%)"
+      RightBar.style.transform = "translateX(200%)"
     }
   }
 
   return (
 
     <>
-    <Navbar/>
-    <div className="two-flex">
-      <div className="ico" onClick={ToggleLeftSideBar}><MenuOpenIcon/></div>
-      <div className="ico" onClick={ToggleRightSideBar}><WidgetsIcon/></div>
-    </div>
+      <Navbar />
+      <div className="two-flex">
+        <div className="ico" onClick={ToggleLeftSideBar}><MenuOpenIcon /></div>
+        <div className="ico" onClick={ToggleRightSideBar}><WidgetsIcon /></div>
+      </div>
       <div className="main-dashboard">
         <div className="left-dashboard" id='Left-Bar'>
           <FormControl fullWidth>
             <InputLabel id="demo-simple-select-label">Select Your Order</InputLabel>
             <Select
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            label="Select Your Order"
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              label="Select Your Order"
             >
               <MenuItem value="Student">Student</MenuItem>
               <MenuItem value="Teacher">Teacher</MenuItem>
               <MenuItem value="Admin">Admin</MenuItem>
             </Select>
           </FormControl>
-          <div className="yourOrders"><a href="#">Your Order</a><ArrowForwardIosIcon/></div>
+          <div className="yourOrders"><a href="#">Your Order</a><ArrowForwardIosIcon /></div>
           <Divider sx={{ margin: '1rem 0' }} />
           <VerticalStepper />
         </div>
         <div className="middle-dashboard">
-          <div className="welcome-message" style={{background: `url(${BackgroundImage})`}}>
+          <div className="welcome-message" style={{ background: `url(${BackgroundImage})` }}>
             <div className="left-message">
-            <h1>Welcome Back User</h1>
-            <h4>{currentTime}</h4>
-            <p>"Quotes From Rapid API Realted To HealthCare"</p>
+              <h1>Welcome Back User</h1>
+              <h4>{currentTime}</h4>
+              <p>Welcome to your dashboard!
+
+                Here, you'll find all the steps of your journey with us. Each time you log in, an Icon will guide you to the current step and show you what the next step is. To progress, simply click on the current step.
+
+                If you need to review previous steps, you can scroll up. To return to the current step, just click the current task button on the Top menu bar.
+
+                Enjoy your journey with us!
+
+              </p>
             </div>
             <div className="right-message">
               {/* Yaha User Ka Profile Image Dalna  */}
-            <img src="/favicon.png" alt="Beone." />
+              <img src="/favicon.png" alt="Beone." />
             </div>
           </div>
         </div>
         <div className="right-dashboard" id='Right-Bar'>
-          </div>
+          Right side
+        </div>
       </div>
     </>
   );

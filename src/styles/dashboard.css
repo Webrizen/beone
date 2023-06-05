@@ -52,9 +52,7 @@
 .welcome-message .left-message{
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: left;
+    text-align: left !important;
     gap: 10px;
     width: 100%;
     background: rgba(225,225,225,0.1);
@@ -70,9 +68,12 @@
     -webkit-text-fill-color: transparent;
     -webkit-background-clip: text;
     background-clip: text;
+    text-align: left;
 }
 .welcome-message .left-message p{
-    font-style: italic;
+    font-size: 14px;
+    text-align: left;
+    color: rgba(225,225,225,0.5);
 }
 .right-message{
     width: 100%;
