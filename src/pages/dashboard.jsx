@@ -16,6 +16,7 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import MenuOpenIcon from '@mui/icons-material/MenuOpen';
 import WidgetsIcon from '@mui/icons-material/Widgets';
 import VerticalStepper from '../components/verticalstepper';
+import Calendar from '../components/calendarcomponent';
 
 const Dashboard = () => {
 
@@ -79,13 +80,10 @@ const Dashboard = () => {
             <div className="left-message">
               <h1>Welcome Back User</h1>
               <h4>{currentTime}</h4>
-              <p>Welcome to your dashboard!
-
+              <p>
                 Here, you'll find all the steps of your journey with us. Each time you log in, an Icon will guide you to the current step and show you what the next step is. To progress, simply click on the current step.
 
                 If you need to review previous steps, you can scroll up. To return to the current step, just click the current task button on the Top menu bar.
-
-                Enjoy your journey with us!
 
               </p>
             </div>
@@ -96,7 +94,11 @@ const Dashboard = () => {
           </div>
         </div>
         <div className="right-dashboard" id='Right-Bar'>
-          Right side
+          <Typography variant="h4" component="h2">
+            Be Productive
+          </Typography>
+          <Divider sx={{ marginBottom: '1rem' }} />
+          <Calendar />
         </div>
       </div>
     </>
