@@ -68,11 +68,9 @@
     -webkit-text-fill-color: transparent;
     -webkit-background-clip: text;
     background-clip: text;
-    text-align: left;
 }
 .welcome-message .left-message p{
     font-size: 14px;
-    text-align: left;
     color: rgba(225,225,225,0.5);
 }
 .right-message{
@@ -126,6 +124,9 @@
         margin: 0px auto;
         transform: translateX(-200%);
         transition: all 0.5s;
+    }
+    .welcome-message .left-message{
+        text-align: center !important;
     }
     .right-dashboard{
         position: absolute;
