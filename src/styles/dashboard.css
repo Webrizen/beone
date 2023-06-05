@@ -85,14 +85,58 @@
 .right-message img{
     width: 100%;
 }
+.yourOrders{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    text-align: left;
+    border-radius: 4px;
+    backdrop-filter: blur(90px);
+    width: 100% !important;
+    border: 0.1px solid rgba(192, 192, 192, 0.349);
+    text-transform: uppercase;
+    font-size: 16px;
+    cursor: pointer;
+    margin: 10px 0 !important;
+    color:  rgba(0,0,0,0.4) !important;
+}
+.yourOrders a{
+    color: rgba(0,0,0,0.4) !important;
+}
+.yourOrders:hover{
+    background: rgba(0,0,0,0.1);
+}
+.two-flex{
+    display: none;
+}
 @media only screen and (max-width: 768px) {
     .main-dashboard{
         grid-template-columns: 1fr;
+        overflow-x: hidden;
+        position: relative;
     }
     .left-dashboard{
+        position: absolute;
+        z-index: 999;
+        background: #f1f1f1;
+        width: 95%;
+        margin: 0px auto;
+        transform: translateX(-200%);
+        transition: all 0.5s;
+    }
+    .right-dashboard{
+        position: absolute;
+        z-index: 999;
+        background: #f1f1f1;
+        width: 95%;
+        margin: 0px auto;
+        transform: translateX(200%);
+        transition: all 0.5s;
+    }
+    .middle-dashboard{
         width: 100%;
-        height: 50vh;
-        overflow-y: scroll;
     }
     .welcome-message{
         display: flex;
@@ -103,5 +147,26 @@
         text-align: center;
         justify-content: center;
         align-items: center;
+    }
+    .two-flex{
+        display: flex;
+        justify-content: space-between;
+        width: 100vw;
+        align-items: center;
+        padding: 5px 10px;
+    }
+    .ico{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 45px;
+        height: 45px;
+        border: 0.1px solid rgba(192, 192, 192, 0.349);
+        border-radius: 7px;
+        margin: 0 5px;
+        cursor: pointer;
+    }
+    .ico:hover{
+        background: rgba(0,0,0,0.01);
     }
 }

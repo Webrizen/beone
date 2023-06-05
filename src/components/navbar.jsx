@@ -3,8 +3,9 @@ import './navbar.css';
 import { Tooltip, Avatar, IconButton, Menu, MenuItem } from '@mui/material';
 import { TaskAlt, Settings, Folder } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
+import CircularStatic from './circularprogresswithlabel';
 
-const Navbar = () => {
+const Navbar = (props) => {
   const [anchorEl, setAnchorEl] = useState(null);
 
   const handleClick = (event) => {
@@ -19,10 +20,12 @@ const Navbar = () => {
     <>
       <header>
         <Link to="/"><div className="logo">
-        <img src="/favicon.png" alt="Beone." />
-      </div></Link>
+          <img src="/favicon.png" alt="Beone." />
+        </div></Link>
         <div className="right-nav">
           {/* Redirect On Click, Yeh Frontend ka Performance thik rakhega  */}
+          <Tooltip title='Your Current Status'>
+            <div className="ico"><CircularStatic/></div></Tooltip>
           <Tooltip title="Current Task">
             <div className='ico'><TaskAlt /></div>
           </Tooltip>
@@ -35,7 +38,7 @@ const Navbar = () => {
               size='small'
             >
               <Avatar
-                alt='Brshcode'
+                alt='Arshcode'
                 src='/static/images/avatar/3.jpg'
               />
             </IconButton>

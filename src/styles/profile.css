@@ -1,5 +1,5 @@
 .Profile{
-    width: 100vw;
+    width: 100%;
     padding: 10px;
 }
 .Model-box{
@@ -62,6 +62,14 @@
 }
 .Picedit:hover{
     background: rgba(225,225,225,0.4) !important;
+}
+.cont-MUI{
+    margin: 0 !important;
+    padding: 0 !important;
+    margin: 0 auto !important;
+}
+.Bg-cont{
+    padding: 0 !important;
 }
 @media only screen and (max-width: 768px) {
     .Model-box{

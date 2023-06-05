@@ -12,10 +12,18 @@ import {
   ListItem,
   ListItemAvatar,
   ListItemText,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
   Modal,
   Box,
   TextField,
 } from "@mui/material";
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import MenuOpenIcon from '@mui/icons-material/MenuOpen';
+import WidgetsIcon from '@mui/icons-material/Widgets';
+import VerticalStepper from '../components/verticalstepper';
 import Navbar from "../components/navbar";
 import {
   AccountCircle,
@@ -78,10 +86,51 @@ const Profile = () => {
     weightUnit: "kg",
   };
 
+  function ToggleLeftSideBar(){
+    const LeftBar = document.getElementById('Left-Bar');
+    if (LeftBar.style.transform === "translateX(-200%)") {
+      LeftBar.style.transform="translateX(3%)"
+    } else {
+      LeftBar.style.transform="translateX(-200%)"
+    }
+  }
+
+  function ToggleRightSideBar(){
+    const RightBar = document.getElementById('Right-Bar');
+    if (RightBar.style.transform === "translateX(200%)") {
+      RightBar.style.transform="translateX(3%)"
+    } else {
+      RightBar.style.transform="translateX(200%)"
+    }
+  }
+
   return (
     <>
       <Navbar />
-      <div className="Profile">
+      <div className="two-flex">
+      <div className="ico" onClick={ToggleLeftSideBar}><MenuOpenIcon/></div>
+      <div className="ico" onClick={ToggleRightSideBar}><WidgetsIcon/></div>
+    </div>
+      <div className="main-dashboard">
+        <div className="left-dashboard" id='Left-Bar'>
+          <FormControl fullWidth>
+            <InputLabel id="demo-simple-select-label">Select Your Order</InputLabel>
+            <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            label="Select Your Order"
+            >
+              <MenuItem value="Student">Student</MenuItem>
+              <MenuItem value="Teacher">Teacher</MenuItem>
+              <MenuItem value="Admin">Admin</MenuItem>
+            </Select>
+          </FormControl>
+          <div className="yourOrders"><a href="#">Your Order</a><ArrowForwardIosIcon/></div>
+          <Divider sx={{ margin: '1rem 0' }} />
+          <VerticalStepper />
+        </div>
+        <div className="middle-dashboard">
+        <div className="Profile">
         <Container maxWidth="md" className="cont-MUI">
           <Paper elevation={3} sx={{ padding: "2rem" }} className="Bg-cont">
             <Grid
@@ -337,6 +386,11 @@ const Profile = () => {
             </Grid>
           </Paper>
         </Container>
+      </div>
+        </div>
+        <div className="right-dashboard" id='Right-Bar'>
+          Right Bar
+          </div>
       </div>
     </>
   );
