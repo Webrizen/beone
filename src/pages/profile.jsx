@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import '../styles/profile.css';
+import React, { useState } from "react";
+import "../styles/profile.css";
 import {
   Container,
   Grid,
@@ -15,17 +15,33 @@ import {
   Modal,
   Box,
   TextField,
-} from '@mui/material';
-import Navbar from '../components/navbar';
-import { AccountCircle, LocationOn, Phone, Email, Description } from '@mui/icons-material';
+} from "@mui/material";
+import Navbar from "../components/navbar";
+import {
+  AccountCircle,
+  LocationOn,
+  Phone,
+  Email,
+  Description,
+  Edit
+} from "@mui/icons-material";
 
 const Profile = () => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => {
     setOpen(true);
+    setProfilePicFile(null);
   };
+
+  const [profilePicFile, setProfilePicFile] = useState(null);
+
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const handleProfilePicChange = (e) => {
+    const file = e.target.files[0];
+    setProfilePicFile(file);
   };
 
   const handleSubmit = (e) => {
@@ -33,23 +49,76 @@ const Profile = () => {
     // Handle form submission here
   };
 
+  // Dummy data
+  const personalInformation = {
+    ageInYears: 25,
+    createdAt: "2023-06-05T05:51:27.249Z",
+    dob: "1998-01-01",
+    email: "john.doe@example.com",
+    firstName: "John",
+    gender: "Male",
+    height: 180,
+    heightUnit: "cm",
+    id: "123456",
+    lastName: "Doe",
+    middleName: "",
+    mobileNumber: "+1 123-456-7890",
+    profilePic: "path/to/profile-pic.jpg",
+    roles: [
+      {
+        id: "role1",
+        name: "User",
+      },
+    ],
+    shopifyCustomerId: "shopify123",
+    title: "Medical Patient",
+    updatedAt: "2023-06-05T05:51:27.249Z",
+    username: "johndoe",
+    weight: 75,
+    weightUnit: "kg",
+  };
+
   return (
     <>
       <Navbar />
       <div className="Profile">
-        <Container maxWidth="md" className='cont-MUI'>
-          <Paper elevation={3} sx={{ padding: '2rem' }} className="Bg-cont">
-            <Grid container spacing={4} alignItems="center" className="BG-profile">
-              <Grid item className='GridProfile-MUI'>
+        <Container maxWidth="md" className="cont-MUI">
+          <Paper elevation={3} sx={{ padding: "2rem" }} className="Bg-cont">
+            <Grid
+              container
+              spacing={4}
+              alignItems="center"
+              className="BG-profile"
+            >
+              <Grid item className="GridProfile-MUI">
                 <Avatar sx={{ width: 150, height: 150 }}>
-                  <AccountCircle sx={{ width: '100%', height: '100%' }} />
+                  {profilePicFile ? (
+                    <img
+                      src={URL.createObjectURL(profilePicFile)}
+                      alt="Profile"
+                    />
+                  ) : (
+                    <AccountCircle sx={{ width: "100%", height: "100%" }} />
+                  )}
                 </Avatar>
+                <input
+                  accept="image/*"
+                  id="profile-pic-input"
+                  type="file"
+                  style={{ display: "none" }}
+                  onChange={handleProfilePicChange}
+                />
+                <label htmlFor="profile-pic-input" className="Picedit">
+                    <Edit/>
+                </label>
               </Grid>
-              <Grid item className='GridProfile-MUI'>
-                <Typography variant="h4" sx={{ fontWeight: 'bold' }}>
-                  John Doe
+              <Grid item className="GridProfile-MUI">
+                <Typography variant="h4" sx={{ fontWeight: "bold" }}>
+                  {personalInformation.firstName} {personalInformation.lastName}
                 </Typography>
-                <Typography variant="body1">Medical Patient</Typography>
+                <Typography variant="body1">
+                  {personalInformation.title}
+                </Typography>
                 <Button variant="text" onClick={handleOpen}>
                   Edit Profile
                 </Button>
@@ -65,13 +134,53 @@ const Profile = () => {
                     </Typography>
                     <Divider sx={{ margin: '1rem 0' }} />
                     <form onSubmit={handleSubmit}>
-                      <Grid container spacing={2}>
+                      <Grid container spacing={2} className="main-body-model">
                         <Grid item xs={12} sm={6}>
                           <TextField
-                            label="Profile Name"
+                            label="First Name"
                             variant="outlined"
                             fullWidth
-                            defaultValue="John Doe"
+                            defaultValue="string"
+                          />
+                        </Grid>
+                        <Grid item xs={12} sm={6}>
+                          <TextField
+                            label="Last Name"
+                            variant="outlined"
+                            fullWidth
+                            defaultValue="string"
+                          />
+                        </Grid>
+                        <Grid item xs={12}>
+                          <TextField
+                            label="Middle Name"
+                            variant="outlined"
+                            fullWidth
+                            defaultValue="string"
+                          />
+                        </Grid>
+                        <Grid item xs={12} sm={6}>
+                          <TextField
+                            label="Gender"
+                            variant="outlined"
+                            fullWidth
+                            defaultValue="string"
+                          />
+                        </Grid>
+                        <Grid item xs={12} sm={6}>
+                          <TextField
+                            label="Date of Birth"
+                            variant="outlined"
+                            fullWidth
+                            defaultValue="string"
+                          />
+                        </Grid>
+                        <Grid item xs={12} sm={6}>
+                          <TextField
+                            label="Age"
+                            variant="outlined"
+                            fullWidth
+                            defaultValue={0}
                           />
                         </Grid>
                         <Grid item xs={12} sm={6}>
@@ -79,63 +188,47 @@ const Profile = () => {
                             label="Title"
                             variant="outlined"
                             fullWidth
-                            defaultValue="Medical Patient"
-                          />
-                        </Grid>
-                        <Grid item xs={12}>
-                          <TextField
-                            label="Address"
-                            variant="outlined"
-                            fullWidth
-                            defaultValue="123 Medical Street, City"
-                          />
-                        </Grid>
-                        <Grid item xs={12}>
-                          <TextField
-                            label="Profile Image"
-                            variant="outlined"
-                            fullWidth
-                            type='file'
+                            defaultValue="string"
                           />
                         </Grid>
                         <Grid item xs={12} sm={6}>
                           <TextField
-                            label="Phone"
+                            label="Height"
                             variant="outlined"
                             fullWidth
-                            defaultValue="+1 123-456-7890"
+                            defaultValue={0}
                           />
                         </Grid>
                         <Grid item xs={12} sm={6}>
                           <TextField
-                            label="Email"
+                            label="Height Unit"
                             variant="outlined"
                             fullWidth
-                            defaultValue="john.doe@example.com"
+                            defaultValue="string"
+                          />
+                        </Grid>
+                        <Grid item xs={12} sm={6}>
+                          <TextField
+                            label="Weight"
+                            variant="outlined"
+                            fullWidth
+                            defaultValue={0}
+                          />
+                        </Grid>
+                        <Grid item xs={12} sm={6}>
+                          <TextField
+                            label="Weight Unit"
+                            variant="outlined"
+                            fullWidth
+                            defaultValue="string"
                           />
                         </Grid>
                         <Grid item xs={12}>
                           <TextField
-                            label="Diagnosis"
+                            label="Mobile Number"
                             variant="outlined"
                             fullWidth
-                            defaultValue="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-                          />
-                        </Grid>
-                        <Grid item xs={12}>
-                          <TextField
-                            label="Treatment"
-                            variant="outlined"
-                            fullWidth
-                            defaultValue="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-                          />
-                        </Grid>
-                        <Grid item xs={12}>
-                          <TextField
-                            label="Medications"
-                            variant="outlined"
-                            fullWidth
-                            defaultValue="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+                            defaultValue="string"
                           />
                         </Grid>
                       </Grid>
@@ -146,11 +239,12 @@ const Profile = () => {
                     </form>
                   </Box>
                 </Modal>
+
               </Grid>
             </Grid>
             <Grid container spacing={4} className="Data">
               <Grid item xs={12} sm={6}>
-                <Typography variant="h6" sx={{ marginBottom: '1rem' }}>
+                <Typography variant="h6" sx={{ marginBottom: "1rem" }}>
                   Personal Information
                 </Typography>
                 <List disablePadding>
@@ -160,7 +254,10 @@ const Profile = () => {
                         <LocationOn />
                       </Avatar>
                     </ListItemAvatar>
-                    <ListItemText primary="Address" secondary="123 Medical Street, City" />
+                    <ListItemText
+                      primary="Address"
+                      secondary="123 Medical Street, City"
+                    />
                   </ListItem>
                   <ListItem disablePadding>
                     <ListItemAvatar>
@@ -168,7 +265,10 @@ const Profile = () => {
                         <Phone />
                       </Avatar>
                     </ListItemAvatar>
-                    <ListItemText primary="Phone" secondary="+1 123-456-7890" />
+                    <ListItemText
+                      primary="Phone"
+                      secondary={personalInformation.mobileNumber}
+                    />
                   </ListItem>
                   <ListItem disablePadding>
                     <ListItemAvatar>
@@ -176,13 +276,16 @@ const Profile = () => {
                         <Email />
                       </Avatar>
                     </ListItemAvatar>
-                    <ListItemText primary="Email" secondary="john.doe@example.com" />
+                    <ListItemText
+                      primary="Email"
+                      secondary={personalInformation.email}
+                    />
                   </ListItem>
                 </List>
               </Grid>
               <Grid item xs={12} sm={6}>
-                <Typography variant="h6" sx={{ marginBottom: '1rem' }}>
-                  Medical History
+                <Typography variant="h6" sx={{ marginBottom: "1rem" }}>
+                  Other Details
                 </Typography>
                 <List disablePadding>
                   <ListItem disablePadding>
@@ -192,8 +295,8 @@ const Profile = () => {
                       </Avatar>
                     </ListItemAvatar>
                     <ListItemText
-                      primary="Diagnosis"
-                      secondary="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+                      primary="Age"
+                      secondary={`${personalInformation.ageInYears} years`}
                     />
                   </ListItem>
                   <ListItem disablePadding>
@@ -203,8 +306,8 @@ const Profile = () => {
                       </Avatar>
                     </ListItemAvatar>
                     <ListItemText
-                      primary="Treatment"
-                      secondary="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+                      primary="Gender"
+                      secondary={personalInformation.gender}
                     />
                   </ListItem>
                   <ListItem disablePadding>
@@ -214,8 +317,19 @@ const Profile = () => {
                       </Avatar>
                     </ListItemAvatar>
                     <ListItemText
-                      primary="Medications"
-                      secondary="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+                      primary="Height"
+                      secondary={`${personalInformation.height} ${personalInformation.heightUnit}`}
+                    />
+                  </ListItem>
+                  <ListItem disablePadding>
+                    <ListItemAvatar>
+                      <Avatar>
+                        <Description />
+                      </Avatar>
+                    </ListItemAvatar>
+                    <ListItemText
+                      primary="Weight"
+                      secondary={`${personalInformation.weight} ${personalInformation.weightUnit}`}
                     />
                   </ListItem>
                 </List>
