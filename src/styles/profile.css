@@ -1,9 +1,10 @@
-.Profile{
+.Profile {
     width: 100%;
     padding: 10px;
 }
-.Model-box{
-    width: 40%;
+
+.Model-box {
+    width: 60%;
     height: auto;
     margin: 100px auto;
     background: #fff;
@@ -12,11 +13,13 @@
     color: #1f1f1f;
     padding: 20px;
 }
-.main-body-model{
+
+.main-body-model {
     height: 40vh !important;
     overflow-y: scroll !important;
 }
-.BG-profile{
+
+.BG-profile {
     background: linear-gradient(50deg, #45d9c9, #069bd9);
     color: #fff !important;
     width: 100% !important;
@@ -27,12 +30,14 @@
     display: flex;
     align-items: center;
 }
-.Bg-cont{
+
+.Bg-cont {
     background: transparent !important;
     backdrop-filter: blur(90px) !important;
     box-shadow: none !important;
 }
-.Data{
+
+.Data {
     background: #fff !important;
     border-radius: 9px !important;
     margin: 0 !important;
@@ -43,13 +48,15 @@
     padding-bottom: 20px !important;
     width: 100% !important;
 }
-.GridProfile-MUI{
+
+.GridProfile-MUI {
     position: relative;
 }
-.Picedit{
+
+.Picedit {
     width: 35px !important;
     height: 35px !important;
-    background: rgba(225,225,225,0.1) !important;
+    background: rgba(225, 225, 225, 0.1) !important;
     backdrop-filter: blur(90px) !important;
     border-radius: 50% !important;
     display: flex !important;
@@ -60,38 +67,46 @@
     right: 0%;
     bottom: 10%;
 }
-.Picedit:hover{
-    background: rgba(225,225,225,0.4) !important;
+
+.Picedit:hover {
+    background: rgba(225, 225, 225, 0.4) !important;
 }
-.cont-MUI{
+
+.cont-MUI {
     margin: 0 !important;
     padding: 0 !important;
     margin: 0 auto !important;
 }
-.Bg-cont{
+
+.Bg-cont {
     padding: 0 !important;
 }
+
 @media only screen and (max-width: 768px) {
-    .Model-box{
+    .Model-box {
         width: 95%;
         height: 70vh;
         overflow-y: scroll;
     }
-    .cont-MUI{
+
+    .cont-MUI {
         padding: 0 !important;
-      }
-      .GridProfile-MUI{
+    }
+
+    .GridProfile-MUI {
         padding: 5px !important;
-      }
-      .BG-profile{
+    }
+
+    .BG-profile {
         justify-content: center !important;
         flex-direction: column !important;
         padding: 20px !important;
         text-align: center !important;
-      }
+    }
 }
+
 @media only screen and (max-width: 355px) {
-    .Data{
+    .Data {
         overflow-x: scroll;
     }
 }

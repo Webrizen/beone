@@ -21,13 +21,15 @@
   gap: 1rem;
   z-index: 999;
 }
-.glassmorphism-container img{
+
+.glassmorphism-container img {
   width: 200px;
   width: 200px;
   background: #fff;
   border-radius: 15px;
   margin: 0 auto;
 }
+
 .loginForm {
   display: flex;
   flex-direction: column;
@@ -63,35 +65,38 @@
   color: #fff !important;
 }
 
-.background{
+.background {
   width: 430px;
   height: 520px;
   position: absolute;
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
   left: 50%;
   top: 50%;
   z-index: -1;
 }
-.background .shape{
+
+.mb-1 {
+  margin-bottom: 10px !important;
+}
+
+.background .shape {
   height: 200px;
   width: 200px;
   position: absolute;
   border-radius: 50%;
 }
-.shape:first-child{
-  background: linear-gradient(
-      #1845ad,
-      #23a2f6
-  );
+
+.shape:first-child {
+  background: linear-gradient(#1845ad,
+      #23a2f6);
   left: -80px;
   top: -80px;
 }
-.shape:last-child{
-  background: linear-gradient(
-      to right,
+
+.shape:last-child {
+  background: linear-gradient(to right,
       #ff512f,
-      #f09819
-  );
+      #f09819);
   right: -30px;
   bottom: -80px;
 }
