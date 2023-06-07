@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Swal from "sweetalert2";
 import "../styles/profile.css";
 import {
@@ -42,8 +42,24 @@ import Layout from '../components/Layout/layout';
 // import BaseUrl from "../config/config";
 import { BASE_API } from "../utils/common";
 import baseApi from "../utils/common";
+import UserContext from "../utils/user_context";
 const Profile = () => {
   const [open, setOpen] = useState(false);
+
+  const { main_user, setmain_user } = useContext(UserContext);
+  const [newValue, setnewValue] = useState({ ...main_user });
+
+  useEffect(() => {
+    // const { id, roles, shopifyCustomerId, ...rest_data } = main_user
+    setnewValue({ ...main_user })
+  }, [main_user])
+  useEffect(() => {
+    console.log("checking data if chnaged", newValue)
+    return () => {
+
+    };
+  }, [newValue]);
+
   const handleOpen = () => {
     setOpen(true);
     setProfilePicFile(null);
@@ -63,8 +79,10 @@ const Profile = () => {
       .post("/files?purpose=PROFILE_PIC", formData)
       .then((response) => {
         console.log(response.data);
+        main_user.profilePic = response.data.id;
+        setmain_user({ ...main_user });
         setProfilePicFile(response.data.id);
-        localStorage.setItem("img", response.data.id);
+        // localStorage.setItem("img", response.data.id);
         Swal.fire({
           position: "center",
           icon: "success",
@@ -105,14 +123,20 @@ const Profile = () => {
     }
   }
 
-  const [user, setuser] = useState({});
-  const [newValue, setnewValue] = useState({});
+  // const [user, setuser] = useState({});
+
+  // useEffect(() => {
+  //   setnewValue(main_user);
+  //   console.log("new value", newValue);
+  // }, [main_user]);
+
+
   const handleUpdate = () => {
     baseApi
       .put("/user", newValue)
       .then((response) => {
         console.log(response.data);
-        setuser(response.data);
+        setmain_user(newValue);
         setOpen(false);
         Swal.fire({
           position: "center",
@@ -127,25 +151,25 @@ const Profile = () => {
       });
   };
 
-  useEffect(() => {
-    baseApi
-      .get("/user")
-      .then((response) => {
-        console.log(response.data);
-        setuser(response.data);
-        setnewValue(response.data);
-        delete newValue.roles;
-        delete newValue.profilePic;
-        console.log(newValue);
-        // personalInformation = response.data;
-        console.log({ "new value": newValue });
-        setProfilePicFile(localStorage.getItem("img"));
-        console.log(profilePicFile);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, []);
+  // useEffect(() => {
+  //   baseApi
+  //     .get("/user")
+  //     .then((response) => {
+  //       console.log(response.data);
+  //       setuser(response.data);
+  //       setnewValue(response.data);
+  //       delete newValue.roles;
+  //       delete newValue.profilePic;
+  //       console.log(newValue);
+  //       // personalInformation = response.data;
+  //       console.log({ "new value": newValue });
+  //       setProfilePicFile(localStorage.getItem("img"));
+  //       console.log(profilePicFile);
+  //     })
+  //     .catch((error) => {
+  //       console.error(error);
+  //     });
+  // }, []);
   return (
     <>
       <Layout>
@@ -197,9 +221,10 @@ const Profile = () => {
                   >
                     <Grid item className="GridProfile-MUI">
                       <Avatar sx={{ width: 150, height: 150 }}>
-                        {profilePicFile ? (
+                        {main_user.profilePic ? (
                           <img
-                            src={`${BASE_API}/files/${profilePicFile}/serve`}
+                            className="profile-img"
+                            src={`${BASE_API}/files/${main_user.profilePic}/serve`}
                             alt="Profile"
                           />
                         ) : (
@@ -221,7 +246,7 @@ const Profile = () => {
                     </Grid>
                     <Grid item className="GridProfile-MUI">
                       <Typography variant="h4" sx={{ fontWeight: "bold" }}>
-                        {user.title} {user.firstName} {user.lastName}
+                        {main_user.title} {main_user.firstName} {main_user.lastName}
                       </Typography>
 
                       <Button variant="text" onClick={handleOpen}>
@@ -253,7 +278,7 @@ const Profile = () => {
                                   label="Title"
                                   variant="outlined"
                                   fullWidth
-                                  defaultValue={user.title}
+                                  defaultValue={main_user.title}
                                   onChange={(event) => {
                                     newValue.title = event.target.value;
                                     setnewValue({ ...newValue });
@@ -266,7 +291,7 @@ const Profile = () => {
                                   label="First Name"
                                   variant="outlined"
                                   fullWidth
-                                  defaultValue={user.firstName}
+                                  defaultValue={main_user.firstName}
                                   onChange={(event) => {
                                     newValue.firstName = event.target.value;
                                     setnewValue({ ...newValue });
@@ -279,7 +304,7 @@ const Profile = () => {
                                   label="Last Name"
                                   variant="outlined"
                                   fullWidth
-                                  defaultValue={user.lastName}
+                                  defaultValue={main_user.lastName}
                                   onChange={(event) => {
                                     newValue.lastName = event.target.value;
                                     setnewValue({ ...newValue });
@@ -292,7 +317,7 @@ const Profile = () => {
                                   label="Middle Name"
                                   variant="outlined"
                                   fullWidth
-                                  defaultValue={user.middleName}
+                                  defaultValue={main_user.middleName}
                                   onChange={(event) => {
                                     newValue.middleName = event.target.value;
                                     setnewValue({ ...newValue });
@@ -305,7 +330,7 @@ const Profile = () => {
                                   label="Gender"
                                   variant="outlined"
                                   fullWidth
-                                  defaultValue={user.gender}
+                                  defaultValue={main_user.gender}
                                   onChange={(event) => {
                                     newValue.gender = event.target.value;
                                     setnewValue({ ...newValue });
@@ -319,7 +344,7 @@ const Profile = () => {
                                   variant="outlined"
                                   fullWidth
                                   type="date"
-                                  defaultValue={user.dob}
+                                  defaultValue={main_user.dob}
                                   onChange={(event) => {
                                     newValue.dob = event.target.value;
                                     setnewValue({ ...newValue });
@@ -332,7 +357,7 @@ const Profile = () => {
                                   label="Age"
                                   variant="outlined"
                                   fullWidth
-                                  defaultValue={user.ageInYears}
+                                  defaultValue={main_user.ageInYears}
                                   onChange={(event) => {
                                     newValue.ageInYears = event.target.value;
                                     setnewValue({ ...newValue });
@@ -346,7 +371,7 @@ const Profile = () => {
                                   label="Height"
                                   variant="outlined"
                                   fullWidth
-                                  defaultValue={user.height}
+                                  defaultValue={main_user.height}
                                   onChange={(event) => {
                                     newValue.height = event.target.value;
                                     setnewValue({ ...newValue });
@@ -359,7 +384,7 @@ const Profile = () => {
                                   label="Height Unit"
                                   variant="outlined"
                                   fullWidth
-                                  defaultValue={user.heightUnit}
+                                  defaultValue={main_user.heightUnit}
                                   onChange={(event) => {
                                     newValue.heightUnit = event.target.value;
                                     setnewValue({ ...newValue });
@@ -372,7 +397,7 @@ const Profile = () => {
                                   label="Weight"
                                   variant="outlined"
                                   fullWidth
-                                  defaultValue={user.weight}
+                                  defaultValue={main_user.weight}
                                   onChange={(event) => {
                                     newValue.weight = event.target.value;
                                     setnewValue({ ...newValue });
@@ -385,7 +410,7 @@ const Profile = () => {
                                   label="Weight Unit"
                                   variant="outlined"
                                   fullWidth
-                                  defaultValue={user.weightUnit}
+                                  defaultValue={main_user.weightUnit}
                                   onChange={(event) => {
                                     newValue.weightUnit = event.target.value;
                                     setnewValue({ ...newValue });
@@ -398,7 +423,7 @@ const Profile = () => {
                                   label="Mobile Number"
                                   variant="outlined"
                                   fullWidth
-                                  defaultValue={user.mobileNumber}
+                                  defaultValue={main_user.mobileNumber}
                                   onChange={(event) => {
                                     newValue.mobileNumber = event.target.value;
                                     setnewValue({ ...newValue });
@@ -447,7 +472,7 @@ const Profile = () => {
                           </ListItemAvatar>
                           <ListItemText
                             primary="Phone"
-                            secondary={user.mobileNumber}
+                            secondary={main_user.mobileNumber}
                           />
                         </ListItem>
                         <ListItem disablePadding>
@@ -458,7 +483,7 @@ const Profile = () => {
                           </ListItemAvatar>
                           <ListItemText
                             primary="Email"
-                            secondary={user.email}
+                            secondary={main_user.email}
                           />
                         </ListItem>
                       </List>
@@ -477,7 +502,7 @@ const Profile = () => {
                             </ListItemAvatar>
                             <ListItemText
                               primary="Age"
-                              secondary={`${user.ageInYears} years`}
+                              secondary={`${main_user.ageInYears} years`}
                             />
                           </ListItem>
                           <ListItem disablePadding>
@@ -488,7 +513,7 @@ const Profile = () => {
                             </ListItemAvatar>
                             <ListItemText
                               primary="Gender"
-                              secondary={user.gender}
+                              secondary={main_user.gender}
                             />
                           </ListItem>
                         </Box>
@@ -500,7 +525,7 @@ const Profile = () => {
                           </ListItemAvatar>
                           <ListItemText
                             primary="Height"
-                            secondary={`${user.height} ${user.heightUnit}`}
+                            secondary={`${main_user.height} ${main_user.heightUnit}`}
                           />
                         </ListItem>
                         <ListItem disablePadding>
@@ -511,7 +536,7 @@ const Profile = () => {
                           </ListItemAvatar>
                           <ListItemText
                             primary="Weight"
-                            secondary={`${user.weight} ${user.weightUnit}`}
+                            secondary={`${main_user.weight} ${main_user.weightUnit}`}
                           />
                         </ListItem>
                       </List>

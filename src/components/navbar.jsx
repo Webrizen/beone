@@ -5,7 +5,7 @@ import { TaskAlt, Settings, Folder } from '@mui/icons-material';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
 import CircularStatic from './circularprogresswithlabel';
 import UserContext from '../utils/user_context';
-
+import { BASE_API } from '../utils/common';
 // const [main_user, setmain_user] = useContext(UserContext);
 const Navbar = (props) => {
   const { main_user, setmain_user } = useContext(UserContext);
@@ -25,7 +25,9 @@ const Navbar = (props) => {
     localStorage.removeItem("img");
     navigate("/login");
   };
-
+  useEffect(() => {
+    console.log("main_user", main_user)
+  }, [main_user])
   return (
     <>
       <header>
@@ -49,7 +51,7 @@ const Navbar = (props) => {
             >
               <Avatar
                 alt='Arshcode'
-                src='/static/images/avatar/3.jpg'
+                src={`${BASE_API}/files/${main_user.profilePic}/serve`}
               />
             </IconButton>
           </Tooltip>
@@ -59,7 +61,7 @@ const Navbar = (props) => {
             onClose={handleClose}
             className='MenuLinks'
           >
-            <Link to="/profile"><MenuItem onClick={handleClose} className='Cursor'>{main_user.name}</MenuItem></Link>
+            <Link to="/profile"><MenuItem onClick={handleClose} className='Cursor'>{main_user.firstName}</MenuItem></Link>
             <Link to="/dashboard"><MenuItem onClick={handleClose} className='Cursor'>Dashboard</MenuItem></Link>
             <Link to="/settings"><MenuItem onClick={handleClose} className='Cursor'>Settings</MenuItem></Link>
             <hr />

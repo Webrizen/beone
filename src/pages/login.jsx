@@ -36,9 +36,8 @@ const Login = () => {
       }).then((response) => {
         console.log(response)
         localStorage.setItem("token", response.data.accessToken);
-        setmain_user({ "name": "ziya 2" });
+        setmain_user(response.data.user);
         console.log({ "main_user": main_user });
-        if (response.data.profilePic !== undefined && response.data.profilePic !== null) localStorage.setItem("img", response.data.profilePic);
         navigate('/dashboard', { replace: true });
         // <Navigate to="/dashboard" />
       }).catch((error) => {
