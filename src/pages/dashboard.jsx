@@ -104,11 +104,8 @@ const Dashboard = () => {
             </div>
           </div>
           <div className="right-dashboard" id='Right-Bar'>
-            Right side
+            <Calendar />
           </div>
-        </div>
-        <div className="right-dashboard" id='Right-Bar'>
-          <Calendar />
         </div>
 
       </Layout >
