@@ -20,6 +20,7 @@ import VerticalStepper from '../components/verticalstepper';
 import Layout from '../components/Layout/layout';
 import UserOrders from '../components/userOrders';
 import Calendar from '../components/calendar';
+import CircularStatic from '../components/circularprogresswithlabel';
 
 const Dashboard = () => {
 
@@ -82,9 +83,7 @@ const Dashboard = () => {
               </p>
             </div>
             <div className="right-message">
-              {/* Yaha User Ka Profile Image Dalna  */}
-              <AccountCircle sx={{ width: "100%", height: "100%" }} />
-              {/* <img src="/favicon.png" alt="Beone." /> */}
+              <CircularStatic className="StaicCircle"/>
             </div>
           </div>
         </div>
