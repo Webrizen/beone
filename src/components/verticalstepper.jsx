@@ -10,6 +10,7 @@ import Typography from '@mui/material/Typography';
 import LockIcon from '@mui/icons-material/Lock';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import { Link } from 'react-router-dom';
 
 const steps = [
   {
@@ -101,7 +102,9 @@ export default function VerticalStepper() {
               StepIconComponent={StepIcon}
               StepIconProps={{ step, completed: index < activeStep }}
             >
-              {step.label}
+              <Link to={`/step/${index}`} style={{ textDecoration: 'none' }}>
+                {step.label}
+              </Link>
             </StepLabel>
             <StepContent>
               <Typography>{step.description}</Typography>

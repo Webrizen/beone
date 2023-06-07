@@ -70,7 +70,7 @@ const Dashboard = () => {
             <div className="left-message">
               <h1>Welcome Back User</h1>
               <h4>{currentTime}</h4>
-              <h2>Welcome to your dashboard!
+              <p>
 
                 Here, you'll find all the steps of your journey with us. Each time you log in, an Icon will guide you to the current step and show you what the next step is. To progress, simply click on the current step.
 
@@ -78,7 +78,7 @@ const Dashboard = () => {
 
                 Enjoy your journey with us!
 
-              </h2>
+              </p>
             </div>
             <div className="right-message">
               {/* Yaha User Ka Profile Image Dalna  */}
