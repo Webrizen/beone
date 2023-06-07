@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import Navbar from '../components/navbar';
 import { AccountCircle } from '@mui/icons-material';
 import '../styles/dashboard.css';
 import BackgroundImage from '../Assets/images/bg-login-01.png';
@@ -19,6 +18,7 @@ import MenuOpenIcon from '@mui/icons-material/MenuOpen';
 import WidgetsIcon from '@mui/icons-material/Widgets';
 import VerticalStepper from '../components/verticalstepper';
 import Layout from '../components/Layout/layout';
+import UserOrders from '../components/userOrders';
 
 const Dashboard = () => {
 
@@ -62,20 +62,7 @@ const Dashboard = () => {
       </div>
       <div className="main-dashboard">
         <div className="left-dashboard" id='Left-Bar'>
-          <FormControl fullWidth>
-            <InputLabel id="demo-simple-select-label">Select Your Order</InputLabel>
-            <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              label="Select Your Order"
-            >
-              <MenuItem value="Student">Student</MenuItem>
-              <MenuItem value="Teacher">Teacher</MenuItem>
-              <MenuItem value="Admin">Admin</MenuItem>
-            </Select>
-          </FormControl>
-          <div className="yourOrders"><a href="#">Your Order</a><ArrowForwardIosIcon /></div>
-          <Divider sx={{ margin: '1rem 0' }} />
+          <UserOrders />
           <VerticalStepper />
         </div>
         <div className="middle-dashboard">
