@@ -80,7 +80,7 @@
     border-radius: 7px;
     padding: 10px;
     overflow: hidden;
-    background: rgba(225,225,225,0.1);
+    background: #fff;
     backdrop-filter: blur(40px);
 }
 .right-message .StaicCircle{
