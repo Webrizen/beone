@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import InputAdornment from "@mui/material/InputAdornment";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import IconButton from "@mui/material/IconButton";
@@ -8,8 +8,14 @@ import baseApi, { BASE_API } from "../utils/common";
 import { useNavigate, Navigate } from "react-router-dom";
 import Swal from 'sweetalert2';
 import '../styles/login.css';
+import UserContext from '../utils/user_context';
+// import UserContext from '../utils/user_context';
+
+// const user = useContext(UserContext);
 
 const Login = () => {
+  const { main_user, setmain_user } = useContext(UserContext);
+
   const [showPass, setShowPass] = useState(false);
   const [email, setEmail] = useState(null);
   const [pass, setPass] = useState(null);
@@ -30,6 +36,8 @@ const Login = () => {
       }).then((response) => {
         console.log(response)
         localStorage.setItem("token", response.data.accessToken);
+        setmain_user({ "name": "ziya 2" });
+        console.log({ "main_user": main_user });
         if (response.data.profilePic !== undefined && response.data.profilePic !== null) localStorage.setItem("img", response.data.profilePic);
         navigate('/dashboard', { replace: true });
         // <Navigate to="/dashboard" />

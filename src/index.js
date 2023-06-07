@@ -1,42 +1,18 @@
-import React from 'react';
+import React, { useState, createContext, useContext } from 'react';
+// import  from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
-import Login from './pages/login';
-import Dashboard from './pages/dashboard';
-import Profile from './pages/profile';
-import ErrorPage from './pages/error-page';
 import App from './App';
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
+import UserContext from './utils/user_context';
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <App/>,
-  },
-  {
-    path: "/login",
-    element: <Login/>,
-  },
-  {
-    path: "/dashboard",
-    element: <Dashboard/>,
-  },
-  {
-    path: "/profile",
-    element: <Profile/>,
-  },
-  {
-    path: "*",
-    element: <ErrorPage/>,
-  }
-]);
+// const UserContext = createContext();
+// const [main_user, setmain_user] = useState({});
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    {/* <UserContext.Provider value={[main_user, setmain_user]}> */}
+    <App />
+    {/* </UserContext.Provider> */}
   </React.StrictMode>
 );
