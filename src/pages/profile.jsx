@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Swal from "sweetalert2";
 import "../styles/profile.css";
+import Calendar from '../components/calendar';
 import {
   Container,
   Grid,
@@ -543,7 +544,7 @@ const [heightUnit, setHeightUnit] = useState('cm');
             </div>
           </div>
           <div className="right-dashboard" id="Right-Bar">
-            Right Bar
+          <Calendar/>
           </div>
         </div>
       </Layout>
