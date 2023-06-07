@@ -19,6 +19,7 @@ import WidgetsIcon from '@mui/icons-material/Widgets';
 import VerticalStepper from '../components/verticalstepper';
 import Layout from '../components/Layout/layout';
 import UserOrders from '../components/userOrders';
+import Calendar from '../components/calendar';
 
 const Dashboard = () => {
 
@@ -88,7 +89,7 @@ const Dashboard = () => {
           </div>
         </div>
         <div className="right-dashboard" id='Right-Bar'>
-          Right side
+          <Calendar/>
         </div>
       </div>
   </Layout>

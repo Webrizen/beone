@@ -81,7 +81,10 @@
 .Bg-cont {
     padding: 0 !important;
 }
-
+.CustomModel{
+    background: transparent !important;
+    backdrop-filter: blur(90px) !important;
+}
 @media only screen and (max-width: 768px) {
     .Model-box {
         width: 95%;

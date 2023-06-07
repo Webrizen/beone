@@ -36,12 +36,6 @@ const Navbar = (props) => {
           {/* Redirect On Click, Yeh Frontend ka Performance thik rakhega  */}
           <Tooltip title='Your Current Status'>
             <div className="ico"><CircularStatic /></div></Tooltip>
-          <Tooltip title="Current Task">
-            <div className='ico'><TaskAlt /></div>
-          </Tooltip>
-          <Tooltip title="Your Personal Data Folder">
-            <div className='ico'><Folder /></div>
-          </Tooltip>
           <Tooltip title='User Controls'>
             <IconButton
               onClick={handleClick}
@@ -59,7 +53,7 @@ const Navbar = (props) => {
             onClose={handleClose}
             className='MenuLinks'
           >
-            <Link to="/profile"><MenuItem onClick={handleClose} className='Cursor'>{main_user.name}</MenuItem></Link>
+            <Link to="/profile"><MenuItem onClick={handleClose} className='Cursor'>Profile</MenuItem></Link>
             <Link to="/dashboard"><MenuItem onClick={handleClose} className='Cursor'>Dashboard</MenuItem></Link>
             <Link to="/settings"><MenuItem onClick={handleClose} className='Cursor'>Settings</MenuItem></Link>
             <hr />
