@@ -2,6 +2,7 @@ import React from "react";
 import Button from "@mui/material/Button";
 import Navbar from "./components/navbar";
 import "./styles/app.css";
+import { Link } from "react-router-dom";
 
 function App() {
   return (
@@ -19,7 +20,9 @@ function App() {
             <br />
             each one bringing us closer to the future and farther from the past
           </p><br />
-          <a href="#">Login</a>
+          <Link to="/login">
+          <Button>Login</Button>
+          </Link>
           <div className="bg"></div>
         </div>
       </div>

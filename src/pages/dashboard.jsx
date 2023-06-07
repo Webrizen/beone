@@ -18,6 +18,7 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import MenuOpenIcon from '@mui/icons-material/MenuOpen';
 import WidgetsIcon from '@mui/icons-material/Widgets';
 import VerticalStepper from '../components/verticalstepper';
+import Layout from '../components/Layout/layout';
 
 const Dashboard = () => {
 
@@ -53,8 +54,8 @@ const Dashboard = () => {
   return (
 
     <>
-      <RouteGuard />
-      <Navbar />
+    <Layout>
+    <RouteGuard />
       <div className="two-flex">
         <div className="ico" onClick={ToggleLeftSideBar}><MenuOpenIcon /></div>
         <div className="ico" onClick={ToggleRightSideBar}><WidgetsIcon /></div>
@@ -103,6 +104,7 @@ const Dashboard = () => {
           Right side
         </div>
       </div>
+  </Layout>
     </>
   );
 }
