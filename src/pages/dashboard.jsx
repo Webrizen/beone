@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import Navbar from '../components/navbar';
 import { AccountCircle } from '@mui/icons-material';
 import '../styles/dashboard.css';
 import BackgroundImage from '../Assets/images/bg-login-01.png';
@@ -18,6 +17,8 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import MenuOpenIcon from '@mui/icons-material/MenuOpen';
 import WidgetsIcon from '@mui/icons-material/Widgets';
 import VerticalStepper from '../components/verticalstepper';
+import Layout from '../components/Layout/layout';
+import UserOrders from '../components/userOrders';
 
 const Dashboard = () => {
 
@@ -53,28 +54,15 @@ const Dashboard = () => {
   return (
 
     <>
-      <RouteGuard />
-      <Navbar />
+    <Layout>
+    <RouteGuard />
       <div className="two-flex">
         <div className="ico" onClick={ToggleLeftSideBar}><MenuOpenIcon /></div>
         <div className="ico" onClick={ToggleRightSideBar}><WidgetsIcon /></div>
       </div>
       <div className="main-dashboard">
         <div className="left-dashboard" id='Left-Bar'>
-          <FormControl fullWidth>
-            <InputLabel id="demo-simple-select-label">Select Your Order</InputLabel>
-            <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              label="Select Your Order"
-            >
-              <MenuItem value="Student">Student</MenuItem>
-              <MenuItem value="Teacher">Teacher</MenuItem>
-              <MenuItem value="Admin">Admin</MenuItem>
-            </Select>
-          </FormControl>
-          <div className="yourOrders"><a href="#">Your Order</a><ArrowForwardIosIcon /></div>
-          <Divider sx={{ margin: '1rem 0' }} />
+          <UserOrders />
           <VerticalStepper />
         </div>
         <div className="middle-dashboard">
@@ -82,7 +70,7 @@ const Dashboard = () => {
             <div className="left-message">
               <h1>Welcome Back User</h1>
               <h4>{currentTime}</h4>
-              <h2>Welcome to your dashboard!
+              <p>
 
                 Here, you'll find all the steps of your journey with us. Each time you log in, an Icon will guide you to the current step and show you what the next step is. To progress, simply click on the current step.
 
@@ -90,7 +78,7 @@ const Dashboard = () => {
 
                 Enjoy your journey with us!
 
-              </h2>
+              </p>
             </div>
             <div className="right-message">
               {/* Yaha User Ka Profile Image Dalna  */}
@@ -103,6 +91,7 @@ const Dashboard = () => {
           Right side
         </div>
       </div>
+  </Layout>
     </>
   );
 }

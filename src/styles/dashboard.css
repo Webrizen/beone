@@ -71,7 +71,9 @@
 }
 .welcome-message .left-message p{
     font-size: 14px;
-    color: rgba(225,225,225,0.5);
+    color: rgba(225,225,225,0.9);
+    letter-spacing: normal;
+    margin-top: 0 !important;
 }
 .right-message{
     width: 100%;
