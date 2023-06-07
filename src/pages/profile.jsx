@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import Swal from "sweetalert2";
 import "../styles/profile.css";
+import Calendar from '../components/calendar';
 import {
   Container,
   Grid,
@@ -35,9 +36,7 @@ import {
   Edit,
 } from "@mui/icons-material";
 import RouteGuard from "../components/routeguard";
-import Layout from '../components/Layout/layout';
-
-
+import Layout from "../components/Layout/layout";
 
 // import BaseUrl from "../config/config";
 import { BASE_API } from "../utils/common";
@@ -170,6 +169,24 @@ const Profile = () => {
   //       console.error(error);
   //     });
   // }, []);
+
+  const [age, setAge] = useState(""); //Calculatying Age :)
+  const calculateAge = (dob) => {
+    const currentDate = new Date();
+    const birthDate = new Date(dob);
+    const diffInMilliseconds = currentDate - birthDate;
+    const ageDate = new Date(diffInMilliseconds);
+    const calculatedAge = Math.abs(ageDate.getUTCFullYear() - 1970);
+    setAge(calculatedAge);
+  };
+
+
+  //Manage Units:
+  const [weightUnit, setWeightUnit] = useState('Kg');
+  const [heightUnit, setHeightUnit] = useState('cm');
+
+
+
   return (
     <>
       <Layout>
@@ -257,6 +274,7 @@ const Profile = () => {
                         onClose={handleClose}
                         aria-labelledby="model-model-title"
                         aria-describedby="model-model-description"
+                        className="CustomModel"
                       >
                         <Box className="Model-box">
                           <Typography
@@ -301,19 +319,6 @@ const Profile = () => {
                               </Grid>
                               <Grid item xs={12} sm={6}>
                                 <TextField
-                                  label="Last Name"
-                                  variant="outlined"
-                                  fullWidth
-                                  defaultValue={main_user.lastName}
-                                  onChange={(event) => {
-                                    newValue.lastName = event.target.value;
-                                    setnewValue({ ...newValue });
-                                    console.log(newValue);
-                                  }}
-                                />
-                              </Grid>
-                              <Grid item xs={12} sm={6}>
-                                <TextField
                                   label="Middle Name"
                                   variant="outlined"
                                   fullWidth
@@ -325,6 +330,20 @@ const Profile = () => {
                                   }}
                                 />
                               </Grid>
+                              <Grid item xs={12} sm={6}>
+                                <TextField
+                                  label="Last Name"
+                                  variant="outlined"
+                                  fullWidth
+                                  defaultValue={main_user.lastName}
+                                  onChange={(event) => {
+                                    newValue.lastName = event.target.value;
+                                    setnewValue({ ...newValue });
+                                    console.log(newValue);
+                                  }}
+                                />
+                              </Grid>
+
                               <Grid item xs={12} sm={6}>
                                 <TextField
                                   label="Gender"
@@ -346,22 +365,25 @@ const Profile = () => {
                                   type="date"
                                   defaultValue={main_user.dob}
                                   onChange={(event) => {
-                                    newValue.dob = event.target.value;
+                                    const newDob = event.target.value;
+                                    calculateAge(newDob); // Calculate the age based on the new DOB
+                                    newValue.dob = newDob;
                                     setnewValue({ ...newValue });
-                                    console.log(newValue);
                                   }}
                                 />
                               </Grid>
+
                               <Grid item xs={12} sm={6}>
                                 <TextField
                                   label="Age"
                                   variant="outlined"
                                   fullWidth
-                                  defaultValue={main_user.ageInYears}
+                                  value={age} // Use the age state as the value
                                   onChange={(event) => {
-                                    newValue.ageInYears = event.target.value;
+                                    const newAge = event.target.value;
+                                    setAge(newAge); // Update the age state
+                                    newValue.ageInYears = newAge;
                                     setnewValue({ ...newValue });
-                                    console.log(newValue);
                                   }}
                                 />
                               </Grid>
@@ -547,7 +569,7 @@ const Profile = () => {
             </div>
           </div>
           <div className="right-dashboard" id="Right-Bar">
-            Right Bar
+            <Calendar />
           </div>
         </div>
       </Layout>

@@ -22,6 +22,9 @@ import UserOrders from '../components/userOrders';
 import UserContext from '../utils/user_context';
 import { BASE_API } from '../utils/common';
 import { Avatar } from '@mui/material';
+import Calendar from '../components/calendar';
+import CircularStatic from '../components/circularprogresswithlabel';
+
 const Dashboard = () => {
   const { main_user, setmain_user } = useContext(UserContext);
   const [currentTime, setCurrentTime] = useState(new Date().toLocaleString());
@@ -54,7 +57,7 @@ const Dashboard = () => {
   }
 
   return (
-    <div>
+    <>
       <Layout>
         <RouteGuard />
         <div className="two-flex">
@@ -104,8 +107,12 @@ const Dashboard = () => {
             Right side
           </div>
         </div>
-      </Layout>
-    </div>
+        <div className="right-dashboard" id='Right-Bar'>
+          <Calendar />
+        </div>
+
+      </Layout >
+    </>
   );
 }
 

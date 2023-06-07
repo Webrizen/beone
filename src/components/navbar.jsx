@@ -38,12 +38,6 @@ const Navbar = (props) => {
           {/* Redirect On Click, Yeh Frontend ka Performance thik rakhega  */}
           <Tooltip title='Your Current Status'>
             <div className="ico"><CircularStatic /></div></Tooltip>
-          <Tooltip title="Current Task">
-            <div className='ico'><TaskAlt /></div>
-          </Tooltip>
-          <Tooltip title="Your Personal Data Folder">
-            <div className='ico'><Folder /></div>
-          </Tooltip>
           <Tooltip title='User Controls'>
             <IconButton
               onClick={handleClick}

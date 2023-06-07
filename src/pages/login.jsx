@@ -55,7 +55,7 @@ const Login = () => {
     }
   };
   return (
-    <div className="background">
+    <div className="background-login">
       <Container maxWidth="sm">
         <Paper elevation={3} className="glassmorphism-container">
           <img src="/favicon.png" alt="Beone" />
@@ -104,8 +104,6 @@ const Login = () => {
           </form>
         </Paper>
         <div className="background">
-          <div className="shape"></div>
-          <div className="shape"></div>
         </div>
       </Container>
     </div>
