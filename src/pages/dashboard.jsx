@@ -24,6 +24,8 @@ import { BASE_API } from '../utils/common';
 import { Avatar } from '@mui/material';
 import Calendar from '../components/calendar';
 import ProgressRing from '../components/progressRing';
+import KitArrivalData from '../components/KitArrival/KitArrivalData';
+import HormoneTest from '../components/planning/hormoneTest';
 
 const Dashboard = () => {
   const { main_user, setmain_user } = useContext(UserContext);
@@ -87,8 +89,6 @@ const Dashboard = () => {
                 </p>
               </div>
               <div className="right-message">
-                {/* Yaha User Ka Profile Image Dalna  */}
-                {/* <AccountCircle sx={{ width: "100%", height: "100%" }} /> */}
                 <Avatar sx={{ width: 150, height: 150 }}>
                   {main_user.profilePic ? (
                     <img
@@ -115,6 +115,8 @@ const Dashboard = () => {
                 <ProgressRing percentage={percentage} />
                 </div>
             </div>
+            {/* <KitArrivalData/> */}
+            {/* <HormoneTest/> */}
           </div>
           <div className="right-dashboard" id='Right-Bar'>
             <Calendar className="BoxCalender" />
