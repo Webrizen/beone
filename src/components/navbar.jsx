@@ -3,7 +3,7 @@ import '../styles/navbar.css';
 import { Tooltip, Avatar, IconButton, Menu, MenuItem } from '@mui/material';
 import { TaskAlt, Settings, Folder } from '@mui/icons-material';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
-import CircularStatic from './circularprogresswithlabel';
+
 import UserContext from '../utils/user_context';
 import { BASE_API } from '../utils/common';
 // const [main_user, setmain_user] = useContext(UserContext);
@@ -36,8 +36,6 @@ const Navbar = (props) => {
         </div></Link>
         <div className="right-nav">
           {/* Redirect On Click, Yeh Frontend ka Performance thik rakhega  */}
-          <Tooltip title='Your Current Status'>
-            <div className="ico"><CircularStatic /></div></Tooltip>
           <Tooltip title='User Controls'>
             <IconButton
               onClick={handleClick}

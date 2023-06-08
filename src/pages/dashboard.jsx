@@ -23,7 +23,7 @@ import UserContext from '../utils/user_context';
 import { BASE_API } from '../utils/common';
 import { Avatar } from '@mui/material';
 import Calendar from '../components/calendar';
-import CircularStatic from '../components/circularprogresswithlabel';
+import ProgressRing from '../components/progressRing';
 
 const Dashboard = () => {
   const { main_user, setmain_user } = useContext(UserContext);
@@ -55,6 +55,8 @@ const Dashboard = () => {
       RightBar.style.transform = "translateX(200%)"
     }
   }
+
+  const percentage = 75;
 
   return (
     <>
@@ -102,9 +104,20 @@ const Dashboard = () => {
                 </Avatar>
               </div>
             </div>
+            <div className="three-col">
+              <div className="col">
+              <ProgressRing percentage={percentage} />
+                </div>
+                <div className="col">
+                <ProgressRing percentage={percentage} />
+                </div>
+                <div className="col">
+                <ProgressRing percentage={percentage} />
+                </div>
+            </div>
           </div>
           <div className="right-dashboard" id='Right-Bar'>
-            <Calendar />
+            <Calendar className="BoxCalender" />
           </div>
         </div>
 

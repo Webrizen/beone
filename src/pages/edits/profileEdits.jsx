@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import Swal from "sweetalert2";
-import "../styles/profile.css";
-import { Link } from "react-router-dom";
-import Calendar from '../components/calendar';
+import "../../styles/profile.css";
+import Calendar from "../../components/calendar";
 import {
   Container,
   Grid,
@@ -26,8 +25,8 @@ import {
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import MenuOpenIcon from "@mui/icons-material/MenuOpen";
 import WidgetsIcon from "@mui/icons-material/Widgets";
-import VerticalStepper from "../components/verticalstepper";
-import Navbar from "../components/navbar";
+import VerticalStepper from "../../components/verticalstepper";
+import Navbar from "../../components/navbar";
 import {
   AccountCircle,
   LocationOn,
@@ -36,14 +35,14 @@ import {
   Description,
   Edit,
 } from "@mui/icons-material";
-import RouteGuard from "../components/routeguard";
-import Layout from "../components/Layout/layout";
+import RouteGuard from "../../components/routeguard";
+import Layout from "../../components/Layout/layout";
 
 // import BaseUrl from "../config/config";
-import { BASE_API } from "../utils/common";
-import baseApi from "../utils/common";
-import UserContext from "../utils/user_context";
-const Profile = () => {
+import { BASE_API } from "../../utils/common";
+import baseApi from "../../utils/common";
+import UserContext from "../../utils/user_context";
+const ProfileEdit = () => {
   const [open, setOpen] = useState(false);
 
   const { main_user, setmain_user } = useContext(UserContext);
@@ -51,13 +50,11 @@ const Profile = () => {
 
   useEffect(() => {
     // const { id, roles, shopifyCustomerId, ...rest_data } = main_user
-    setnewValue({ ...main_user })
-  }, [main_user])
+    setnewValue({ ...main_user });
+  }, [main_user]);
   useEffect(() => {
-    console.log("checking data if chnaged", newValue)
-    return () => {
-
-    };
+    console.log("checking data if chnaged", newValue);
+    return () => {};
   }, [newValue]);
 
   const handleOpen = () => {
@@ -130,7 +127,6 @@ const Profile = () => {
   //   console.log("new value", newValue);
   // }, [main_user]);
 
-
   const handleUpdate = () => {
     baseApi
       .put("/user", newValue)
@@ -181,12 +177,9 @@ const Profile = () => {
     setAge(calculatedAge);
   };
 
-
   //Manage Units:
-  const [weightUnit, setWeightUnit] = useState('Kg');
-  const [heightUnit, setHeightUnit] = useState('cm');
-
-
+  const [weightUnit, setWeightUnit] = useState("Kg");
+  const [heightUnit, setHeightUnit] = useState("cm");
 
   return (
     <>
@@ -226,57 +219,7 @@ const Profile = () => {
           <div className="middle-dashboard">
             <div className="Profile">
               <Container maxWidth="md" className="cont-MUI">
-                <Paper
-                  elevation={3}
-                  sx={{ padding: "2rem" }}
-                  className="Bg-cont"
-                >
-                  <Grid
-                    container
-                    spacing={4}
-                    alignItems="center"
-                    className="BG-profile"
-                  >
-                    <Grid item className="GridProfile-MUI">
-                      <Avatar sx={{ width: 150, height: 150 }}>
-                        {main_user.profilePic ? (
-                          <img
-                            className="profile-img"
-                            src={`${BASE_API}/files/${main_user.profilePic}/serve`}
-                            alt="Profile"
-                          />
-                        ) : (
-                          <AccountCircle
-                            sx={{ width: "100%", height: "100%" }}
-                          />
-                        )}
-                      </Avatar>
-                      <input
-                        accept="image/*"
-                        id="profile-pic-input"
-                        type="file"
-                        style={{ display: "none" }}
-                        onChange={handleProfilePicChange}
-                      />
-                      <label htmlFor="profile-pic-input" className="Picedit">
-                        <Edit />
-                      </label>
-                    </Grid>
-                    <Grid item className="GridProfile-MUI">
-                      <Typography variant="h4" sx={{ fontWeight: "bold" }}>
-                        {main_user.title} {main_user.firstName} {main_user.lastName}
-                      </Typography>
-
-                      <Link to="/edit/profile"><Button variant="text">
-                        Edit Profile
-                      </Button></Link>
-                      <Modal
-                        open={open}
-                        onClose={handleClose}
-                        aria-labelledby="model-model-title"
-                        aria-describedby="model-model-description"
-                        className="CustomModel"
-                      >
+              <div>
                         <Box className="Model-box">
                           <Typography
                             id="model-model-title"
@@ -467,105 +410,7 @@ const Profile = () => {
                             </Button>
                           </form>
                         </Box>
-                      </Modal>
-                    </Grid>
-                  </Grid>
-                  <Grid container spacing={4} className="Data">
-                    <Grid item xs={12} sm={6}>
-                      <Typography variant="h6" sx={{ marginBottom: "1rem" }}>
-                        Personal Information
-                      </Typography>
-                      <List disablePadding>
-                        {/* <ListItem disablePadding>
-                        <ListItemAvatar>
-                          <Avatar>
-                            <LocationOn />
-                          </Avatar>
-                        </ListItemAvatar>
-                        <ListItemText
-                          primary="Address"
-                          secondary="123 Medical Street, City"
-                        />
-                      </ListItem> */}
-                        <ListItem disablePadding>
-                          <ListItemAvatar>
-                            <Avatar>
-                              <Phone />
-                            </Avatar>
-                          </ListItemAvatar>
-                          <ListItemText
-                            primary="Phone"
-                            secondary={main_user.mobileNumber}
-                          />
-                        </ListItem>
-                        <ListItem disablePadding>
-                          <ListItemAvatar>
-                            <Avatar>
-                              <Email />
-                            </Avatar>
-                          </ListItemAvatar>
-                          <ListItemText
-                            primary="Email"
-                            secondary={main_user.email}
-                          />
-                        </ListItem>
-                      </List>
-                    </Grid>
-                    <Grid item xs={12} sm={6}>
-                      <Typography variant="h6" sx={{ marginBottom: "1rem" }}>
-                        Other Details
-                      </Typography>
-                      <List disablePadding>
-                        <Box>
-                          <ListItem disablePadding>
-                            <ListItemAvatar>
-                              <Avatar>
-                                <Description />
-                              </Avatar>
-                            </ListItemAvatar>
-                            <ListItemText
-                              primary="Age"
-                              secondary={`${main_user.ageInYears} years`}
-                            />
-                          </ListItem>
-                          <ListItem disablePadding>
-                            <ListItemAvatar>
-                              <Avatar>
-                                <Description />
-                              </Avatar>
-                            </ListItemAvatar>
-                            <ListItemText
-                              primary="Gender"
-                              secondary={main_user.gender}
-                            />
-                          </ListItem>
-                        </Box>
-                        <ListItem disablePadding>
-                          <ListItemAvatar>
-                            <Avatar>
-                              <Description />
-                            </Avatar>
-                          </ListItemAvatar>
-                          <ListItemText
-                            primary="Height"
-                            secondary={`${main_user.height} ${main_user.heightUnit}`}
-                          />
-                        </ListItem>
-                        <ListItem disablePadding>
-                          <ListItemAvatar>
-                            <Avatar>
-                              <Description />
-                            </Avatar>
-                          </ListItemAvatar>
-                          <ListItemText
-                            primary="Weight"
-                            secondary={`${main_user.weight} ${main_user.weightUnit}`}
-                          />
-                        </ListItem>
-                      </List>
-                    </Grid>
-                  </Grid>
-                </Paper>
+                      </div>
               </Container>
             </div>
           </div>
@@ -578,4 +423,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default ProfileEdit;

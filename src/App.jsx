@@ -8,6 +8,7 @@ import Dashboard from './pages/dashboard';
 import Profile from './pages/profile';
 import ErrorPage from './pages/error-page';
 import baseApi from './utils/common';
+import ProfileEdit from './pages/edits/profileEdits';
 // import UserContext from './utils/user_context';
 import {
   createBrowserRouter,
@@ -48,6 +49,10 @@ function App() {
     {
       path: "/profile",
       element: <Profile />,
+    },
+    {
+      path: "/edit/profile",
+      element: <ProfileEdit />,
     },
     {
       path: "*",

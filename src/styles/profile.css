@@ -4,19 +4,13 @@
 }
 
 .Model-box {
-    width: 60%;
+    width: 100%;
     height: auto;
-    margin: 100px auto;
     background: #fff;
     border-radius: 5px;
     box-shadow: 0 0 5px #ccc;
     color: #1f1f1f;
     padding: 20px;
-}
-
-.main-body-model {
-    height: 40vh !important;
-    overflow-y: scroll !important;
 }
 
 .BG-profile {

@@ -1,4 +1,4 @@
-.main-dashboard{
+.main-dashboard {
     width: 100vw;
     height: 90vh;
     overflow-y: scroll;
@@ -7,7 +7,8 @@
     gap: 10px;
     padding: 10px;
 }
-.left-message{
+
+.left-message {
     width: 100%;
     height: 100%;
     border: 0.1px solid rgba(192, 192, 192, 0.349);
@@ -15,28 +16,32 @@
     padding: 10px;
 
 }
-.right-dashboard{
+
+.right-dashboard {
     display: flex;
     flex-direction: column;
     gap: 10px;
-     width: 100%;
-    height: 100%;
-    border: 0.1px solid rgba(192, 192, 192, 0.349);
-    border-radius: 7px;
-    padding: 10px;
-}
-.left-dashboard{
     width: 100%;
     height: 100%;
     border: 0.1px solid rgba(192, 192, 192, 0.349);
     border-radius: 7px;
     padding: 10px;
 }
-.middle-dashboard{
+
+.left-dashboard {
+    width: 100%;
+    height: 100%;
+    border: 0.1px solid rgba(192, 192, 192, 0.349);
+    border-radius: 7px;
+    padding: 10px;
+}
+
+.middle-dashboard {
     width: 100%;
     height: 100%;
 }
-.welcome-message{
+
+.welcome-message {
     display: grid;
     grid-template-columns: 80% 1fr;
     gap: 10px;
@@ -46,19 +51,21 @@
     background-size: 40%;
     border-radius: 7px;
 }
-.welcome-message .left-message{
+
+.welcome-message .left-message {
     display: flex;
     flex-direction: column;
     text-align: left !important;
     gap: 10px;
     width: 100%;
-    background: rgba(225,225,225,0.1);
+    background: rgba(225, 225, 225, 0.1);
     color: #f1f1f1;
     backdrop-filter: blur(40px);
     border-radius: 7px;
     padding: 10px;
 }
-.welcome-message .left-message h1{
+
+.welcome-message .left-message h1 {
     font-size: 2.4rem;
     font-weight: 700;
     background: linear-gradient(50deg, #45d9c9, #84b3c7);
@@ -66,13 +73,15 @@
     -webkit-background-clip: text;
     background-clip: text;
 }
-.welcome-message .left-message p{
+
+.welcome-message .left-message p {
     font-size: 14px;
-    color: rgba(225,225,225,0.9);
+    color: rgba(225, 225, 225, 0.9);
     letter-spacing: normal;
     margin-top: 0 !important;
 }
-.right-message{
+
+.right-message {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -83,11 +92,13 @@
     background: #fff;
     backdrop-filter: blur(40px);
 }
-.right-message .StaicCircle{
+
+.right-message .StaicCircle {
     width: 100%;
     color: #f1f1f1 !important;
 }
-.yourOrders{
+
+.yourOrders {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -102,24 +113,50 @@
     font-size: 16px;
     cursor: pointer;
     margin: 10px 0 !important;
-    color:  rgba(0,0,0,0.4) !important;
+    color: rgba(0, 0, 0, 0.4) !important;
 }
-.yourOrders a{
-    color: rgba(0,0,0,0.4) !important;
+
+.yourOrders a {
+    color: rgba(0, 0, 0, 0.4) !important;
 }
-.yourOrders:hover{
-    background: rgba(0,0,0,0.1);
+
+.yourOrders:hover {
+    background: rgba(0, 0, 0, 0.1);
 }
-.two-flex{
+
+.two-flex {
     display: none;
 }
+.three-col {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+    padding: 10px;
+  }
+  
+  .three-col .col {
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    border: 0.1px solid rgba(192, 192, 192, 0.349);
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+  }
+  
 @media only screen and (max-width: 768px) {
-    .main-dashboard{
+    .main-dashboard {
         grid-template-columns: 1fr;
         overflow-x: hidden;
         position: relative;
     }
-    .left-dashboard{
+
+    .left-dashboard {
         position: absolute;
         z-index: 999;
         background: #f1f1f1;
@@ -128,10 +165,12 @@
         transform: translateX(-200%);
         transition: all 0.5s;
     }
-    .welcome-message .left-message{
+
+    .welcome-message .left-message {
         text-align: center !important;
     }
-    .right-dashboard{
+
+    .right-dashboard {
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -143,27 +182,32 @@
         transform: translateX(200%);
         transition: all 0.5s;
     }
-    .middle-dashboard{
+
+    .middle-dashboard {
         width: 100%;
     }
-    .welcome-message{
+
+    .welcome-message {
         display: flex;
         flex-direction: column;
         flex-flow: column-reverse;
     }
-    .welcome-message .left-message{
+
+    .welcome-message .left-message {
         text-align: center;
         justify-content: center;
         align-items: center;
     }
-    .two-flex{
+
+    .two-flex {
         display: flex;
         justify-content: space-between;
         width: 100vw;
         align-items: center;
         padding: 5px 10px;
     }
-    .ico{
+
+    .ico {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -174,7 +218,8 @@
         margin: 0 5px;
         cursor: pointer;
     }
-    .ico:hover{
-        background: rgba(0,0,0,0.01);
+
+    .ico:hover {
+        background: rgba(0, 0, 0, 0.01);
     }
 }
