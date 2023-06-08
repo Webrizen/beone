@@ -3,7 +3,7 @@
     height: 90vh;
     overflow-y: scroll;
     display: grid;
-    grid-template-columns: 20% 1fr 20%;
+    grid-template-columns: 1fr auto 1fr;
     gap: 10px;
     padding: 10px;
 }
@@ -16,7 +16,10 @@
     padding: 10px;
 
 }
-
+.css-xtlx1y-MuiGrid-root>.MuiGrid-item{
+    padding: 0 !important;
+    margin-right: 10px !important;
+}
 .right-dashboard {
     display: flex;
     flex-direction: column;
@@ -89,8 +92,6 @@
     border-radius: 7px;
     padding: 10px;
     overflow: hidden;
-    background: #fff;
-    backdrop-filter: blur(40px);
 }
 
 .right-message .StaicCircle {
