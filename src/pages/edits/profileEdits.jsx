@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import Swal from "sweetalert2";
 import "../../styles/profile.css";
 import Calendar from "../../components/calendar";
+import UserOrders from '../../components/userOrders';
 import {
   Container,
   Grid,
@@ -195,24 +196,7 @@ const ProfileEdit = () => {
         </div>
         <div className="main-dashboard">
           <div className="left-dashboard" id="Left-Bar">
-            <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-label">
-                Select Your Order
-              </InputLabel>
-              <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                label="Select Your Order"
-              >
-                <MenuItem value="Student">Student</MenuItem>
-                <MenuItem value="Teacher">Teacher</MenuItem>
-                <MenuItem value="Admin">Admin</MenuItem>
-              </Select>
-            </FormControl>
-            <div className="yourOrders">
-              <a href="#">Your Order</a>
-              <ArrowForwardIosIcon />
-            </div>
+            <UserOrders/>
             <Divider sx={{ margin: "1rem 0" }} />
             <VerticalStepper />
           </div>
