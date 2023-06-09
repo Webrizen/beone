@@ -9,12 +9,14 @@ import Kitarrival from './pages/kitarrival';
 import Planning from './pages/planning';
 import Profile from './pages/profile';
 import ErrorPage from './pages/error-page';
+import ImmunePic from './pages/immune-pic';
 import baseApi from './utils/common';
 import ProfileEdit from './pages/edits/profileEdits';
 import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
+import TestInstructions from './pages/TestInstructions';
 function App() {
   const [main_user, setmain_user] = useState({});
   useEffect(() => {
@@ -62,6 +64,14 @@ function App() {
     {
       path: "/planning",
       element: <Planning/>,
+    },
+    {
+      path: "/test-instructions",
+      element: <TestInstructions/>,
+    },
+    {
+      path: "/immune-pic",
+      element: <ImmunePic/>,
     },
     {
       path: "*",
