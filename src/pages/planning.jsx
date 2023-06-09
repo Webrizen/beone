@@ -28,6 +28,8 @@ import ProgressRing from '../components/progressRing';
 import KitArrivalData from '../components/KitArrival/KitArrivalData';
 import HormoneTestData from '../components/HormoneTest/hormonetestdata';
 import HormoneTestForm from '../components/HormoneTest/hormonetestform';
+import MetabolicData from '../components/Metabolic/MetabolicData';
+import MetabolicForm from '../components/Metabolic/MetabolicForm';
 
 const Planning = () => {
   return (
@@ -46,6 +48,8 @@ const Planning = () => {
           <div className="middle-dashboard">
             <HormoneTestData />
             <HormoneTestForm />
+            <MetabolicData />
+            <MetabolicForm />
           </div>
           <div className="right-dashboard" id='Right-Bar'>
             <Calendar className="BoxCalender" />
