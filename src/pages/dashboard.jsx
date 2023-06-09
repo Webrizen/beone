@@ -11,7 +11,8 @@ import {
   InputLabel,
   Select,
   MenuItem,
-  Button
+  Button,
+  Grid
 } from '@mui/material';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import MenuOpenIcon from '@mui/icons-material/MenuOpen';
@@ -20,7 +21,7 @@ import VerticalStepper from '../components/verticalstepper';
 import Layout from '../components/Layout/layout';
 import UserOrders from '../components/userOrders';
 import UserContext from '../utils/user_context';
-import { BASE_API } from '../utils/common';
+import baseApi, { BASE_API } from '../utils/common';
 import { Avatar } from '@mui/material';
 import Calendar from '../components/calendar';
 import ProgressRing from '../components/progressRing';
@@ -59,6 +60,19 @@ const Dashboard = () => {
   }
 
   const percentage = 75;
+
+  const [all_orders, setall_orders] = useState([]);
+  useEffect(() => {
+    baseApi
+      .get("/dashboard")
+      .then((response) => {
+        // console.log("dashboard data", response.data);
+        setall_orders(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
 
   return (
     <>
@@ -104,16 +118,36 @@ const Dashboard = () => {
                 </Avatar>
               </div>
             </div>
+            {/* <Grid justifyContent="center"
+              alignItems="center" container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+              {Array.from(Array(6)).map((_, index) => (
+                <Grid item xs={2} sm={4} md={4} key={index}>
+                  <ProgressRing percentage={percentage} />
+                </Grid>
+              ))}
+            </Grid> */}
+            <h1 style={{ margin: "10px" }}>All Orders Progress</h1>
             <div className="three-col">
+              {/* <div className="col">
+                <ProgressRing percentage={percentage} />
+              </div>
               <div className="col">
-              <ProgressRing percentage={percentage} />
-                </div>
-                <div className="col">
                 <ProgressRing percentage={percentage} />
-                </div>
-                <div className="col">
+              </div>
+              <div className="col">
                 <ProgressRing percentage={percentage} />
+              </div>
+              <div className="col">
+                <ordersProgress />
+              </div>
+              <div className="col">
+                <ProgressRing percentage={percentage} />
+              </div> */}
+              {all_orders.map((order, index) => (
+                <div className="col">
+                  <ProgressRing orderId={order.orderId} />
                 </div>
+              ))}
             </div>
             {/* <KitArrivalData/> */}
             {/* <HormoneTest/> */}
