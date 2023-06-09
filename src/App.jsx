@@ -5,11 +5,11 @@ import UserContext from './utils/user_context';
 import './index.css';
 import Login from './pages/login';
 import Dashboard from './pages/dashboard';
+import Kitarrival from './pages/kitarrival';
 import Profile from './pages/profile';
 import ErrorPage from './pages/error-page';
 import baseApi from './utils/common';
 import ProfileEdit from './pages/edits/profileEdits';
-// import UserContext from './utils/user_context';
 import {
   createBrowserRouter,
   RouterProvider,
@@ -53,6 +53,10 @@ function App() {
     {
       path: "/edit/profile",
       element: <ProfileEdit />,
+    },
+    {
+      path: "/kit-arrival",
+      element: <Kitarrival/>,
     },
     {
       path: "*",
