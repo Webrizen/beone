@@ -6,6 +6,7 @@ import './index.css';
 import Login from './pages/login';
 import Dashboard from './pages/dashboard';
 import Kitarrival from './pages/kitarrival';
+import Planning from './pages/planning';
 import Profile from './pages/profile';
 import ErrorPage from './pages/error-page';
 import baseApi from './utils/common';
@@ -57,6 +58,10 @@ function App() {
     {
       path: "/kit-arrival",
       element: <Kitarrival/>,
+    },
+    {
+      path: "/planning",
+      element: <Planning/>,
     },
     {
       path: "*",
