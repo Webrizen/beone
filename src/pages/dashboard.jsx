@@ -27,10 +27,12 @@ import Calendar from '../components/calendar';
 import ProgressRing from '../components/progressRing';
 import KitArrivalData from '../components/KitArrival/KitArrivalData';
 import HormoneTest from '../components/planning/hormoneTest';
-
-const Dashboard = () => {
+import { useLocation } from 'react-router';
+// useLocation
+const Dashboard = (route) => {
   const { main_user, setmain_user } = useContext(UserContext);
   const [currentTime, setCurrentTime] = useState(new Date().toLocaleString());
+
   useEffect(() => {
     const intervalId = setInterval(() => {
       setCurrentTime(new Date().toLocaleString());
@@ -59,7 +61,7 @@ const Dashboard = () => {
     }
   }
 
-  const percentage = 75;
+  // const percentage = 75;
 
   const [all_orders, setall_orders] = useState([]);
   useEffect(() => {

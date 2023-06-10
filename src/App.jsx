@@ -7,15 +7,19 @@ import Login from './pages/login';
 import Dashboard from './pages/dashboard';
 import Profile from './pages/profile';
 import ErrorPage from './pages/error-page';
-import baseApi from './utils/common';
+import baseApi, { Set_order } from './utils/common';
 import ProfileEdit from './pages/edits/profileEdits';
 // import UserContext from './utils/user_context';
 import {
   createBrowserRouter,
   RouterProvider,
+  useParams,
 } from "react-router-dom";
+import CurrOrderContext from './utils/order_context';
 function App() {
+  let params = useParams();
   const [main_user, setmain_user] = useState({});
+  const [currOrder, setCurrOrder] = useState([]);
   useEffect(() => {
     if (localStorage.getItem("token")) {
       baseApi
@@ -25,13 +29,22 @@ function App() {
           console.log("response data", response.data);
           setmain_user({ ...response.data });
           console.log({ "main_user": main_user });
+          Set_order(localStorage.getItem("currOrder"), setCurrOrder)
         })
         .catch((error) => {
           console.error(error);
         });
+
+      // alert(localStorage.getItem("currOrder"))
     } else {
       setmain_user({ firstName: "" });
     }
+  }, []);
+
+
+  useEffect(() => {
+    // const params = useParams();
+    console.log("params form app", params.id);
   }, []);
   const router = createBrowserRouter([
     {
@@ -43,7 +56,7 @@ function App() {
       element: <Login />,
     },
     {
-      path: "/dashboard",
+      path: "/dashboard/:id",
       element: <Dashboard />,
     },
     {
@@ -61,7 +74,9 @@ function App() {
   ]);
   return (
     <UserContext.Provider value={{ main_user, setmain_user }}>
-      <RouterProvider router={router} />
+      <CurrOrderContext.Provider value={{ currOrder, setCurrOrder }}>
+        <RouterProvider router={router} />
+      </CurrOrderContext.Provider>
     </UserContext.Provider>
   );
 }

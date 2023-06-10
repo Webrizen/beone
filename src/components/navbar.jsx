@@ -22,7 +22,7 @@ const Navbar = (props) => {
   };
   const handleLogout = () => {
     localStorage.removeItem("token");
-    localStorage.removeItem("img");
+    localStorage.removeItem("currOrder");
     navigate("/login");
   };
   useEffect(() => {
