@@ -13,18 +13,16 @@ import ImmunePic from './pages/immune-pic';
 import Questionnaire from './pages/questionnaire';
 import Results from './pages/results';
 import Lifestyle from './pages/lifestyle';
-import baseApi from './utils/common';
+import baseApi, { Set_order } from './utils/common';
 import ProfileEdit from './pages/edits/profileEdits';
+
 import {
   createBrowserRouter,
   RouterProvider,
   useParams,
 } from "react-router-dom";
-<<<<<<< HEAD
 import CurrOrderContext from './utils/order_context';
-=======
 import TestInstructions from './pages/TestInstructions';
->>>>>>> a233f8699953de39d0f09756d041e0e2c26f8b1c
 function App() {
   let params = useParams();
   const [main_user, setmain_user] = useState({});
@@ -65,7 +63,7 @@ function App() {
       element: <Login />,
     },
     {
-      path: "/dashboard/:id",
+      path: "/order/:id/welcome",
       element: <Dashboard />,
     },
     {
@@ -77,31 +75,31 @@ function App() {
       element: <ProfileEdit />,
     },
     {
-      path: "/kit-arrival",
+      path: "/order/:id/kitArrival",
       element: <Kitarrival />,
     },
     {
-      path: "/planning",
+      path: "/order/:id/planning",
       element: <Planning />,
     },
     {
-      path: "/test-instructions",
+      path: "/order/:id/testingInstructions",
       element: <TestInstructions />,
     },
     {
-      path: "/immune-pic",
+      path: "/order/:id/immuneTestPictureUpload",
       element: <ImmunePic />,
     },
     {
-      path: "/health-questionnaire",
+      path: "/order/:id/healthQuestionnaire",
       element: <Questionnaire />,
     },
     {
-      path: "/begin-your-lifestyle-program",
+      path: "/order/:id/beginLifestyleProgram",
       element: <Lifestyle />,
     },
     {
-      path: "/results-and-personalized-protocol",
+      path: "/order/:id/resultsAndPersonalizedProtocol",
       element: <Results />,
     },
     {

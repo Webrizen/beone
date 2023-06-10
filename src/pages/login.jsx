@@ -27,7 +27,7 @@ const Login = () => {
 
     if (localStorage.getItem("token")) {
       const id = localStorage.getItem("currOrder");
-      navigate(`/dashboard/${id}`);
+      navigate(`/order/${id}/welocme`);
     }
   }, []);
   // Set_order()
@@ -56,7 +56,7 @@ const Login = () => {
           for (var i = 0; i < orders.length; i++) {
             if (orders[i].status == "PENDING") {
               Set_order(orders[i].orderId, setCurrOrder);
-              navigate(`/dashboard/${orders[i].orderId}`);
+              navigate(`/order/${orders[i].orderId}/welcome`);
               break;
             }
           }

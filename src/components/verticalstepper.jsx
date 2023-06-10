@@ -73,17 +73,17 @@ const steps = [
 export default function VerticalStepper() {
   const [activeStep, setActiveStep] = React.useState(0);
   const { currOrder, setCurrOrder } = useContext(CurrOrderContext);
-  const handleNext = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-  };
+  // const handleNext = () => {
+  //   setActiveStep((prevActiveStep) => prevActiveStep + 1);
+  // };
 
-  const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  };
+  // const handleBack = () => {
+  //   setActiveStep((prevActiveStep) => prevActiveStep - 1);
+  // };
 
-  const handleReset = () => {
-    setActiveStep(0);
-  };
+  // const handleReset = () => {
+  //   setActiveStep(0);
+  // };
 
   const StepIcon = ({ step, completed }) => {
     if (completed) {
@@ -94,21 +94,21 @@ export default function VerticalStepper() {
       return <LockIcon sx={{ color: 'gray' }} />;
     }
   };
-
+  const params = useParams();
   return (
     <Box sx={{ maxWidth: 400 }}>
       <Stepper activeStep={activeStep} orientation="vertical">
         {currOrder.map((step, index) => (
-          <Step key={step.stepId}>
+          <Step key={step.stepId} completed={true}>
             <StepLabel
               StepIconComponent={StepIcon}
-              StepIconProps={{ step, completed: index < activeStep }}
+              StepIconProps={{ step: step.stepId, completed: step.status == "Done" }}
             >
-              <Link to={`/step/${index}`} style={{ textDecoration: 'none' }}>
+              <Link to={`/order/${params.id}/${step.stepId}`} style={{ textDecoration: 'none' }}>
                 {step.stepId}
               </Link>
             </StepLabel>
-            <StepContent>
+            {/* <StepContent>
               <Typography>{step.status}</Typography>
               <Box sx={{ mb: 2 }}>
                 <div>
@@ -128,18 +128,18 @@ export default function VerticalStepper() {
                   </Button>
                 </div>
               </Box>
-            </StepContent>
+            </StepContent> */}
           </Step>
         ))}
       </Stepper>
-      {activeStep === steps.length && (
+      {/* {activeStep === steps.length && (
         <Paper square elevation={0} sx={{ p: 3 }}>
           <Typography>All steps completed - you&apos;re finished</Typography>
           <Button onClick={handleReset} sx={{ mt: 1, mr: 1 }}>
             Reset
           </Button>
         </Paper>
-      )}
+      )} */}
     </Box>
   );
 }

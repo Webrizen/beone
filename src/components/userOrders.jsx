@@ -14,13 +14,14 @@ import CurrOrderContext from "../utils/order_context";
 const UserOrders = () => {
   const { currOrder, setCurrOrder } = useContext(CurrOrderContext);
   let params = useParams();
+  const curr_oder = localStorage.getItem("currOrder");
   const [order_id, setorder_id] = useState();
   const [all_orders, setall_orders] = useState([]);
   useEffect(() => {
     baseApi
       .get("/dashboard")
       .then((response) => {
-        console.log("dashboard data", response.data);
+        console.log("all orders data", response.data);
         setall_orders(response.data);
       })
       .catch((error) => {
@@ -32,7 +33,7 @@ const UserOrders = () => {
     baseApi.get(`/dashboard/${order_id}`).then((response) => {
       console.log("current order", order_id, response.data)
       setCurrOrder(response.data);
-      navigate(`/dashboard/${order_id}`);
+      navigate(`/order/${order_id}/welcome`);
       // response.data.map((order, index) => {
       //   if (order.status == "PENDING") {
       //     Set_order(order.orderId);
@@ -51,7 +52,7 @@ const UserOrders = () => {
           labelId="demo-simple-select-label"
           id="demo-simple-select"
           label="Select Your Order"
-          defaultValue={params.id}
+          defaultValue={curr_oder}
           onChange={(event) => { setorder_id(event.target.value); console.log("changing order from dropdown", order_id) }}
         >
           {all_orders.map((order, index) => {
