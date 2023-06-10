@@ -48,3 +48,6 @@ p {
     transform: rotate(360deg) scale(3);
   }
 }
+@media only screen and (max-width: 768px) {
+  
+}

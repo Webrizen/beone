@@ -3,7 +3,7 @@
     height: 90vh;
     overflow-y: scroll;
     display: grid;
-    grid-template-columns: 1fr 50% 1fr;
+    grid-template-columns: auto 1fr auto;
     gap: 10px;
     padding: 10px;
 }
