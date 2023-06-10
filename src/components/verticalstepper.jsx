@@ -10,8 +10,10 @@ import Typography from '@mui/material/Typography';
 import LockIcon from '@mui/icons-material/Lock';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
-import { Link } from 'react-router-dom';
-
+import { Link, useParams } from 'react-router-dom';
+import { useContext } from 'react';
+import CurrOrderContext from '../utils/order_context';
+import { useEffect } from 'react';
 const steps = [
   {
     label: 'Welcome',
@@ -70,7 +72,7 @@ const steps = [
 
 export default function VerticalStepper() {
   const [activeStep, setActiveStep] = React.useState(0);
-
+  const { currOrder, setCurrOrder } = useContext(CurrOrderContext);
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
@@ -96,18 +98,18 @@ export default function VerticalStepper() {
   return (
     <Box sx={{ maxWidth: 400 }}>
       <Stepper activeStep={activeStep} orientation="vertical">
-        {steps.map((step, index) => (
-          <Step key={step.label}>
+        {currOrder.map((step, index) => (
+          <Step key={step.stepId}>
             <StepLabel
               StepIconComponent={StepIcon}
               StepIconProps={{ step, completed: index < activeStep }}
             >
               <Link to={`/step/${index}`} style={{ textDecoration: 'none' }}>
-                {step.label}
+                {step.stepId}
               </Link>
             </StepLabel>
             <StepContent>
-              <Typography>{step.description}</Typography>
+              <Typography>{step.status}</Typography>
               <Box sx={{ mb: 2 }}>
                 <div>
                   <Button
