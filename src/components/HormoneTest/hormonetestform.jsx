@@ -24,7 +24,7 @@ const HormoneTestForm = () => {
   const [activeAccordion, setActiveAccordion] = useState(0);
 
   const handleNextAccordion = () => {
-    setActiveAccordion((prevAccordion) => prevAccordion + 1);
+    setActiveAccordion((prevActiveAccordion) => prevActiveAccordion + 1);
   };
 
   return (
@@ -33,7 +33,7 @@ const HormoneTestForm = () => {
         <Accordion expanded={activeAccordion === 0}>
           <AccordionSummary
             expandIcon={<ExpandMore />}
-            onClick={handleNextAccordion}
+            onClick={() => handleNextAccordion()}
           >
             <Typography variant="body1">Introduction</Typography>
           </AccordionSummary>
@@ -58,16 +58,21 @@ const HormoneTestForm = () => {
                 3: Your availability to take the samples at the specific times
                 required throughout the day
               </Typography>
-              <Button variant="contained" onClick={handleNextAccordion}>
-                Next
-              </Button>
+              <Box sx={{ mt: 2 }}>
+                <Button
+                  variant="contained"
+                  onClick={() => handleNextAccordion()}
+                >
+                  Next
+                </Button>
+              </Box>
             </Box>
           </AccordionDetails>
         </Accordion>
         <Accordion expanded={activeAccordion === 1}>
           <AccordionSummary
             expandIcon={<ExpandMore />}
-            onClick={handleNextAccordion}
+            onClick={() => handleNextAccordion()}
           >
             <Typography variant="body1">Length of your cycle</Typography>
           </AccordionSummary>
@@ -94,22 +99,55 @@ const HormoneTestForm = () => {
                 You will need to use ovulation strips to ensure that you test at
                 the right time. Ovulation strips can be purchased in most
                 pharmacies as well as online. Use 1 ovulation test each morning
-                starting on day 7 of your cycle until a positive result is
-                detected. Once a positive result is detected, the test should be
-                done 5 days after the positive result. Please note: once you get
-                a positive ovulation test result, it can take between 24 to 36
-                hours for the egg to be released.
+                starting on day 7 of your cycle (counting from the first day of
+                flow) until you get the first faint positive result on an
+                ovulation strip. This is considered day one, and you will aim to
+                test between days 5 &amp; 7.
               </Typography>
-              <Button variant="contained" onClick={handleNextAccordion}>
-                Next
-              </Button>
+              <Typography variant="h6" gutterBottom>
+                If you are not menstruating:
+              </Typography>
+              <Typography variant="body1" gutterBottom>
+                Testing can happen at any time of the month.
+              </Typography>
+              <Box sx={{ mt: 2 }}>
+                <Typography variant="caption" gutterBottom>
+                  Testing Window Starts At: Monday, June 19th, 2023 at 12:00:00
+                  AM
+                </Typography>
+              </Box>
+              <Box sx={{ mt: 2 }}>
+                <Typography variant="body1">
+                  Enter when your testing window starts
+                </Typography>
+                <br />
+                <TextField
+                  id="testing-window"
+                  label="Testing Window"
+                  placeholder="MM/DD/YYYY"
+                  variant="outlined"
+                  InputProps={{
+                    readOnly: true,
+                  }}
+                  value="06/10/2023"
+                  fullWidth
+                />
+              </Box>
+              <Box sx={{ mt: 2 }}>
+                <Button
+                  variant="contained"
+                  onClick={() => handleNextAccordion()}
+                >
+                  Next
+                </Button>
+              </Box>
             </Box>
           </AccordionDetails>
         </Accordion>
         <Accordion expanded={activeAccordion === 2}>
           <AccordionSummary
             expandIcon={<ExpandMore />}
-            onClick={handleNextAccordion}
+            onClick={() => handleNextAccordion()}
           >
             <Typography variant="body1">
               Preparation time prior to taking the samples
@@ -118,166 +156,188 @@ const HormoneTestForm = () => {
           <AccordionDetails>
             <Box>
               <Typography variant="h6" gutterBottom>
-                Foods and supplements to avoid
+                Preparation time prior to taking the samples
+              </Typography>
+              <Typography variant="h6" gutterBottom>
+                Note that:
               </Typography>
               <Typography variant="body1" gutterBottom>
-                In order to obtain accurate hormone test results, there are
-                certain foods and supplements you should avoid in the 48 hours
-                leading up to the test. These include:
+                It is best to postpone testing if you have had an unusually bad
+                night of sleep. Therefore, avoid planning to test on the last
+                day in the testing window as you may then need to wait a whole
+                month. We suggest to aim for the 1st or 2nd day of your testing
+                window. If bad sleep is the norm for you, then contact us to add
+                the insomnia sample to your test (the insomnia test incurs an
+                extra cost).
               </Typography>
-              <ul>
-                <li>Caffeine</li>
-                <li>Alcohol</li>
-                <li>Supplements containing hormones</li>
-                <li>Birth control pills</li>
-              </ul>
+              <Typography variant="h6" gutterBottom>
+                For 48 hours prior to testing you will need to avoid:
+              </Typography>
               <Typography variant="body1" gutterBottom>
-                Make sure to avoid these substances before taking the test. It's
-                recommended to consult with your healthcare provider for
-                specific instructions related to your situation.
+                Foods: Avocado, banana, fava beans or too much of any one
+                particular food
               </Typography>
-              <Button variant="contained" onClick={handleNextAccordion}>
-                Next
-              </Button>
+              <Typography variant="body1" gutterBottom>
+                Supplements: Tryrosine, l-Dopa, DLPA, Mucuna, Quercetin
+              </Typography>
+              <Typography variant="h6" gutterBottom>
+                For 24 hours prior to testing you will also need to avoid:
+              </Typography>
+              <Typography variant="body1" gutterBottom>
+                Drinks: No caffeine or alcohol day before and day of collection
+              </Typography>
+              <Typography variant="body1" gutterBottom>
+                Exercise – no vigorous on day of collection
+              </Typography>
+              <Box sx={{ mt: 2 }}>
+                <Typography
+                  variant="body1"
+                  id="demo-controlled-radio-buttons-group"
+                >
+                  Will you be able to prepare for two days prior to the 1st or
+                  maximum the 2nd day of your testing window?
+                </Typography>
+                <RadioGroup
+                  row
+                  aria-label="controlled-radio-buttons-group"
+                  name="controlled-radio-buttons-group"
+                  defaultValue="Y"
+                >
+                  <FormControlLabel
+                    value="Y"
+                    control={<Radio />}
+                    label={
+                      <>
+                        <Typography variant="body1">Yes</Typography>
+                      </>
+                    }
+                  />
+                  <FormControlLabel
+                    value="N"
+                    control={<Radio />}
+                    label={
+                      <>
+                        <Typography variant="body1">No</Typography>
+                      </>
+                    }
+                  />
+                </RadioGroup>
+              </Box>
+              <Box sx={{ mt: 2 }}>
+                <Button
+                  variant="contained"
+                  onClick={() => handleNextAccordion()}
+                >
+                  Next
+                </Button>
+              </Box>
             </Box>
           </AccordionDetails>
         </Accordion>
         <Accordion expanded={activeAccordion === 3}>
           <AccordionSummary
             expandIcon={<ExpandMore />}
-            onClick={handleNextAccordion}
+            onClick={() => handleNextAccordion()}
           >
             <Typography variant="body1">
-              Your availability to take the samples at the specific time
-              required throughout the day
+              Your availability to take the samples
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
             <Box>
               <Typography variant="h6" gutterBottom>
-                Available sampling times
+                Your availability to take the samples at the specific time
+                required throughout the day
               </Typography>
-              <Typography variant="body1" gutterBottom>
-                The hormone test requires samples to be taken at specific times
-                throughout the day. Please indicate your availability for each
-                time slot below:
+              <Typography variant="h6" gutterBottom>
+                Urine and saliva samples will need to be taken throughout the
+                day. See below the collection times so that you can ensure you
+                have the time to take the samples
               </Typography>
               <TableContainer component={Paper}>
                 <Table>
                   <TableHead>
                     <TableRow>
-                      <TableCell>Time Slot</TableCell>
-                      <TableCell align="center">Available</TableCell>
+                      <TableCell>Sample</TableCell>
+                      <TableCell>Time</TableCell>
+                      <TableCell>Type</TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
                     <TableRow>
-                      <TableCell>5:30 AM</TableCell>
-                      <TableCell align="center">
-                        <RadioGroup
-                          row
-                          aria-label="5:30 AM"
-                          defaultValue="available"
-                        >
-                          <FormControlLabel
-                            value="available"
-                            control={<Radio />}
-                            label="Available"
-                          />
-                          <FormControlLabel
-                            value="unavailable"
-                            control={<Radio />}
-                            label="Unavailable"
-                          />
-                        </RadioGroup>
-                      </TableCell>
+                      <TableCell>1st sample</TableCell>
+                      <TableCell>Upon waking</TableCell>
+                      <TableCell>Saliva and urine</TableCell>
                     </TableRow>
                     <TableRow>
-                      <TableCell>11:00 AM</TableCell>
-                      <TableCell align="center">
-                        <RadioGroup
-                          row
-                          aria-label="11:00 AM"
-                          defaultValue="available"
-                        >
-                          <FormControlLabel
-                            value="available"
-                            control={<Radio />}
-                            label="Available"
-                          />
-                          <FormControlLabel
-                            value="unavailable"
-                            control={<Radio />}
-                            label="Unavailable"
-                          />
-                        </RadioGroup>
-                      </TableCell>
+                      <TableCell>2nd sample</TableCell>
+                      <TableCell>30 mins after waking</TableCell>
+                      <TableCell>Saliva only</TableCell>
                     </TableRow>
                     <TableRow>
-                      <TableCell>4:30 PM</TableCell>
-                      <TableCell align="center">
-                        <RadioGroup
-                          row
-                          aria-label="4:30 PM"
-                          defaultValue="available"
-                        >
-                          <FormControlLabel
-                            value="available"
-                            control={<Radio />}
-                            label="Available"
-                          />
-                          <FormControlLabel
-                            value="unavailable"
-                            control={<Radio />}
-                            label="Unavailable"
-                          />
-                        </RadioGroup>
-                      </TableCell>
+                      <TableCell>3rd sample</TableCell>
+                      <TableCell>60 mins after waking</TableCell>
+                      <TableCell>Saliva</TableCell>
                     </TableRow>
                     <TableRow>
-                      <TableCell>9:00 PM</TableCell>
-                      <TableCell align="center">
-                        <RadioGroup
-                          row
-                          aria-label="9:00 PM"
-                          defaultValue="available"
-                        >
-                          <FormControlLabel
-                            value="available"
-                            control={<Radio />}
-                            label="Available"
-                          />
-                          <FormControlLabel
-                            value="unavailable"
-                            control={<Radio />}
-                            label="Unavailable"
-                          />
-                        </RadioGroup>
-                      </TableCell>
+                      <TableCell>4th sample</TableCell>
+                      <TableCell>2-3 hrs after waking</TableCell>
+                      <TableCell>Urine only</TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell>5th sample</TableCell>
+                      <TableCell>16:00-17:00</TableCell>
+                      <TableCell>Urine only</TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell>6th sample</TableCell>
+                      <TableCell>22:00-24:00</TableCell>
+                      <TableCell>Saliva and urine</TableCell>
                     </TableRow>
                   </TableBody>
                 </Table>
               </TableContainer>
-              <Button variant="contained" onClick={handleNextAccordion}>
-                Next
-              </Button>
+              <Box sx={{ mt: 2 }}>
+                <Button
+                  variant="contained"
+                  onClick={() => handleNextAccordion()}
+                >
+                  Next
+                </Button>
+              </Box>
             </Box>
           </AccordionDetails>
         </Accordion>
         <Accordion expanded={activeAccordion === 4}>
-          <AccordionSummary expandIcon={<ExpandMore />}>
-            <Typography variant="body1">Conclusion</Typography>
+          <AccordionSummary expandIcon={<ExpandMore />} disabled>
+            <Typography variant="body1">Confirm sampling date</Typography>
           </AccordionSummary>
           <AccordionDetails>
             <Box>
-              <Typography variant="body1" gutterBottom>
-                Thank you for completing the hormone test form. Please review
-                your answers before submitting the form. If everything looks
-                correct, click the "Submit" button below.
+              <Typography variant="h6" gutterBottom>
+                Confirm sampling date
               </Typography>
-              <Button variant="contained" color="primary">
-                Submit
-              </Button>
+              <Box sx={{ mt: 2 }}>
+                <Typography variant="body1">
+                  Enter the date you plan to start collecting your samples
+                </Typography>
+                <br />
+                <TextField
+                  id="sampling-date"
+                  label="Sampling Date"
+                  placeholder="MM/DD/YYYY"
+                  variant="outlined"
+                  fullWidth
+                />
+              </Box>
+              <Box sx={{ mt: 2 }}>
+                <Button
+                  variant="contained"
+                  onClick={() => handleNextAccordion()}
+                >
+                  Next
+                </Button>
+              </Box>
             </Box>
           </AccordionDetails>
         </Accordion>
