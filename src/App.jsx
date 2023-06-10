@@ -10,6 +10,9 @@ import Planning from './pages/planning';
 import Profile from './pages/profile';
 import ErrorPage from './pages/error-page';
 import ImmunePic from './pages/immune-pic';
+import Questionnaire from './pages/questionnaire';
+import Results from './pages/results';
+import Lifestyle from './pages/lifestyle';
 import baseApi from './utils/common';
 import ProfileEdit from './pages/edits/profileEdits';
 import {
@@ -72,6 +75,18 @@ function App() {
     {
       path: "/immune-pic",
       element: <ImmunePic/>,
+    },
+    {
+      path: "/health-questionnaire",
+      element: <Questionnaire/>,
+    },
+    {
+      path: "/begin-your-lifestyle-program",
+      element: <Lifestyle/>,
+    },
+    {
+      path: "/results-and-personalized-protocol",
+      element: <Results/>,
     },
     {
       path: "*",
