@@ -1,10 +1,24 @@
 import React from 'react';
-import { Typography, Accordion, AccordionSummary, AccordionDetails, Box } from '@mui/material';
+import {
+  Typography,
+  Accordion,
+  AccordionSummary,
+  AccordionDetails,
+  Box,
+  TextField,
+  Button,
+} from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 const MetabolicForm = () => {
+  const handleNextAccordion = () => {
+    // Add logic here to handle the navigation to the next accordion
+    // You can track the active accordion using state and update it accordingly
+    // For example: setActiveAccordion(activeAccordion + 1);
+  };
+
   return (
-    <Box sx={{ flexGrow: 1, marginTop: "20px" }}>
+    <Box sx={{ flexGrow: 1, marginTop: '20px' }}>
       <Accordion>
         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
           <Typography variant="body1">Introduction</Typography>
@@ -27,6 +41,11 @@ const MetabolicForm = () => {
               3: Your availability to take the samples at specific times required throughout the day
             </Typography>
           </Box>
+          <Box sx={{ mt: 2 }}>
+            <Button variant="contained" onClick={handleNextAccordion}>
+              Next
+            </Button>
+          </Box>
         </AccordionDetails>
       </Accordion>
 
@@ -42,6 +61,11 @@ const MetabolicForm = () => {
             <Typography variant="body1" gutterBottom>
               Please note that the sampling process will take two days and testing cannot happen during menstruation
             </Typography>
+          </Box>
+          <Box sx={{ mt: 2 }}>
+            <Button variant="contained" onClick={handleNextAccordion}>
+              Next
+            </Button>
           </Box>
         </AccordionDetails>
       </Accordion>
@@ -76,6 +100,11 @@ const MetabolicForm = () => {
               <br />
               The night before the bloodspot sample collection, fast starting at least 8 hours prior to the morning collection.
             </Typography>
+          </Box>
+          <Box sx={{ mt: 2 }}>
+            <Button variant="contained" onClick={handleNextAccordion}>
+              Next
+            </Button>
           </Box>
         </AccordionDetails>
       </Accordion>
@@ -120,6 +149,24 @@ const MetabolicForm = () => {
             <Typography variant="caption" gutterBottom>
               Sampling Date: Tuesday, June 20th, 2023 at 5:30:00 AM
             </Typography>
+          </Box>
+          <Box sx={{ mt: 2 }}>
+            <Typography variant="body1">
+              Enter the date you plan to start collecting your samples
+            </Typography>
+            <br />
+            <TextField
+              id="sampling-date"
+              label="Sampling Date"
+              placeholder="MM/DD/YYYY"
+              variant="outlined"
+              fullWidth
+            />
+          </Box>
+          <Box sx={{ mt: 2 }}>
+            <Button variant="contained" onClick={handleNextAccordion}>
+              Next
+            </Button>
           </Box>
         </AccordionDetails>
       </Accordion>
