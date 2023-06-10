@@ -18,10 +18,17 @@ import ProfileEdit from './pages/edits/profileEdits';
 import {
   createBrowserRouter,
   RouterProvider,
+  useParams,
 } from "react-router-dom";
+<<<<<<< HEAD
+import CurrOrderContext from './utils/order_context';
+=======
 import TestInstructions from './pages/TestInstructions';
+>>>>>>> a233f8699953de39d0f09756d041e0e2c26f8b1c
 function App() {
+  let params = useParams();
   const [main_user, setmain_user] = useState({});
+  const [currOrder, setCurrOrder] = useState([]);
   useEffect(() => {
     if (localStorage.getItem("token")) {
       baseApi
@@ -31,13 +38,22 @@ function App() {
           console.log("response data", response.data);
           setmain_user({ ...response.data });
           console.log({ "main_user": main_user });
+          Set_order(localStorage.getItem("currOrder"), setCurrOrder)
         })
         .catch((error) => {
           console.error(error);
         });
+
+      // alert(localStorage.getItem("currOrder"))
     } else {
       setmain_user({ firstName: "" });
     }
+  }, []);
+
+
+  useEffect(() => {
+    // const params = useParams();
+    console.log("params form app", params.id);
   }, []);
   const router = createBrowserRouter([
     {
@@ -49,7 +65,7 @@ function App() {
       element: <Login />,
     },
     {
-      path: "/dashboard",
+      path: "/dashboard/:id",
       element: <Dashboard />,
     },
     {
@@ -62,31 +78,31 @@ function App() {
     },
     {
       path: "/kit-arrival",
-      element: <Kitarrival/>,
+      element: <Kitarrival />,
     },
     {
       path: "/planning",
-      element: <Planning/>,
+      element: <Planning />,
     },
     {
       path: "/test-instructions",
-      element: <TestInstructions/>,
+      element: <TestInstructions />,
     },
     {
       path: "/immune-pic",
-      element: <ImmunePic/>,
+      element: <ImmunePic />,
     },
     {
       path: "/health-questionnaire",
-      element: <Questionnaire/>,
+      element: <Questionnaire />,
     },
     {
       path: "/begin-your-lifestyle-program",
-      element: <Lifestyle/>,
+      element: <Lifestyle />,
     },
     {
       path: "/results-and-personalized-protocol",
-      element: <Results/>,
+      element: <Results />,
     },
     {
       path: "*",
@@ -95,7 +111,9 @@ function App() {
   ]);
   return (
     <UserContext.Provider value={{ main_user, setmain_user }}>
-      <RouterProvider router={router} />
+      <CurrOrderContext.Provider value={{ currOrder, setCurrOrder }}>
+        <RouterProvider router={router} />
+      </CurrOrderContext.Provider>
     </UserContext.Provider>
   );
 }

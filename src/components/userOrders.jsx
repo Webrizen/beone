@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   Divider,
   FormControl,
@@ -7,9 +7,14 @@ import {
   MenuItem,
 } from "@mui/material";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import baseApi from "../utils/common";
+import { Box } from "@mui/system";
+import CurrOrderContext from "../utils/order_context";
 const UserOrders = () => {
+  const { currOrder, setCurrOrder } = useContext(CurrOrderContext);
+  let params = useParams();
+  const [order_id, setorder_id] = useState();
   const [all_orders, setall_orders] = useState([]);
   useEffect(() => {
     baseApi
@@ -22,15 +27,32 @@ const UserOrders = () => {
         console.error(error);
       });
   }, []);
+  const navigate = useNavigate();
+  const changeOrder = () => {
+    baseApi.get(`/dashboard/${order_id}`).then((response) => {
+      console.log("current order", order_id, response.data)
+      setCurrOrder(response.data);
+      navigate(`/dashboard/${order_id}`);
+      // response.data.map((order, index) => {
+      //   if (order.status == "PENDING") {
+      //     Set_order(order.orderId);
+      //     break;
+      //   }
+      // })
+    }).catch((error) => {
+      console.log("userorders id api error:", error)
+    })
+  }
   return (
     <>
       <FormControl fullWidth>
-        <InputLabel id="demo-simple-select-label">Select Your Order</InputLabel>
+        <InputLabel id="demo-simple-select-label">Current Order</InputLabel>
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
           label="Select Your Order"
-          defaultValue={778877556688}
+          defaultValue={params.id}
+          onChange={(event) => { setorder_id(event.target.value); console.log("changing order from dropdown", order_id) }}
         >
           {all_orders.map((order, index) => {
             // if (order.status == "PENDING") {
@@ -46,13 +68,13 @@ const UserOrders = () => {
           <MenuItem value="Admin">Admin</MenuItem> */}
         </Select>
       </FormControl>
-      <Link to="/orders/:id">
-        {/* Yeh Bhaiya ID Pass Krne Wala Ap Dekh Lena | Is Comment Ko Remove Kr Dena Baadme */}
-        <div className="yourOrders">
-          Your Orders
-          <ArrowForwardIosIcon />
-        </div>
-      </Link>
+      {/* <Box> */}
+      {/* Yeh Bhaiya ID Pass Krne Wala Ap Dekh Lena | Is Comment Ko Remove Kr Dena Baadme */}
+      <div onClick={changeOrder} className="yourOrders">
+        GoTo Selected Order
+        <ArrowForwardIosIcon />
+      </div>
+      {/* </Box > */}
       <Divider sx={{ margin: "1rem 0" }} />
     </>
   );

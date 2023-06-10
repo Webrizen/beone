@@ -1,6 +1,7 @@
 import axios from "axios";
-
-
+import { useContext } from "react";
+import CurrOrderContext from "./order_context";
+import { useNavigate } from "react-router-dom";
 const getUserToken = () => {
     return localStorage.getItem("token");
 };
@@ -21,3 +22,26 @@ baseApi.interceptors.request.use((config) => {
 },);
 
 export default baseApi;
+
+export const Set_order = (id, setCurrOrder) => {
+    // const navigate = useNavigate();
+
+    // const { currOrder, setCurrOrder } = useContext(CurrOrderContext);
+
+    baseApi.get(`/dashboard/${id}`).then((response) => {
+        console.log("current order", id, response.data)
+        setCurrOrder(response.data);
+        localStorage.setItem("currOrder", id);
+        // navigate(`/dashboard/${id}`);
+        // return id;
+        // response.data.map((order, index) => {
+        //   if (order.status == "PENDING") {
+        //     Set_order(order.orderId);
+        //     break;
+        //   }
+        // })
+    }).catch((error) => {
+        console.log("set order api", error)
+    })
+
+}
