@@ -15,26 +15,6 @@ const KitArrivalData = () => {
   return (
     <>
       <Box sx={{ maxWidth: "100%", overflowX: "auto", padding: "10px" }}>
-        <Typography
-          variant="h4"
-          gutterBottom
-          sx={{
-            fontWeight: 700,
-            background: "linear-gradient(50deg, #45d9c9, #84b3c7)",
-            WebkitTextFillColor: "transparent",
-            WebkitBackgroundClip: "text",
-            backgroundClip: "text",
-          }}
-        >
-          The package arrived!
-        </Typography>
-        <Typography
-          variant="body1"
-          gutterBottom
-          sx={{ color: "rgba(0,0,0,0.3)" }}
-        >
-          The package is with you now
-        </Typography>
         <Box sx={{ mt: 2 }}>
           <TableContainer>
             <Table>

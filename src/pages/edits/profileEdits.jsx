@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import Swal from "sweetalert2";
 import "../../styles/profile.css";
 import Calendar from "../../components/calendar";
+import UserOrders from '../../components/userOrders';
 import {
   Container,
   Grid,
@@ -185,39 +186,7 @@ const ProfileEdit = () => {
     <>
       <Layout>
         <RouteGuard />
-        <div className="two-flex">
-          <div className="ico" onClick={ToggleLeftSideBar}>
-            <MenuOpenIcon />
-          </div>
-          <div className="ico" onClick={ToggleRightSideBar}>
-            <WidgetsIcon />
-          </div>
-        </div>
-        <div className="main-dashboard">
-          <div className="left-dashboard" id="Left-Bar">
-            <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-label">
-                Select Your Order
-              </InputLabel>
-              <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                label="Select Your Order"
-              >
-                <MenuItem value="Student">Student</MenuItem>
-                <MenuItem value="Teacher">Teacher</MenuItem>
-                <MenuItem value="Admin">Admin</MenuItem>
-              </Select>
-            </FormControl>
-            <div className="yourOrders">
-              <a href="#">Your Order</a>
-              <ArrowForwardIosIcon />
-            </div>
-            <Divider sx={{ margin: "1rem 0" }} />
-            <VerticalStepper />
-          </div>
-          <div className="middle-dashboard">
-            <div className="Profile">
+        <div className="Profile">
               <Container maxWidth="md" className="cont-MUI">
               <div>
                         <Box className="Model-box">
@@ -413,11 +382,6 @@ const ProfileEdit = () => {
                       </div>
               </Container>
             </div>
-          </div>
-          <div className="right-dashboard" id="Right-Bar">
-            <Calendar />
-          </div>
-        </div>
       </Layout>
     </>
   );

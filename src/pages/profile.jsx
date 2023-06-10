@@ -28,6 +28,7 @@ import MenuOpenIcon from "@mui/icons-material/MenuOpen";
 import WidgetsIcon from "@mui/icons-material/Widgets";
 import VerticalStepper from "../components/verticalstepper";
 import Navbar from "../components/navbar";
+import UserOrders from '../components/userOrders';
 import {
   AccountCircle,
   LocationOn,
@@ -102,9 +103,6 @@ const Profile = () => {
     // Handle form submission here
   };
 
-  // Dummy data
-  var personalInformation = {};
-
   function ToggleLeftSideBar() {
     const LeftBar = document.getElementById("Left-Bar");
     if (LeftBar.style.transform === "translateX(-200%)") {
@@ -122,14 +120,6 @@ const Profile = () => {
       RightBar.style.transform = "translateX(200%)";
     }
   }
-
-  // const [user, setuser] = useState({});
-
-  // useEffect(() => {
-  //   setnewValue(main_user);
-  //   console.log("new value", newValue);
-  // }, [main_user]);
-
 
   const handleUpdate = () => {
     baseApi
@@ -150,26 +140,6 @@ const Profile = () => {
         console.error(error);
       });
   };
-
-  // useEffect(() => {
-  //   baseApi
-  //     .get("/user")
-  //     .then((response) => {
-  //       console.log(response.data);
-  //       setuser(response.data);
-  //       setnewValue(response.data);
-  //       delete newValue.roles;
-  //       delete newValue.profilePic;
-  //       console.log(newValue);
-  //       // personalInformation = response.data;
-  //       console.log({ "new value": newValue });
-  //       setProfilePicFile(localStorage.getItem("img"));
-  //       console.log(profilePicFile);
-  //     })
-  //     .catch((error) => {
-  //       console.error(error);
-  //     });
-  // }, []);
 
   const [age, setAge] = useState(""); //Calculatying Age :)
   const calculateAge = (dob) => {
@@ -192,39 +162,7 @@ const Profile = () => {
     <>
       <Layout>
         <RouteGuard />
-        <div className="two-flex">
-          <div className="ico" onClick={ToggleLeftSideBar}>
-            <MenuOpenIcon />
-          </div>
-          <div className="ico" onClick={ToggleRightSideBar}>
-            <WidgetsIcon />
-          </div>
-        </div>
-        <div className="main-dashboard">
-          <div className="left-dashboard" id="Left-Bar">
-            <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-label">
-                Select Your Order
-              </InputLabel>
-              <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                label="Select Your Order"
-              >
-                <MenuItem value="Student">Student</MenuItem>
-                <MenuItem value="Teacher">Teacher</MenuItem>
-                <MenuItem value="Admin">Admin</MenuItem>
-              </Select>
-            </FormControl>
-            <div className="yourOrders">
-              <a href="#">Your Order</a>
-              <ArrowForwardIosIcon />
-            </div>
-            <Divider sx={{ margin: "1rem 0" }} />
-            <VerticalStepper />
-          </div>
-          <div className="middle-dashboard">
-            <div className="Profile">
+        <div className="Profile">
               <Container maxWidth="md" className="cont-MUI">
                 <Paper
                   elevation={3}
@@ -568,11 +506,6 @@ const Profile = () => {
                 </Paper>
               </Container>
             </div>
-          </div>
-          <div className="right-dashboard" id="Right-Bar">
-            <Calendar />
-          </div>
-        </div>
       </Layout>
     </>
   );
