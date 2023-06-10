@@ -31,7 +31,7 @@ const Navbar = (props) => {
   return (
     <>
       <header>
-        <Link to="/dashboard"><div className="logo">
+        <Link to="/order/:id/welcome"><div className="logo">
           <img src="/favicon.png" alt="Beone." />
         </div></Link>
         <div className="right-nav">
@@ -54,7 +54,7 @@ const Navbar = (props) => {
             className='MenuLinks'
           >
             <Link to="/profile"><MenuItem onClick={handleClose} className='Cursor'>{main_user.firstName}</MenuItem></Link>
-            <Link to="/dashboard"><MenuItem onClick={handleClose} className='Cursor'>Dashboard</MenuItem></Link>
+            <Link to="/order/:id/welcome"><MenuItem onClick={handleClose} className='Cursor'>Dashboard</MenuItem></Link>
             <Link to="/settings"><MenuItem onClick={handleClose} className='Cursor'>Settings</MenuItem></Link>
             <hr />
             <MenuItem onClick={handleLogout} className='Cursor'>Logout</MenuItem>
