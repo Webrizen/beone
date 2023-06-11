@@ -38,15 +38,19 @@ export default function VerticalStepper() {
   const params = useParams();
 
   return (
-    <Box sx={{ maxWidth: 400 }}>
+    <Box>
       <Stepper activeStep={activeStep} orientation="vertical">
         {currOrder.map((step, index) => (
           <Step key={step.stepId} completed={true}>
             <StepLabel
               StepIconComponent={StepIcon}
               StepIconProps={{ step: step.stepId, completed: step.status === 'Done' }}
+              className='StepBTN'
             >
-              <Link to={`/order/${params.id}/${step.stepId}`} style={{ textDecoration: 'none', fontSize: '18px' }}>
+              <Link
+                to={`/order/${params.id}/${step.stepId}`}
+                style={{ textDecoration: 'none', fontSize: '14px', textTransform: 'uppercase' }}
+              >
                 {formatStepId(step.stepId)}
               </Link>
             </StepLabel>

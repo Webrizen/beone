@@ -71,10 +71,6 @@ const UserOrders = () => {
       </FormControl>
       {/* <Box> */}
       {/* Yeh Bhaiya ID Pass Krne Wala Ap Dekh Lena | Is Comment Ko Remove Kr Dena Baadme */}
-      <div onClick={changeOrder} className="yourOrders">
-        GoTo Selected Order
-        <ArrowForwardIosIcon />
-      </div>
       {/* </Box > */}
       <Divider sx={{ margin: "1rem 0" }} />
     </>

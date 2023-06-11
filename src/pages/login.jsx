@@ -27,7 +27,7 @@ const Login = () => {
 
     if (localStorage.getItem("token")) {
       const id = localStorage.getItem("currOrder");
-      navigate(`/order/${id}/welocme`);
+      navigate(`/order/${id}/welcome`);
     }
   }, []);
   // Set_order()

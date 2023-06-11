@@ -28,32 +28,72 @@ a {
   text-decoration: none;
   white-space: nowrap;
 }
-
 img {
   pointer-events: none;
   user-select: none;
 }
+.step-link {
+  text-decoration: none;
+  font-size: 16px;
+  text-transform: uppercase;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  word-wrap: break-word;
+  max-height: 3.6em;
+}
 
 /* ===== Scrollbar CSS ===== */
-/* Firefox */
-body {
+* {
   scrollbar-width: auto;
   scrollbar-color: #f1f1f1;
 }
 
 /* Chrome, Edge, and Safari */
-body::-webkit-scrollbar {
-  width: 10px;
+*::-webkit-scrollbar {
+  width: 0px;
 }
 
-body::-webkit-scrollbar-track {
+*::-webkit-scrollbar-track {
   background: transparent;
 }
 
-body::-webkit-scrollbar-thumb {
-  background-color: #f1f1f1;
+*::-webkit-scrollbar-thumb {
+  background-color: transparent;
   border-radius: 1px;
   border: 3px solid transparent;
 }
 
+/* Firefox */
+body {
+  scrollbar-width: auto !important;
+  scrollbar-color: #f1f1f1 !important;
+}
+
+/* Chrome, Edge, and Safari */
+body::-webkit-scrollbar {
+  width: 10px !important;
+}
+
+body::-webkit-scrollbar-track {
+  background: transparent !important;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: #f1f1f1 !important;
+  border-radius: 1px !important;
+  border: 3px solid transparent !important;
+}
+.StepBTN{
+  padding: 10px !important;
+  overflow: hidden;
+  width: min-content;
+  border-radius: 6px;
+  transition: all 0.1s;
+  border: 0.1px solid rgba(0,0,0,0.1);
+}
+.StepBTN:hover{
+  background: rgba(0,0,0,0.01);
+}
 @media only screen and (max-width: 768px) {}

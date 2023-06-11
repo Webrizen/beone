@@ -45,19 +45,10 @@ const Dashboard = (route) => {
 
   function ToggleLeftSideBar() {
     const LeftBar = document.getElementById('Left-Bar');
-    if (LeftBar.style.transform == "translateX(-200%)") {
-      LeftBar.style.transform = "translateX(3%)"
-    } else {
+    if (LeftBar.style.transform == "translateX(0%)") {
       LeftBar.style.transform = "translateX(-200%)"
-    }
-  }
-
-  function ToggleRightSideBar() {
-    const RightBar = document.getElementById('Right-Bar');
-    if (RightBar.style.transform == "translateX(200%)") {
-      RightBar.style.transform = "translateX(3%)"
     } else {
-      RightBar.style.transform = "translateX(200%)"
+      LeftBar.style.transform = "translateX(0%)"
     }
   }
 
@@ -82,7 +73,6 @@ const Dashboard = (route) => {
         <RouteGuard />
         <div className="two-flex">
           <div className="ico" onClick={ToggleLeftSideBar}><MenuOpenIcon /></div>
-          <div className="ico" onClick={ToggleRightSideBar}><WidgetsIcon /></div>
         </div>
         <div className="main-dashboard">
           <div className="left-dashboard" id='Left-Bar'>
@@ -120,42 +110,6 @@ const Dashboard = (route) => {
                 </Avatar>
               </div>
             </div>
-            {/* <Grid justifyContent="center"
-              alignItems="center" container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
-              {Array.from(Array(6)).map((_, index) => (
-                <Grid item xs={2} sm={4} md={4} key={index}>
-                  <ProgressRing percentage={percentage} />
-                </Grid>
-              ))}
-            </Grid> */}
-            <h1 style={{ margin: "10px" }}>All Orders Progress</h1>
-            <div className="three-col">
-              {/* <div className="col">
-                <ProgressRing percentage={percentage} />
-              </div>
-              <div className="col">
-                <ProgressRing percentage={percentage} />
-              </div>
-              <div className="col">
-                <ProgressRing percentage={percentage} />
-              </div>
-              <div className="col">
-                <ordersProgress />
-              </div>
-              <div className="col">
-                <ProgressRing percentage={percentage} />
-              </div> */}
-              {all_orders.map((order, index) => (
-                <div className="col">
-                  <ProgressRing orderId={order.orderId} />
-                </div>
-              ))}
-            </div>
-            {/* <KitArrivalData/> */}
-            {/* <HormoneTest/> */}
-          </div>
-          <div className="right-dashboard" id='Right-Bar'>
-            <Calendar className="BoxCalender" />
           </div>
         </div>
 
