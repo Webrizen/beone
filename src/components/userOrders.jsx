@@ -30,6 +30,7 @@ const UserOrders = () => {
   }, []);
   const navigate = useNavigate();
   const changeOrder = () => {
+    localStorage.setItem("currOrder", order_id);
     baseApi.get(`/dashboard/${order_id}`).then((response) => {
       console.log("current order", order_id, response.data)
       setCurrOrder(response.data);
