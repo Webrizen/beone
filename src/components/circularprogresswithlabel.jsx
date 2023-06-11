@@ -5,6 +5,7 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 
 function CircularProgressWithLabel(props) {
+
   return (
     <Box sx={{ position: 'relative', display: 'inline-flex' }}>
       <CircularProgress variant="determinate" {...props} />
@@ -37,6 +38,9 @@ CircularProgressWithLabel.propTypes = {
   value: PropTypes.number.isRequired,
 };
 
-export default function CircularStatic() {
-  return <CircularProgressWithLabel value={80} />;
+export default function CircularStatic({ order }) {
+  const doneSteps = order.filter(
+    (item) => item.status === 'Done'
+  ).length;
+  return <CircularProgressWithLabel value={(doneSteps / 8) * 100} />;
 }

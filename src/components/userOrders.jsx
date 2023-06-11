@@ -29,12 +29,12 @@ const UserOrders = () => {
       });
   }, []);
   const navigate = useNavigate();
-  const changeOrder = () => {
-    localStorage.setItem("currOrder", order_id);
-    baseApi.get(`/dashboard/${order_id}`).then((response) => {
-      console.log("current order", order_id, response.data)
+  const changeOrder = (event) => {
+    localStorage.setItem("currOrder", event.target.value);
+    baseApi.get(`/dashboard/${event.target.value}`).then((response) => {
+      console.log("setting order order", event.target.value, response.data)
       setCurrOrder(response.data);
-      navigate(`/order/${order_id}/welcome`);
+      navigate(`/order/${event.target.value}/welcome`);
       // response.data.map((order, index) => {
       //   if (order.status == "PENDING") {
       //     Set_order(order.orderId);
@@ -54,7 +54,7 @@ const UserOrders = () => {
           id="demo-simple-select"
           label="Select Your Order"
           defaultValue={curr_oder}
-          onChange={(event) => { setorder_id(event.target.value); console.log("changing order from dropdown", order_id) }}
+          onChange={changeOrder}
         >
           {all_orders.map((order, index) => {
             // if (order.status == "PENDING") {

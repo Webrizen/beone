@@ -15,11 +15,11 @@ import Results from './pages/results';
 import Lifestyle from './pages/lifestyle';
 import baseApi, { Set_order } from './utils/common';
 import ProfileEdit from './pages/edits/profileEdits';
-
 import {
   createBrowserRouter,
   RouterProvider,
   useParams,
+  useSearchParams,
 } from "react-router-dom";
 import CurrOrderContext from './utils/order_context';
 import TestInstructions from './pages/TestInstructions';
@@ -51,7 +51,7 @@ function App() {
 
   useEffect(() => {
     // const params = useParams();
-    console.log("params form app", params.id);
+    console.log("params form app", params);
   }, []);
   const router = createBrowserRouter([
     {

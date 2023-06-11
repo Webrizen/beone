@@ -13,19 +13,19 @@ import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import { Link, useParams } from 'react-router-dom';
 import { useContext } from 'react';
 import CurrOrderContext from '../utils/order_context';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function VerticalStepper() {
-  const [activeStep, setActiveStep] = React.useState(0);
+  const [activeStep, setActiveStep] = useState(0);
   const { currOrder, setCurrOrder } = useContext(CurrOrderContext);
 
-  const StepIcon = ({ step, completed }) => {
+  const StepIcon = ({ id, step, completed }) => {
     if (completed) {
       return <CheckCircleIcon sx={{ color: 'green' }} />;
-    } else if (activeStep === step) {
+    } else if (step) {
       return <CheckCircleOutlineIcon sx={{ color: 'blue' }} />;
     } else {
-      return <LockIcon sx={{ color: 'gray' }} />;
+      return <LockIcon disabled={true} sx={{ color: 'gray' }} />;
     }
   };
 
@@ -41,22 +41,25 @@ export default function VerticalStepper() {
     <Box>
       <Stepper activeStep={activeStep} orientation="vertical">
         {currOrder.map((step, index) => (
-          <Step key={step.stepId} completed={true}>
+          <Step disabled={true} key={step.stepId} completed={true} >
             <StepLabel
               StepIconComponent={StepIcon}
-              StepIconProps={{ step: step.stepId, completed: step.status === 'Done' }}
+              StepIconProps={{ id: step.stepId, step: step.status == "Active", completed: step.status === 'Done' }}
               className='StepBTN'
+
             >
-              <Link
+              {step.status == "Pending" || step.status == null ? <p style={{ textTransform: 'capitalize' }}>{formatStepId(step.stepId)}</p> : <Link
+                disable={true}
                 to={`/order/${params.id}/${step.stepId}`}
-                style={{ textDecoration: 'none', fontSize: '14px', textTransform: 'uppercase' }}
+                style={{ textDecoration: 'none', fontSize: '14px', textTransform: 'capitalize' }}
               >
                 {formatStepId(step.stepId)}
-              </Link>
+              </Link>}
+
             </StepLabel>
           </Step>
         ))}
       </Stepper>
-    </Box>
+    </Box >
   );
 }

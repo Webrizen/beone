@@ -11,7 +11,7 @@ import {
   TableCell,
 } from "@mui/material";
 
-const KitArrivalData = () => {
+const KitArrivalData = ({ data }) => {
   return (
     <>
       <Box
@@ -43,7 +43,7 @@ const KitArrivalData = () => {
                     <Typography variant="body1">AWB Number:</Typography>
                   </TableCell>
                   <TableCell align="right">
-                    <Typography variant="body1">MONSTER</Typography>
+                    <Typography variant="body1">{data.awbNumber}</Typography>
                   </TableCell>
                 </TableRow>
                 <TableRow>
@@ -51,7 +51,7 @@ const KitArrivalData = () => {
                     <Typography variant="body1">AWB Status:</Typography>
                   </TableCell>
                   <TableCell align="right">
-                    <Typography variant="body1">Done</Typography>
+                    <Typography variant="body1">{data.awbStatus}</Typography>
                   </TableCell>
                 </TableRow>
                 <TableRow>
@@ -61,7 +61,7 @@ const KitArrivalData = () => {
                     </Typography>
                   </TableCell>
                   <TableCell align="right">
-                    <Typography variant="body1">STANDARD</Typography>
+                    <Typography variant="body1">{data.productPackageType}</Typography>
                   </TableCell>
                 </TableRow>
               </TableBody>
@@ -71,16 +71,17 @@ const KitArrivalData = () => {
             <div className="left-data-kit">
               <Typography variant="body1">Completed At:</Typography>
               <Typography variant="body1">
-                Thursday, June 8th, 2023
+                {data.completedAt}
               </Typography>
             </div>
+            {'completedIn' in data ? <div className="right-data-kit">
 
-            <div className="right-data-kit">
               <Typography variant="body1">Completed In:</Typography>
               <Typography variant="body1">
-              3 days
+                {data.completedIn}
               </Typography>
-            </div>
+            </div> : ""}
+
           </div>
         </Box>
       </Box>
