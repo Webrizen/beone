@@ -32,13 +32,20 @@ import MetabolicData from '../components/Metabolic/MetabolicData';
 import MetabolicForm from '../components/Metabolic/MetabolicForm';
 
 const Planning = () => {
+  function ToggleLeftSideBar() {
+    const LeftBar = document.getElementById('Left-Bar');
+    if (LeftBar.style.transform == "translateX(0%)") {
+      LeftBar.style.transform = "translateX(-200%)"
+    } else {
+      LeftBar.style.transform = "translateX(0%)"
+    }
+  }
   return (
     <>
      <Layout>
         <RouteGuard />
         <div className="two-flex">
-          <div className="ico"><MenuOpenIcon /></div>
-          <div className="ico"><WidgetsIcon /></div>
+          <div className="ico" onClick={ToggleLeftSideBar}><MenuOpenIcon /></div>
         </div>
         <div className="main-dashboard">
           <div className="left-dashboard" id='Left-Bar'>
@@ -50,9 +57,6 @@ const Planning = () => {
             <HormoneTestForm />
             <MetabolicData />
             <MetabolicForm />
-          </div>
-          <div className="right-dashboard" id='Right-Bar'>
-            <Calendar className="BoxCalender" />
           </div>
         </div>
 

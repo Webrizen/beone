@@ -14,76 +14,10 @@ import { Link, useParams } from 'react-router-dom';
 import { useContext } from 'react';
 import CurrOrderContext from '../utils/order_context';
 import { useEffect } from 'react';
-const steps = [
-  {
-    label: 'Welcome',
-    description: `For each ad campaign that you create, you can control how much
-              you're willing to spend on clicks and conversions, which networks
-              and geographical locations you want your ads to show on, and more.`,
-  },
-  {
-    label: 'Kit Arrival',
-    description:
-      'An ad group contains one or more ads which target a shared set of keywords.',
-  },
-  {
-    label: 'Plaining',
-    description: `Try out different ad text to see what brings in the most customers,
-              and learn how to enhance your ads using features like ad extensions.
-              If you run into any problems with your ads, find out how to tell if
-              they're running and how to resolve approval issues.`,
-  },
-  {
-    label: 'Test Instructions',
-    description: `Try out different ad text to see what brings in the most customers,
-              and learn how to enhance your ads using features like ad extensions.
-              If you run into any problems with your ads, find out how to tell if
-              they're running and how to resolve approval issues.`,
-  },
-  {
-    label: 'Immune text picture Upload',
-    description: `Try out different ad text to see what brings in the most customers,
-              and learn how to enhance your ads using features like ad extensions.
-              If you run into any problems with your ads, find out how to tell if
-              they're running and how to resolve approval issues.`,
-  },
-  {
-    label: 'Health Questionnaire',
-    description: `Try out different ad text to see what brings in the most customers,
-              and learn how to enhance your ads using features like ad extensions.
-              If you run into any problems with your ads, find out how to tell if
-              they're running and how to resolve approval issues.`,
-  },
-  {
-    label: 'Begin Your LifeStyle Progrmme',
-    description: `Try out different ad text to see what brings in the most customers,
-              and learn how to enhance your ads using features like ad extensions.
-              If you run into any problems with your ads, find out how to tell if
-              they're running and how to resolve approval issues.`,
-  },
-  {
-    label: 'Results And Personalized Protocal',
-    description: `Try out different ad text to see what brings in the most customers,
-              and learn how to enhance your ads using features like ad extensions.
-              If you run into any problems with your ads, find out how to tell if
-              they're running and how to resolve approval issues.`,
-  },
-];
 
 export default function VerticalStepper() {
   const [activeStep, setActiveStep] = React.useState(0);
   const { currOrder, setCurrOrder } = useContext(CurrOrderContext);
-  // const handleNext = () => {
-  //   setActiveStep((prevActiveStep) => prevActiveStep + 1);
-  // };
-
-  // const handleBack = () => {
-  //   setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  // };
-
-  // const handleReset = () => {
-  //   setActiveStep(0);
-  // };
 
   const StepIcon = ({ step, completed }) => {
     if (completed) {
@@ -94,52 +28,35 @@ export default function VerticalStepper() {
       return <LockIcon sx={{ color: 'gray' }} />;
     }
   };
+
+  const formatStepId = (stepId) => {
+    // Add spacing to the stepId label
+    const formattedStepId = stepId.replace(/([A-Z])/g, ' $1').trim();
+    return formattedStepId;
+  };
+
   const params = useParams();
+
   return (
-    <Box sx={{ maxWidth: 400 }}>
+    <Box>
       <Stepper activeStep={activeStep} orientation="vertical">
         {currOrder.map((step, index) => (
           <Step key={step.stepId} completed={true}>
             <StepLabel
               StepIconComponent={StepIcon}
-              StepIconProps={{ step: step.stepId, completed: step.status == "Done" }}
+              StepIconProps={{ step: step.stepId, completed: step.status === 'Done' }}
+              className='StepBTN'
             >
-              <Link to={`/order/${params.id}/${step.stepId}`} style={{ textDecoration: 'none' }}>
-                {step.stepId}
+              <Link
+                to={`/order/${params.id}/${step.stepId}`}
+                style={{ textDecoration: 'none', fontSize: '14px', textTransform: 'uppercase' }}
+              >
+                {formatStepId(step.stepId)}
               </Link>
             </StepLabel>
-            {/* <StepContent>
-              <Typography>{step.status}</Typography>
-              <Box sx={{ mb: 2 }}>
-                <div>
-                  <Button
-                    variant="contained"
-                    onClick={handleNext}
-                    sx={{ mt: 1, mr: 1 }}
-                  >
-                    {index === steps.length - 1 ? 'Finish' : 'Continue'}
-                  </Button>
-                  <Button
-                    disabled={index === 0}
-                    onClick={handleBack}
-                    sx={{ mt: 1, mr: 1 }}
-                  >
-                    Back
-                  </Button>
-                </div>
-              </Box>
-            </StepContent> */}
           </Step>
         ))}
       </Stepper>
-      {/* {activeStep === steps.length && (
-        <Paper square elevation={0} sx={{ p: 3 }}>
-          <Typography>All steps completed - you&apos;re finished</Typography>
-          <Button onClick={handleReset} sx={{ mt: 1, mr: 1 }}>
-            Reset
-          </Button>
-        </Paper>
-      )} */}
     </Box>
   );
 }

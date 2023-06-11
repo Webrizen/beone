@@ -1,7 +1,9 @@
 import React from "react";
-import { useRouteError, Link } from "react-router-dom";
-import { Button } from '@mui/material';
-import Layout from '../components/Layout/layout';
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
+import { Link, useRouteError } from "react-router-dom";
+import Layout from "../components/Layout/layout";
 
 export default function ErrorPage() {
   const error = useRouteError();
@@ -10,14 +12,34 @@ export default function ErrorPage() {
   return (
     <>
       <Layout>
-        <div id="error-page">
-          <h1>Oops!</h1>
-          <br />
-          <p>Sorry, an unexpected error has occurred.</p>
-          <Link to="/dashboard">
-          <Button>Dashboard</Button>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            height: "100vh",
+          }}
+        >
+          <Typography
+            variant="h1"
+            sx={{ fontSize: 120, fontWeight: "bold", mb: 4 }}
+          >
+            404
+          </Typography>
+          <Typography variant="h4" sx={{ mb: 4 }}>
+            Oops! Page not found.
+          </Typography>
+          <Typography variant="body1" sx={{ textAlign: "center", mb: 4 }}>
+            The page you are looking for might have been removed, had its name
+            changed, or is temporarily unavailable.
+          </Typography>
+          <Link to='/'>
+          <Button variant="contained" color="primary">
+            Go to Home
+          </Button>
           </Link>
-        </div>
+        </Box>
       </Layout>
     </>
   );

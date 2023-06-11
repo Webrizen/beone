@@ -8,8 +8,6 @@ const MetabolicData = () => {
         { label: 'Preparation Date 2', value: 'Saturday, June 17th, 2023' },
         { label: 'Preparation Date 3', value: 'Sunday, June 18th, 2023' },
         { label: 'Preparation Date 4', value: 'Monday, June 19th, 2023' },
-        { label: 'Completed At', value: 'Friday, June 9th, 2023' },
-        { label: 'Completed In', value: 'about 17 hours' },
       ];
 
   return (
@@ -36,6 +34,21 @@ const MetabolicData = () => {
                 </TableBody>
               </Table>
             </TableContainer>
+            <div className="two-col-kit" style={{ color: "lightgray", background: 'white', borderRadius: '15px' }}>
+            <div className="left-data-kit">
+              <Typography variant="body1">Completed At:</Typography>
+              <Typography variant="body1">
+                Thursday, June 8th, 2023
+              </Typography>
+            </div>
+
+            <div className="right-data-kit">
+              <Typography variant="body1">Completed In:</Typography>
+              <Typography variant="body1">
+              3 days
+              </Typography>
+            </div>
+          </div>
           </Box>
         </Box>
       </Typography>

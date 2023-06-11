@@ -11,7 +11,7 @@ const UploadIcon = styled(SvgIcon)({
 
 const ImmunePicComp = () => {
   return (
-    <Box sx={{ p: 2 }}>
+    <Box sx={{ p: 2, background: "white", borderRadius: '15px' }}>
       <Typography variant="h6" gutterBottom>
         Immune test picture upload
       </Typography>
@@ -50,10 +50,10 @@ const ImmunePicComp = () => {
           </Button>
         </label>
       </Box>
-      <Box sx={{ mt: 2 }}>
+      <Box sx={{ mt: 2, width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'right' }}>
         <Button
           variant="contained"
-          color="primary"
+          color="warning"
           size="medium"
           sx={{ textTransform: "none" }}
         >

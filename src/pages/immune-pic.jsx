@@ -26,19 +26,10 @@ const ImmunePic  = () => {
 
   function ToggleLeftSideBar() {
     const LeftBar = document.getElementById('Left-Bar');
-    if (LeftBar.style.transform == "translateX(-200%)") {
-      LeftBar.style.transform = "translateX(3%)"
-    } else {
+    if (LeftBar.style.transform == "translateX(0%)") {
       LeftBar.style.transform = "translateX(-200%)"
-    }
-  }
-
-  function ToggleRightSideBar() {
-    const RightBar = document.getElementById('Right-Bar');
-    if (RightBar.style.transform == "translateX(200%)") {
-      RightBar.style.transform = "translateX(3%)"
     } else {
-      RightBar.style.transform = "translateX(200%)"
+      LeftBar.style.transform = "translateX(0%)"
     }
   }
   return (
@@ -47,7 +38,6 @@ const ImmunePic  = () => {
         <RouteGuard />
         <div className="two-flex">
           <div className="ico" onClick={ToggleLeftSideBar}><MenuOpenIcon /></div>
-          <div className="ico" onClick={ToggleRightSideBar}><WidgetsIcon /></div>
         </div>
         <div className="main-dashboard">
           <div className="left-dashboard" id='Left-Bar'>
@@ -56,9 +46,6 @@ const ImmunePic  = () => {
           </div>
           <div className="middle-dashboard">
             <ImmunePicComp />
-          </div>
-          <div className="right-dashboard" id='Right-Bar'>
-            <Calendar className="BoxCalender" />
           </div>
         </div>
 

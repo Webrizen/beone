@@ -9,7 +9,7 @@ import {
   Button,
   Box,
   Tooltip,
-  Grid 
+  Grid,
 } from "@mui/material";
 import {
   RadioButtonUnchecked,
@@ -28,24 +28,40 @@ const TestInstructionsComp = () => {
         videos at least a few days before starting the preparation to ensure
         that everything is clear.
       </Typography>
-      <Box sx={{ display: "flex", flexDirection: "row", alignItems: "center", gap: "5px" }}>
-        <Tooltip title="Link to Hormone Test video"><Button variant="outlined" component={Link} href="#">
-          <VideoLibrary />
-        </Button></Tooltip>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "center",
+          gap: "5px",
+        }}
+      >
+        <Tooltip title="Link to Hormone Test video">
+          <Button variant="outlined" component={Link} href="#">
+            <VideoLibrary />
+          </Button>
+        </Tooltip>
         <br />
-        <Tooltip title="Link to Metabolic Test"><Button variant="outlined" component={Link} href="#">
-          <VideoLibrary />
-        </Button></Tooltip>
+        <Tooltip title="Link to Metabolic Test">
+          <Button variant="outlined" component={Link} href="#">
+            <VideoLibrary />
+          </Button>
+        </Tooltip>
         <br />
-        <Tooltip title="Link to Thyroid Test"><Button variant="outlined" component={Link} href="#">
-          <VideoLibrary />
-        </Button></Tooltip>
+        <Tooltip title="Link to Thyroid Test">
+          <Button variant="outlined" component={Link} href="#">
+            <VideoLibrary />
+          </Button>
+        </Tooltip>
         <br />
-        <Tooltip title="Link to Immune Test"><Button variant="outlined" component={Link} href="#">
-          <VideoLibrary />
-        </Button></Tooltip>
+        <Tooltip title="Link to Immune Test">
+          <Button variant="outlined" component={Link} href="#">
+            <VideoLibrary />
+          </Button>
+        </Tooltip>
       </Box>
       <br />
+      <div style={{ background: '#fff', borderRadius: '15px', padding: '20px' }}>
       <FormControl>
         <Typography
           variant="body1"
@@ -155,7 +171,8 @@ const TestInstructionsComp = () => {
           color="primary"
           id="demo-controlled-radio-buttons-group"
         >
-          You confirmed on that sampling of Metabolic test was successful. Great!!
+          You confirmed on that sampling of Metabolic test was successful.
+          Great!!
         </Typography>
         <RadioGroup name="controlled-radio-buttons-group">
           <FormControlLabel
@@ -188,7 +205,8 @@ const TestInstructionsComp = () => {
           variant="body1"
           color="primary"
           id="demo-controlled-radio-buttons-group"
-        >You have not confirmed yet if your sampling went ok.
+        >
+          You have not confirmed yet if your sampling went ok.
         </Typography>
         <RadioGroup name="controlled-radio-buttons-group">
           <FormControlLabel
@@ -221,7 +239,9 @@ const TestInstructionsComp = () => {
           variant="body1"
           color="primary"
           id="demo-controlled-radio-buttons-group"
-        >You have not confirmed yet if your sampling went ok.</Typography>
+        >
+          You have not confirmed yet if your sampling went ok.
+        </Typography>
         <RadioGroup name="controlled-radio-buttons-group">
           <FormControlLabel
             value="yes"
@@ -247,90 +267,111 @@ const TestInstructionsComp = () => {
           />
         </RadioGroup>
       </FormControl>
-      <Box sx={{ width: "100%", display: "flex", flexDirection: "row", justifyContent: "right", paddingRight: "20px", marginBottom: "20px"}}><Button variant="contained" color="warning">
-        Submit
-      </Button></Box>
+      </div>
+      <Box
+        sx={{
+          width: "100%",
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "right",
+          paddingRight: "20px",
+          marginBottom: "20px",
+          marginTop: '-20px'
+        }}
+      >
+        <Button variant="contained" color="warning">
+          Submit
+        </Button>
+      </Box>
 
       {/* SHow This After Form Submit  */}
-      <Box sx={{ p: 2, background: '#f5f5f5', borderRadius: '4px', border: '1px solid #ccc' }}>
-      <Typography variant="body1" gutterBottom>
-        Testing instructions data
-      </Typography>
-      <Grid container spacing={2}>
-        <Grid item xs={12}>
-          <Grid container spacing={2}>
-            <Grid item xs={6}>
-              <Typography variant="body1">Hormone preparation confirmation date:</Typography>
-            </Grid>
-            <Grid item xs={6}>
-              <Typography variant="body1" align="right">
-                Monday, May 22nd, 2023
-              </Typography>
-            </Grid>
-          </Grid>
-        </Grid>
-        <Grid item xs={12}>
-          <Grid container spacing={2}>
-            <Grid item xs={6}>
-              <Typography variant="body1">Metabolic preparation confirmation Date:</Typography>
-            </Grid>
-            <Grid item xs={6}>
-              <Typography variant="body1" align="right">
-                Monday, May 22nd, 2023
-              </Typography>
+      <Box
+        sx={{
+          p: 2,
+          background: "#f5f5f5",
+          borderRadius: "4px",
+          border: "1px solid #ccc",
+        }}
+      >
+        <Typography variant="body1" gutterBottom>
+          Testing instructions data
+        </Typography>
+        <Grid container spacing={2}>
+          <Grid item xs={12}>
+            <Grid container spacing={2}>
+              <Grid item xs={6}>
+                <Typography variant="body1">
+                  Hormone preparation confirmation date:
+                </Typography>
+              </Grid>
+              <Grid item xs={6}>
+                <Typography variant="body1" align="right">
+                  Monday, May 22nd, 2023
+                </Typography>
+              </Grid>
             </Grid>
           </Grid>
-        </Grid>
-        <Grid item xs={12}>
-          <Grid container spacing={2}>
-            <Grid item xs={6}>
-              <Typography variant="body1">Hormone sample collect confirmation date:</Typography>
-            </Grid>
-            <Grid item xs={6}>
-              <Typography variant="body1" align="right">
-                Monday, May 22nd, 2023
-              </Typography>
-            </Grid>
-          </Grid>
-        </Grid>
-        <Grid item xs={12}>
-          <Grid container spacing={2}>
-            <Grid item xs={6}>
-              <Typography variant="body1">Metabolic sample collect confirmation date:</Typography>
-            </Grid>
-            <Grid item xs={6}>
-              <Typography variant="body1" align="right">
-                Monday, May 22nd, 2023
-              </Typography>
+          <Grid item xs={12}>
+            <Grid container spacing={2}>
+              <Grid item xs={6}>
+                <Typography variant="body1">
+                  Metabolic preparation confirmation Date:
+                </Typography>
+              </Grid>
+              <Grid item xs={6}>
+                <Typography variant="body1" align="right">
+                  Monday, May 22nd, 2023
+                </Typography>
+              </Grid>
             </Grid>
           </Grid>
-        </Grid>
-        <Grid item xs={12}>
-          <Grid container spacing={2}>
-            <Grid item xs={6}>
+          <Grid item xs={12}>
+            <Grid container spacing={2}>
+              <Grid item xs={6}>
+                <Typography variant="body1">
+                  Hormone sample collect confirmation date:
+                </Typography>
+              </Grid>
+              <Grid item xs={6}>
+                <Typography variant="body1" align="right">
+                  Monday, May 22nd, 2023
+                </Typography>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item xs={12}>
+            <Grid container spacing={2}>
+              <Grid item xs={6}>
+                <Typography variant="body1">
+                  Metabolic sample collect confirmation date:
+                </Typography>
+              </Grid>
+              <Grid item xs={6}>
+                <Typography variant="body1" align="right">
+                  Monday, May 22nd, 2023
+                </Typography>
+              </Grid>
+            </Grid>
+          </Grid>
+          <div
+            className="two-col-kit"
+            style={{
+              color: "lightgray",
+              width: '100%'
+            }}
+          >
+            <div className="left-data-kit">
               <Typography variant="body1">Completed At:</Typography>
-            </Grid>
-            <Grid item xs={6}>
-              <Typography variant="body1" align="right">
-                Thursday, May 25th, 2023
-              </Typography>
-            </Grid>
-          </Grid>
-        </Grid>
-        <Grid item xs={12}>
-          <Grid container spacing={2}>
-            <Grid item xs={6}>
+              <Typography variant="body1">Thursday, June 8th, 2023</Typography>
+            </div>
+
+            <div className="right-data-kit">
               <Typography variant="body1">Completed In:</Typography>
-            </Grid>
-            <Grid item xs={6}>
-              <Typography variant="body1" align="right">
-                3 days
-              </Typography>
-            </Grid>
-          </Grid>
+              <Typography variant="body1">3 days</Typography>
+            </div>
+          </div>
         </Grid>
-      </Grid>
-    </Box>
+      </Box>
     </>
   );
 };

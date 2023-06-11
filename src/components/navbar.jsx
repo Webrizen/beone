@@ -3,6 +3,7 @@ import '../styles/navbar.css';
 import { Tooltip, Avatar, IconButton, Menu, MenuItem } from '@mui/material';
 import { TaskAlt, Settings, Folder } from '@mui/icons-material';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
+import  CircularStatic  from './circularprogresswithlabel';
 
 import UserContext from '../utils/user_context';
 import { BASE_API } from '../utils/common';
@@ -31,11 +32,16 @@ const Navbar = (props) => {
   return (
     <>
       <header>
-        <Link to="/dashboard"><div className="logo">
+        <Link to="/"><div className="logo">
           <img src="/favicon.png" alt="Beone." />
         </div></Link>
         <div className="right-nav">
           {/* Redirect On Click, Yeh Frontend ka Performance thik rakhega  */}
+          <Tooltip title='Status'>
+            <div className="ico">
+              <CircularStatic />
+            </div>
+          </Tooltip>
           <Tooltip title='User Controls'>
             <IconButton
               onClick={handleClick}
@@ -54,7 +60,7 @@ const Navbar = (props) => {
             className='MenuLinks'
           >
             <Link to="/profile"><MenuItem onClick={handleClose} className='Cursor'>{main_user.firstName}</MenuItem></Link>
-            <Link to="/dashboard"><MenuItem onClick={handleClose} className='Cursor'>Dashboard</MenuItem></Link>
+            <Link to="/order/:id/welcome"><MenuItem onClick={handleClose} className='Cursor'>Dashboard</MenuItem></Link>
             <Link to="/settings"><MenuItem onClick={handleClose} className='Cursor'>Settings</MenuItem></Link>
             <hr />
             <MenuItem onClick={handleLogout} className='Cursor'>Logout</MenuItem>

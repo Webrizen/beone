@@ -14,7 +14,16 @@ import {
 const KitArrivalData = () => {
   return (
     <>
-      <Box sx={{ maxWidth: "100%", overflowX: "auto", padding: "10px" }}>
+      <Box
+        sx={{
+          maxWidth: "100%",
+          overflowX: "auto",
+          background: "white",
+          borderRadius: "7px",
+          padding: "20px",
+          marginTop: "10px",
+        }}
+      >
         <Box sx={{ mt: 2 }}>
           <TableContainer>
             <Table>
@@ -55,27 +64,24 @@ const KitArrivalData = () => {
                     <Typography variant="body1">STANDARD</Typography>
                   </TableCell>
                 </TableRow>
-                <TableRow>
-                  <TableCell>
-                    <Typography variant="body1">Completed At:</Typography>
-                  </TableCell>
-                  <TableCell align="right">
-                    <Typography variant="body1">
-                      Thursday, June 8th, 2023
-                    </Typography>
-                  </TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell>
-                    <Typography variant="body1">Completed In:</Typography>
-                  </TableCell>
-                  <TableCell align="right">
-                    <Typography variant="body1">3 days</Typography>
-                  </TableCell>
-                </TableRow>
               </TableBody>
             </Table>
           </TableContainer>
+          <div className="two-col-kit" style={{ color: "lightgray" }}>
+            <div className="left-data-kit">
+              <Typography variant="body1">Completed At:</Typography>
+              <Typography variant="body1">
+                Thursday, June 8th, 2023
+              </Typography>
+            </div>
+
+            <div className="right-data-kit">
+              <Typography variant="body1">Completed In:</Typography>
+              <Typography variant="body1">
+              3 days
+              </Typography>
+            </div>
+          </div>
         </Box>
       </Box>
     </>
