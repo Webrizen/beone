@@ -23,7 +23,7 @@ const KitArrivalForm = () => {
 
   return (
     <>
-      <Box sx={{ flexGrow: 1 }}>
+      <Box sx={{ flexGrow: 1, background: 'white', borderRadius: '7px', padding: '20px' }}>
       <FormGroup>
         <FormControlLabel
           control={

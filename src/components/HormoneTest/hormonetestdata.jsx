@@ -16,7 +16,7 @@ const HormoneTestData = () => {
             <Typography variant="body1" gutterBottom>
               Hormone test data
             </Typography>
-            <TableContainer component={Paper}>
+            <TableContainer component={Paper} sx={{ background: "white", borderRadius: "15px" }}>
               <Table>
                 <TableBody>
                   <TableRow>
@@ -43,17 +43,24 @@ const HormoneTestData = () => {
                     <TableCell>Testing Window Starts At:</TableCell>
                     <TableCell align="right">Monday, June 19th, 2023</TableCell>
                   </TableRow>
-                  <TableRow>
-                    <TableCell>Completed At:</TableCell>
-                    <TableCell align="right">Friday, June 9th, 2023</TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell>Completed In:</TableCell>
-                    <TableCell align="right">about 17 hours</TableCell>
-                  </TableRow>
                 </TableBody>
               </Table>
             </TableContainer>
+            <div className="two-col-kit" style={{ color: "lightgray", background: 'white', borderRadius: '15px' }}>
+            <div className="left-data-kit">
+              <Typography variant="body1">Completed At:</Typography>
+              <Typography variant="body1">
+                Thursday, June 8th, 2023
+              </Typography>
+            </div>
+
+            <div className="right-data-kit">
+              <Typography variant="body1">Completed In:</Typography>
+              <Typography variant="body1">
+              3 days
+              </Typography>
+            </div>
+          </div>
           </Box>
         </Box>
       </Typography>

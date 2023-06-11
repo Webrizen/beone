@@ -45,25 +45,6 @@ img {
 }
 
 /* ===== Scrollbar CSS ===== */
-* {
-  scrollbar-width: auto;
-  scrollbar-color: #f1f1f1;
-}
-
-/* Chrome, Edge, and Safari */
-*::-webkit-scrollbar {
-  width: 0px;
-}
-
-*::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-*::-webkit-scrollbar-thumb {
-  background-color: transparent;
-  border-radius: 1px;
-  border: 3px solid transparent;
-}
 
 /* Firefox */
 body {
@@ -96,4 +77,30 @@ body::-webkit-scrollbar-thumb {
 .StepBTN:hover{
   background: rgba(0,0,0,0.01);
 }
-@media only screen and (max-width: 768px) {}
+.two-col-kit{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 10px;
+  padding: 10px;
+  justify-content: space-between;
+}
+.left-data-kit, .right-data-kit{
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  align-items: center;
+}
+@media only screen and (max-width: 768px) {
+  .two-col-kit{
+    flex-direction: column;
+    justify-content: left;
+    text-align: left;
+    white-space: nowrap;
+    align-items: normal;
+  }
+  .left-data-kit, .right-data-kit{
+    align-items: normal;
+    text-align: left;
+  }
+}
