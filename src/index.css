@@ -91,16 +91,21 @@ body::-webkit-scrollbar-thumb {
   gap: 5px;
   align-items: center;
 }
+.left-data-kit p, .right-data-kit p{
+  font-size: 15px !important;
+}
 @media only screen and (max-width: 768px) {
   .two-col-kit{
-    flex-direction: column;
-    justify-content: left;
-    text-align: left;
+    flex-direction: row;
+    justify-content: space-between;
     white-space: nowrap;
     align-items: normal;
   }
   .left-data-kit, .right-data-kit{
     align-items: normal;
     text-align: left;
+  }
+  .left-data-kit p, .right-data-kit p{
+    font-size: 10px !important;
   }
 }
