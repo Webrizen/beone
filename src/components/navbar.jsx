@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import '../styles/navbar.css';
+import '../styles/loading.css';
 import { Tooltip, Avatar, IconButton, Menu, MenuItem } from '@mui/material';
 import { TaskAlt, Settings, Folder } from '@mui/icons-material';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
@@ -8,12 +9,13 @@ import CircularStatic from './circularprogresswithlabel';
 import UserContext from '../utils/user_context';
 import { BASE_API } from '../utils/common';
 import CurrOrderContext from '../utils/order_context';
-// const [main_user, setmain_user] = useContext(UserContext);
+
 const Navbar = (props) => {
   const { main_user, setmain_user } = useContext(UserContext);
   const { currOrder, setCurrOrder } = useContext(CurrOrderContext);
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -28,16 +30,21 @@ const Navbar = (props) => {
     navigate("/login");
   };
   useEffect(() => {
-    console.log("main_user", main_user)
+    console.log("main_user", main_user);
+    if (main_user.profilePic) {
+      setLoading(false);
+    }
   }, [main_user])
+
   return (
     <>
       <header>
-        <Link to="/"><div className="logo">
-          <img src="/favicon.png" alt="Beone." />
-        </div></Link>
+        <Link to="/">
+          <div className="logo">
+            <img src="/favicon.png" alt="Beone." />
+          </div>
+        </Link>
         <div className="right-nav">
-          {/* Redirect On Click, Yeh Frontend ka Performance thik rakhega  */}
           <Tooltip title='Status'>
             <div className="ico">
               <CircularStatic order={currOrder} />
@@ -48,10 +55,14 @@ const Navbar = (props) => {
               onClick={handleClick}
               size='small'
             >
-              <Avatar
-                alt='Arshcode'
-                src={`${BASE_API}/files/${main_user.profilePic}/serve`}
-              />
+              {loading ? (
+                <div className="avatar-skeleton" />
+              ) : (
+                <Avatar
+                  alt='Arshcode'
+                  src={`${BASE_API}/files/${main_user.profilePic}/serve`}
+                />
+              )}
             </IconButton>
           </Tooltip>
           <Menu

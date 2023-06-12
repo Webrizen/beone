@@ -15,6 +15,7 @@ import {
   Grid
 } from '@mui/material';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import '../styles/loading.css';
 import MenuOpenIcon from '@mui/icons-material/MenuOpen';
 import WidgetsIcon from '@mui/icons-material/Widgets';
 import VerticalStepper from '../components/verticalstepper';
@@ -28,10 +29,12 @@ import ProgressRing from '../components/progressRing';
 import KitArrivalData from '../components/KitArrival/KitArrivalData';
 import HormoneTest from '../components/planning/hormoneTest';
 import { useLocation } from 'react-router';
+
 // useLocation
 const Dashboard = (route) => {
   const { main_user, setmain_user } = useContext(UserContext);
   const [currentTime, setCurrentTime] = useState(new Date().toLocaleString());
+  const [loading, setLoading] = useState(true); // State to track loading state
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -52,18 +55,18 @@ const Dashboard = (route) => {
     }
   }
 
-  // const percentage = 75;
-
   const [all_orders, setall_orders] = useState([]);
   useEffect(() => {
+    setLoading(true); // Start loading
     baseApi
       .get("/dashboard")
       .then((response) => {
-        // console.log("dashboard data", response.data);
         setall_orders(response.data);
+        setLoading(false); // Stop loading
       })
       .catch((error) => {
         console.error(error);
+        setLoading(false); // Stop loading in case of error
       });
   }, []);
 
@@ -85,34 +88,33 @@ const Dashboard = (route) => {
                 <h1>Welcome Back {main_user.firstName}</h1>
                 <h4>{currentTime}</h4>
                 <p>
-
                   Here, you'll find all the steps of your journey with us. Each time you log in, an Icon will guide you to the current step and show you what the next step is. To progress, simply click on the current step.
 
                   If you need to review previous steps, you can scroll up. To return to the current step, just click the current task button on the Top menu bar.
 
                   Enjoy your journey with us!
-
                 </p>
               </div>
               <div className="right-message">
-                <Avatar sx={{ width: 150, height: 150 }}>
-                  {main_user.profilePic ? (
-                    <img
-                      className="profile-img"
-                      src={`${BASE_API}/files/${main_user.profilePic}/serve`}
-                      alt="Profile"
-                    />
-                  ) : (
-                    <AccountCircle
-                      sx={{ width: "100%", height: "100%" }}
-                    />
-                  )}
-                </Avatar>
+                {loading ? ( // Render skeleton when loading is true
+                  <div className="avatar-skeleton-dashboard"></div>
+                ) : (
+                  <Avatar sx={{ width: 150, height: 150 }}>
+                    {main_user.profilePic ? (
+                      <img
+                        className="profile-img"
+                        src={`${BASE_API}/files/${main_user.profilePic}/serve`}
+                        alt="Profile"
+                      />
+                    ) : (
+                      <AccountCircle sx={{ width: "100%", height: "100%" }} />
+                    )}
+                  </Avatar>
+                )}
               </div>
             </div>
           </div>
         </div>
-
       </Layout >
     </>
   );

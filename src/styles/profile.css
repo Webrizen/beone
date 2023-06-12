@@ -107,3 +107,48 @@
         overflow-x: scroll;
     }
 }
+
+.Skeleton {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+  }
+  
+  .Skeleton-avatar {
+    width: 150px;
+    height: 150px;
+    background-color: #ccc;
+    border-radius: 50%;
+    margin-bottom: 1rem;
+  }
+  
+  .Skeleton-title {
+    width: 200px;
+    height: 32px;
+    background-color: #ccc;
+    margin-bottom: 1rem;
+  }
+  
+  .Skeleton-button {
+    width: 120px;
+    height: 32px;
+    background-color: #ccc;
+    margin-bottom: 1rem;
+  }
+  
+  .Skeleton-info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 1rem;
+    width: 100%;
+  }
+  
+  .Skeleton-info > div {
+    width: 100%;
+    height: 32px;
+    background-color: #ccc;
+    margin-bottom: 1rem;
+  }
+  

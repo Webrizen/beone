@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import Swal from "sweetalert2";
 import "../styles/profile.css";
 import { Link } from "react-router-dom";
-import Calendar from '../components/calendar';
+import Calendar from "../components/calendar";
 import {
   Container,
   Grid,
@@ -28,7 +28,7 @@ import MenuOpenIcon from "@mui/icons-material/MenuOpen";
 import WidgetsIcon from "@mui/icons-material/Widgets";
 import VerticalStepper from "../components/verticalstepper";
 import Navbar from "../components/navbar";
-import UserOrders from '../components/userOrders';
+import UserOrders from "../components/userOrders";
 import {
   AccountCircle,
   LocationOn,
@@ -44,6 +44,16 @@ import Layout from "../components/Layout/layout";
 import { BASE_API } from "../utils/common";
 import baseApi from "../utils/common";
 import UserContext from "../utils/user_context";
+
+const Skeleton = () => (
+  <div className="Skeleton">
+    <div className="Skeleton-avatar" />
+    <div className="Skeleton-title" />
+    <div className="Skeleton-button" />
+    <div className="Skeleton-info" />
+  </div>
+);
+
 const Profile = () => {
   const [open, setOpen] = useState(false);
 
@@ -51,14 +61,12 @@ const Profile = () => {
   const [newValue, setnewValue] = useState({ ...main_user });
 
   useEffect(() => {
-    // const { id, roles, shopifyCustomerId, ...rest_data } = main_user
-    setnewValue({ ...main_user })
-  }, [main_user])
+    setnewValue({ ...main_user });
+    setLoading(false);
+  }, [main_user]);
   useEffect(() => {
-    console.log("checking data if chnaged", newValue)
-    return () => {
-
-    };
+    console.log("checking data if chnaged", newValue);
+    return () => {};
   }, [newValue]);
 
   const handleOpen = () => {
@@ -67,6 +75,7 @@ const Profile = () => {
   };
 
   const [profilePicFile, setProfilePicFile] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   const handleClose = () => {
     setOpen(false);
@@ -151,270 +160,265 @@ const Profile = () => {
     setAge(calculatedAge);
   };
 
-
   //Manage Units:
-  const [weightUnit, setWeightUnit] = useState('Kg');
-  const [heightUnit, setHeightUnit] = useState('cm');
-
-
+  const [weightUnit, setWeightUnit] = useState("Kg");
+  const [heightUnit, setHeightUnit] = useState("cm");
 
   return (
     <>
       <Layout>
         <RouteGuard />
-        <div className="Profile">
-              <Container maxWidth="md" className="cont-MUI">
-                <Paper
-                  elevation={3}
-                  sx={{ padding: "2rem" }}
-                  className="Bg-cont"
+        {loading ? (
+          <Skeleton />
+        ) : (
+          <div className="Profile">
+            <Container maxWidth="md" className="cont-MUI">
+              <Paper elevation={3} sx={{ padding: "2rem" }} className="Bg-cont">
+                <Grid
+                  container
+                  spacing={4}
+                  alignItems="center"
+                  className="BG-profile"
                 >
-                  <Grid
-                    container
-                    spacing={4}
-                    alignItems="center"
-                    className="BG-profile"
-                  >
-                    <Grid item className="GridProfile-MUI">
-                      <Avatar sx={{ width: 150, height: 150 }}>
-                        {main_user.profilePic ? (
-                          <img
-                            className="profile-img"
-                            src={`${BASE_API}/files/${main_user.profilePic}/serve`}
-                            alt="Profile"
-                          />
-                        ) : (
-                          <AccountCircle
-                            sx={{ width: "100%", height: "100%" }}
-                          />
-                        )}
-                      </Avatar>
-                      <input
-                        accept="image/*"
-                        id="profile-pic-input"
-                        type="file"
-                        style={{ display: "none" }}
-                        onChange={handleProfilePicChange}
-                      />
-                      <label htmlFor="profile-pic-input" className="Picedit">
-                        <Edit />
-                      </label>
-                    </Grid>
-                    <Grid item className="GridProfile-MUI">
-                      <Typography variant="h4" sx={{ fontWeight: "bold" }}>
-                        {main_user.title} {main_user.firstName} {main_user.lastName}
-                      </Typography>
-
-                      <Link to="/edit/profile"><Button variant="text">
-                        Edit Profile
-                      </Button></Link>
-                      <Modal
-                        open={open}
-                        onClose={handleClose}
-                        aria-labelledby="model-model-title"
-                        aria-describedby="model-model-description"
-                        className="CustomModel"
-                      >
-                        <Box className="Model-box">
-                          <Typography
-                            id="model-model-title"
-                            variant="h4"
-                            component="h2"
-                          >
-                            Edit Profile
-                          </Typography>
-                          <Divider sx={{ margin: "1rem 0" }} />
-                          <form onSubmit={handleSubmit}>
-                            <Grid
-                              container
-                              spacing={2}
-                              className="main-body-model"
-                            >
-                              <Grid item xs={12} sm={6}>
-                                <TextField
-                                  label="Title"
-                                  variant="outlined"
-                                  fullWidth
-                                  defaultValue={main_user.title}
-                                  onChange={(event) => {
-                                    newValue.title = event.target.value;
-                                    setnewValue({ ...newValue });
-                                    console.log(newValue);
-                                  }}
-                                />
-                              </Grid>
-                              <Grid item xs={12} sm={6}>
-                                <TextField
-                                  label="First Name"
-                                  variant="outlined"
-                                  fullWidth
-                                  defaultValue={main_user.firstName}
-                                  onChange={(event) => {
-                                    newValue.firstName = event.target.value;
-                                    setnewValue({ ...newValue });
-                                    console.log(newValue);
-                                  }}
-                                />
-                              </Grid>
-                              <Grid item xs={12} sm={6}>
-                                <TextField
-                                  label="Middle Name"
-                                  variant="outlined"
-                                  fullWidth
-                                  defaultValue={main_user.middleName}
-                                  onChange={(event) => {
-                                    newValue.middleName = event.target.value;
-                                    setnewValue({ ...newValue });
-                                    console.log(newValue);
-                                  }}
-                                />
-                              </Grid>
-                              <Grid item xs={12} sm={6}>
-                                <TextField
-                                  label="Last Name"
-                                  variant="outlined"
-                                  fullWidth
-                                  defaultValue={main_user.lastName}
-                                  onChange={(event) => {
-                                    newValue.lastName = event.target.value;
-                                    setnewValue({ ...newValue });
-                                    console.log(newValue);
-                                  }}
-                                />
-                              </Grid>
-
-                              <Grid item xs={12} sm={6}>
-                                <TextField
-                                  label="Gender"
-                                  variant="outlined"
-                                  fullWidth
-                                  defaultValue={main_user.gender}
-                                  onChange={(event) => {
-                                    newValue.gender = event.target.value;
-                                    setnewValue({ ...newValue });
-                                    console.log(newValue);
-                                  }}
-                                />
-                              </Grid>
-                              <Grid item xs={12} sm={6}>
-                                <TextField
-                                  label="Date of Birth"
-                                  variant="outlined"
-                                  fullWidth
-                                  type="date"
-                                  defaultValue={main_user.dob}
-                                  onChange={(event) => {
-                                    const newDob = event.target.value;
-                                    calculateAge(newDob); // Calculate the age based on the new DOB
-                                    newValue.dob = newDob;
-                                    setnewValue({ ...newValue });
-                                  }}
-                                />
-                              </Grid>
-
-                              <Grid item xs={12} sm={6}>
-                                <TextField
-                                  label="Age"
-                                  variant="outlined"
-                                  fullWidth
-                                  value={age} // Use the age state as the value
-                                  onChange={(event) => {
-                                    const newAge = event.target.value;
-                                    setAge(newAge); // Update the age state
-                                    newValue.ageInYears = newAge;
-                                    setnewValue({ ...newValue });
-                                  }}
-                                />
-                              </Grid>
-
-                              <Grid item xs={12} sm={6}>
-                                <TextField
-                                  label="Height"
-                                  variant="outlined"
-                                  fullWidth
-                                  defaultValue={main_user.height}
-                                  onChange={(event) => {
-                                    newValue.height = event.target.value;
-                                    setnewValue({ ...newValue });
-                                    console.log(newValue);
-                                  }}
-                                />
-                              </Grid>
-                              <Grid item xs={12} sm={6}>
-                                <TextField
-                                  label="Height Unit"
-                                  variant="outlined"
-                                  fullWidth
-                                  defaultValue={main_user.heightUnit}
-                                  onChange={(event) => {
-                                    newValue.heightUnit = event.target.value;
-                                    setnewValue({ ...newValue });
-                                    console.log(newValue);
-                                  }}
-                                />
-                              </Grid>
-                              <Grid item xs={12} sm={6}>
-                                <TextField
-                                  label="Weight"
-                                  variant="outlined"
-                                  fullWidth
-                                  defaultValue={main_user.weight}
-                                  onChange={(event) => {
-                                    newValue.weight = event.target.value;
-                                    setnewValue({ ...newValue });
-                                    console.log(newValue);
-                                  }}
-                                />
-                              </Grid>
-                              <Grid item xs={12} sm={6}>
-                                <TextField
-                                  label="Weight Unit"
-                                  variant="outlined"
-                                  fullWidth
-                                  defaultValue={main_user.weightUnit}
-                                  onChange={(event) => {
-                                    newValue.weightUnit = event.target.value;
-                                    setnewValue({ ...newValue });
-                                    console.log(newValue);
-                                  }}
-                                />
-                              </Grid>
-                              <Grid item xs={12}>
-                                <TextField
-                                  label="Mobile Number"
-                                  variant="outlined"
-                                  fullWidth
-                                  defaultValue={main_user.mobileNumber}
-                                  onChange={(event) => {
-                                    newValue.mobileNumber = event.target.value;
-                                    setnewValue({ ...newValue });
-                                    console.log(newValue);
-                                  }}
-                                />
-                              </Grid>
-                            </Grid>
-                            <Divider sx={{ margin: "0.5rem 0" }} />
-                            <Button
-                              variant="contained"
-                              onClick={handleUpdate}
-                              size="medium"
-                              color="success"
-                              type="submit"
-                            >
-                              Save Changes
-                            </Button>
-                          </form>
-                        </Box>
-                      </Modal>
-                    </Grid>
+                  <Grid item className="GridProfile-MUI">
+                    <Avatar sx={{ width: 150, height: 150 }}>
+                      {main_user.profilePic ? (
+                        <img
+                          className="profile-img"
+                          src={`${BASE_API}/files/${main_user.profilePic}/serve`}
+                          alt="Profile"
+                        />
+                      ) : (
+                        <AccountCircle sx={{ width: "100%", height: "100%" }} />
+                      )}
+                    </Avatar>
+                    <input
+                      accept="image/*"
+                      id="profile-pic-input"
+                      type="file"
+                      style={{ display: "none" }}
+                      onChange={handleProfilePicChange}
+                    />
+                    <label htmlFor="profile-pic-input" className="Picedit">
+                      <Edit />
+                    </label>
                   </Grid>
-                  <Grid container spacing={4} className="Data">
-                    <Grid item xs={12} sm={6}>
-                      <Typography variant="h6" sx={{ marginBottom: "1rem" }}>
-                        Personal Information
-                      </Typography>
-                      <List disablePadding>
-                        {/* <ListItem disablePadding>
+                  <Grid item className="GridProfile-MUI">
+                    <Typography variant="h4" sx={{ fontWeight: "bold" }}>
+                      {main_user.title} {main_user.firstName}{" "}
+                      {main_user.lastName}
+                    </Typography>
+
+                    <Link to="/edit/profile">
+                      <Button variant="text">Edit Profile</Button>
+                    </Link>
+                    <Modal
+                      open={open}
+                      onClose={handleClose}
+                      aria-labelledby="model-model-title"
+                      aria-describedby="model-model-description"
+                      className="CustomModel"
+                    >
+                      <Box className="Model-box">
+                        <Typography
+                          id="model-model-title"
+                          variant="h4"
+                          component="h2"
+                        >
+                          Edit Profile
+                        </Typography>
+                        <Divider sx={{ margin: "1rem 0" }} />
+                        <form onSubmit={handleSubmit}>
+                          <Grid
+                            container
+                            spacing={2}
+                            className="main-body-model"
+                          >
+                            <Grid item xs={12} sm={6}>
+                              <TextField
+                                label="Title"
+                                variant="outlined"
+                                fullWidth
+                                defaultValue={main_user.title}
+                                onChange={(event) => {
+                                  newValue.title = event.target.value;
+                                  setnewValue({ ...newValue });
+                                  console.log(newValue);
+                                }}
+                              />
+                            </Grid>
+                            <Grid item xs={12} sm={6}>
+                              <TextField
+                                label="First Name"
+                                variant="outlined"
+                                fullWidth
+                                defaultValue={main_user.firstName}
+                                onChange={(event) => {
+                                  newValue.firstName = event.target.value;
+                                  setnewValue({ ...newValue });
+                                  console.log(newValue);
+                                }}
+                              />
+                            </Grid>
+                            <Grid item xs={12} sm={6}>
+                              <TextField
+                                label="Middle Name"
+                                variant="outlined"
+                                fullWidth
+                                defaultValue={main_user.middleName}
+                                onChange={(event) => {
+                                  newValue.middleName = event.target.value;
+                                  setnewValue({ ...newValue });
+                                  console.log(newValue);
+                                }}
+                              />
+                            </Grid>
+                            <Grid item xs={12} sm={6}>
+                              <TextField
+                                label="Last Name"
+                                variant="outlined"
+                                fullWidth
+                                defaultValue={main_user.lastName}
+                                onChange={(event) => {
+                                  newValue.lastName = event.target.value;
+                                  setnewValue({ ...newValue });
+                                  console.log(newValue);
+                                }}
+                              />
+                            </Grid>
+
+                            <Grid item xs={12} sm={6}>
+                              <TextField
+                                label="Gender"
+                                variant="outlined"
+                                fullWidth
+                                defaultValue={main_user.gender}
+                                onChange={(event) => {
+                                  newValue.gender = event.target.value;
+                                  setnewValue({ ...newValue });
+                                  console.log(newValue);
+                                }}
+                              />
+                            </Grid>
+                            <Grid item xs={12} sm={6}>
+                              <TextField
+                                label="Date of Birth"
+                                variant="outlined"
+                                fullWidth
+                                type="date"
+                                defaultValue={main_user.dob}
+                                onChange={(event) => {
+                                  const newDob = event.target.value;
+                                  calculateAge(newDob); // Calculate the age based on the new DOB
+                                  newValue.dob = newDob;
+                                  setnewValue({ ...newValue });
+                                }}
+                              />
+                            </Grid>
+
+                            <Grid item xs={12} sm={6}>
+                              <TextField
+                                label="Age"
+                                variant="outlined"
+                                fullWidth
+                                value={age} // Use the age state as the value
+                                onChange={(event) => {
+                                  const newAge = event.target.value;
+                                  setAge(newAge); // Update the age state
+                                  newValue.ageInYears = newAge;
+                                  setnewValue({ ...newValue });
+                                }}
+                              />
+                            </Grid>
+
+                            <Grid item xs={12} sm={6}>
+                              <TextField
+                                label="Height"
+                                variant="outlined"
+                                fullWidth
+                                defaultValue={main_user.height}
+                                onChange={(event) => {
+                                  newValue.height = event.target.value;
+                                  setnewValue({ ...newValue });
+                                  console.log(newValue);
+                                }}
+                              />
+                            </Grid>
+                            <Grid item xs={12} sm={6}>
+                              <TextField
+                                label="Height Unit"
+                                variant="outlined"
+                                fullWidth
+                                defaultValue={main_user.heightUnit}
+                                onChange={(event) => {
+                                  newValue.heightUnit = event.target.value;
+                                  setnewValue({ ...newValue });
+                                  console.log(newValue);
+                                }}
+                              />
+                            </Grid>
+                            <Grid item xs={12} sm={6}>
+                              <TextField
+                                label="Weight"
+                                variant="outlined"
+                                fullWidth
+                                defaultValue={main_user.weight}
+                                onChange={(event) => {
+                                  newValue.weight = event.target.value;
+                                  setnewValue({ ...newValue });
+                                  console.log(newValue);
+                                }}
+                              />
+                            </Grid>
+                            <Grid item xs={12} sm={6}>
+                              <TextField
+                                label="Weight Unit"
+                                variant="outlined"
+                                fullWidth
+                                defaultValue={main_user.weightUnit}
+                                onChange={(event) => {
+                                  newValue.weightUnit = event.target.value;
+                                  setnewValue({ ...newValue });
+                                  console.log(newValue);
+                                }}
+                              />
+                            </Grid>
+                            <Grid item xs={12}>
+                              <TextField
+                                label="Mobile Number"
+                                variant="outlined"
+                                fullWidth
+                                defaultValue={main_user.mobileNumber}
+                                onChange={(event) => {
+                                  newValue.mobileNumber = event.target.value;
+                                  setnewValue({ ...newValue });
+                                  console.log(newValue);
+                                }}
+                              />
+                            </Grid>
+                          </Grid>
+                          <Divider sx={{ margin: "0.5rem 0" }} />
+                          <Button
+                            variant="contained"
+                            onClick={handleUpdate}
+                            size="medium"
+                            color="success"
+                            type="submit"
+                          >
+                            Save Changes
+                          </Button>
+                        </form>
+                      </Box>
+                    </Modal>
+                  </Grid>
+                </Grid>
+                <Grid container spacing={4} className="Data">
+                  <Grid item xs={12} sm={6}>
+                    <Typography variant="h6" sx={{ marginBottom: "1rem" }}>
+                      Personal Information
+                    </Typography>
+                    <List disablePadding>
+                      {/* <ListItem disablePadding>
                         <ListItemAvatar>
                           <Avatar>
                             <LocationOn />
@@ -425,87 +429,88 @@ const Profile = () => {
                           secondary="123 Medical Street, City"
                         />
                       </ListItem> */}
-                        <ListItem disablePadding>
-                          <ListItemAvatar>
-                            <Avatar>
-                              <Phone />
-                            </Avatar>
-                          </ListItemAvatar>
-                          <ListItemText
-                            primary="Phone"
-                            secondary={main_user.mobileNumber}
-                          />
-                        </ListItem>
-                        <ListItem disablePadding>
-                          <ListItemAvatar>
-                            <Avatar>
-                              <Email />
-                            </Avatar>
-                          </ListItemAvatar>
-                          <ListItemText
-                            primary="Email"
-                            secondary={main_user.email}
-                          />
-                        </ListItem>
-                      </List>
-                    </Grid>
-                    <Grid item xs={12} sm={6}>
-                      <Typography variant="h6" sx={{ marginBottom: "1rem" }}>
-                        Other Details
-                      </Typography>
-                      <List disablePadding>
-                        <Box>
-                          <ListItem disablePadding>
-                            <ListItemAvatar>
-                              <Avatar>
-                                <Description />
-                              </Avatar>
-                            </ListItemAvatar>
-                            <ListItemText
-                              primary="Age"
-                              secondary={`${main_user.ageInYears} years`}
-                            />
-                          </ListItem>
-                          <ListItem disablePadding>
-                            <ListItemAvatar>
-                              <Avatar>
-                                <Description />
-                              </Avatar>
-                            </ListItemAvatar>
-                            <ListItemText
-                              primary="Gender"
-                              secondary={main_user.gender}
-                            />
-                          </ListItem>
-                        </Box>
-                        <ListItem disablePadding>
-                          <ListItemAvatar>
-                            <Avatar>
-                              <Description />
-                            </Avatar>
-                          </ListItemAvatar>
-                          <ListItemText
-                            primary="Height"
-                            secondary={`${main_user.height} ${main_user.heightUnit}`}
-                          />
-                        </ListItem>
-                        <ListItem disablePadding>
-                          <ListItemAvatar>
-                            <Avatar>
-                              <Description />
-                            </Avatar>
-                          </ListItemAvatar>
-                          <ListItemText
-                            primary="Weight"
-                            secondary={`${main_user.weight} ${main_user.weightUnit}`}
-                          />
-                        </ListItem>
-                      </List>
-                    </Grid>
+                      <ListItem disablePadding>
+                        <ListItemAvatar>
+                          <Avatar>
+                            <Phone />
+                          </Avatar>
+                        </ListItemAvatar>
+                        <ListItemText
+                          primary="Phone"
+                          secondary={main_user.mobileNumber}
+                        />
+                      </ListItem>
+                      <ListItem disablePadding>
+                        <ListItemAvatar>
+                          <Avatar>
+                            <Email />
+                          </Avatar>
+                        </ListItemAvatar>
+                        <ListItemText
+                          primary="Email"
+                          secondary={main_user.email}
+                        />
+                      </ListItem>
+                    </List>
                   </Grid>
-                </Paper>
-              </Container>
-            </div>
+                  <Grid item xs={12} sm={6}>
+                    <Typography variant="h6" sx={{ marginBottom: "1rem" }}>
+                      Other Details
+                    </Typography>
+                    <List disablePadding>
+                      <Box>
+                        <ListItem disablePadding>
+                          <ListItemAvatar>
+                            <Avatar>
+                              <Description />
+                            </Avatar>
+                          </ListItemAvatar>
+                          <ListItemText
+                            primary="Age"
+                            secondary={`${main_user.ageInYears} years`}
+                          />
+                        </ListItem>
+                        <ListItem disablePadding>
+                          <ListItemAvatar>
+                            <Avatar>
+                              <Description />
+                            </Avatar>
+                          </ListItemAvatar>
+                          <ListItemText
+                            primary="Gender"
+                            secondary={main_user.gender}
+                          />
+                        </ListItem>
+                      </Box>
+                      <ListItem disablePadding>
+                        <ListItemAvatar>
+                          <Avatar>
+                            <Description />
+                          </Avatar>
+                        </ListItemAvatar>
+                        <ListItemText
+                          primary="Height"
+                          secondary={`${main_user.height} ${main_user.heightUnit}`}
+                        />
+                      </ListItem>
+                      <ListItem disablePadding>
+                        <ListItemAvatar>
+                          <Avatar>
+                            <Description />
+                          </Avatar>
+                        </ListItemAvatar>
+                        <ListItemText
+                          primary="Weight"
+                          secondary={`${main_user.weight} ${main_user.weightUnit}`}
+                        />
+                      </ListItem>
+                    </List>
+                  </Grid>
+                </Grid>
+              </Paper>
+            </Container>
+          </div>
+        )}
       </Layout>
     </>
   );
