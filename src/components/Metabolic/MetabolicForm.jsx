@@ -9,6 +9,7 @@ import {
   Button,
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import BasicDatePicker from '../BasicDatePicker';
 
 const MetabolicForm = () => {
   const handleNextAccordion = () => {
@@ -155,13 +156,7 @@ const MetabolicForm = () => {
               Enter the date you plan to start collecting your samples
             </Typography>
             <br />
-            <TextField
-              id="sampling-date"
-              label="Sampling Date"
-              placeholder="MM/DD/YYYY"
-              variant="outlined"
-              fullWidth
-            />
+            <BasicDatePicker/>
           </Box>
           <Box sx={{ mt: 2 }}>
             <Button variant="contained" onClick={handleNextAccordion}>

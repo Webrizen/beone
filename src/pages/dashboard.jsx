@@ -34,7 +34,6 @@ import { useLocation } from 'react-router';
 const Dashboard = (route) => {
   const { main_user, setmain_user } = useContext(UserContext);
   const [currentTime, setCurrentTime] = useState(new Date().toLocaleString());
-  const [loading, setLoading] = useState(true); // State to track loading state
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -57,16 +56,13 @@ const Dashboard = (route) => {
 
   const [all_orders, setall_orders] = useState([]);
   useEffect(() => {
-    setLoading(true); // Start loading
     baseApi
       .get("/dashboard")
       .then((response) => {
         setall_orders(response.data);
-        setLoading(false); // Stop loading
       })
       .catch((error) => {
         console.error(error);
-        setLoading(false); // Stop loading in case of error
       });
   }, []);
 
@@ -96,21 +92,17 @@ const Dashboard = (route) => {
                 </p>
               </div>
               <div className="right-message">
-                {loading ? ( // Render skeleton when loading is true
-                  <div className="avatar-skeleton-dashboard"></div>
-                ) : (
-                  <Avatar sx={{ width: 150, height: 150 }}>
-                    {main_user.profilePic ? (
-                      <img
-                        className="profile-img"
-                        src={`${BASE_API}/files/${main_user.profilePic}/serve`}
-                        alt="Profile"
-                      />
-                    ) : (
-                      <AccountCircle sx={{ width: "100%", height: "100%" }} />
-                    )}
-                  </Avatar>
-                )}
+                <Avatar sx={{ width: 150, height: 150 }}>
+                  {main_user.profilePic ? (
+                    <img
+                      className="profile-img"
+                      src={`${BASE_API}/files/${main_user.profilePic}/serve`}
+                      alt="Profile"
+                    />
+                  ) : (
+                    <AccountCircle sx={{ width: "100%", height: "100%" }} />
+                  )}
+                </Avatar>
               </div>
             </div>
           </div>

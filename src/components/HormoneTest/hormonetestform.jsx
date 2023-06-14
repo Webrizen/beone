@@ -19,6 +19,7 @@ import {
   Button,
 } from "@mui/material";
 import { ExpandMore } from "@mui/icons-material";
+import BasicDatePicker from '../BasicDatePicker';
 
 const HormoneTestForm = () => {
   const [activeAccordion, setActiveAccordion] = useState(0);
@@ -121,17 +122,7 @@ const HormoneTestForm = () => {
                   Enter when your testing window starts
                 </Typography>
                 <br />
-                <TextField
-                  id="testing-window"
-                  label="Testing Window"
-                  placeholder="MM/DD/YYYY"
-                  variant="outlined"
-                  InputProps={{
-                    readOnly: true,
-                  }}
-                  value="06/10/2023"
-                  fullWidth
-                />
+                <BasicDatePicker/>
               </Box>
               <Box sx={{ mt: 2 }}>
                 <Button
@@ -322,13 +313,7 @@ const HormoneTestForm = () => {
                   Enter the date you plan to start collecting your samples
                 </Typography>
                 <br />
-                <TextField
-                  id="sampling-date"
-                  label="Sampling Date"
-                  placeholder="MM/DD/YYYY"
-                  variant="outlined"
-                  fullWidth
-                />
+                <BasicDatePicker/>
               </Box>
               <Box sx={{ mt: 2 }}>
                 <Button

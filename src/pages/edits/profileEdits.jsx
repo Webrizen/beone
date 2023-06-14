@@ -259,19 +259,6 @@ const ProfileEdit = () => {
 
                               <Grid item xs={12} sm={6}>
                                 <TextField
-                                  label="Gender"
-                                  variant="outlined"
-                                  fullWidth
-                                  defaultValue={main_user.gender}
-                                  onChange={(event) => {
-                                    newValue.gender = event.target.value;
-                                    setnewValue({ ...newValue });
-                                    console.log(newValue);
-                                  }}
-                                />
-                              </Grid>
-                              <Grid item xs={12} sm={6}>
-                                <TextField
                                   label="Date of Birth"
                                   variant="outlined"
                                   fullWidth
@@ -353,6 +340,21 @@ const ProfileEdit = () => {
                                   }}
                                 />
                               </Grid>
+
+                              <Grid item xs={12} sm={6}>
+                                <TextField
+                                  label="Gender"
+                                  variant="outlined"
+                                  fullWidth
+                                  defaultValue={main_user.gender}
+                                  onChange={(event) => {
+                                    newValue.gender = event.target.value;
+                                    setnewValue({ ...newValue });
+                                    console.log(newValue);
+                                  }}
+                                />
+                              </Grid>
+
                               <Grid item xs={12}>
                                 <TextField
                                   label="Mobile Number"
