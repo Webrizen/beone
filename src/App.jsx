@@ -12,6 +12,7 @@ import ErrorPage from './pages/error-page';
 import ImmunePic from './pages/immune-pic';
 import Questionnaire from './pages/questionnaire';
 import Results from './pages/results';
+import Settings from './pages/settings';
 import Lifestyle from './pages/lifestyle';
 import baseApi, { Set_order } from './utils/common';
 import ProfileEdit from './pages/edits/profileEdits';
@@ -61,6 +62,10 @@ function App() {
     {
       path: "/login",
       element: <Login />,
+    },
+    {
+      path: "/settings",
+      element: <Settings/>
     },
     {
       path: "/order/:id/welcome",
