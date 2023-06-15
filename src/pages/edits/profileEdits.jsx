@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import Swal from "sweetalert2";
 import "../../styles/profile.css";
 import Calendar from "../../components/calendar";
-import UserOrders from '../../components/userOrders';
+import UserOrders from "../../components/userOrders";
 import {
   Container,
   Grid,
@@ -187,148 +187,154 @@ const ProfileEdit = () => {
       <Layout>
         <RouteGuard />
         <div className="Profile">
-              <Container maxWidth="md" className="cont-MUI">
-              <div>
-                        <Box className="Model-box">
-                          <Typography
-                            id="model-model-title"
-                            variant="h4"
-                            component="h2"
-                          >
-                            Edit Profile
-                          </Typography>
-                          <Divider sx={{ margin: "1rem 0" }} />
-                          <form onSubmit={handleSubmit}>
-                            <Grid
-                              container
-                              spacing={2}
-                              className="main-body-model"
-                            >
-                              <Grid item xs={12} sm={6}>
-                                <TextField
-                                  label="Title"
-                                  variant="outlined"
-                                  fullWidth
-                                  defaultValue={main_user.title}
-                                  onChange={(event) => {
-                                    newValue.title = event.target.value;
-                                    setnewValue({ ...newValue });
-                                    console.log(newValue);
-                                  }}
-                                />
-                              </Grid>
-                              <Grid item xs={12} sm={6}>
-                                <TextField
-                                  label="First Name"
-                                  variant="outlined"
-                                  fullWidth
-                                  defaultValue={main_user.firstName}
-                                  onChange={(event) => {
-                                    newValue.firstName = event.target.value;
-                                    setnewValue({ ...newValue });
-                                    console.log(newValue);
-                                  }}
-                                />
-                              </Grid>
-                              <Grid item xs={12} sm={6}>
-                                <TextField
-                                  label="Middle Name"
-                                  variant="outlined"
-                                  fullWidth
-                                  defaultValue={main_user.middleName}
-                                  onChange={(event) => {
-                                    newValue.middleName = event.target.value;
-                                    setnewValue({ ...newValue });
-                                    console.log(newValue);
-                                  }}
-                                />
-                              </Grid>
-                              <Grid item xs={12} sm={6}>
-                                <TextField
-                                  label="Last Name"
-                                  variant="outlined"
-                                  fullWidth
-                                  defaultValue={main_user.lastName}
-                                  onChange={(event) => {
-                                    newValue.lastName = event.target.value;
-                                    setnewValue({ ...newValue });
-                                    console.log(newValue);
-                                  }}
-                                />
-                              </Grid>
+          <Container maxWidth="md" className="cont-MUI">
+            <div>
+              <Box className="Model-box">
+                <Typography id="model-model-title" variant="h4" component="h2">
+                  Edit Profile
+                </Typography>
+                <Divider sx={{ margin: "1rem 0" }} />
+                <form onSubmit={handleSubmit}>
+                  <Grid container spacing={2} className="main-body-model">
+                    <Grid item xs={12} sm={6}>
+                      <TextField
+                        label="Title"
+                        variant="outlined"
+                        fullWidth
+                        defaultValue={main_user.title}
+                        onChange={(event) => {
+                          newValue.title = event.target.value;
+                          setnewValue({ ...newValue });
+                          console.log(newValue);
+                        }}
+                      />
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                      <TextField
+                        label="First Name"
+                        variant="outlined"
+                        fullWidth
+                        defaultValue={main_user.firstName}
+                        onChange={(event) => {
+                          newValue.firstName = event.target.value;
+                          setnewValue({ ...newValue });
+                          console.log(newValue);
+                        }}
+                      />
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                      <TextField
+                        label="Middle Name"
+                        variant="outlined"
+                        fullWidth
+                        defaultValue={main_user.middleName}
+                        onChange={(event) => {
+                          newValue.middleName = event.target.value;
+                          setnewValue({ ...newValue });
+                          console.log(newValue);
+                        }}
+                      />
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                      <TextField
+                        label="Last Name"
+                        variant="outlined"
+                        fullWidth
+                        defaultValue={main_user.lastName}
+                        onChange={(event) => {
+                          newValue.lastName = event.target.value;
+                          setnewValue({ ...newValue });
+                          console.log(newValue);
+                        }}
+                      />
+                    </Grid>
 
-                              <Grid item xs={12} sm={6}>
-                                <TextField
-                                  label="Date of Birth"
-                                  variant="outlined"
-                                  fullWidth
-                                  type="date"
-                                  defaultValue={main_user.dob}
-                                  onChange={(event) => {
-                                    const newDob = event.target.value;
-                                    calculateAge(newDob); // Calculate the age based on the new DOB
-                                    newValue.dob = newDob;
-                                    setnewValue({ ...newValue });
-                                  }}
-                                />
-                              </Grid>
+                    <Grid item xs={12} sm={6}>
+                      <TextField
+                        label="Date of Birth"
+                        variant="outlined"
+                        fullWidth
+                        type="date"
+                        defaultValue={main_user.dob}
+                        onChange={(event) => {
+                          const newDob = event.target.value;
+                          calculateAge(newDob); // Calculate the age based on the new DOB
+                          newValue.dob = newDob;
+                          setnewValue({ ...newValue });
+                        }}
+                      />
+                    </Grid>
 
-                              <Grid item xs={12} sm={6}>
-                                <TextField
-                                  label="Age"
-                                  variant="outlined"
-                                  fullWidth
-                                  value={age} // Use the age state as the value
-                                  onChange={(event) => {
-                                    const newAge = event.target.value;
-                                    setAge(newAge); // Update the age state
-                                    newValue.ageInYears = newAge;
-                                    setnewValue({ ...newValue });
-                                  }}
-                                />
-                              </Grid>
+                    <Grid item xs={12} sm={6}>
+                      <TextField
+                        label="Age"
+                        variant="outlined"
+                        fullWidth
+                        value={age} // Use the age state as the value
+                        onChange={(event) => {
+                          const newAge = event.target.value;
+                          setAge(newAge); // Update the age state
+                          newValue.ageInYears = newAge;
+                          setnewValue({ ...newValue });
+                        }}
+                      />
+                    </Grid>
 
-                              <Grid item xs={12} sm={6}>
-                                <TextField
-                                  label="Height"
-                                  variant="outlined"
-                                  fullWidth
-                                  defaultValue={main_user.height}
-                                  onChange={(event) => {
-                                    newValue.height = event.target.value;
-                                    setnewValue({ ...newValue });
-                                    console.log(newValue);
-                                  }}
-                                />
-                              </Grid>
-                              <Grid item xs={12} sm={6}>
-                                <TextField
-                                  label="Height Unit"
-                                  variant="outlined"
-                                  fullWidth
-                                  defaultValue={main_user.heightUnit}
-                                  onChange={(event) => {
-                                    newValue.heightUnit = event.target.value;
-                                    setnewValue({ ...newValue });
-                                    console.log(newValue);
-                                  }}
-                                />
-                              </Grid>
-                              <Grid item xs={12} sm={6}>
-                                <TextField
-                                  label="Weight"
-                                  variant="outlined"
-                                  fullWidth
-                                  defaultValue={main_user.weight}
-                                  onChange={(event) => {
-                                    newValue.weight = event.target.value;
-                                    setnewValue({ ...newValue });
-                                    console.log(newValue);
-                                  }}
-                                />
-                              </Grid>
-                              <Grid item xs={12} sm={6}>
-                                <TextField
+                    <Grid item xs={12} sm={6}>
+                      <TextField
+                        label="Height"
+                        variant="outlined"
+                        fullWidth
+                        defaultValue={main_user.height}
+                        onChange={(event) => {
+                          newValue.height = event.target.value;
+                          setnewValue({ ...newValue });
+                          console.log(newValue);
+                        }}
+                      />
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                      {/* <TextField
+                        label="Height Unit"
+                        variant="outlined"
+                        fullWidth
+                        defaultValue={main_user.heightUnit}
+                        onChange={(event) => {
+                          newValue.heightUnit = event.target.value;
+                          setnewValue({ ...newValue });
+                          console.log(newValue);
+                        }}
+                      /> */}
+                      <FormControl variant="outlined" fullWidth>
+                        <InputLabel id="Height-unit-label">
+                        Height Unit
+                        </InputLabel>
+                        <Select
+                          labelId="Height-unit-label"
+                          id="Height-unit-select"
+                          label="Height Unit"
+                        >
+                          <MenuItem value="ft">ft</MenuItem>
+                          <MenuItem value="cm">cm</MenuItem>
+                          <MenuItem value="m">m</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                      <TextField
+                        label="Weight"
+                        variant="outlined"
+                        fullWidth
+                        defaultValue={main_user.weight}
+                        onChange={(event) => {
+                          newValue.weight = event.target.value;
+                          setnewValue({ ...newValue });
+                          console.log(newValue);
+                        }}
+                      />
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                      {/* <TextField
                                   label="Weight Unit"
                                   variant="outlined"
                                   fullWidth
@@ -338,52 +344,66 @@ const ProfileEdit = () => {
                                     setnewValue({ ...newValue });
                                     console.log(newValue);
                                   }}
-                                />
-                              </Grid>
+                                /> */}
+                      <FormControl variant="outlined" fullWidth>
+                        <InputLabel id="weight-unit-label">
+                          Weight Unit
+                        </InputLabel>
+                        <Select
+                          labelId="weight-unit-label"
+                          id="weight-unit-select"
+                          label="Weight Unit"
+                        >
+                          <MenuItem value="Kg">Kg</MenuItem>
+                          <MenuItem value="Stones">Stones</MenuItem>
+                          <MenuItem value="Pounds">Pounds</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </Grid>
 
-                              <Grid item xs={12} sm={6}>
-                                <TextField
-                                  label="Gender"
-                                  variant="outlined"
-                                  fullWidth
-                                  defaultValue={main_user.gender}
-                                  onChange={(event) => {
-                                    newValue.gender = event.target.value;
-                                    setnewValue({ ...newValue });
-                                    console.log(newValue);
-                                  }}
-                                />
-                              </Grid>
+                    <Grid item xs={12} sm={6}>
+                      <TextField
+                        label="Gender"
+                        variant="outlined"
+                        fullWidth
+                        defaultValue={main_user.gender}
+                        onChange={(event) => {
+                          newValue.gender = event.target.value;
+                          setnewValue({ ...newValue });
+                          console.log(newValue);
+                        }}
+                      />
+                    </Grid>
 
-                              <Grid item xs={12}>
-                                <TextField
-                                  label="Mobile Number"
-                                  variant="outlined"
-                                  fullWidth
-                                  defaultValue={main_user.mobileNumber}
-                                  onChange={(event) => {
-                                    newValue.mobileNumber = event.target.value;
-                                    setnewValue({ ...newValue });
-                                    console.log(newValue);
-                                  }}
-                                />
-                              </Grid>
-                            </Grid>
-                            <Divider sx={{ margin: "0.5rem 0" }} />
-                            <Button
-                              variant="contained"
-                              onClick={handleUpdate}
-                              size="medium"
-                              color="success"
-                              type="submit"
-                            >
-                              Save Changes
-                            </Button>
-                          </form>
-                        </Box>
-                      </div>
-              </Container>
+                    <Grid item xs={12}>
+                      <TextField
+                        label="Mobile Number"
+                        variant="outlined"
+                        fullWidth
+                        defaultValue={main_user.mobileNumber}
+                        onChange={(event) => {
+                          newValue.mobileNumber = event.target.value;
+                          setnewValue({ ...newValue });
+                          console.log(newValue);
+                        }}
+                      />
+                    </Grid>
+                  </Grid>
+                  <Divider sx={{ margin: "0.5rem 0" }} />
+                  <Button
+                    variant="contained"
+                    onClick={handleUpdate}
+                    size="medium"
+                    color="success"
+                    type="submit"
+                  >
+                    Save Changes
+                  </Button>
+                </form>
+              </Box>
             </div>
+          </Container>
+        </div>
       </Layout>
     </>
   );
