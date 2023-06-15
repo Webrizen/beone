@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 const getUserToken = () => {
     return localStorage.getItem("token");
 };
-export const BASE_API = "https://2f74-2405-201-4036-c8bc-a52b-6f3c-ea5f-52c1.ngrok-free.app/api"
+export const BASE_API = "https://6578-2405-201-4036-c8bc-cc56-51b5-d2a8-da8f.ngrok-free.app/api"
 
 const baseApi = axios.create({
     //withCredentials: true
