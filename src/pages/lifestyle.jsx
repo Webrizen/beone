@@ -5,14 +5,11 @@ import BackgroundImage from '../Assets/images/bg-login-01.png';
 import RouteGuard from '../components/routeguard';
 import {
   Typography,
-  Divider,
+  Card,
+  Box,
   TextField,
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
-  Button,
-  Grid
+  InputAdornment,
+  IconButton,
 } from '@mui/material';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import MenuOpenIcon from '@mui/icons-material/MenuOpen';
@@ -23,11 +20,7 @@ import UserOrders from '../components/userOrders';
 import UserContext from '../utils/user_context';
 import baseApi, { BASE_API } from '../utils/common';
 import { Avatar } from '@mui/material';
-import Calendar from '../components/calendar';
-import ProgressRing from '../components/progressRing';
-import KitArrivalData from '../components/KitArrival/KitArrivalData';
-import HormoneTest from '../components/planning/hormoneTest';
-import KitArrivalForm from '../components/KitArrival/KitArrivalForm';
+import SearchIcon from '@mui/icons-material/Search';
 
 const Lifestyle = () => {
   function ToggleLeftSideBar() {
@@ -51,7 +44,29 @@ const Lifestyle = () => {
             <VerticalStepper />
           </div>
           <div className="middle-dashboard">
-          LifeStyle Page
+          <Card sx={{ p: 2 }}>
+      <Typography variant="h6" sx={{ mb: 2 }}>
+        Recent Paid Invoice
+      </Typography>
+      <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
+        <TextField
+          label="Select Month"
+          type="month"
+          id="Month"
+          InputLabelProps={{
+            shrink: true,
+          }}
+          sx={{ mr: 2 }}
+        />
+        <IconButton>
+          <SearchIcon />
+        </IconButton>
+      </Box>
+      <Typography variant="h6" sx={{ mb: 2 }}>
+        Total Receipts
+      </Typography>
+      <Typography variant="h4">890k</Typography>
+    </Card>
           </div>
         </div>
 
