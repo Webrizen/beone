@@ -22,7 +22,8 @@ import VerticalStepper from '../components/verticalstepper';
 import Layout from '../components/Layout/layout';
 import UserOrders from '../components/userOrders';
 import Calendar from '../components/calendar';
-const ImmunePic  = () => {
+
+const ImmunePic = () => {
 
   function ToggleLeftSideBar() {
     const LeftBar = document.getElementById('Left-Bar');
@@ -45,6 +46,7 @@ const ImmunePic  = () => {
             <VerticalStepper />
           </div>
           <div className="middle-dashboard">
+            <pic />
             <ImmunePicComp />
           </div>
         </div>

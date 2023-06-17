@@ -58,16 +58,16 @@ const Profile = () => {
   const [open, setOpen] = useState(false);
 
   const { main_user, setmain_user } = useContext(UserContext);
-  const [newValue, setnewValue] = useState({ ...main_user });
+  // const [newValue, setnewValue] = useState({ ...main_user });
 
   useEffect(() => {
-    setnewValue({ ...main_user });
+    // setnewValue({ ...main_user });
     setLoading(false);
   }, [main_user]);
-  useEffect(() => {
-    console.log("checking data if chnaged", newValue);
-    return () => {};
-  }, [newValue]);
+  // useEffect(() => {
+  //   console.log("checking data if chnaged", newValue);
+  //   return () => {};
+  // }, [newValue]);
 
   const handleOpen = () => {
     setOpen(true);
@@ -130,25 +130,25 @@ const Profile = () => {
     }
   }
 
-  const handleUpdate = () => {
-    baseApi
-      .put("/user", newValue)
-      .then((response) => {
-        console.log(response.data);
-        setmain_user(newValue);
-        setOpen(false);
-        Swal.fire({
-          position: "center",
-          icon: "success",
-          title: "User Details Updated",
-          showConfirmButton: false,
-          timer: 1500,
-        });
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  };
+  // const handleUpdate = () => {
+  //   baseApi
+  //     .put("/user", newValue)
+  //     .then((response) => {
+  //       console.log(response.data);
+  //       setmain_user(newValue);
+  //       setOpen(false);
+  //       Swal.fire({
+  //         position: "center",
+  //         icon: "success",
+  //         title: "User Details Updated",
+  //         showConfirmButton: false,
+  //         timer: 1500,
+  //       });
+  //     })
+  //     .catch((error) => {
+  //       console.error(error);
+  //     });
+  // };
 
   const [age, setAge] = useState(""); //Calculatying Age :)
   const calculateAge = (dob) => {
@@ -212,7 +212,7 @@ const Profile = () => {
                     <Link to="/edit/profile">
                       <Button variant="text">Edit Profile</Button>
                     </Link>
-                    <Modal
+                    {/* <Modal
                       open={open}
                       onClose={handleClose}
                       aria-labelledby="model-model-title"
@@ -409,7 +409,7 @@ const Profile = () => {
                           </Button>
                         </form>
                       </Box>
-                    </Modal>
+                    </Modal> */}
                   </Grid>
                 </Grid>
                 <Grid container spacing={4} className="Data">

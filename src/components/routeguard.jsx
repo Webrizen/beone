@@ -5,5 +5,6 @@ const RouteGuard = () => {
         return <Navigate to="/login" />
         // console.log("not logined");
     }
+    document.title = "BeOne::" + window.location.pathname.split("/").pop();
 }
 export default RouteGuard;
