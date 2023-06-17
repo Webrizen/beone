@@ -28,6 +28,7 @@ import ProgressRing from '../components/progressRing';
 import KitArrivalData from '../components/KitArrival/KitArrivalData';
 import HormoneTest from '../components/planning/hormoneTest';
 import KitArrivalForm from '../components/KitArrival/KitArrivalForm';
+import QuizComponent from '../components/QuizComponent';
 
 const Questionnaire = () => {
   function ToggleLeftSideBar() {
@@ -51,7 +52,8 @@ const Questionnaire = () => {
             <VerticalStepper />
           </div>
           <div className="middle-dashboard">
-          Health Questionnaire 
+          {/* Health Questionnaire  */}
+          <QuizComponent/>
           </div>
         </div>
 

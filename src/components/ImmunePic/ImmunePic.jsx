@@ -3,6 +3,7 @@ import { Box, Typography, InputBase, Button, SvgIcon } from "@mui/material";
 import { styled } from "@mui/system";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
+import ImagePreview from "../ImagePreview";
 
 
 const UploadIcon = styled(SvgIcon)({
@@ -60,6 +61,9 @@ const ImmunePicComp = () => {
           Next
           <SvgIcon component={NavigateNextIcon} sx={{ ml: 1 }} />
         </Button>
+      </Box>
+      <Box sx={{ mt: 2, width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <ImagePreview/>
       </Box>
     </Box>
   );
