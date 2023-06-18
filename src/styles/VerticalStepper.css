@@ -1,0 +1,21 @@
+.StepBTN {
+    position: relative;
+    transition: top 0.5s ease-in-out;
+  }
+  
+  .StepBTN.active {
+    top: 20px;
+    animation: slideDown 0.5s ease-in-out forwards;
+  }
+  
+  @keyframes slideDown {
+    from {
+      top: -20px;
+      opacity: 0;
+    }
+    to {
+      top: 20px;
+      opacity: 1;
+    }
+  }
+  
