@@ -62,9 +62,7 @@ const ImmunePicComp = () => {
           <SvgIcon component={NavigateNextIcon} sx={{ ml: 1 }} />
         </Button>
       </Box>
-      <Box sx={{ mt: 2, width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <ImagePreview/>
-      </Box>
+
     </Box>
   );
 };

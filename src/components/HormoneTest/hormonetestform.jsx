@@ -1,4 +1,8 @@
 import React, { useState } from "react";
+import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import {
   Typography,
   Accordion,
@@ -21,17 +25,20 @@ import {
 import { ExpandMore } from "@mui/icons-material";
 import BasicDatePicker from '../BasicDatePicker';
 
-const HormoneTestForm = () => {
-  const [activeAccordion, setActiveAccordion] = useState(0);
+const HormoneTestForm = ({ setFinalData }) => {
+  const [activeAccordion, setActiveAccordion] = useState(1);
 
   const handleNextAccordion = () => {
     setActiveAccordion((prevActiveAccordion) => prevActiveAccordion + 1);
   };
-
+  const hormone_sampling_date = (e) => {
+    e.preventDefault();
+    console.log("sampling date hormine", e.target.value);
+  }
   return (
     <>
       <div style={{ marginTop: "20px", marginBottom: "20px" }}>
-        <Accordion expanded={activeAccordion === 0}>
+        <Accordion expanded={activeAccordion === 1}>
           <AccordionSummary
             expandIcon={<ExpandMore />}
             onClick={() => handleNextAccordion()}
@@ -70,7 +77,7 @@ const HormoneTestForm = () => {
             </Box>
           </AccordionDetails>
         </Accordion>
-        <Accordion expanded={activeAccordion === 1}>
+        <Accordion expanded={activeAccordion === 2}>
           <AccordionSummary
             expandIcon={<ExpandMore />}
             onClick={() => handleNextAccordion()}
@@ -122,7 +129,7 @@ const HormoneTestForm = () => {
                   Enter when your testing window starts
                 </Typography>
                 <br />
-                <BasicDatePicker/>
+                <BasicDatePicker />
               </Box>
               <Box sx={{ mt: 2 }}>
                 <Button
@@ -135,7 +142,7 @@ const HormoneTestForm = () => {
             </Box>
           </AccordionDetails>
         </Accordion>
-        <Accordion expanded={activeAccordion === 2}>
+        <Accordion expanded={activeAccordion === 3}>
           <AccordionSummary
             expandIcon={<ExpandMore />}
             onClick={() => handleNextAccordion()}
@@ -225,7 +232,7 @@ const HormoneTestForm = () => {
             </Box>
           </AccordionDetails>
         </Accordion>
-        <Accordion expanded={activeAccordion === 3}>
+        <Accordion expanded={activeAccordion === 4}>
           <AccordionSummary
             expandIcon={<ExpandMore />}
             onClick={() => handleNextAccordion()}
@@ -299,8 +306,12 @@ const HormoneTestForm = () => {
             </Box>
           </AccordionDetails>
         </Accordion>
-        <Accordion expanded={activeAccordion === 4}>
-          <AccordionSummary expandIcon={<ExpandMore />} disabled>
+        <Accordion expanded={activeAccordion === 5}>
+          <AccordionSummary expandIcon={<ExpandMore />}
+            expandIcon={<ExpandMore />}
+            onClick={() => handleNextAccordion()}
+          >
+
             <Typography variant="body1">Confirm sampling date</Typography>
           </AccordionSummary>
           <AccordionDetails>
@@ -313,12 +324,18 @@ const HormoneTestForm = () => {
                   Enter the date you plan to start collecting your samples
                 </Typography>
                 <br />
-                <BasicDatePicker/>
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                  <DemoContainer components={['DatePicker']}>
+                    <DatePicker label="Select Sampling Date" onChange={{}} />
+                  </DemoContainer>
+                </LocalizationProvider>
+
+
               </Box>
               <Box sx={{ mt: 2 }}>
                 <Button
+                  type="submit"
                   variant="contained"
-                  onClick={() => handleNextAccordion()}
                 >
                   Next
                 </Button>

@@ -13,7 +13,8 @@ import {
   Select,
   MenuItem,
   Button,
-  Grid
+  Grid,
+  Box
 } from '@mui/material';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import MenuOpenIcon from '@mui/icons-material/MenuOpen';
@@ -22,9 +23,15 @@ import VerticalStepper from '../components/verticalstepper';
 import Layout from '../components/Layout/layout';
 import UserOrders from '../components/userOrders';
 import Calendar from '../components/calendar';
+import ImagePreview from '../components/ImagePreview';
+import CurrOrderContext from '../utils/order_context';
 
 const ImmunePic = () => {
-
+  const { currOrder, setCurrOrder } = useContext(CurrOrderContext);
+  const [ImmunePic, setImmunePic] = useState({ ...currOrder[4] });
+  useEffect(() => {
+    setImmunePic({ ...currOrder[4] });
+  }, [currOrder]);
   function ToggleLeftSideBar() {
     const LeftBar = document.getElementById('Left-Bar');
     if (LeftBar.style.transform == "translateX(0%)") {
@@ -46,8 +53,12 @@ const ImmunePic = () => {
             <VerticalStepper />
           </div>
           <div className="middle-dashboard">
-            <pic />
-            <ImmunePicComp />
+
+            {ImmunePic.status === "Done" ? <Box sx={{ mt: 2, width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <ImagePreview id={ImmunePic.data.immuneBalanceTestFileId} />
+            </Box> : <ImmunePicComp />}
+
+
           </div>
         </div>
 
