@@ -47,6 +47,7 @@ const Navbar = (props) => {
               <Avatar
                 alt="Arshcode"
                 src={`${BASE_API}/files/${main_user.profilePic}/serve`}
+                loading="lazy"
               />
             </IconButton>
           </Tooltip>

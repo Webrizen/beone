@@ -98,6 +98,7 @@ const Dashboard = (route) => {
                       className="profile-img"
                       src={`${BASE_API}/files/${main_user.profilePic}/serve`}
                       alt="Profile"
+                      loading="lazy"
                     />
                   ) : (
                     <AccountCircle sx={{ width: "100%", height: "100%" }} />
