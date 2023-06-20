@@ -101,7 +101,7 @@ body::-webkit-scrollbar-thumb {
 
 .left-data-kit p,
 .right-data-kit p {
-  font-size: 15px !important;
+  font-size: 10px !important;
 }
 
 @media only screen and (max-width: 768px) {
@@ -135,4 +135,10 @@ body::-webkit-scrollbar-thumb {
 .fc-day-fri,
 .fc-day-sat {
   background-color: hsla(0, 0%, 82%, .3) !important;
+}
+
+@media only screen and (max-width: 768px) {
+  .css-19kzrtu{
+    padding: 20px 0 !important;
+  }
 }

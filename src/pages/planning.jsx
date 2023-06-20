@@ -33,10 +33,10 @@ import HormoneTestData from "../components/HormoneTest/hormonetestdata";
 import MetabolicData from "../components/Metabolic/MetabolicData";
 import MetabolicForm from "../components/Metabolic/MetabolicForm";
 import CurrOrderContext from "../utils/order_context";
-import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import {
   Accordion,
   AccordionSummary,
@@ -53,7 +53,7 @@ import {
   Paper,
 } from "@mui/material";
 import { ExpandMore } from "@mui/icons-material";
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Swal from "sweetalert2";
 import Hormone1Calendr from "../components/calendar/hormone1Calendr";
 import EventsCalendar from "../components/calendar/eventsCalendar";
@@ -92,19 +92,15 @@ function TabPanel(props: TabPanelProps) {
 function a11yProps(index: number) {
   return {
     id: `simple-tab-${index}`,
-    'aria-controls': `simple-tabpanel-${index}`,
+    "aria-controls": `simple-tabpanel-${index}`,
   };
 }
 const Planning = (props) => {
-
-
   const [value, setValue] = useState(0);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
-
-
 
   // const { currOrder, setCurrOrder } = useContext(CurrOrderContext);
   const today = new Date();
@@ -112,6 +108,7 @@ const Planning = (props) => {
   disabledDate.setDate(today.getDate() + 5);
   let n = 1;
   const [activeAccordion, setActiveAccordion] = useState(n);
+  
   const handleNextAccordion = () => {
     n = n + 1;
     setActiveAccordion(n);
@@ -128,10 +125,15 @@ const Planning = (props) => {
     // var mydate = new Date(val);
     const date = new Date(val);
 
-    const options = { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' };
-    const formattedDate = date.toLocaleDateString('en-US', options);
+    const options = {
+      weekday: "long",
+      month: "long",
+      day: "numeric",
+      year: "numeric",
+    };
+    const formattedDate = date.toLocaleDateString("en-US", options);
     return formattedDate;
-  }
+  };
   function dateFormat(input_D, format_D) {
     // input date parsed
     const date = new Date(input_D);
@@ -158,7 +160,7 @@ const Planning = (props) => {
   }
 
   const data = {
-    testOption: 'OPTION_1',
+    testOption: "OPTION_1",
     hormoneTestSamplingDate: null,
     periodCycleLength: 0,
     hormoneTestWindowStartDate: null,
@@ -192,8 +194,7 @@ const Planning = (props) => {
   const o_id = localStorage.getItem("currOrder");
   const handlePlanning = () => {
     baseApi
-      .post(`/dashboard/${o_id}/complete-planning-task`,
-        FinalData)
+      .post(`/dashboard/${o_id}/complete-planning-task`, FinalData)
       .then((response) => {
         console.log("after planning task", response.data);
 
@@ -209,7 +210,7 @@ const Planning = (props) => {
       .catch((error) => {
         console.error(error);
       });
-  }
+  };
 
   // const [2, set2] = useState(null);
   // const [2, set2] = useState(null);
@@ -228,8 +229,7 @@ const Planning = (props) => {
     } else {
       setactiveTab("1");
     }
-
-  }
+  };
   return (
     <>
       <Layout>
@@ -369,8 +369,8 @@ const Planning = (props) => {
                               }} />
                           </DemoContainer>
                         </LocalizationProvider>} */}
-                          </Box>
-                          {/* <Box sx={{ mt: 2 }}>
+                              </Box>
+                              {/* <Box sx={{ mt: 2 }}>
                         <Button
                           variant="contained"
                           onClick={() => handleNextAccordion()}
@@ -607,7 +607,7 @@ const Planning = (props) => {
                   {planning.status == "Done" ? <MetabolicData data={planning.data} /> : ""}
                   {planning.status == "Done" ? <MetaBolicEvents key={2} events={planning.data} /> : ""}
 
-                  {/* <MetabolicForm /> */}
+                      {/* <MetabolicForm /> */}
 
                   {/* metabolic form  */}
                   <Box sx={{ flexGrow: 1, marginTop: '20px' }}>

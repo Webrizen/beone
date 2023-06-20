@@ -1,7 +1,7 @@
 import React from "react";
 import {
   Typography,
-  Link,
+  Link, 
   FormControl,
   FormControlLabel,
   Radio,
@@ -10,12 +10,16 @@ import {
   Box,
   Tooltip,
   Grid,
+  Alert,
+  TextField,
+  Checkbox,
 } from "@mui/material";
 import {
   RadioButtonUnchecked,
   RadioButtonChecked,
   VideoLibrary,
 } from "@mui/icons-material";
+import SentimentVeryDissatisfiedIcon from "@mui/icons-material/SentimentVeryDissatisfied";
 
 const TestInstructionsComp = () => {
   return (
@@ -276,7 +280,7 @@ const TestInstructionsComp = () => {
           justifyContent: "right",
           paddingRight: "20px",
           marginBottom: "20px",
-          marginTop: '-20px'
+          marginTop: "-20px",
         }}
       >
         <Button variant="contained" color="warning">
@@ -357,7 +361,7 @@ const TestInstructionsComp = () => {
             className="two-col-kit"
             style={{
               color: "lightgray",
-              width: '100%'
+              width: "100%",
             }}
           >
             <div className="left-data-kit">
