@@ -1,22 +1,26 @@
-import React, { useState }  from "react";
+import React, { useState } from "react";
 import {
   Typography,
-  Link, 
+  Link,
   FormControl,
   FormControlLabel,
   Radio,
   RadioGroup,
   Button,
   Box,
-  TextField,
+  FormGroup,
   Tooltip,
   Grid,
+  Alert,
+  TextField,
+  Checkbox,
 } from "@mui/material";
 import {
   RadioButtonUnchecked,
   RadioButtonChecked,
   VideoLibrary,
 } from "@mui/icons-material";
+import SentimentVeryDissatisfiedIcon from "@mui/icons-material/SentimentVeryDissatisfied";
 
 const TestInstructionsComp = () => {
   const [samplingConfirmation, setSamplingConfirmation] = useState(null);
@@ -37,6 +41,32 @@ const TestInstructionsComp = () => {
     // Reset feedback state
     setFeedback("");
   };
+
+  const [contactUs, setContactUs] = useState("");
+  const [resendKits, setResendKits] = useState("");
+  const [requiredTestKits, setRequiredTestKits] = useState([]);
+
+  const handleContactUsChange = (event) => {
+    setContactUs(event.target.value);
+  };
+
+  const handleResendKitsChange = (event) => {
+    setResendKits(event.target.value);
+  };
+
+  const handleTestKitsChange = (event) => {
+    const value = event.target.value;
+    const isChecked = event.target.checked;
+
+    if (isChecked) {
+      setRequiredTestKits((prevTestKits) => [...prevTestKits, value]);
+    } else {
+      setRequiredTestKits((prevTestKits) =>
+        prevTestKits.filter((kit) => kit !== value)
+      );
+    }
+  };
+
   return (
     <>
       <Typography variant="body1" gutterBottom>
@@ -80,192 +110,316 @@ const TestInstructionsComp = () => {
         </Tooltip>
       </Box>
       <br />
-      <div style={{ background: '#fff', borderRadius: '15px', padding: '20px' }}>
-      <FormControl>
-        <Typography
-          variant="body1"
-          color="primary"
-          id="demo-controlled-radio-buttons-group"
-        >
-          You have not confirmed yet if you are prepared for the hormone test on
-        </Typography>
-        <RadioGroup name="controlled-radio-buttons-group">
-          <FormControlLabel
-            value="yes"
-            control={
-              <Radio
-                color="success"
-                icon={<RadioButtonUnchecked />}
-                checkedIcon={<RadioButtonChecked />}
-              />
-            }
-            label="Yes"
-          />
-          <FormControlLabel
-            value="no"
-            control={
-              <Radio
-                color="error"
-                icon={<RadioButtonUnchecked />}
-                checkedIcon={<RadioButtonChecked />}
-              />
-            }
-            label="No"
-          />
-        </RadioGroup>
-      </FormControl>
-      <br />
-      <FormControl>
-        <Typography
-          variant="body1"
-          color="primary"
-          id="demo-controlled-radio-buttons-group"
-        >
-          You have not confirmed yet if you are prepared for the Metabolic test
-          on
-        </Typography>
-        <RadioGroup name="controlled-radio-buttons-group">
-          <FormControlLabel
-            value="yes"
-            control={
-              <Radio
-                color="success"
-                icon={<RadioButtonUnchecked />}
-                checkedIcon={<RadioButtonChecked />}
-              />
-            }
-            label="Yes"
-          />
-          <FormControlLabel
-            value="no"
-            control={
-              <Radio
-                color="error"
-                icon={<RadioButtonUnchecked />}
-                checkedIcon={<RadioButtonChecked />}
-              />
-            }
-            label="No"
-          />
-        </RadioGroup>
-      </FormControl>
-      <br />
-      <FormControl>
-        <Typography
-          variant="body1"
-          color="primary"
-          id="demo-controlled-radio-buttons-group"
-        >
-          You confirmed on that sampling of hormone test was successful. Great!!
-        </Typography>
-        <RadioGroup name="controlled-radio-buttons-group">
-          <FormControlLabel
-            value="yes"
-            control={
-              <Radio
-                color="success"
-                icon={<RadioButtonUnchecked />}
-                checkedIcon={<RadioButtonChecked />}
-              />
-            }
-            label="Yes"
-          />
-          <FormControlLabel
-            value="no"
-            control={
-              <Radio
-                color="error"
-                icon={<RadioButtonUnchecked />}
-                checkedIcon={<RadioButtonChecked />}
-              />
-            }
-            label="No"
-          />
-        </RadioGroup>
-      </FormControl>
-      <br />
-      <FormControl>
-        <Typography
-          variant="body1"
-          color="primary"
-          id="demo-controlled-radio-buttons-group"
-        >
-          You confirmed on that sampling of Metabolic test was successful.
-          Great!!
-        </Typography>
-        <RadioGroup name="controlled-radio-buttons-group">
-          <FormControlLabel
-            value="yes"
-            control={
-              <Radio
-                color="success"
-                icon={<RadioButtonUnchecked />}
-                checkedIcon={<RadioButtonChecked />}
-              />
-            }
-            label="Yes"
-          />
-          <FormControlLabel
-            value="no"
-            control={
-              <Radio
-                color="error"
-                icon={<RadioButtonUnchecked />}
-                checkedIcon={<RadioButtonChecked />}
-              />
-            }
-            label="No"
-          />
-        </RadioGroup>
-      </FormControl>
-      <br />
-      <FormControl component="fieldset">
-        <Typography variant="body1" color="primary">
-          You have not confirmed yet if your sampling went ok.
-        </Typography>
-        <RadioGroup
-          name="controlled-radio-buttons-group"
-          value={samplingConfirmation}
-          onChange={handleConfirmationChange}
-        >
-          <FormControlLabel
-            value="yes"
-            control={
-              <Radio
-                color="success"
-                icon={<RadioButtonUnchecked />}
-                checkedIcon={<RadioButtonChecked />}
-              />
-            }
-            label="Yes"
-          />
-          <FormControlLabel
-            value="no"
-            control={
-              <Radio
-                color="error"
-                icon={<RadioButtonUnchecked />}
-                checkedIcon={<RadioButtonChecked />}
-              />
-            }
-            label="No"
-          />
-        </RadioGroup>
-      </FormControl>
-      {samplingConfirmation === "no" && (
-        <form onSubmit={handleSubmit}>
-          <TextField
-            label="What went wrong?"
-            value={feedback}
-            onChange={handleFeedbackChange}
-            fullWidth
-            multiline
-            rows={4}
-            margin="normal"
-            variant="outlined"
-          />
-        </form>
-      )}
+      <div
+        style={{ background: "#fff", borderRadius: "15px", padding: "20px" }}
+      >
+        <FormControl>
+          <Typography
+            variant="body1"
+            color="primary"
+            id="demo-controlled-radio-buttons-group"
+          >
+            You have not confirmed yet if you are prepared for the hormone test
+            on
+          </Typography>
+          <RadioGroup name="controlled-radio-buttons-group">
+            <FormControlLabel
+              value="yes"
+              control={
+                <Radio
+                  color="success"
+                  icon={<RadioButtonUnchecked />}
+                  checkedIcon={<RadioButtonChecked />}
+                />
+              }
+              label="Yes"
+            />
+            <FormControlLabel
+              value="no"
+              control={
+                <Radio
+                  color="error"
+                  icon={<RadioButtonUnchecked />}
+                  checkedIcon={<RadioButtonChecked />}
+                />
+              }
+              label="No"
+            />
+          </RadioGroup>
+        </FormControl>
+        <br />
+        <FormControl>
+          <Typography
+            variant="body1"
+            color="primary"
+            id="demo-controlled-radio-buttons-group"
+          >
+            You have not confirmed yet if you are prepared for the Metabolic
+            test on
+          </Typography>
+          <RadioGroup name="controlled-radio-buttons-group">
+            <FormControlLabel
+              value="yes"
+              control={
+                <Radio
+                  color="success"
+                  icon={<RadioButtonUnchecked />}
+                  checkedIcon={<RadioButtonChecked />}
+                />
+              }
+              label="Yes"
+            />
+            <FormControlLabel
+              value="no"
+              control={
+                <Radio
+                  color="error"
+                  icon={<RadioButtonUnchecked />}
+                  checkedIcon={<RadioButtonChecked />}
+                />
+              }
+              label="No"
+            />
+          </RadioGroup>
+        </FormControl>
+        <br />
+        <FormControl>
+          <Typography
+            variant="body1"
+            color="primary"
+            id="demo-controlled-radio-buttons-group"
+          >
+            You confirmed on that sampling of hormone test was successful.
+            Great!!
+          </Typography>
+          <RadioGroup name="controlled-radio-buttons-group">
+            <FormControlLabel
+              value="yes"
+              control={
+                <Radio
+                  color="success"
+                  icon={<RadioButtonUnchecked />}
+                  checkedIcon={<RadioButtonChecked />}
+                />
+              }
+              label="Yes"
+            />
+            <FormControlLabel
+              value="no"
+              control={
+                <Radio
+                  color="error"
+                  icon={<RadioButtonUnchecked />}
+                  checkedIcon={<RadioButtonChecked />}
+                />
+              }
+              label="No"
+            />
+          </RadioGroup>
+        </FormControl>
+        <br />
+        <FormControl>
+          <Typography
+            variant="body1"
+            color="primary"
+            id="demo-controlled-radio-buttons-group"
+          >
+            You confirmed on that sampling of Metabolic test was successful.
+            Great!!
+          </Typography>
+          <RadioGroup name="controlled-radio-buttons-group">
+            <FormControlLabel
+              value="yes"
+              control={
+                <Radio
+                  color="success"
+                  icon={<RadioButtonUnchecked />}
+                  checkedIcon={<RadioButtonChecked />}
+                />
+              }
+              label="Yes"
+            />
+            <FormControlLabel
+              value="no"
+              control={
+                <Radio
+                  color="error"
+                  icon={<RadioButtonUnchecked />}
+                  checkedIcon={<RadioButtonChecked />}
+                />
+              }
+              label="No"
+            />
+          </RadioGroup>
+        </FormControl>
+        <br />
+        <FormControl component="fieldset">
+          <Typography variant="body1" color="primary">
+            You have not confirmed yet if your sampling went ok.
+          </Typography>
+          <RadioGroup
+            name="controlled-radio-buttons-group"
+            value={samplingConfirmation}
+            onChange={handleConfirmationChange}
+          >
+            <FormControlLabel
+              value="yes"
+              control={
+                <Radio
+                  color="success"
+                  icon={<RadioButtonUnchecked />}
+                  checkedIcon={<RadioButtonChecked />}
+                />
+              }
+              label="Yes"
+            />
+            <FormControlLabel
+              value="no"
+              control={
+                <Radio
+                  color="error"
+                  icon={<RadioButtonUnchecked />}
+                  checkedIcon={<RadioButtonChecked />}
+                />
+              }
+              label="No"
+            />
+          </RadioGroup>
+        </FormControl>
+        {samplingConfirmation === "no" && (
+          <>
+            <br />
+            <Alert
+              icon={<SentimentVeryDissatisfiedIcon fontSize="inherit" />}
+              severity="success"
+            >
+              We apologize for the difficulties you encountered. If you require
+              assistance or wish to discuss the problem further, please don't
+              hesitate to reach out to us.
+            </Alert>
+            <br />
+            <FormControl>
+              <Typography variant="body1" color="primary">
+                You need to contact us regarding the issue that you had?
+              </Typography>
+              <RadioGroup
+                name="contact-us"
+                value={contactUs}
+                onChange={handleContactUsChange}
+              >
+                <FormControlLabel
+                  value="yes"
+                  control={<Radio color="primary" />}
+                  label="Yes"
+                />
+                <FormControlLabel
+                  value="no"
+                  control={<Radio color="primary" />}
+                  label="No"
+                />
+              </RadioGroup>
+
+              {contactUs === "yes" && (
+                <div>
+                  <Typography variant="body1" color="primary">
+                    Please explain the issue:
+                  </Typography>
+                  <TextField
+                    label="What went wrong?"
+                    value={feedback}
+                    onChange={handleFeedbackChange}
+                    fullWidth
+                    multiline
+                    rows={4}
+                    margin="normal"
+                    variant="outlined"
+                  />
+                  <Button type="submit" variant="contained" color="primary">
+                    Submit Feedback
+                  </Button>
+                </div>
+              )}
+              <br />
+              <Typography variant="body1" color="primary">
+                Will you require any of the kits re-sent to you?
+              </Typography>
+              <RadioGroup
+                name="resend-kits"
+                value={resendKits}
+                onChange={handleResendKitsChange}
+              >
+                <FormControlLabel
+                  value="yes"
+                  control={<Radio color="primary" />}
+                  label="Yes"
+                />
+                <FormControlLabel
+                  value="no"
+                  control={<Radio color="primary" />}
+                  label="No"
+                />
+              </RadioGroup>
+
+              {resendKits === "yes" && (
+                <div>
+                  <Typography variant="body1" color="primary">
+                    Which test kits will you require? (Tick all the ones you
+                    need)
+                  </Typography>
+                  <FormGroup>
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          color="primary"
+                          value="hormone"
+                          checked={requiredTestKits.includes("hormone")}
+                          onChange={handleTestKitsChange}
+                        />
+                      }
+                      label="Hormone Test"
+                    />
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          color="primary"
+                          value="metabolic"
+                          checked={requiredTestKits.includes("metabolic")}
+                          onChange={handleTestKitsChange}
+                        />
+                      }
+                      label="Metabolic Test"
+                    />
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          color="primary"
+                          value="thyroid"
+                          checked={requiredTestKits.includes("thyroid")}
+                          onChange={handleTestKitsChange}
+                        />
+                      }
+                      label="Thyroid Test"
+                    />
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          color="primary"
+                          value="immune"
+                          checked={requiredTestKits.includes("immune")}
+                          onChange={handleTestKitsChange}
+                        />
+                      }
+                      label="Immune Test"
+                    />
+                  </FormGroup>
+                  <Alert severity="info">
+                    Please note that there will be a fee for this.
+                  </Alert>
+                </div>
+              )}
+            </FormControl>
+          </>
+        )}
       </div>
       <Box
         sx={{
@@ -275,7 +429,7 @@ const TestInstructionsComp = () => {
           justifyContent: "right",
           paddingRight: "20px",
           marginBottom: "20px",
-          marginTop: '-20px'
+          marginTop: "-20px",
         }}
       >
         <Button variant="contained" color="warning">
@@ -356,7 +510,7 @@ const TestInstructionsComp = () => {
             className="two-col-kit"
             style={{
               color: "lightgray",
-              width: '100%'
+              width: "100%",
             }}
           >
             <div className="left-data-kit">

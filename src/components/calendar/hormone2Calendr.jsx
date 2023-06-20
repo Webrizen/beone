@@ -113,7 +113,7 @@ const Hormone2Calendr = ({ type, finalData, setData }) => {
     }
     return (
         <div className='demo-app'>
-
+            {/* Grid mei Dalo  */}
             {renderSidebar()}
             <div className='demo-app-main'>
                 <FullCalendar

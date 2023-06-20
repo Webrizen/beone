@@ -50,5 +50,7 @@ p {
 }
 
 @media only screen and (max-width: 768px) {
-  
+  .css-19kzrtu{
+    padding: 20px 0 !important;
+  }
 }
