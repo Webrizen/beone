@@ -108,6 +108,7 @@ const Planning = (props) => {
   disabledDate.setDate(today.getDate() + 5);
   let n = 1;
   const [activeAccordion, setActiveAccordion] = useState(n);
+  
   const handleNextAccordion = () => {
     n = n + 1;
     setActiveAccordion(n);
