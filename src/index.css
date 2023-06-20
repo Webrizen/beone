@@ -101,7 +101,7 @@ body::-webkit-scrollbar-thumb {
 
 .left-data-kit p,
 .right-data-kit p {
-  font-size: 15px !important;
+  font-size: 10px !important;
 }
 
 @media only screen and (max-width: 768px) {

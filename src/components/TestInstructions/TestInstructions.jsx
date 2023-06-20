@@ -1,13 +1,14 @@
-import React from "react";
+import React, { useState }  from "react";
 import {
   Typography,
-  Link,
+  Link, 
   FormControl,
   FormControlLabel,
   Radio,
   RadioGroup,
   Button,
   Box,
+  TextField,
   Tooltip,
   Grid,
 } from "@mui/material";
@@ -18,6 +19,24 @@ import {
 } from "@mui/icons-material";
 
 const TestInstructionsComp = () => {
+  const [samplingConfirmation, setSamplingConfirmation] = useState(null);
+  const [feedback, setFeedback] = useState("");
+
+  const handleConfirmationChange = (event) => {
+    setSamplingConfirmation(event.target.value);
+  };
+
+  const handleFeedbackChange = (event) => {
+    setFeedback(event.target.value);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    // Handle form submission, e.g., send feedback to backend or perform desired actions
+    console.log(feedback);
+    // Reset feedback state
+    setFeedback("");
+  };
   return (
     <>
       <Typography variant="body1" gutterBottom>
@@ -200,15 +219,15 @@ const TestInstructionsComp = () => {
         </RadioGroup>
       </FormControl>
       <br />
-      <FormControl>
-        <Typography
-          variant="body1"
-          color="primary"
-          id="demo-controlled-radio-buttons-group"
-        >
+      <FormControl component="fieldset">
+        <Typography variant="body1" color="primary">
           You have not confirmed yet if your sampling went ok.
         </Typography>
-        <RadioGroup name="controlled-radio-buttons-group">
+        <RadioGroup
+          name="controlled-radio-buttons-group"
+          value={samplingConfirmation}
+          onChange={handleConfirmationChange}
+        >
           <FormControlLabel
             value="yes"
             control={
@@ -233,40 +252,20 @@ const TestInstructionsComp = () => {
           />
         </RadioGroup>
       </FormControl>
-      <br />
-      <FormControl>
-        <Typography
-          variant="body1"
-          color="primary"
-          id="demo-controlled-radio-buttons-group"
-        >
-          You have not confirmed yet if your sampling went ok.
-        </Typography>
-        <RadioGroup name="controlled-radio-buttons-group">
-          <FormControlLabel
-            value="yes"
-            control={
-              <Radio
-                color="success"
-                icon={<RadioButtonUnchecked />}
-                checkedIcon={<RadioButtonChecked />}
-              />
-            }
-            label="Yes"
+      {samplingConfirmation === "no" && (
+        <form onSubmit={handleSubmit}>
+          <TextField
+            label="What went wrong?"
+            value={feedback}
+            onChange={handleFeedbackChange}
+            fullWidth
+            multiline
+            rows={4}
+            margin="normal"
+            variant="outlined"
           />
-          <FormControlLabel
-            value="no"
-            control={
-              <Radio
-                color="error"
-                icon={<RadioButtonUnchecked />}
-                checkedIcon={<RadioButtonChecked />}
-              />
-            }
-            label="No"
-          />
-        </RadioGroup>
-      </FormControl>
+        </form>
+      )}
       </div>
       <Box
         sx={{
