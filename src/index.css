@@ -28,10 +28,12 @@ a {
   text-decoration: none;
   white-space: nowrap;
 }
+
 img {
   pointer-events: none;
   user-select: none;
 }
+
 .step-link {
   text-decoration: none;
   font-size: 16px;
@@ -66,18 +68,21 @@ body::-webkit-scrollbar-thumb {
   border-radius: 1px !important;
   border: 3px solid transparent !important;
 }
-.StepBTN{
+
+.StepBTN {
   padding: 10px !important;
   overflow: hidden;
   width: min-content;
   border-radius: 6px;
   transition: all 0.1s;
-  border: 0.1px solid rgba(0,0,0,0.1);
+  border: 0.1px solid rgba(0, 0, 0, 0.1);
 }
-.StepBTN:hover{
-  background: rgba(0,0,0,0.01);
+
+.StepBTN:hover {
+  background: rgba(0, 0, 0, 0.01);
 }
-.two-col-kit{
+
+.two-col-kit {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -85,27 +90,49 @@ body::-webkit-scrollbar-thumb {
   padding: 10px;
   justify-content: space-between;
 }
-.left-data-kit, .right-data-kit{
+
+.left-data-kit,
+.right-data-kit {
   display: flex;
   flex-direction: row;
   gap: 5px;
   align-items: center;
 }
-.left-data-kit p, .right-data-kit p{
+
+.left-data-kit p,
+.right-data-kit p {
   font-size: 15px !important;
 }
+
 @media only screen and (max-width: 768px) {
-  .two-col-kit{
+  .two-col-kit {
     flex-direction: row;
     justify-content: space-between;
     white-space: nowrap;
     align-items: normal;
   }
-  .left-data-kit, .right-data-kit{
+
+  .left-data-kit,
+  .right-data-kit {
     align-items: normal;
     text-align: left;
   }
-  .left-data-kit p, .right-data-kit p{
+
+  .left-data-kit p,
+  .right-data-kit p {
     font-size: 10px !important;
   }
+}
+
+.demo-app {
+  max-width: 600px;
+  display: block;
+  margin: auto;
+}
+
+.fc-day-wed,
+.fc-day-thu,
+.fc-day-fri,
+.fc-day-sat {
+  background-color: hsla(0, 0%, 82%, .3) !important;
 }
