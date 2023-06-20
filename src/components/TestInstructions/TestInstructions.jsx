@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Typography,
   Link, 
@@ -11,6 +11,7 @@ import {
   Tooltip,
   Grid,
   Alert,
+  FormGroup,
   TextField,
   Checkbox,
 } from "@mui/material";
@@ -22,6 +23,26 @@ import {
 import SentimentVeryDissatisfiedIcon from "@mui/icons-material/SentimentVeryDissatisfied";
 
 const TestInstructionsComp = () => {
+
+  const [samplingConfirmed, setSamplingConfirmed] = useState("");
+  const [contactNeeded, setContactNeeded] = useState(false);
+  const [kitsResentNeeded, setKitsResentNeeded] = useState(false);
+
+  const handleSamplingConfirmationChange = (event) => {
+    setSamplingConfirmed(event.target.value);
+    setContactNeeded(false);
+    setKitsResentNeeded(false);
+  };
+
+  const handleContactNeededChange = (event) => {
+    setContactNeeded(event.target.value === "yes");
+  };
+
+  const handleKitsResentNeededChange = (event) => {
+    setKitsResentNeeded(event.target.value === "yes");
+  };
+
+
   return (
     <>
       <Typography variant="body1" gutterBottom>
@@ -205,72 +226,72 @@ const TestInstructionsComp = () => {
       </FormControl>
       <br />
       <FormControl>
-        <Typography
-          variant="body1"
-          color="primary"
-          id="demo-controlled-radio-buttons-group"
-        >
+        <Typography variant="body1" color="primary">
           You have not confirmed yet if your sampling went ok.
         </Typography>
-        <RadioGroup name="controlled-radio-buttons-group">
-          <FormControlLabel
-            value="yes"
-            control={
-              <Radio
-                color="success"
-                icon={<RadioButtonUnchecked />}
-                checkedIcon={<RadioButtonChecked />}
-              />
-            }
-            label="Yes"
-          />
-          <FormControlLabel
-            value="no"
-            control={
-              <Radio
-                color="error"
-                icon={<RadioButtonUnchecked />}
-                checkedIcon={<RadioButtonChecked />}
-              />
-            }
-            label="No"
-          />
-        </RadioGroup>
-      </FormControl>
-      <br />
-      <FormControl>
-        <Typography
-          variant="body1"
-          color="primary"
-          id="demo-controlled-radio-buttons-group"
+        <RadioGroup
+          name="controlled-radio-buttons-group"
+          value={samplingConfirmed}
+          onChange={handleSamplingConfirmationChange}
         >
-          You have not confirmed yet if your sampling went ok.
-        </Typography>
-        <RadioGroup name="controlled-radio-buttons-group">
-          <FormControlLabel
-            value="yes"
-            control={
-              <Radio
-                color="success"
-                icon={<RadioButtonUnchecked />}
-                checkedIcon={<RadioButtonChecked />}
-              />
-            }
-            label="Yes"
-          />
-          <FormControlLabel
-            value="no"
-            control={
-              <Radio
-                color="error"
-                icon={<RadioButtonUnchecked />}
-                checkedIcon={<RadioButtonChecked />}
-              />
-            }
-            label="No"
-          />
+          <FormControlLabel value="yes" control={<Radio />} label="Yes" />
+          <FormControlLabel value="no" control={<Radio />} label="No" />
         </RadioGroup>
+
+        {/* Contact Form */}
+        {samplingConfirmed === "no" && (
+          <>
+            <Typography variant="body1" color="primary">
+              Do you need to contact us regarding the issue that you had?
+            </Typography>
+            <RadioGroup
+              name="contact-needed"
+              value={contactNeeded ? "yes" : "no"}
+              onChange={handleContactNeededChange}
+            >
+              <FormControlLabel value="yes" control={<Radio />} label="Yes" />
+              <FormControlLabel value="no" control={<Radio />} label="No" />
+            </RadioGroup>
+
+            {/* Resent Kits Form */}
+            <Typography variant="body1" color="primary">
+              Will you require any of the kits re-sent to you?
+            </Typography>
+            <RadioGroup
+              name="kits-resent-needed"
+              value={kitsResentNeeded ? "yes" : "no"}
+              onChange={handleKitsResentNeededChange}
+            >
+              <FormControlLabel value="yes" control={<Radio />} label="Yes" />
+              <FormControlLabel value="no" control={<Radio />} label="No" />
+            </RadioGroup>
+            {kitsResentNeeded && (
+              <FormGroup>
+                <Typography variant="body1" color="primary">
+                  Which test kits will you require? (tick all the ones you need)
+                </Typography>
+                <FormControlLabel
+                  control={<Checkbox color="primary" />}
+                  label="Hormone Test"
+                />
+                <FormControlLabel
+                  control={<Checkbox color="primary" />}
+                  label="Metabolic Test"
+                />
+                <FormControlLabel
+                  control={<Checkbox color="primary" />}
+                  label="Thyroid Test"
+                />
+                <FormControlLabel
+                  control={<Checkbox color="primary" />}
+                  label="Immune Test"
+                />
+              </FormGroup>
+            )}
+          </>
+        )}
       </FormControl>
+
       </div>
       <Box
         sx={{
