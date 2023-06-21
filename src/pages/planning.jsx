@@ -638,40 +638,53 @@ const Planning = (props) => {
                       )}
                     </Grid>
                   </Grid>
+
                   <Box sx={{ flexGrow: 1, marginTop: "20px" }}>
-                    <Accordion>
+                    <Accordion
+                      expanded={expandedId === 0}
+                      onChange={() => setExpandedId(0)}
+                      ref={(ref) => (accordionRefs.current[0] = ref)}
+                    >
                       <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                         <Typography variant="body1">Introduction</Typography>
                       </AccordionSummary>
                       <AccordionDetails>
                         <Box>
-                          <Typography variant="h6" gutterBottom>
-                            Metabolic, immune and thyroid test
-                          </Typography>
-                          <Typography variant="body1" gutterBottom>
-                            There are three main criteria that dictate when the
-                            test can be done:
-                          </Typography>
-                          <Typography variant="body1" gutterBottom>
-                            1: Testing cannot happen while menstruating
-                          </Typography>
-                          <Typography variant="body1" gutterBottom>
-                            2: Preparation time prior to taking the samples – 2
-                            days prior to the test there are foods and
-                            supplements to avoid
-                          </Typography>
-                          <Typography variant="body1" gutterBottom>
-                            3: Your availability to take the samples at specific
-                            times required throughout the day
-                          </Typography>
-                        </Box>
-                        <Box sx={{ mt: 2 }}>
-                          <Button variant="contained">Next</Button>
+                          <Box>
+                            <Typography variant="h6" gutterBottom>
+                              Metabolic, immune and thyroid test
+                            </Typography>
+                            <Typography variant="body1" gutterBottom>
+                              There are three main criteria that dictate when
+                              the test can be done:
+                            </Typography>
+                            <Typography variant="body1" gutterBottom>
+                              1: Testing cannot happen while menstruating
+                            </Typography>
+                            <Typography variant="body1" gutterBottom>
+                              2: Preparation time prior to taking the samples –
+                              2 days prior to the test there are foods and
+                              supplements to avoid
+                            </Typography>
+                            <Typography variant="body1" gutterBottom>
+                              3: Your availability to take the samples at
+                              specific times required throughout the day
+                            </Typography>
+                          </Box>
+                          <Button
+                            variant="contained"
+                            onClick={() => handleNextClick(0)}
+                          >
+                            Next
+                          </Button>
                         </Box>
                       </AccordionDetails>
                     </Accordion>
-
-                    <Accordion>
+                    <Accordion
+                      expanded={expandedId === 1}
+                      onChange={() => setExpandedId(1)}
+                      ref={(ref) => (accordionRefs.current[1] = ref)}
+                    >
                       <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                         <Typography variant="body1">
                           Testing cannot happen while menstruating
@@ -679,22 +692,31 @@ const Planning = (props) => {
                       </AccordionSummary>
                       <AccordionDetails>
                         <Box>
-                          <Typography variant="h6" gutterBottom>
-                            Aim to schedule this test as close as possible to
-                            the previous one – ideally within the same week
-                          </Typography>
-                          <Typography variant="body1" gutterBottom>
-                            Please note that the sampling process will take two
-                            days and testing cannot happen during menstruation
-                          </Typography>
-                        </Box>
-                        <Box sx={{ mt: 2 }}>
-                          <Button variant="contained">Next</Button>
+                          <Box>
+                            <Typography variant="h6" gutterBottom>
+                              Aim to schedule this test as close as possible to
+                              the previous one – ideally within the same week
+                            </Typography>
+                            <Typography variant="body1" gutterBottom>
+                              Please note that the sampling process will take
+                              two days and testing cannot happen during
+                              menstruation
+                            </Typography>
+                          </Box>
+                          <Button
+                            variant="contained"
+                            onClick={() => handleNextClick(1)}
+                          >
+                            Next
+                          </Button>
                         </Box>
                       </AccordionDetails>
                     </Accordion>
-
-                    <Accordion>
+                    <Accordion
+                      expanded={expandedId === 2}
+                      onChange={() => setExpandedId(2)}
+                      ref={(ref) => (accordionRefs.current[2] = ref)}
+                    >
                       <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                         <Typography variant="body1">
                           Preparation time prior to taking the samples
@@ -702,53 +724,60 @@ const Planning = (props) => {
                       </AccordionSummary>
                       <AccordionDetails>
                         <Box>
-                          <Typography variant="h6" gutterBottom>
-                            For 48 hours prior to testing you will need to:
-                          </Typography>
-                          <Typography variant="body1" gutterBottom>
-                            - Discontinue all non-essential medication and
-                            supplements, including fortified food and drinks or
-                            meal replacement.
-                            <br />
-                            - Do not stop essential medications such as heart
-                            medication, thyroid hormones, etc.
-                            <br />
-                            - Avoid seafood.
-                            <br />- Continue with these food + supplement
-                            restrictions until all your samples are completely
-                            collected.
-                          </Typography>
-                          <Typography variant="body1" gutterBottom>
-                            If in any way unsure, please contact us 24 hours
-                            before the test.
-                          </Typography>
-                          <Typography variant="body1" gutterBottom>
-                            Eat your usual diet, with the exception of any
-                            fortified foods/drinks and meal replacements.
-                            <br />
-                            Also avoid over consuming any single food.
-                            <br />
-                            Limit fluid intake to 2 litres of fluids for the 24
-                            hours period before urine collection.
-                            <br />
-                            The night before the bloodspot sample collection,
-                            fast starting at least 8 hours prior to the morning
-                            collection.
-                          </Typography>
-                        </Box>
-                        <Box sx={{ mt: 2 }}>
-                          <Button variant="contained">Next</Button>
+                          <Box>
+                            <Typography variant="h6" gutterBottom>
+                              For 48 hours prior to testing you will need to:
+                            </Typography>
+                            <Typography variant="body1" gutterBottom>
+                              - Discontinue all non-essential medication and
+                              supplements, including fortified food and drinks
+                              or meal replacement.
+                              <br />
+                              - Do not stop essential medications such as heart
+                              medication, thyroid hormones, etc.
+                              <br />
+                              - Avoid seafood.
+                              <br />- Continue with these food + supplement
+                              restrictions until all your samples are completely
+                              collected.
+                            </Typography>
+                            <Typography variant="body1" gutterBottom>
+                              If in any way unsure, please contact us 24 hours
+                              before the test.
+                            </Typography>
+                            <Typography variant="body1" gutterBottom>
+                              Eat your usual diet, with the exception of any
+                              fortified foods/drinks and meal replacements.
+                              <br />
+                              Also avoid over consuming any single food.
+                              <br />
+                              Limit fluid intake to 2 litres of fluids for the
+                              24 hours period before urine collection.
+                              <br />
+                              The night before the bloodspot sample collection,
+                              fast starting at least 8 hours prior to the
+                              morning collection.
+                            </Typography>
+                          </Box>
+                          <Button
+                            variant="contained"
+                            onClick={() => handleNextClick(0)}
+                          >
+                            Next
+                          </Button>
                         </Box>
                       </AccordionDetails>
                     </Accordion>
-
-                    <Accordion>
+                    <Accordion
+                      expanded={expandedId === 3}
+                      onChange={() => setExpandedId(3)}
+                      ref={(ref) => (accordionRefs.current[3] = ref)}
+                    >
                       <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                        <Typography variant="body1">
-                          Your availability to take the samples
-                        </Typography>
+                        <Typography variant="body1">Your availability to take the samples</Typography>
                       </AccordionSummary>
                       <AccordionDetails>
+                        <Box>
                         <Box>
                           <Typography variant="h6" gutterBottom>
                             Timings and requirements for day one and day two of
@@ -809,25 +838,12 @@ const Planning = (props) => {
                             sampling requirements, Confirm sampling date
                           </Typography>
                           <br />
-                          {/* <BasicDatePicker /> */}
                           <Hormone2Calendr
                             key={2}
                             type={"2"}
                             finalData={FinalData}
                             setData={setFinalData}
                           />
-                          {/* {planning.status == "Done" ? "" : <LocalizationProvider dateAdapter={AdapterDayjs}>
-                        <DemoContainer components={['DatePicker']}>
-                          <DatePicker label="Select Date"
-                            disablePast shouldDisableDate={disableNextDays}
-                            onChange={(event) => {
-                              console.log(event);
-                              let date = new Date(event);
-                              FinalData.metabolismTestSamplingDate = dateFormat(date, 'yyyy-MM-dd');
-                              setFinalData({ ...FinalData }); console.log(FinalData);
-                            }} />
-                        </DemoContainer>
-                      </LocalizationProvider>} */}
                         </Box>
                         <Box sx={{ mt: 2 }}>
                           {planning.status == "Done" ? (
@@ -848,6 +864,7 @@ const Planning = (props) => {
                               Submit
                             </Button>
                           )}
+                        </Box>
                         </Box>
                       </AccordionDetails>
                     </Accordion>
