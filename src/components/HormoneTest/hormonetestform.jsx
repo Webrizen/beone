@@ -308,7 +308,6 @@ const HormoneTestForm = ({ setFinalData }) => {
         </Accordion>
         <Accordion expanded={activeAccordion === 5}>
           <AccordionSummary expandIcon={<ExpandMore />}
-            expandIcon={<ExpandMore />}
             onClick={() => handleNextAccordion()}
           >
 

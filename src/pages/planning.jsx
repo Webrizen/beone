@@ -580,7 +580,6 @@ const Planning = (props) => {
                     <Accordion>
                       <AccordionSummary
                         expandIcon={<ExpandMore />}
-                        expandIcon={<ExpandMore />}
                       >
                         <Typography variant="body1">
                           Confirm sampling date

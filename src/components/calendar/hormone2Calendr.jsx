@@ -5,7 +5,8 @@ import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
-import { Grid } from '@mui/material'
+import { Grid, Alert } from '@mui/material'
+import WatchLaterIcon from '@mui/icons-material/WatchLater';
 
 // Calendar
 // import "./index.css"
@@ -122,10 +123,10 @@ const Hormone2Calendr = ({ type, finalData, setData }) => {
         <div className='demo-app calendr1'>
             {/* Grid mei Dalo  */}
             <Grid container spacing={2}>
-                <Grid item xs={12} sm={3}>
+                <Grid item xs={12} sm={6}>
                     {renderSidebar()}
                 </Grid>
-                <Grid item xs={12} sm={9}>
+                <Grid item xs={12} sm={6}>
                     <div className='demo-app-main calendar2'>
                         <FullCalendar
                             plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
@@ -159,12 +160,13 @@ const Hormone2Calendr = ({ type, finalData, setData }) => {
                 <div className='demo-app-sidebar-section'>
                     <h2>Instructions</h2>
                     <ul>
-                        <li><span style={{ backgroundColor: "#f1f1f1", height: "20px", width: "20px", color: "#f1f1f1" }}>a</span> Disabled Dates </li>
-                        <li>Select the dates to check the preperation dates</li>
-                        <li>Click on Date to select it</li>
+                        <li style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap:'10px' }}><span style={{ backgroundColor: "#f1f1f1", height: "20px", width: "50px", color: "#f1f1f1", display: 'flex', flexDirection: 'row' }}>.</span> Disabled Dates </li>
+                        <li style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap:'10px' }}><span style={{ backgroundColor: "#fff", height: "20px", width: "50px", color: "#fff", display: 'flex', flexDirection: 'row', border: '0.1px solid rgba(0,0,0,0.1)', borderRadius: '4px' }}>.</span> Enabled Dates </li>
+                        <br />
+                        <Alert severity="info">Select the dates to check the preperation dates, Click on Date to select it</Alert>
                     </ul>
                 </div>
-
+                <br />
                 <div className='demo-app-sidebar-section'>
                     <h2>All Events ({events.length})</h2>
                     <ul>
@@ -187,8 +189,8 @@ function renderEventContent(eventInfo) {
 function renderSidebarEvent(event) {
     return (
         <li key={event.id}>
-            <i>{event.title}: </i>
-            <b>{formatDate(event.start, { year: 'numeric', month: 'short', day: 'numeric' })}</b>
+            <Alert severity='info'>{event.title}: </Alert>
+            <Alert icon={<WatchLaterIcon fontSize="inherit" />} severity="info">{formatDate(event.start, { year: 'numeric', month: 'short', day: 'numeric' })}</Alert>
         </li>
     )
 }
