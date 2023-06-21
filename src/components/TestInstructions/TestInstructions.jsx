@@ -249,8 +249,9 @@ const TestInstructionsComp = () => {
               value={contactNeeded ? "yes" : "no"}
               onChange={handleContactNeededChange}
             >
-              <FormControlLabel value="yes" control={<Radio />} label="Yes" />
-              <FormControlLabel value="no" control={<Radio />} label="No" />
+              <Button component={Link} href="/contact" sx={{ width: 'min-content', whiteSpace: 'nowrap' }} color="success">
+              Contact Us
+            </Button>
             </RadioGroup>
 
             {/* Resent Kits Form */}

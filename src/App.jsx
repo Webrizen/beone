@@ -10,6 +10,7 @@ import Planning from './pages/planning';
 import Profile from './pages/profile';
 import ErrorPage from './pages/error-page';
 import ImmunePic from './pages/immune-pic';
+import Contact from './pages/contact';
 import Questionnaire from './pages/questionnaire';
 import Results from './pages/results';
 import Settings from './pages/settings';
@@ -66,6 +67,10 @@ function App() {
     {
       path: "/settings",
       element: <Settings/>
+    },
+    {
+      path: "/contact",
+      element: <Contact />
     },
     {
       path: "/order/:id/welcome",
