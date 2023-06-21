@@ -1,12 +1,12 @@
-.demo-app{
+.demo-app {
     width: 100% !important;
     padding: 10px !important;
     border-radius: 10px !important;
     background: #fff !important;
-    margin: 10px 0px !important;
     overflow-x: scroll !important;
 }
-.MainCal{
+
+.MainCal {
     display: flex !important;
     justify-content: center !important;
     align-items: center !important;
@@ -14,13 +14,15 @@
     padding: 10px !important;
     border-radius: 6px !important;
 }
-.MainCal td{
+
+.MainCal td {
     display: flex !important;
     justify-content: center !important;
     align-items: center !important;
     text-align: center !important;
 }
-.fc .fc-button-primary{
+
+.fc .fc-button-primary {
     background: linear-gradient(50deg, #45d9c9, #84b3c7) !important;
     -webkit-text-fill-color: transparent !important;
     -webkit-background-clip: text !important;
@@ -30,15 +32,34 @@
     outline: none !important;
 }
 
-.fc .fc-toolbar-title{
+.fc .fc-toolbar-title {
     font-size: 20px !important;
 }
-.fc-daygrid-block-event .fc-event-time, .fc-daygrid-block-event .fc-event-title{
+
+.fc-daygrid-block-event .fc-event-time,
+.fc-daygrid-block-event {
     font-size: 8px !important;
-    padding: 5px;
+    padding: 6px;
 }
+
 @media only screen and (max-width: 768px) {
-    .demo-app{
-      overflow: scroll;
+    .demo-app {
+        overflow: scroll;
     }
+}
+
+.fc-header-toolbar {
+    margin: 0 !important;
+    padding: 15px;
+    background-color: #07a7e7;
+    color: black;
+}
+
+.fc-col-header-cell {
+    font-size: 14px;
+    overflow: hidden;
+}
+
+.demo-app-main {
+    max-width: 600px;
 }

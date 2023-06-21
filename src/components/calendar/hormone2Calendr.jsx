@@ -5,6 +5,8 @@ import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
+import { Grid } from '@mui/material'
+
 // Calendar
 // import "./index.css"
 const Hormone2Calendr = ({ type, finalData, setData }) => {
@@ -72,29 +74,34 @@ const Hormone2Calendr = ({ type, finalData, setData }) => {
         if (selectInfo.dateStr < minDate) return;
         const prepEvents = [
             {
-                start: getFutDte("P", 1, selectInfo.dateStr),
-                title: 'Prep 3',
-                // backgroundColor: ""
+                start: getFutDte("P", 3, selectInfo.dateStr),
+                title: 'Prep 1',
+                textColor: "black",
+                backgroundColor: "#CDC2AE"
             },
             {
                 start: getFutDte("P", 2, selectInfo.dateStr),
                 title: 'Prep 2',
-                // backgroundColor: ""
+                textColor: "black",
+                backgroundColor: "#CDC2AE"
             },
             {
-                start: getFutDte("P", 3, selectInfo.dateStr),
-                title: 'Prep 1',
-                // backgroundColor: ""
+                start: getFutDte("P", 1, selectInfo.dateStr),
+                title: 'Prep 3',
+                textColor: "black",
+                backgroundColor: "#CDC2AE"
             },
             {
                 start: getFutDte("P", 0, selectInfo.dateStr),
                 title: 'Selected Date',
-                backgroundColor: "green"
+                backgroundColor: "#C2DEDC",
+                textColor: "black"
             },
             {
                 start: getFutDte("F", 1, selectInfo.dateStr),
                 title: 'Test Date',
-                backgroundColor: "red"
+                backgroundColor: "#ECE5C7",
+                textColor: "black"
             }
         ];
         setevents(prepEvents);
@@ -108,34 +115,42 @@ const Hormone2Calendr = ({ type, finalData, setData }) => {
         }
 
         console.log("previoes date", getFutDte("P", 1, selectInfo.dateStr));
-        alert(selectInfo.dateStr);
+        // alert(selectInfo.dateStr);
 
     }
     return (
-        <div className='demo-app'>
+        <div className='demo-app calendr1'>
             {/* Grid mei Dalo  */}
-            {renderSidebar()}
-            <div className='demo-app-main'>
-                <FullCalendar
-                    plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-                    headerToolbar={{
-                        left: 'prev,next today',
-                        center: 'title',
-                        right: 'dayGridMonth,timeGridWeek,timeGridDay'
-                    }}
-                    initialView='dayGridMonth'
-                    // editable={true}
-                    validRange={validRange}
-                    selectable={true}
-                    // selectMirror={true}
-                    dateClick={handleDateSelect}
+            <Grid container spacing={2}>
+                <Grid item xs={12} sm={3}>
+                    {renderSidebar()}
+                </Grid>
+                <Grid item xs={12} sm={9}>
+                    <div className='demo-app-main calendar2'>
+                        <FullCalendar
+                            plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+                            headerToolbar={{
+                                left: 'prev,next today',
+                                center: 'title',
+                                right: 'dayGridMonth,timeGridWeek,timeGridDay'
+                            }}
+                            initialView='dayGridMonth'
+                            // editable={true}
+                            validRange={validRange}
+                            selectable={true}
+                            // selectMirror={true}
+                            dateClick={handleDateSelect}
 
-                    events={events} // alternatively, use the `events` setting to fetch from a feed
+                            events={events} // alternatively, use the `events` setting to fetch from a feed
 
-                // eventRender={eventRender}
+                        // eventRender={eventRender}
 
-                />
-            </div>
+                        />
+                    </div>
+                </Grid>
+            </Grid>
+
+
         </div>
     );
     function renderSidebar() {
@@ -144,9 +159,9 @@ const Hormone2Calendr = ({ type, finalData, setData }) => {
                 <div className='demo-app-sidebar-section'>
                     <h2>Instructions</h2>
                     <ul>
-                        <li>Select dates and you will be prompted to create a new event</li>
-                        <li>Drag, drop, and resize events</li>
-                        <li>Click an event to delete it</li>
+                        <li><span style={{ backgroundColor: "#f1f1f1", height: "20px", width: "20px", color: "#f1f1f1" }}>a</span> Disabled Dates </li>
+                        <li>Select the dates to check the preperation dates</li>
+                        <li>Click on Date to select it</li>
                     </ul>
                 </div>
 

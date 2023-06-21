@@ -8,6 +8,13 @@ import interactionPlugin from '@fullcalendar/interaction'
 // Calendar
 // import "./index.css"
 const Hormone1Calendr = ({ finalData, setData }) => {
+    const [date, setdate] = useState(null);
+    const events = [
+        {
+            start: date,
+            display: 'background'
+        }
+    ]
     const [validDate, setvalidDate] = useState();
     useEffect(() => {
         var currentDate = new Date();
@@ -19,21 +26,25 @@ const Hormone1Calendr = ({ finalData, setData }) => {
         const clickedDate = selectInfo.dateStr;
         finalData.hormoneTestWindowStartDate = clickedDate;
         setData({ ...finalData }); console.log(finalData);
-        alert(clickedDate);
+        setdate(clickedDate);
+        // alert(clickedDate);
     }
+
+
     return (
-        <div className='demo-app'>
+        <div className='demo-app calendr1'>
 
             {/* {renderSidebar()} */}
-            <div className='demo-app-main'>
+            <div className='demo-app-main' style={{ margin: "auto" }}>
                 <FullCalendar
                     plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
                     headerToolbar={{
                         left: 'prev,next today',
                         center: 'title',
-                        right: 'dayGridMonth'
+                        right: 'dayGridMonth,timeGridWeek,timeGridDay'
                     }}
                     initialView='dayGridMonth'
+                    events={events}
                     // editable={true}
                     validRange={{
                         start: new Date(+new Date().setHours(0, 0, 0, 0) + 86400000).toLocaleDateString('fr-CA')

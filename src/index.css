@@ -124,21 +124,26 @@ body::-webkit-scrollbar-thumb {
   }
 }
 
-.demo-app {
-  max-width: 600px;
+.calendr1 {
+  /* max-width: 800px; */
   display: block;
   margin: auto;
 }
 
-.fc-day-wed,
-.fc-day-thu,
-.fc-day-fri,
-.fc-day-sat {
+.calendar2 .fc-day-wed,
+.calendar2 .fc-day-thu,
+.calendar2 .fc-day-fri,
+.calendar2 .fc-day-sat {
   background-color: hsla(0, 0%, 82%, .3) !important;
 }
 
+.fc-event-title.fc-sticky {
+  font-size: 11px !important;
+  font-weight: bolder;
+}
+
 @media only screen and (max-width: 768px) {
-  .css-19kzrtu{
+  .css-19kzrtu {
     padding: 20px 0 !important;
   }
 }

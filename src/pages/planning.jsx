@@ -258,15 +258,16 @@ const Planning = (props) => {
               </Box>
               <TabPanel value={value} index={0}>
                 <Box>
+
                   <Grid container spacing={2}>
-                    <Grid item xs={12} sm={6}>
+                    <Grid item xs={12} sm={12} lg={6}>
                       {planning.status == "Done" ? (
                         <HormoneTestData data={planning.data} />
                       ) : (
                         ""
                       )}
                     </Grid>
-                    <Grid item xs={12} sm={6}>
+                    <Grid item xs={12} sm={12} lg={6}>
                       {planning.status == "Done" ? (
                         <EventsCalendar
                           key={1}
@@ -861,7 +862,7 @@ const Planning = (props) => {
                                 !(
                                   FinalData.hormoneTestSamplingDate != null &&
                                   FinalData.hormoneTestWindowStartDate !=
-                                    null &&
+                                  null &&
                                   FinalData.metabolismTestSamplingDate != null
                                 )
                               }

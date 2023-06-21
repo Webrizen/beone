@@ -15,87 +15,58 @@ const EventsCalendar = ({ events }) => {
     {
       title: "Prep 1",
       start: formteD(events.StandardPackageHormone__PrepDate1),
+      textColor: "black",
+      backgroundColor: "#CDC2AE",
     },
     {
       title: "Prep 2",
       start: formteD(events.StandardPackageHormone__PrepDate2),
+      textColor: "black",
+      backgroundColor: "#CDC2AE",
     },
     {
       title: "Prep 3",
       start: formteD(events.StandardPackageHormone__PrepDate3),
+      textColor: "black",
+      backgroundColor: "#CDC2AE",
     },
     {
       title: "Prep 4",
       start: formteD(events.StandardPackageHormone__PrepDate4),
+      textColor: "black",
+      backgroundColor: "#CDC2AE",
     },
     {
       title: "Reminder 1",
       start: formteD(events.StandardPackageHormone__reminder1Time),
-      backgroundColor: "red",
+      backgroundColor: "#CDC2AE",
+      textColor: "black",
     },
     {
       title: "Reminder 2",
       start: formteD(events.StandardPackageHormone__reminder2Time),
-      backgroundColor: "red",
+      backgroundColor: "#CDC2AE",
+      textColor: "black",
     },
     {
       title: "Test 1",
       start: formteD(events.StandardPackageHormone__testDate1),
       backgroundColor: "green",
+      textColor: "black",
+      backgroundColor: "#ECE5C7",
     },
     {
       title: "Test 2",
       start: formteD(events.StandardPackageHormone__testDate2),
       backgroundColor: "green",
+      textColor: "black",
+      backgroundColor: "#ECE5C7",
     },
     {
       title: "Test Sampling",
       start: formteD(events.hormoneTestSamplingDate),
-      backgroundColor: "aqua",
-    },
-    // Add more events as needed
-  ];
-  const metabolicevents = [
-    {
-      title: "Prep 1",
-      start: formteD(events.StandardPackageMetabolic__PrepDate1),
-    },
-    {
-      title: "Prep 2",
-      start: formteD(events.StandardPackageMetabolic__PrepDate2),
-    },
-    {
-      title: "Prep 3",
-      start: formteD(events.StandardPackageMetabolic__PrepDate3),
-    },
-    {
-      title: "Prep 4",
-      start: formteD(events.StandardPackageMetabolic__PrepDate4),
-    },
-    {
-      title: "Reminder 1",
-      start: formteD(events.StandardPackageMetabolic__reminder1Time),
-      backgroundColor: "red",
-    },
-    {
-      title: "Reminder 2",
-      start: formteD(events.StandardPackageMetabolic__reminder2Time),
-      backgroundColor: "red",
-    },
-    {
-      title: "Test 1",
-      start: formteD(events.StandardPackageMetabolic__testDate1),
-      backgroundColor: "green",
-    },
-    {
-      title: "Test 2",
-      start: formteD(events.StandardPackageMetabolic__testDate2),
-      backgroundColor: "green",
-    },
-    {
-      title: "Test Sampling",
-      start: formteD(events.metabolicTestDate),
-      backgroundColor: "aqua",
+      backgroundColor: "#C2DEDC",
+      textColor: "black",
     },
     // Add more events as needed
   ];
@@ -105,11 +76,11 @@ const EventsCalendar = ({ events }) => {
       {/* {renderSidebar()} */}
       <div className="demo-app-main">
         <FullCalendar
-          plugins={[dayGridPlugin]}
+          plugins={[dayGridPlugin, timeGridPlugin]}
           headerToolbar={{
             left: "prev,next today",
             center: "title",
-            right: "dayGridMonth",
+            right: "dayGridMonth,timeGridWeek,timeGridDay",
           }}
           initialView="dayGridMonth"
           initialDate={formteD(events.StandardPackageHormone__PrepDate1)}
