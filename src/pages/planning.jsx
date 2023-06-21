@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useRef } from "react";
 import { AccountCircle } from "@mui/icons-material";
 import "../styles/dashboard.css";
 import BackgroundImage from "../Assets/images/bg-login-01.png";
@@ -59,11 +59,6 @@ import Hormone1Calendr from "../components/calendar/hormone1Calendr";
 import EventsCalendar from "../components/calendar/eventsCalendar";
 import Hormone2Calendr from "../components/calendar/hormone2Calendr";
 import MetaBolicEvents from "../components/calendar/metabolicEvents";
-// setOrder
-// import baseApi from "../utils/common";
-// import TextField from "@mui/material";
-// import BasicDatePicker from '../BasicDatePicker';
-// BasicDatePicker
 interface TabPanelProps {
   children?: React.ReactNode;
   index: number;
@@ -106,13 +101,6 @@ const Planning = (props) => {
   const today = new Date();
   const disabledDate = new Date();
   disabledDate.setDate(today.getDate() + 5);
-  let n = 1;
-  const [activeAccordion, setActiveAccordion] = useState(n);
-
-  const handleNextAccordion = () => {
-    n = n + 1;
-    setActiveAccordion(n);
-  };
   const disableNextDays = (date) => {
     const currentDate = new Date();
     const nextFiveDays = new Date();
@@ -184,13 +172,6 @@ const Planning = (props) => {
       LeftBar.style.transform = "translateX(0%)";
     }
   }
-
-  //For Tabs:
-  // const [value, setValue] = useState("tab1");
-
-  // const handleChange = (event, newValue) => {
-  //   setValue(newValue);
-  // };
   const o_id = localStorage.getItem("currOrder");
   const handlePlanning = () => {
     baseApi
@@ -212,16 +193,6 @@ const Planning = (props) => {
       });
   };
 
-  // const [2, set2] = useState(null);
-  // const [2, set2] = useState(null);
-  // useEffect(() => {
-  //   set2("1");
-  // }, [planning]);
-
-  // useEffect(() => {
-  //   set2("2");
-  // }, [planning]);
-
   const [activeTab, setactiveTab] = useState("1");
   const showTab = (n) => {
     if (activeTab == "1") {
@@ -230,6 +201,16 @@ const Planning = (props) => {
       setactiveTab("1");
     }
   };
+
+  const accordionRefs = useRef([]);
+  const [expandedId, setExpandedId] = useState(0);
+
+  const handleNextClick = (currentId) => {
+    const nextId = currentId + 1;
+
+    setExpandedId(nextId);
+  };
+
   return (
     <>
       <Layout>
@@ -258,7 +239,6 @@ const Planning = (props) => {
               </Box>
               <TabPanel value={value} index={0}>
                 <Box>
-
                   <Grid container spacing={2}>
                     <Grid item xs={12} sm={12} lg={6}>
                       {planning.status == "Done" ? (
@@ -281,357 +261,359 @@ const Planning = (props) => {
                   </Grid>
 
                   <div style={{ marginTop: "20px", marginBottom: "20px" }}>
-                    <Accordion>
-                      <AccordionSummary expandIcon={<ExpandMore />}>
+                    <Accordion
+                      expanded={expandedId === 0}
+                      onChange={() => setExpandedId(0)}
+                      ref={(ref) => (accordionRefs.current[0] = ref)}
+                    >
+                      <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                         <Typography variant="body1">Introduction</Typography>
                       </AccordionSummary>
                       <AccordionDetails>
                         <Box>
-                          <Typography variant="h6" gutterBottom>
-                            Hormone test
-                          </Typography>
-                          <Typography variant="body1" gutterBottom>
-                            There are three main criteria that dictate when the
-                            test can be done:
-                          </Typography>
-                          <Typography variant="body1" gutterBottom>
-                            1: Length of your cycle – the test needs to be done
-                            5 days post ovulation
-                          </Typography>
-                          <Typography variant="body1" gutterBottom>
-                            2: Preparation time prior to taking the samples –
-                            two days prior to the test there are foods and
-                            supplements to avoid
-                          </Typography>
-                          <Typography variant="body1" gutterBottom>
-                            3: Your availability to take the samples at the
-                            specific times required throughout the day
-                          </Typography>
-                          {/* <Box sx={{ mt: 2 }}>
-                        <Button
-                          variant="contained"
-                          onClick={() => handleNextAccordion()}
-                        >
-                          Next
-                        </Button>
-                      </Box> */}
+                          <Box>
+                            <Typography variant="h6" gutterBottom>
+                              Hormone test
+                            </Typography>
+                            <Typography variant="body1" gutterBottom>
+                              There are three main criteria that dictate when
+                              the test can be done:
+                            </Typography>
+                            <Typography variant="body1" gutterBottom>
+                              1: Length of your cycle – the test needs to be
+                              done 5 days post ovulation
+                            </Typography>
+                            <Typography variant="body1" gutterBottom>
+                              2: Preparation time prior to taking the samples –
+                              two days prior to the test there are foods and
+                              supplements to avoid
+                            </Typography>
+                            <Typography variant="body1" gutterBottom>
+                              3: Your availability to take the samples at the
+                              specific times required throughout the day
+                            </Typography>
+                          </Box>
+                          <Button
+                            variant="contained"
+                            onClick={() => handleNextClick(0)}
+                          >
+                            Next
+                          </Button>
                         </Box>
                       </AccordionDetails>
                     </Accordion>
-                    <Accordion>
-                      <AccordionSummary expandIcon={<ExpandMore />}>
+                    <Accordion
+                      expanded={expandedId === 1}
+                      onChange={() => setExpandedId(1)}
+                      ref={(ref) => (accordionRefs.current[1] = ref)}
+                    >
+                      <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                         <Typography variant="body1">
                           Length of your cycle
                         </Typography>
                       </AccordionSummary>
                       <AccordionDetails>
                         <Box>
-                          <Typography variant="h6" gutterBottom>
-                            Length of your cycle - Calculate the next testing
-                            window in your cycle
-                          </Typography>
-                          <Typography variant="h6" gutterBottom>
-                            If you have a regular cycle:
-                          </Typography>
-                          <Typography variant="body1" gutterBottom>
-                            For women with a 28-day cycle, the test should be
-                            done between day 19-22 (day 1 is the 1st day of your
-                            menstruation). If the cycle is longer, e.g. 29 days,
-                            add one day – test between day 20-23. If the cycle
-                            is shorter, e.g. 27 days, remove one day – test
-                            between day 18-21. Adjust according to your cycle
-                            length.
-                          </Typography>
-                          <Typography variant="h6" gutterBottom>
-                            If you have an irregular cycle:
-                          </Typography>
-                          <Typography variant="body1" gutterBottom>
-                            You will need to use ovulation strips to ensure that
-                            you test at the right time. Ovulation strips can be
-                            purchased in most pharmacies as well as online. Use
-                            1 ovulation test each morning starting on day 7 of
-                            your cycle (counting from the first day of flow)
-                            until you get the first faint positive result on an
-                            ovulation strip. This is considered day one, and you
-                            will aim to test between days 5 &amp; 7.
-                          </Typography>
-                          <Typography variant="h6" gutterBottom>
-                            If you are not menstruating:
-                          </Typography>
-                          <Typography variant="body1" gutterBottom>
-                            Testing can happen at any time of the month.
-                          </Typography>
-                          <Box sx={{ mt: 2 }}>
-                            {planning.status === "Done" ? (
-                              <Typography variant="h6" gutterBottom>
-                                Testing Window Starts At:
-                                {change_format(
-                                  planning.data
-                                    .StandardPackageHormone__testDate1
-                                )}
-                              </Typography>
-                            ) : (
-                              " "
-                            )}
-                          </Box>
-                          <Box sx={{ mt: 2 }}>
-                            <Typography align="center" variant="h5">
-                              Enter when your testing window starts
+                          <Box>
+                            <Typography variant="h6" gutterBottom>
+                              Length of your cycle - Calculate the next testing
+                              window in your cycle
                             </Typography>
-                            <br />
-                            <div className="calendar">
-                              <Hormone1Calendr
-                                finalData={FinalData}
-                                setData={setFinalData}
-                              />
-                            </div>
-                            {/* {planning.status == "Done" ? "" : <LocalizationProvider dateAdapter={AdapterDayjs}>
-                          <DemoContainer components={['DatePicker']}>
-                            <DatePicker label="Select Testing Window Date" disablePast shouldDisableDate={disableNextDays}
-
-                              renderInput={(params) => <TextField {...params} />}
-                              onChange={(event) => {
-                                let date = new Date(event);
-                                FinalData.hormoneTestWindowStartDate = dateFormat(date, 'yyyy-MM-dd');
-                                setFinalData({ ...FinalData }); console.log(FinalData);
-                              }} />
-                          </DemoContainer>
-                        </LocalizationProvider>} */}
+                            <Typography variant="h6" gutterBottom>
+                              If you have a regular cycle:
+                            </Typography>
+                            <Typography variant="body1" gutterBottom>
+                              For women with a 28-day cycle, the test should be
+                              done between day 19-22 (day 1 is the 1st day of
+                              your menstruation). If the cycle is longer, e.g.
+                              29 days, add one day – test between day 20-23. If
+                              the cycle is shorter, e.g. 27 days, remove one day
+                              – test between day 18-21. Adjust according to your
+                              cycle length.
+                            </Typography>
+                            <Typography variant="h6" gutterBottom>
+                              If you have an irregular cycle:
+                            </Typography>
+                            <Typography variant="body1" gutterBottom>
+                              You will need to use ovulation strips to ensure
+                              that you test at the right time. Ovulation strips
+                              can be purchased in most pharmacies as well as
+                              online. Use 1 ovulation test each morning starting
+                              on day 7 of your cycle (counting from the first
+                              day of flow) until you get the first faint
+                              positive result on an ovulation strip. This is
+                              considered day one, and you will aim to test
+                              between days 5 &amp; 7.
+                            </Typography>
+                            <Typography variant="h6" gutterBottom>
+                              If you are not menstruating:
+                            </Typography>
+                            <Typography variant="body1" gutterBottom>
+                              Testing can happen at any time of the month.
+                            </Typography>
+                            <Box sx={{ mt: 2 }}>
+                              {planning.status === "Done" ? (
+                                <Typography variant="h6" gutterBottom>
+                                  Testing Window Starts At:
+                                  {change_format(
+                                    planning.data
+                                      .StandardPackageHormone__testDate1
+                                  )}
+                                </Typography>
+                              ) : (
+                                " "
+                              )}
+                            </Box>
+                            <Box sx={{ mt: 2 }}>
+                              <Typography align="center" variant="h5">
+                                Enter when your testing window starts
+                              </Typography>
+                              <br />
+                              <div className="calendar">
+                                <Hormone1Calendr
+                                  finalData={FinalData}
+                                  setData={setFinalData}
+                                />
+                              </div>
+                            </Box>
                           </Box>
-                          {/* <Box sx={{ mt: 2 }}>
-                        <Button
-                          variant="contained"
-                          onClick={() => handleNextAccordion()}
-                        >
-                          Next
-                        </Button>
-                      </Box> */}
+                          <Button
+                            variant="contained"
+                            onClick={() => handleNextClick(1)}
+                          >
+                            Next
+                          </Button>
                         </Box>
                       </AccordionDetails>
                     </Accordion>
-                    <Accordion>
-                      <AccordionSummary expandIcon={<ExpandMore />}>
+                    <Accordion
+                      expanded={expandedId === 2}
+                      onChange={() => setExpandedId(2)}
+                      ref={(ref) => (accordionRefs.current[2] = ref)}
+                    >
+                      <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                         <Typography variant="body1">
                           Preparation time prior to taking the samples
                         </Typography>
                       </AccordionSummary>
                       <AccordionDetails>
                         <Box>
-                          <Typography variant="h6" gutterBottom>
-                            Preparation time prior to taking the samples
-                          </Typography>
-                          <Typography variant="h6" gutterBottom>
-                            Note that:
-                          </Typography>
-                          <Typography variant="body1" gutterBottom>
-                            It is best to postpone testing if you have had an
-                            unusually bad night of sleep. Therefore, avoid
-                            planning to test on the last day in the testing
-                            window as you may then need to wait a whole month.
-                            We suggest to aim for the 1st or 2nd day of your
-                            testing window. If bad sleep is the norm for you,
-                            then contact us to add the insomnia sample to your
-                            test (the insomnia test incurs an extra cost).
-                          </Typography>
-                          <Typography variant="h6" gutterBottom>
-                            For 48 hours prior to testing you will need to
-                            avoid:
-                          </Typography>
-                          <Typography variant="body1" gutterBottom>
-                            Foods: Avocado, banana, fava beans or too much of
-                            any one particular food
-                          </Typography>
-                          <Typography variant="body1" gutterBottom>
-                            Supplements: Tryrosine, l-Dopa, DLPA, Mucuna,
-                            Quercetin
-                          </Typography>
-                          <Typography variant="h6" gutterBottom>
-                            For 24 hours prior to testing you will also need to
-                            avoid:
-                          </Typography>
-                          <Typography variant="body1" gutterBottom>
-                            Drinks: No caffeine or alcohol day before and day of
-                            collection
-                          </Typography>
-                          <Typography variant="body1" gutterBottom>
-                            Exercise – no vigorous on day of collection
-                          </Typography>
-                          <Box sx={{ mt: 2 }}>
-                            <Typography
-                              variant="body1"
-                              id="demo-controlled-radio-buttons-group"
-                            >
-                              Will you be able to prepare for two days prior to
-                              the 1st or maximum the 2nd day of your testing
-                              window?
+                          <Box>
+                            <Typography variant="h6" gutterBottom>
+                              Preparation time prior to taking the samples
                             </Typography>
-                            <RadioGroup
-                              row
-                              aria-label="controlled-radio-buttons-group"
-                              name="controlled-radio-buttons-group"
-                              defaultValue="Y"
-                              onChange={(event) => {
-                                // FinalData.hormoneTestPrepConfirmation
-                              }}
-                            >
-                              <FormControlLabel
-                                value="Y"
-                                control={<Radio />}
-                                label={
-                                  <>
-                                    <Typography variant="body1">Yes</Typography>
-                                  </>
-                                }
-                              />
-                              <FormControlLabel
-                                value="N"
-                                control={<Radio />}
-                                label={
-                                  <>
-                                    <Typography variant="body1">No</Typography>
-                                  </>
-                                }
-                              />
-                            </RadioGroup>
+                            <Typography variant="h6" gutterBottom>
+                              Note that:
+                            </Typography>
+                            <Typography variant="body1" gutterBottom>
+                              It is best to postpone testing if you have had an
+                              unusually bad night of sleep. Therefore, avoid
+                              planning to test on the last day in the testing
+                              window as you may then need to wait a whole month.
+                              We suggest to aim for the 1st or 2nd day of your
+                              testing window. If bad sleep is the norm for you,
+                              then contact us to add the insomnia sample to your
+                              test (the insomnia test incurs an extra cost).
+                            </Typography>
+                            <Typography variant="h6" gutterBottom>
+                              For 48 hours prior to testing you will need to
+                              avoid:
+                            </Typography>
+                            <Typography variant="body1" gutterBottom>
+                              Foods: Avocado, banana, fava beans or too much of
+                              any one particular food
+                            </Typography>
+                            <Typography variant="body1" gutterBottom>
+                              Supplements: Tryrosine, l-Dopa, DLPA, Mucuna,
+                              Quercetin
+                            </Typography>
+                            <Typography variant="h6" gutterBottom>
+                              For 24 hours prior to testing you will also need
+                              to avoid:
+                            </Typography>
+                            <Typography variant="body1" gutterBottom>
+                              Drinks: No caffeine or alcohol day before and day
+                              of collection
+                            </Typography>
+                            <Typography variant="body1" gutterBottom>
+                              Exercise – no vigorous on day of collection
+                            </Typography>
+                            <Box sx={{ mt: 2 }}>
+                              <Typography
+                                variant="body1"
+                                id="demo-controlled-radio-buttons-group"
+                              >
+                                Will you be able to prepare for two days prior
+                                to the 1st or maximum the 2nd day of your
+                                testing window?
+                              </Typography>
+                              <RadioGroup
+                                row
+                                aria-label="controlled-radio-buttons-group"
+                                name="controlled-radio-buttons-group"
+                                defaultValue="Y"
+                                onChange={(event) => {
+                                  // FinalData.hormoneTestPrepConfirmation
+                                }}
+                              >
+                                <FormControlLabel
+                                  value="Y"
+                                  control={<Radio />}
+                                  label={
+                                    <>
+                                      <Typography variant="body1">
+                                        Yes
+                                      </Typography>
+                                    </>
+                                  }
+                                />
+                                <FormControlLabel
+                                  value="N"
+                                  control={<Radio />}
+                                  label={
+                                    <>
+                                      <Typography variant="body1">
+                                        No
+                                      </Typography>
+                                    </>
+                                  }
+                                />
+                              </RadioGroup>
+                            </Box>
                           </Box>
-                          {/* <Box sx={{ mt: 2 }}>
-                        <Button
-                          variant="contained"
-                          onClick={() => handleNextAccordion()}
-                        >
-                          Next
-                        </Button>
-                      </Box> */}
+                          <Button
+                            variant="contained"
+                            onClick={() => handleNextClick(2)}
+                          >
+                            Next
+                          </Button>
                         </Box>
                       </AccordionDetails>
                     </Accordion>
-                    <Accordion>
-                      <AccordionSummary expandIcon={<ExpandMore />}>
+                    <Accordion
+                      expanded={expandedId === 3}
+                      onChange={() => setExpandedId(3)}
+                      ref={(ref) => (accordionRefs.current[3] = ref)}
+                    >
+                      <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                         <Typography variant="body1">
                           Your availability to take the samples
                         </Typography>
                       </AccordionSummary>
                       <AccordionDetails>
                         <Box>
-                          <Typography variant="h6" gutterBottom>
-                            Your availability to take the samples at the
-                            specific time required throughout the day
-                          </Typography>
-                          <Typography variant="h6" gutterBottom>
-                            Urine and saliva samples will need to be taken
-                            throughout the day. See below the collection times
-                            so that you can ensure you have the time to take the
-                            samples
-                          </Typography>
-                          <TableContainer component={Paper}>
-                            <Table>
-                              <TableHead>
-                                <TableRow>
-                                  <TableCell>Sample</TableCell>
-                                  <TableCell>Time</TableCell>
-                                  <TableCell>Type</TableCell>
-                                </TableRow>
-                              </TableHead>
-                              <TableBody>
-                                <TableRow>
-                                  <TableCell>1st sample</TableCell>
-                                  <TableCell>Upon waking</TableCell>
-                                  <TableCell>Saliva and urine</TableCell>
-                                </TableRow>
-                                <TableRow>
-                                  <TableCell>2nd sample</TableCell>
-                                  <TableCell>30 mins after waking</TableCell>
-                                  <TableCell>Saliva only</TableCell>
-                                </TableRow>
-                                <TableRow>
-                                  <TableCell>3rd sample</TableCell>
-                                  <TableCell>60 mins after waking</TableCell>
-                                  <TableCell>Saliva</TableCell>
-                                </TableRow>
-                                <TableRow>
-                                  <TableCell>4th sample</TableCell>
-                                  <TableCell>2-3 hrs after waking</TableCell>
-                                  <TableCell>Urine only</TableCell>
-                                </TableRow>
-                                <TableRow>
-                                  <TableCell>5th sample</TableCell>
-                                  <TableCell>16:00-17:00</TableCell>
-                                  <TableCell>Urine only</TableCell>
-                                </TableRow>
-                                <TableRow>
-                                  <TableCell>6th sample</TableCell>
-                                  <TableCell>22:00-24:00</TableCell>
-                                  <TableCell>Saliva and urine</TableCell>
-                                </TableRow>
-                              </TableBody>
-                            </Table>
-                          </TableContainer>
-                          {/* <Box sx={{ mt: 2 }}>
-                        <Button
-                          variant="contained"
-                          onClick={() => handleNextAccordion()}
-                        >
-                          Next
-                        </Button>
-                      </Box> */}
+                          <Box>
+                            <Typography variant="h6" gutterBottom>
+                              Your availability to take the samples at the
+                              specific time required throughout the day
+                            </Typography>
+                            <Typography variant="h6" gutterBottom>
+                              Urine and saliva samples will need to be taken
+                              throughout the day. See below the collection times
+                              so that you can ensure you have the time to take
+                              the samples
+                            </Typography>
+                            <TableContainer component={Paper}>
+                              <Table>
+                                <TableHead>
+                                  <TableRow>
+                                    <TableCell>Sample</TableCell>
+                                    <TableCell>Time</TableCell>
+                                    <TableCell>Type</TableCell>
+                                  </TableRow>
+                                </TableHead>
+                                <TableBody>
+                                  <TableRow>
+                                    <TableCell>1st sample</TableCell>
+                                    <TableCell>Upon waking</TableCell>
+                                    <TableCell>Saliva and urine</TableCell>
+                                  </TableRow>
+                                  <TableRow>
+                                    <TableCell>2nd sample</TableCell>
+                                    <TableCell>30 mins after waking</TableCell>
+                                    <TableCell>Saliva only</TableCell>
+                                  </TableRow>
+                                  <TableRow>
+                                    <TableCell>3rd sample</TableCell>
+                                    <TableCell>60 mins after waking</TableCell>
+                                    <TableCell>Saliva</TableCell>
+                                  </TableRow>
+                                  <TableRow>
+                                    <TableCell>4th sample</TableCell>
+                                    <TableCell>2-3 hrs after waking</TableCell>
+                                    <TableCell>Urine only</TableCell>
+                                  </TableRow>
+                                  <TableRow>
+                                    <TableCell>5th sample</TableCell>
+                                    <TableCell>16:00-17:00</TableCell>
+                                    <TableCell>Urine only</TableCell>
+                                  </TableRow>
+                                  <TableRow>
+                                    <TableCell>6th sample</TableCell>
+                                    <TableCell>22:00-24:00</TableCell>
+                                    <TableCell>Saliva and urine</TableCell>
+                                  </TableRow>
+                                </TableBody>
+                              </Table>
+                            </TableContainer>
+                          </Box>
+                          <Button
+                            variant="contained"
+                            onClick={() => handleNextClick(3)}
+                          >
+                            Next
+                          </Button>
                         </Box>
                       </AccordionDetails>
                     </Accordion>
-                    <Accordion>
-                      <AccordionSummary
-                        expandIcon={<ExpandMore />}
-                      >
+                    <Accordion
+                      expanded={expandedId === 4}
+                      onChange={() => setExpandedId(4)}
+                      ref={(ref) => (accordionRefs.current[4] = ref)}
+                    >
+                      <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                         <Typography variant="body1">
                           Confirm sampling date
                         </Typography>
                       </AccordionSummary>
                       <AccordionDetails>
                         <Box>
-                          <Typography variant="h6" gutterBottom>
-                            Confirm sampling date
-                          </Typography>
-                          <Box sx={{ mt: 2 }}>
-                            {planning.status === "Done" ? (
-                              <Typography variant="h6" gutterBottom>
-                                Sample Collecting Date:
-                                {change_format(
-                                  planning.data.hormoneTestSamplingDate
-                                )}
-                              </Typography>
-                            ) : (
-                              " "
-                            )}
-                          </Box>
-                          <Box sx={{ mt: 2 }}>
-                            <Typography variant="body1">
-                              Enter the date you plan to start collecting your
-                              samples
+                          <Box>
+                            <Typography variant="h6" gutterBottom>
+                              Confirm sampling date
                             </Typography>
-                            <br />
-                            <Hormone2Calendr
-                              key={1}
-                              type={"1"}
-                              finalData={FinalData}
-                              setData={setFinalData}
-                            />
-                            {/* {planning.status === "Done" ? " " : <LocalizationProvider dateAdapter={AdapterDayjs}>
-                          <DemoContainer components={['DatePicker']}>
-                            <DatePicker label="Select Sampling Date"
-                              disablePast
-                              shouldDisableDate={disableNextDays}
-                              onChange={(event) => {
-                                let date = new Date(event);
-                                FinalData.hormoneTestSamplingDate = dateFormat(date, 'yyyy-MM-dd');
-                                setFinalData({ ...FinalData }); console.log(FinalData);
-                              }} />
-                          </DemoContainer>
-                        </LocalizationProvider>} */}
+                            <Box sx={{ mt: 2 }}>
+                              {planning.status === "Done" ? (
+                                <Typography variant="h6" gutterBottom>
+                                  Sample Collecting Date:
+                                  {change_format(
+                                    planning.data.hormoneTestSamplingDate
+                                  )}
+                                </Typography>
+                              ) : (
+                                " "
+                              )}
+                            </Box>
+                            <Box sx={{ mt: 2 }}>
+                              <Typography variant="body1">
+                                Enter the date you plan to start collecting your
+                                samples
+                              </Typography>
+                              <br />
+                              <Hormone2Calendr
+                                key={1}
+                                type={"1"}
+                                finalData={FinalData}
+                                setData={setFinalData}
+                              />
+                            </Box>
                           </Box>
-                          <Box sx={{ mt: 2 }}>
-                            <Button type="submit" variant="contained">
-                              Next
-                            </Button>
-                          </Box>
+                          <Button
+                            variant="contained"
+                            onClick={() => handleNextClick(4)}
+                          >
+                            Submit
+                          </Button>
                         </Box>
                       </AccordionDetails>
                     </Accordion>
@@ -656,10 +638,6 @@ const Planning = (props) => {
                       )}
                     </Grid>
                   </Grid>
-
-                  {/* <MetabolicForm /> */}
-
-                  {/* metabolic form  */}
                   <Box sx={{ flexGrow: 1, marginTop: "20px" }}>
                     <Accordion>
                       <AccordionSummary expandIcon={<ExpandMoreIcon />}>
@@ -861,7 +839,7 @@ const Planning = (props) => {
                                 !(
                                   FinalData.hormoneTestSamplingDate != null &&
                                   FinalData.hormoneTestWindowStartDate !=
-                                  null &&
+                                    null &&
                                   FinalData.metabolismTestSamplingDate != null
                                 )
                               }
