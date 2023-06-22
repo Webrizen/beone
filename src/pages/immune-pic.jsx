@@ -58,6 +58,7 @@ const ImmunePic = () => {
               <ImagePreview id={ImmunePic.data.immuneBalanceTestFileId} />
             </Box> : <ImmunePicComp />}
             <ImmunePicComp />
+
           </div>
         </div>
 
