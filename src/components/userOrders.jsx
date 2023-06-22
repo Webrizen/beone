@@ -20,7 +20,7 @@ const UserOrders = () => {
     baseApi
       .get("/dashboard")
       .then((response) => {
-        // console.log("all orders data", response.data);
+        console.log("calling Dashboard API two times", response.data);
         setall_orders(response.data);
       })
       .catch((error) => {
@@ -32,16 +32,17 @@ const UserOrders = () => {
 
   const changeOrder = (event) => {
     localStorage.setItem("currOrder", event.target.value);
-    baseApi
-      .get(`/dashboard/${event.target.value}`)
-      .then((response) => {
-        Set_order(event.target.value, setCurrOrder);
-        // setCurrOrder(response.data);
-        navigate(`/order/${event.target.value}/welcome`);
-      })
-      .catch((error) => {
-        console.log("userorders id api error:", error);
-      });
+    Set_order(event.target.value, setCurrOrder);
+    // setCurrOrder(response.data);
+    navigate(`/order/${event.target.value}/welcome`);
+    // baseApi
+    //   .get(`/dashboard/${event.target.value}`)
+    //   .then((response) => {
+
+    //   })
+    //   .catch((error) => {
+    //     console.log("userorders id api error:", error);
+    //   });
   };
 
   return (

@@ -49,6 +49,14 @@ const ImmunePicComp = () => {
       });
 
       console.log('Response:', response.data);
+      Set_order(o_id, setCurrOrder);
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Immune Pic upload done",
+        showConfirmButton: false,
+        timer: 1500,
+      });
     } catch (error) {
       console.error('Error:', error);
     }

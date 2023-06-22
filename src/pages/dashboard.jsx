@@ -54,17 +54,18 @@ const Dashboard = (route) => {
     }
   }
 
-  const [all_orders, setall_orders] = useState([]);
-  useEffect(() => {
-    baseApi
-      .get("/dashboard")
-      .then((response) => {
-        setall_orders(response.data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, []);
+  // const [all_orders, setall_orders] = useState([]);
+  // useEffect(() => {
+  //   baseApi
+  //     .get("/dashboard")
+  //     .then((response) => {
+  //       setall_orders(response.data);
+  //       console.log("calling dashboard");
+  //     })
+  //     .catch((error) => {
+  //       console.error(error);
+  //     });
+  // }, []);
 
   return (
     <>
