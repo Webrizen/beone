@@ -66,7 +66,7 @@ function App() {
     },
     {
       path: "/settings",
-      element: <Settings/>
+      element: <Settings />
     },
     {
       path: "/contact",

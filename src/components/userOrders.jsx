@@ -9,9 +9,8 @@ import {
 } from "@mui/material";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import baseApi from "../utils/common";
+import baseApi, { Set_order } from "../utils/common";
 import CurrOrderContext from "../utils/order_context";
-
 const UserOrders = () => {
   const { currOrder, setCurrOrder } = useContext(CurrOrderContext);
   const [order_id, setorder_id] = useState();
@@ -21,7 +20,7 @@ const UserOrders = () => {
     baseApi
       .get("/dashboard")
       .then((response) => {
-        console.log("all orders data", response.data);
+        // console.log("all orders data", response.data);
         setall_orders(response.data);
       })
       .catch((error) => {
@@ -36,12 +35,8 @@ const UserOrders = () => {
     baseApi
       .get(`/dashboard/${event.target.value}`)
       .then((response) => {
-        console.log(
-          "setting order order",
-          event.target.value,
-          response.data
-        );
-        setCurrOrder(response.data);
+        Set_order(event.target.value, setCurrOrder);
+        // setCurrOrder(response.data);
         navigate(`/order/${event.target.value}/welcome`);
       })
       .catch((error) => {

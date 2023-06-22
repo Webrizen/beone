@@ -23,10 +23,23 @@ import Layout from '../components/Layout/layout';
 import UserOrders from '../components/userOrders';
 import { Avatar } from '@mui/material';
 import Calendar from '../components/calendar';
+import InstructionsData from '../components/TestInstructions/instructionsData';
+import CurrOrderContext from '../utils/order_context';
+// import CurrOrderContext from '../utils/order_context';
+// import CurrOrderContext from '../utils/order_context';
 
 const TestInstructions = () => {
+  const { currOrder, setCurrOrder } = useContext(CurrOrderContext);
+  const [instruction, setinstruction] = useState({ ...currOrder[3] });
+  useEffect(() => {
+    setinstruction({ ...currOrder[3] })
+    console.log("order from instructions", currOrder[3]);
+    console.log("instructions", instruction)
+  }, [currOrder]);
 
   function ToggleLeftSideBar() {
+
+
     const LeftBar = document.getElementById('Left-Bar');
     if (LeftBar.style.transform == "translateX(0%)") {
       LeftBar.style.transform = "translateX(-200%)"
@@ -48,7 +61,9 @@ const TestInstructions = () => {
             <VerticalStepper />
           </div>
           <div className="middle-dashboard">
-          <TestInstructionsComp />
+            {instruction.status === "Done" ? <InstructionsData data={instruction.data} /> : <TestInstructionsComp />}
+
+
           </div>
         </div>
 
