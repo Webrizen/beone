@@ -40,18 +40,22 @@ export const Set_order = (id, setCurrOrder, navigate) => {
         localStorage.setItem("currOrder", id);
         // navigate("/order/404040/planning")
         // return <Navigate to='/order/404040/planning' />;
+        let findFirstNotDone = false
+        let foundData = {}
         for (let index = 0; index < steps.length; index++) {
             const element = steps[index];
-            if (element.status != "Done") {
 
-                navigate(`/order/${id}/${element.stepId}`);
-                return false;
-
-            } else {
-                console.log(element);
-                console.log("no redirecting");
+            if (!findFirstNotDone) {
+                if (element.status != "Done") {
+                    findFirstNotDone = true
+                    foundData = element
+                } else {
+                    console.log(element);
+                    console.log("no redirecting");
+                }
             }
         };
+        navigate(`/order/${id}/${foundData.stepId}`);
 
     }).catch((error) => {
         console.log("set order api", error)
