@@ -873,10 +873,6 @@ const Planning = (props) => {
               </TabPanel>
             </Box>
             <Box>
-              {/* <Tab label="Hormone Test" onClick={showTab(1)} />
-              <Tab label="Metabolic Data" onClick={showTab(2)} /> */}
-              {/* <button onClick={showTab}>hormone test</button>
-              <button onClick={showTab}>metabolic test</button> */}
             </Box>
             <br />
           </div>

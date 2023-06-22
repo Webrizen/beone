@@ -57,8 +57,6 @@ const ImmunePic = () => {
             {ImmunePic.status === "Done" ? <Box sx={{ mt: 2, width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <ImagePreview id={ImmunePic.data.immuneBalanceTestFileId} />
             </Box> : <ImmunePicComp />}
-
-
           </div>
         </div>
 
