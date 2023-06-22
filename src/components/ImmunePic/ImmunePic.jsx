@@ -8,11 +8,13 @@ import baseApi, { BASE_API, Set_order } from "../../utils/common";
 import CurrOrderContext from "../../utils/order_context";
 import Swal from "sweetalert2";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 const UploadIcon = styled(SvgIcon)({
   marginRight: "8px",
 });
 const ImmunePicComp = () => {
   const { currOrder, setCurrOrder } = useContext(CurrOrderContext);
+  const navigate = useNavigate();
   function convertToBinaryString(file) {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
@@ -49,7 +51,7 @@ const ImmunePicComp = () => {
       });
 
       console.log('Response:', response.data);
-      Set_order(o_id, setCurrOrder);
+      Set_order(o_id, setCurrOrder, navigate);
       Swal.fire({
         position: "center",
         icon: "success",

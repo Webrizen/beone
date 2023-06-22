@@ -29,13 +29,14 @@ import SentimentVeryDissatisfiedIcon from "@mui/icons-material/SentimentVeryDiss
 import CurrOrderContext from "../../utils/order_context";
 import baseApi, { Set_order } from "../../utils/common";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const TestInstructionsComp = () => {
 
   const [samplingConfirmed, setSamplingConfirmed] = useState("");
   const [contactNeeded, setContactNeeded] = useState(false);
   const [kitsResentNeeded, setKitsResentNeeded] = useState(false);
-
+  const navigate = useNavigate();
 
   const { currOrder, setCurrOrder } = useContext(CurrOrderContext);
   const [finalData, setfinalData] = useState({
@@ -69,7 +70,7 @@ const TestInstructionsComp = () => {
       .then((response) => {
         console.log("after planning task", response.data);
 
-        Set_order(o_id, setCurrOrder);
+        Set_order(o_id, setCurrOrder, navigate);
         Swal.fire({
           position: "center",
           icon: "success",

@@ -59,6 +59,7 @@ import Hormone1Calendr from "../components/calendar/hormone1Calendr";
 import EventsCalendar from "../components/calendar/eventsCalendar";
 import Hormone2Calendr from "../components/calendar/hormone2Calendr";
 import MetaBolicEvents from "../components/calendar/metabolicEvents";
+import { useNavigate } from "react-router-dom";
 interface TabPanelProps {
   children?: React.ReactNode;
   index: number;
@@ -173,13 +174,14 @@ const Planning = (props) => {
     }
   }
   const o_id = localStorage.getItem("currOrder");
+  const navigate = useNavigate();
   const handlePlanning = () => {
     baseApi
       .post(`/dashboard/${o_id}/complete-planning-task`, FinalData)
       .then((response) => {
         console.log("after planning task", response.data);
 
-        Set_order(o_id, setCurrOrder);
+        Set_order(o_id, setCurrOrder, navigate);
         Swal.fire({
           position: "center",
           icon: "success",

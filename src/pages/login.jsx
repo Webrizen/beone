@@ -55,7 +55,7 @@ const Login = () => {
           const orders = response.data;
           for (var i = 0; i < orders.length; i++) {
             if (orders[i].status == "PENDING") {
-              Set_order(orders[i].orderId, setCurrOrder);
+              Set_order(orders[i].orderId, setCurrOrder, navigate);
               navigate(`/order/${orders[i].orderId}/welcome`);
               break;
             }

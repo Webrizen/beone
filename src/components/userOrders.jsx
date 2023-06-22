@@ -32,9 +32,11 @@ const UserOrders = () => {
 
   const changeOrder = (event) => {
     localStorage.setItem("currOrder", event.target.value);
-    Set_order(event.target.value, setCurrOrder);
+    Set_order(event.target.value, setCurrOrder, navigate);
+
     // setCurrOrder(response.data);
-    navigate(`/order/${event.target.value}/welcome`);
+    const step = localStorage.getItem("ActiveStep");
+    navigate(`/order/${event.target.value}/${step}`);
     // baseApi
     //   .get(`/dashboard/${event.target.value}`)
     //   .then((response) => {
