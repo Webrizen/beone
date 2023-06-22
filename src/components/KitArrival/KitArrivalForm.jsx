@@ -41,7 +41,7 @@ const KitArrivalForm = ({ setOrder }) => {
           showConfirmButton: false,
           timer: 1500,
         });
-        navigate(`/order/${o_id}/planning`);
+        // navigate(`/order/${o_id}/planning`);
       })
       .catch((error) => {
         console.error("kit arrival error", error);
