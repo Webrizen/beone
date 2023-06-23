@@ -1,4 +1,4 @@
-import { Box, Grid, Typography } from '@mui/material'
+import { Box, Grid, Typography, Divider } from '@mui/material'
 import React from 'react'
 const InstructionsData = ({ data }) => {
     const formattedDate = (data) => {
@@ -17,6 +17,7 @@ const InstructionsData = ({ data }) => {
             <Typography variant="body1" gutterBottom>
                 Testing instructions data
             </Typography>
+            <Divider sx={{ marginBottom: '10px' }} />
             <Grid container spacing={2}>
                 <Grid item xs={12}>
                     <Grid container spacing={2}>

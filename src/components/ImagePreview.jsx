@@ -11,7 +11,7 @@ const ImagePreview = ({ id }) => {
   }
   return (
     <>
-      <Button onClick={save} fullWidth={true} variant="outlined" startIcon={<CloudDownloadIcon />}>
+      <Button onClick={save} variant='contained' sx={{ width: 'min-content', whiteSpace: 'nowrap' }} startIcon={<CloudDownloadIcon />}>
         Download File
       </Button>
       {/* <img src={url} alt="Check Your Internet Connection." style={{ width: '100%', borderRadius: '7px' }} /> */}

@@ -51,6 +51,7 @@ import {
   TableHead,
   TableRow,
   Paper,
+  Alert
 } from "@mui/material";
 import { ExpandMore } from "@mui/icons-material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
@@ -60,6 +61,9 @@ import EventsCalendar from "../components/calendar/eventsCalendar";
 import Hormone2Calendr from "../components/calendar/hormone2Calendr";
 import MetaBolicEvents from "../components/calendar/metabolicEvents";
 import { useNavigate } from "react-router-dom";
+import AccessTimeFilledIcon from '@mui/icons-material/AccessTimeFilled';
+
+
 interface TabPanelProps {
   children?: React.ReactNode;
   index: number;
@@ -213,9 +217,10 @@ const Planning = (props) => {
     setExpandedId(nextId);
   };
 
-
   const [testingWindwoDate, settestingWindwoDate] = useState([]);
-  const [HormoneSamplingDateEvents, setHormoneSamplingDateEvents] = useState([]);
+  const [HormoneSamplingDateEvents, setHormoneSamplingDateEvents] = useState(
+    []
+  );
   const [MetabolicEvents, setMetabolicEvents] = useState([]);
   useEffect(() => {
     console.log("HormoneSamplingDateEvents", HormoneSamplingDateEvents);
@@ -364,27 +369,32 @@ const Planning = (props) => {
                               {planning.status === "Done" ? (
                                 <Typography variant="h6" gutterBottom>
                                   Testing Window Starts At:
-                                  {change_format(
-                                    planning.data
-                                      .StandardPackageHormone__testDate1
-                                  )}
+                                  <Alert icon={<AccessTimeFilledIcon fontSize="inherit" />} severity="info">
+                                    {change_format(
+                                      planning.data
+                                        .StandardPackageHormone__testDate1
+                                    )}
+                                  </Alert>
                                 </Typography>
-                              ) : <Box sx={{ mt: 2 }}>
-                                <Typography align="center" variant="h5">
-                                  Enter when your testing window starts
-                                </Typography>
-                                <br />
-                                <div className="calendar">
-                                  <Hormone1Calendr
-                                    finalData={FinalData}
-                                    setData={setFinalData}
-                                    testingWindwoDate={testingWindwoDate}
-                                    settestingWindwoDate={settestingWindwoDate}
-                                  />
-                                </div>
-                              </Box>}
+                              ) : (
+                                <Box sx={{ mt: 2 }}>
+                                  <Typography align="center" variant="h5">
+                                    Enter when your testing window starts
+                                  </Typography>
+                                  <br />
+                                  <div className="calendar">
+                                    <Hormone1Calendr
+                                      finalData={FinalData}
+                                      setData={setFinalData}
+                                      testingWindwoDate={testingWindwoDate}
+                                      settestingWindwoDate={
+                                        settestingWindwoDate
+                                      }
+                                    />
+                                  </div>
+                                </Box>
+                              )}
                             </Box>
-
                           </Box>
                           <Button
                             variant="contained"
@@ -588,36 +598,40 @@ const Planning = (props) => {
                       <AccordionDetails>
                         <Box>
                           <Box>
-                            <Typography variant="h6" gutterBottom>
-                              Confirm sampling date
-                            </Typography>
                             <Box sx={{ mt: 2 }}>
                               {planning.status === "Done" ? (
                                 <Typography variant="h6" gutterBottom>
                                   Sample Collecting Date:
+                                  <Alert icon={<AccessTimeFilledIcon fontSize="inherit" />} severity="info">
                                   {change_format(
                                     planning.data.hormoneTestSamplingDate
                                   )}
+                                  </Alert>
                                 </Typography>
-                              ) : <Box sx={{ mt: 2 }}>
-                                <Typography variant="body1">
-                                  Enter the date you plan to start collecting your
-                                  samples
-                                </Typography>
-                                <br />
-                                <Hormone2Calendr
-                                  key={1}
-                                  type={"1"}
-                                  finalData={FinalData}
-                                  setData={setFinalData}
-                                  HormoneSamplingDateEvents={HormoneSamplingDateEvents}
-                                  setHormoneSamplingDateEvents={setHormoneSamplingDateEvents}
-                                  MetabolicEvents={MetabolicEvents}
-                                  setMetabolicEvents={setMetabolicEvents}
-                                />
-                              </Box>}
+                              ) : (
+                                <Box sx={{ mt: 2 }}>
+                                  <Typography variant="body1">
+                                    Enter the date you plan to start collecting
+                                    your samples
+                                  </Typography>
+                                  <br />
+                                  <Hormone2Calendr
+                                    key={1}
+                                    type={"1"}
+                                    finalData={FinalData}
+                                    setData={setFinalData}
+                                    HormoneSamplingDateEvents={
+                                      HormoneSamplingDateEvents
+                                    }
+                                    setHormoneSamplingDateEvents={
+                                      setHormoneSamplingDateEvents
+                                    }
+                                    MetabolicEvents={MetabolicEvents}
+                                    setMetabolicEvents={setMetabolicEvents}
+                                  />
+                                </Box>
+                              )}
                             </Box>
-
                           </Box>
                           {/* <Button
                             variant="contained"
@@ -785,14 +799,16 @@ const Planning = (props) => {
                       ref={(ref) => (accordionRefs.current[3] = ref)}
                     >
                       <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                        <Typography variant="body1">Your availability to take the samples</Typography>
+                        <Typography variant="body1">
+                          Your availability to take the samples
+                        </Typography>
                       </AccordionSummary>
                       <AccordionDetails>
                         <Box>
                           <Box>
                             <Typography variant="h6" gutterBottom>
-                              Timings and requirements for day one and day two of
-                              testing
+                              Timings and requirements for day one and day two
+                              of testing
                             </Typography>
                             <Typography variant="h6" gutterBottom>
                               Day 1
@@ -813,8 +829,8 @@ const Planning = (props) => {
                               for both)
                               <br />
                               - Warm water
-                              <br />- A freezer to prepare the freeze block needed
-                              on day 2
+                              <br />- A freezer to prepare the freeze block
+                              needed on day 2
                             </Typography>
                             <Typography variant="h6" gutterBottom>
                               Day 2
@@ -822,9 +838,9 @@ const Planning = (props) => {
                             <Typography variant="body1" gutterBottom>
                               Total time required: 35-40 minutes
                               <br />
-                              Need to collect mouth swabs before eating, drinking,
-                              or brushing teeth and urine before eating or
-                              drinking.
+                              Need to collect mouth swabs before eating,
+                              drinking, or brushing teeth and urine before
+                              eating or drinking.
                               <br />
                               Ensure that DHL has been booked to pick up the
                               samples.
@@ -837,25 +853,33 @@ const Planning = (props) => {
                             {planning.status == "Done" ? (
                               <Typography variant="h6" gutterBottom>
                                 Sampling Date:{" "}
+                                <Alert icon={<AccessTimeFilledIcon fontSize="inherit" />} severity="info">
                                 {change_format(planning.data.metabolicTestDate)}
+                                </Alert>
                               </Typography>
-                            ) : <Box sx={{ mt: 2 }}>
-                              <Typography variant="body1">
-                                Considering your menstruation, preparation and
-                                sampling requirements, Confirm sampling date
-                              </Typography>
-                              <br />
-                              <Hormone2Calendr
-                                key={2}
-                                type={"2"}
-                                finalData={FinalData}
-                                setData={setFinalData}
-                                HormoneSamplingDateEvents={HormoneSamplingDateEvents}
-                                setHormoneSamplingDateEvents={setHormoneSamplingDateEvents}
-                                MetabolicEvents={MetabolicEvents}
-                                setMetabolicEvents={setMetabolicEvents}
-                              />
-                            </Box>}
+                            ) : (
+                              <Box sx={{ mt: 2 }}>
+                                <Typography variant="body1">
+                                  Considering your menstruation, preparation and
+                                  sampling requirements, Confirm sampling date
+                                </Typography>
+                                <br />
+                                <Hormone2Calendr
+                                  key={2}
+                                  type={"2"}
+                                  finalData={FinalData}
+                                  setData={setFinalData}
+                                  HormoneSamplingDateEvents={
+                                    HormoneSamplingDateEvents
+                                  }
+                                  setHormoneSamplingDateEvents={
+                                    setHormoneSamplingDateEvents
+                                  }
+                                  MetabolicEvents={MetabolicEvents}
+                                  setMetabolicEvents={setMetabolicEvents}
+                                />
+                              </Box>
+                            )}
                           </Box>
 
                           <Box sx={{ mt: 2 }}>
@@ -868,7 +892,7 @@ const Planning = (props) => {
                                   !(
                                     FinalData.hormoneTestSamplingDate != null &&
                                     FinalData.hormoneTestWindowStartDate !=
-                                    null &&
+                                      null &&
                                     FinalData.metabolismTestSamplingDate != null
                                   )
                                 }
@@ -885,8 +909,7 @@ const Planning = (props) => {
                 </Box>
               </TabPanel>
             </Box>
-            <Box>
-            </Box>
+            <Box></Box>
             <br />
           </div>
         </div>
