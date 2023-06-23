@@ -5,6 +5,7 @@ const RouteGuard = () => {
         return <Navigate to="/login" />
         // console.log("not logined");
     }
-    document.title = "BeOne::" + window.location.pathname.split("/").pop();
+    const id = localStorage.getItem("currOrder");
+    document.title = "BeOne::" + id + "::" + window.location.pathname.split("/").pop();
 }
 export default RouteGuard;

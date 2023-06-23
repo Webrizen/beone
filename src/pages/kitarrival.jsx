@@ -32,16 +32,16 @@ import CurrOrderContext from '../utils/order_context';
 
 const kitarrival = () => {
   const { currOrder, setCurrOrder } = useContext(CurrOrderContext);
-  console.log("kit arrival page", currOrder);
+  // console.log("kit arrival page", currOrder);
   const [order, setorder] = useState({ ...currOrder[1] });
   useEffect(() => {
     setorder({ ...currOrder[1] });
-    console.log(order);
+    // console.log(order);
   }, [currOrder]);
 
-  useEffect(() => {
-    console.log("checking order is changed", order);
-  }, [order]);
+  // useEffect(() => {
+  //   console.log("checking order is changed", order);
+  // }, [order]);
   function ToggleLeftSideBar() {
     const LeftBar = document.getElementById('Left-Bar');
     if (LeftBar.style.transform == "translateX(0%)") {

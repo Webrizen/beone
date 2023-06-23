@@ -10,10 +10,23 @@ import WatchLaterIcon from '@mui/icons-material/WatchLater';
 
 // Calendar
 // import "./index.css"
-const Hormone2Calendr = ({ type, finalData, setData }) => {
+const Hormone2Calendr = ({ type, finalData, setData, HormoneSamplingDateEvents, setHormoneSamplingDateEvents, MetabolicEvents, setMetabolicEvents }) => {
 
     const [minDate, setminDate] = useState(null);
     const [validRange, setvalidRange] = useState({});
+    const new_events = () => {
+        return type == "1" ? HormoneSamplingDateEvents : MetabolicEvents
+    };
+    const [eventsList, seteventsList] = useState([]);
+    useEffect(() => {
+        seteventsList(new_events);
+    }, [HormoneSamplingDateEvents, MetabolicEvents]);
+    useEffect(() => {
+        if (eventsList.length > 0) {
+            setvalidRange({ start: getFutDte("F", 0, new Date()) });
+            console.log("setting new valid range");
+        };
+    }, [eventsList]);
     const getFutDte = (time, number, date) => {
         // Create a new Date object
         const currentDate = new Date(date);
@@ -54,16 +67,7 @@ const Hormone2Calendr = ({ type, finalData, setData }) => {
 
         return el;
     };
-    // const validRange = () => {
-
-    //     return {
-    //         // start: "2023-06-19",
-    //         start: minDate,
-    //         // daysOfWeek: [0, 1, 2]
-
-    //     };
-    // };
-    const [events, setevents] = useState([]);
+    // const [events, setevents] = useState([]);
     const handleDateSelect = (selectInfo) => {
         console.log(selectInfo);
         const clickedDate = selectInfo.date;
@@ -105,13 +109,16 @@ const Hormone2Calendr = ({ type, finalData, setData }) => {
                 textColor: "black"
             }
         ];
-        setevents(prepEvents);
+        // setevents(prepEvents);
         setvalidRange({ start: getFutDte("F", 0, new Date()) })
         if (type == "1") {
             finalData.hormoneTestSamplingDate = selectInfo.dateStr;
+            setHormoneSamplingDateEvents(prepEvents);
             setData({ ...finalData }); console.log(finalData);
+            console.log("hormone events", HormoneSamplingDateEvents);
         } else {
             finalData.metabolismTestSamplingDate = selectInfo.dateStr;
+            setMetabolicEvents(prepEvents);
             setData({ ...finalData }); console.log(finalData);
         }
 
@@ -142,7 +149,7 @@ const Hormone2Calendr = ({ type, finalData, setData }) => {
                             // selectMirror={true}
                             dateClick={handleDateSelect}
 
-                            events={events} // alternatively, use the `events` setting to fetch from a feed
+                            events={type === "1" ? HormoneSamplingDateEvents : MetabolicEvents} // alternatively, use the `events` setting to fetch from a feed
 
                         // eventRender={eventRender}
 
@@ -160,17 +167,17 @@ const Hormone2Calendr = ({ type, finalData, setData }) => {
                 <div className='demo-app-sidebar-section'>
                     <h2>Instructions</h2>
                     <ul>
-                        <li style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap:'10px' }}><span style={{ backgroundColor: "#f1f1f1", height: "20px", width: "50px", color: "#f1f1f1", display: 'flex', flexDirection: 'row' }}>.</span> Disabled Dates </li>
-                        <li style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap:'10px' }}><span style={{ backgroundColor: "#fff", height: "20px", width: "50px", color: "#fff", display: 'flex', flexDirection: 'row', border: '0.1px solid rgba(0,0,0,0.1)', borderRadius: '4px' }}>.</span> Enabled Dates </li>
+                        <li style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '10px' }}><span style={{ backgroundColor: "#f1f1f1", height: "20px", width: "50px", color: "#f1f1f1", display: 'flex', flexDirection: 'row' }}>.</span> Disabled Dates </li>
+                        <li style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '10px' }}><span style={{ backgroundColor: "#fff", height: "20px", width: "50px", color: "#fff", display: 'flex', flexDirection: 'row', border: '0.1px solid rgba(0,0,0,0.1)', borderRadius: '4px' }}>.</span> Enabled Dates </li>
                         <br />
                         <Alert severity="info">Select the dates to check the preperation dates, Click on Date to select it</Alert>
                     </ul>
                 </div>
                 <br />
                 <div className='demo-app-sidebar-section'>
-                    <h2>All Events ({events.length})</h2>
+                    <h2>All Events ({eventsList.length})</h2>
                     <ul>
-                        {events.map(renderSidebarEvent)}
+                        {eventsList.map(renderSidebarEvent)}
                     </ul>
                 </div>
             </div>
@@ -188,9 +195,9 @@ function renderEventContent(eventInfo) {
 
 function renderSidebarEvent(event) {
     return (
-        <li key={event.id}>
-            <Alert severity='info'>{event.title}: </Alert>
-            <Alert icon={<WatchLaterIcon fontSize="inherit" />} severity="info">{formatDate(event.start, { year: 'numeric', month: 'short', day: 'numeric' })}</Alert>
+        <li style={{ display: "flex" }} key={event.id}>
+            <Alert icon={<WatchLaterIcon fontSize="inherit" />}>{event.title}: </Alert>
+            <Alert>{formatDate(event.start, { year: 'numeric', month: 'short', day: 'numeric' })}</Alert>
         </li>
     )
 }

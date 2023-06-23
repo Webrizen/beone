@@ -33,7 +33,7 @@ const KitArrivalForm = ({ setOrder }) => {
         console.log("data after kit arrival post", response.data);
 
         // localStorage.setItem("img", response.data.id);
-        Set_order(o_id, setOrder);
+        Set_order(o_id, setOrder, navigate);
         Swal.fire({
           position: "center",
           icon: "success",
@@ -41,7 +41,7 @@ const KitArrivalForm = ({ setOrder }) => {
           showConfirmButton: false,
           timer: 1500,
         });
-        navigate(`/order/${o_id}/planning`);
+        // navigate(`/order/${o_id}/planning`);
       })
       .catch((error) => {
         console.error("kit arrival error", error);
