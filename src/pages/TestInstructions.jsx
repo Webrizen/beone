@@ -52,21 +52,7 @@ const TestInstructions = () => {
     <>
       <Layout>
         <RouteGuard />
-        <div className="two-flex">
-          <div className="ico" onClick={ToggleLeftSideBar}><MenuOpenIcon /></div>
-        </div>
-        <div className="main-dashboard">
-          <div className="left-dashboard" id='Left-Bar'>
-            <UserOrders />
-            <VerticalStepper />
-          </div>
-          <div className="middle-dashboard">
             {instruction.status === "Done" ? <InstructionsData data={instruction.data} /> : <TestInstructionsComp />}
-
-
-          </div>
-        </div>
-
       </Layout >
     </>
   );

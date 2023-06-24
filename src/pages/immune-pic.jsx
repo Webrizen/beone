@@ -44,17 +44,6 @@ const ImmunePic = () => {
     <>
       <Layout>
         <RouteGuard />
-        <div className="two-flex">
-          <div className="ico" onClick={ToggleLeftSideBar}>
-            <MenuOpenIcon />
-          </div>
-        </div>
-        <div className="main-dashboard">
-          <div className="left-dashboard" id="Left-Bar">
-            <UserOrders />
-            <VerticalStepper />
-          </div>
-          <div className="middle-dashboard">
             {ImmunePic.status === "Done" ? (
               <Box
                 sx={{
@@ -70,8 +59,6 @@ const ImmunePic = () => {
             ) : (
               <ImmunePicComp />
             )}
-          </div>
-        </div>
       </Layout>
     </>
   );

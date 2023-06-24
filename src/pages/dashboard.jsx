@@ -71,15 +71,6 @@ const Dashboard = (route) => {
     <>
       <Layout>
         <RouteGuard />
-        <div className="two-flex">
-          <div className="ico" onClick={ToggleLeftSideBar}><MenuOpenIcon /></div>
-        </div>
-        <div className="main-dashboard">
-          <div className="left-dashboard" id='Left-Bar'>
-            <UserOrders />
-            <VerticalStepper />
-          </div>
-          <div className="middle-dashboard">
             <div className="welcome-message" style={{ background: `url(${BackgroundImage})` }}>
               <div className="left-message">
                 <h1>Welcome Back {main_user.firstName}</h1>
@@ -107,8 +98,6 @@ const Dashboard = (route) => {
                 </Avatar>
               </div>
             </div>
-          </div>
-        </div>
       </Layout >
     </>
   );

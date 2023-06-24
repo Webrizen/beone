@@ -229,17 +229,6 @@ const Planning = (props) => {
     <>
       <Layout>
         <RouteGuard />
-        <div className="two-flex">
-          <div className="ico" onClick={ToggleLeftSideBar}>
-            <MenuOpenIcon />
-          </div>
-        </div>
-        <div className="main-dashboard">
-          <div className="left-dashboard" id="Left-Bar">
-            <UserOrders />
-            <VerticalStepper />
-          </div>
-          <div className="middle-dashboard">
             <Box sx={{ width: "100%" }}>
               <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
                 <Tabs
@@ -909,10 +898,6 @@ const Planning = (props) => {
                 </Box>
               </TabPanel>
             </Box>
-            <Box></Box>
-            <br />
-          </div>
-        </div>
       </Layout>
     </>
   );

@@ -54,15 +54,6 @@ const kitarrival = () => {
     <>
       <Layout>
         <RouteGuard />
-        <div className="two-flex">
-          <div className="ico" onClick={ToggleLeftSideBar}><MenuOpenIcon /></div>
-        </div>
-        <div className="main-dashboard">
-          <div className="left-dashboard" id='Left-Bar'>
-            <UserOrders />
-            <VerticalStepper />
-          </div>
-          <div className="middle-dashboard">
             <Typography
               variant="h4"
               gutterBottom
@@ -84,11 +75,6 @@ const kitarrival = () => {
               The package is with you now
             </Typography>
             {order.status == "Done" ? <KitArrivalData data={order.data} /> : <KitArrivalForm setOrder={setCurrOrder} />}
-
-
-          </div>
-        </div>
-
       </Layout >
     </>
   );

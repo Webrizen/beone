@@ -42,19 +42,7 @@ const Results = () => {
     <div>
        <Layout>
         <RouteGuard />
-        <div className="two-flex">
-          <div className="ico" onClick={ToggleLeftSideBar}><MenuOpenIcon /></div>
-        </div>
-        <div className="main-dashboard">
-          <div className="left-dashboard" id='Left-Bar'>
-            <UserOrders />
-            <VerticalStepper />
-          </div>
-          <div className="middle-dashboard">
           Results and personalized protocol
-          </div>
-        </div>
-
       </Layout >
     </div>
   );
