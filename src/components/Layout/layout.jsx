@@ -36,19 +36,19 @@ const Layout = ({ children }) => {
       <div className="main-dashboard">
         <div className="left-dashboard" id='Left-Bar'>
           {loading ? (
-            <Skeleton variant="rectangular" height={150} animation="wave" />
+            <Skeleton variant="rectangular" height={150} animation="wave" style={{ borderRadius: '10px' }} />
           ) : (
             <UserOrders />
           )}
           {loading ? (
-            <Skeleton variant="rectangular" height={400} animation="wave" style={{ marginTop: 20 }} />
+            <Skeleton variant="rectangular" height={400} animation="wave" style={{ marginTop: 20, borderRadius: '10px' }} />
           ) : (
             <VerticalStepper />
           )}
         </div>
         <div className="middle-dashboard">
           {loading ? (
-            <Skeleton variant="rectangular" height={500} animation="wave" />
+            <Skeleton variant="rectangular" height={500} animation="wave" style={{ borderRadius: '10px' }} />
           ) : (
             children
           )}

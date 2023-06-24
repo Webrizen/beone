@@ -43,7 +43,7 @@ const UserOrders = () => {
   return (
     <>
       {loading ? (
-        <Skeleton variant="rectangular" height={40} animation="wave" />
+        <Skeleton variant="rectangular" height={40} animation="wave" style={{ borderRadius: '10px' }} />
       ) : (
         <FormControl fullWidth>
           <InputLabel id="demo-simple-select-label">Current Order</InputLabel>

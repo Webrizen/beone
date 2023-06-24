@@ -200,13 +200,16 @@ const Planning = (props) => {
   };
 
   const [activeTab, setactiveTab] = useState("1");
-  const showTab = (n) => {
-    if (activeTab == "1") {
+  const showTab = () => {
+    if (activeTab === "1") {
       setactiveTab("2");
+      setValue(1); // Set the value of the Tab component to switch to Tab 2
     } else {
       setactiveTab("1");
     }
   };
+  
+  
 
   const accordionRefs = useRef([]);
   const [expandedId, setExpandedId] = useState(0);
@@ -622,12 +625,12 @@ const Planning = (props) => {
                               )}
                             </Box>
                           </Box>
-                          {/* <Button
+                          <Button
                             variant="contained"
-                            onClick={() => handleNextClick(4)}
+                            onClick={showTab}
                           >
-                            Submit
-                          </Button> */}
+                            Next
+                          </Button>
                         </Box>
                       </AccordionDetails>
                     </Accordion>
