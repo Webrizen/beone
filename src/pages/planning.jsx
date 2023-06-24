@@ -775,7 +775,7 @@ const Planning = (props) => {
                           </Box>
                           <Button
                             variant="contained"
-                            onClick={() => handleNextClick(0)}
+                            onClick={() => handleNextClick(2)}
                           >
                             Next
                           </Button>

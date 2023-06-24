@@ -80,19 +80,19 @@ const Hormone2Calendr = ({ type, finalData, setData, HormoneSamplingDateEvents, 
         const prepEvents = [
             {
                 start: getFutDte("P", 3, selectInfo.dateStr),
-                title: 'Prep 1',
+                title: 'preparation Day 1',
                 textColor: "black",
                 backgroundColor: "#CDC2AE"
             },
             {
                 start: getFutDte("P", 2, selectInfo.dateStr),
-                title: 'Prep 2',
+                title: 'preparation Day 2',
                 textColor: "black",
                 backgroundColor: "#CDC2AE"
             },
             {
                 start: getFutDte("P", 1, selectInfo.dateStr),
-                title: 'Prep 3',
+                title: 'preparation Day 3',
                 textColor: "black",
                 backgroundColor: "#CDC2AE"
             },
@@ -175,7 +175,7 @@ const Hormone2Calendr = ({ type, finalData, setData, HormoneSamplingDateEvents, 
                 </div>
                 <br />
                 <div className='demo-app-sidebar-section'>
-                    <h2>All Events ({eventsList.length})</h2>
+                    <h2>Important Dates ({eventsList.length})</h2>
                     <ul>
                         {eventsList.map(renderSidebarEvent)}
                     </ul>
@@ -195,9 +195,8 @@ function renderEventContent(eventInfo) {
 
 function renderSidebarEvent(event) {
     return (
-        <li style={{ display: "flex" }} key={event.id}>
-            <Alert icon={<WatchLaterIcon fontSize="inherit" />}>{event.title}: </Alert>
-            <Alert>{formatDate(event.start, { year: 'numeric', month: 'short', day: 'numeric' })}</Alert>
+        <li style={{ display: "flex", flexDirection:'column', gap: '10px' }} key={event.id}>
+            <Alert icon={<WatchLaterIcon fontSize="inherit" />} sx={{ margin: '4px 0px' }} >{event.title}: {formatDate(event.start, { year: 'numeric', month: 'short', day: 'numeric' })}</Alert>
         </li>
     )
 }
