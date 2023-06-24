@@ -24,7 +24,7 @@ const UserOrders = () => {
       .get("/dashboard")
       .then((response) => {
         console.log("calling Dashboard API two times", response.data);
-        setall_orders(response.data);
+        setall_orders(response.data.reverse()); // Reverse the order array to show the latest order first
         setLoading(false);
       })
       .catch((error) => {
