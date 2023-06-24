@@ -10,20 +10,21 @@ import {
   Box,
   Tooltip,
   Grid,
-  Alert,
-  FormGroup,
-  TextField,
+  Card,
+  CardMedia,
+  CardContent,
   Checkbox,
   InputLabel,
   Select,
   OutlinedInput,
   MenuItem,
+  Divider,
   Chip,
 } from "@mui/material";
 import {
   RadioButtonUnchecked,
   RadioButtonChecked,
-  VideoLibrary,
+  Email,
 } from "@mui/icons-material";
 import SentimentVeryDissatisfiedIcon from "@mui/icons-material/SentimentVeryDissatisfied";
 import CurrOrderContext from "../../utils/order_context";
@@ -32,7 +33,6 @@ import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 
 const TestInstructionsComp = () => {
-
   const [samplingConfirmed, setSamplingConfirmed] = useState("");
   const [contactNeeded, setContactNeeded] = useState(false);
   const [kitsResentNeeded, setKitsResentNeeded] = useState(false);
@@ -44,11 +44,11 @@ const TestInstructionsComp = () => {
       StandardPackageHormonePrep__customerConfirmationStatus: null,
       StandardPackageHormoneSampleCollect__customerConfirmationStatus: null,
       StandardPackageMetabolicPrep__customerConfirmationStatus: null,
-      StandardPackageMetabolicSampleCollect__customerConfirmationStatus: null
+      StandardPackageMetabolicSampleCollect__customerConfirmationStatus: null,
     },
     overallSamplingStatus: null,
     overAllPrepStatus: null,
-    reorderData: []
+    reorderData: [],
   });
   // const finalData = {
   //   data: {
@@ -83,7 +83,6 @@ const TestInstructionsComp = () => {
         console.error(error);
       });
   };
-
 
   const handleSamplingConfirmationChange = (event) => {
     setSamplingConfirmed(event.target.value);
@@ -141,15 +140,49 @@ const TestInstructionsComp = () => {
   };
   const [form, setform] = useState(true);
   const checkBtn = () => {
-    if (finalData.data.StandardPackageHormonePrep__customerConfirmationStatus == null || finalData.data.StandardPackageHormoneSampleCollect__customerConfirmationStatus == null || finalData.data.StandardPackageMetabolicPrep__customerConfirmationStatus == null || finalData.data.StandardPackageMetabolicSampleCollect__customerConfirmationStatus == null || finalData.overallSamplingStatus == null || finalData.overAllPrepStatus == null) {
+    if (
+      finalData.data.StandardPackageHormonePrep__customerConfirmationStatus ==
+        null ||
+      finalData.data
+        .StandardPackageHormoneSampleCollect__customerConfirmationStatus ==
+        null ||
+      finalData.data.StandardPackageMetabolicPrep__customerConfirmationStatus ==
+        null ||
+      finalData.data
+        .StandardPackageMetabolicSampleCollect__customerConfirmationStatus ==
+        null ||
+      finalData.overallSamplingStatus == null ||
+      finalData.overAllPrepStatus == null
+    ) {
       setform(true);
     } else {
       setform(false);
     }
-  }
+  };
+
+  const videos = [
+    {
+      title: "Link to Hormone Test video",
+      imageUrl: "https://placehold.co/400",
+    },
+    {
+      title: "Link to Metabolic Test",
+      imageUrl: "https://placehold.co/400",
+    },
+    {
+      title: "Link to Thyroid Test",
+      imageUrl: "https://placehold.co/400",
+    },
+    {
+      title: "Link to Immune Test",
+      imageUrl: "https://placehold.co/400",
+    },
+  ];
 
   return (
     <>
+    <Typography variant="h5" gutterBottom>Test Instructions</Typography>
+    <Divider sx={{ margin: "1rem 0" }} />
       <Typography variant="body1" gutterBottom>
         The kits you received come with fully comprehensive instructions. For
         practicality, we are providing a digital version of them{" "}
@@ -158,56 +191,53 @@ const TestInstructionsComp = () => {
         videos at least a few days before starting the preparation to ensure
         that everything is clear.
       </Typography>
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "row",
-          alignItems: "center",
-          gap: "5px",
-        }}
-      >
-        <Tooltip title="Link to Hormone Test video">
-          <Button variant="outlined" component={Link} href="#">
-            <VideoLibrary />
-          </Button>
-        </Tooltip>
-        <br />
-        <Tooltip title="Link to Metabolic Test">
-          <Button variant="outlined" component={Link} href="#">
-            <VideoLibrary />
-          </Button>
-        </Tooltip>
-        <br />
-        <Tooltip title="Link to Thyroid Test">
-          <Button variant="outlined" component={Link} href="#">
-            <VideoLibrary />
-          </Button>
-        </Tooltip>
-        <br />
-        <Tooltip title="Link to Immune Test">
-          <Button variant="outlined" component={Link} href="#">
-            <VideoLibrary />
-          </Button>
-        </Tooltip>
-      </Box>
+      <Grid container spacing={2}>
+      {videos.map((video, index) => (
+        <Grid item xs={12} sm={6} md={3} key={index}>
+          <Card style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', background: 'transparent' , boxShadow: 'none', borderRadius: '8px', height: '100%' }}>
+            <CardMedia
+              component="img"
+              image={video.imageUrl}
+              alt={video.title}
+              style={{ height: '180px', width: '100%', objectFit: 'cover', borderRadius: '8px' }}
+            />
+            <CardContent sx={{ paddingTop: '10px', background: 'white', width: '100%', marginBottom: '0' }}>
+              <Typography variant="body1" style={{fontWeight: 'bold', textAlign: 'center', fontSize: 'small' }}>
+                <Link href='/' style={{ textDecoration: 'none' }}>{video.title}</Link>
+              </Typography>
+            </CardContent>
+          </Card>
+        </Grid>
+      ))}
+    </Grid>
       <br />
-      <div style={{ background: '#fff', borderRadius: '15px', padding: '20px' }}>
+      <div
+        style={{ background: "#fff", borderRadius: "15px", padding: "20px" }}
+      >
+        <Typography variant="body1" gutterBottom>
+          Answer Atleast One Question To Reach Next Step* <br />
+          <span style={{ color: 'silver', fontSize: 'small', display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '5px' }}><Email/>  Check Your Email For Reminders & Answering these questions.</span>
+        </Typography>
+        <Divider sx={{ margin: "1rem 0" }} />
         <FormControl>
           <Typography
             variant="body1"
             color="primary"
             id="demo-controlled-radio-buttons-group"
           >
-            You have not confirmed yet if you are prepared for the hormone test on
+           Are you prepared for the Harmone Test on {" {{hormoneSamplingDate1}} "} 
           </Typography>
-          <RadioGroup name="controlled-radio-buttons-group" onChange={(event) => {
-            console.log("changed");
-            const val = event.target.value;
-            checkBtn();
-            finalData.data.StandardPackageHormonePrep__customerConfirmationStatus = val;
-            setfinalData({ ...finalData });
-            console.log(finalData);
-          }}>
+          <RadioGroup
+            name="controlled-radio-buttons-group"
+            onChange={(event) => {
+              console.log("changed");
+              const val = event.target.value;
+              checkBtn();
+              finalData.data.StandardPackageHormonePrep__customerConfirmationStatus = val;
+              setfinalData({ ...finalData });
+              console.log(finalData);
+            }}
+          >
             <FormControlLabel
               value="Y"
               control={
@@ -215,7 +245,7 @@ const TestInstructionsComp = () => {
                   color="success"
                   icon={<RadioButtonUnchecked />}
                   checkedIcon={<RadioButtonChecked />}
-
+                  disabled={true}
                 />
               }
               label="Yes"
@@ -227,6 +257,7 @@ const TestInstructionsComp = () => {
                   color="error"
                   icon={<RadioButtonUnchecked />}
                   checkedIcon={<RadioButtonChecked />}
+                  disabled={true}
                 />
               }
               label="No"
@@ -240,17 +271,19 @@ const TestInstructionsComp = () => {
             color="primary"
             id="demo-controlled-radio-buttons-group"
           >
-            You have not confirmed yet if you are prepared for the Metabolic test
-            on
+            Are you prepared for Matabolic test on {" {{metabolicSamplingDate1}} "}
           </Typography>
-          <RadioGroup name="controlled-radio-buttons-group" onChange={(event) => {
-            console.log("changed");
-            const val = event.target.value;
-            checkBtn();
-            finalData.data.StandardPackageMetabolicPrep__customerConfirmationStatus = val;
-            setfinalData({ ...finalData });
-            console.log(finalData);
-          }}>
+          <RadioGroup
+            name="controlled-radio-buttons-group"
+            onChange={(event) => {
+              console.log("changed");
+              const val = event.target.value;
+              checkBtn();
+              finalData.data.StandardPackageMetabolicPrep__customerConfirmationStatus = val;
+              setfinalData({ ...finalData });
+              console.log(finalData);
+            }}
+          >
             <FormControlLabel
               value="Y"
               control={
@@ -258,6 +291,7 @@ const TestInstructionsComp = () => {
                   color="success"
                   icon={<RadioButtonUnchecked />}
                   checkedIcon={<RadioButtonChecked />}
+                  disabled={true}
                 />
               }
               label="Yes"
@@ -269,6 +303,7 @@ const TestInstructionsComp = () => {
                   color="error"
                   icon={<RadioButtonUnchecked />}
                   checkedIcon={<RadioButtonChecked />}
+                  disabled={true}
                 />
               }
               label="No"
@@ -282,16 +317,19 @@ const TestInstructionsComp = () => {
             color="primary"
             id="demo-controlled-radio-buttons-group"
           >
-            You confirmed on that sampling of hormone test was successful. Great!!
+            Did you undergo the Hormone test on { "Date" }
           </Typography>
-          <RadioGroup name="controlled-radio-buttons-group" onChange={(event) => {
-            console.log("changed");
-            const val = event.target.value;
-            checkBtn();
-            finalData.data.StandardPackageHormoneSampleCollect__customerConfirmationStatus = val;
-            setfinalData({ ...finalData });
-            console.log(finalData);
-          }}>
+          <RadioGroup
+            name="controlled-radio-buttons-group"
+            onChange={(event) => {
+              console.log("changed");
+              const val = event.target.value;
+              checkBtn();
+              finalData.data.StandardPackageHormoneSampleCollect__customerConfirmationStatus = val;
+              setfinalData({ ...finalData });
+              console.log(finalData);
+            }}
+          >
             <FormControlLabel
               value="Y"
               control={
@@ -299,6 +337,7 @@ const TestInstructionsComp = () => {
                   color="success"
                   icon={<RadioButtonUnchecked />}
                   checkedIcon={<RadioButtonChecked />}
+                  disabled={true}
                 />
               }
               label="Yes"
@@ -310,6 +349,7 @@ const TestInstructionsComp = () => {
                   color="error"
                   icon={<RadioButtonUnchecked />}
                   checkedIcon={<RadioButtonChecked />}
+                  disabled={true}
                 />
               }
               label="No"
@@ -323,58 +363,19 @@ const TestInstructionsComp = () => {
             color="primary"
             id="demo-controlled-radio-buttons-group"
           >
-            You confirmed on that sampling of Metabolic test was successful.
-            Great!!
+            Did you undergo Matabolic Test on {" Date "}
           </Typography>
-          <RadioGroup name="controlled-radio-buttons-group" onChange={(event) => {
-            console.log("changed");
-            const val = event.target.value;
-            checkBtn();
-            finalData.data.StandardPackageMetabolicSampleCollect__customerConfirmationStatus = val;
-            setfinalData({ ...finalData });
-            console.log(finalData);
-          }}>
-            <FormControlLabel
-              value="Y"
-              control={
-                <Radio
-                  color="success"
-                  icon={<RadioButtonUnchecked />}
-                  checkedIcon={<RadioButtonChecked />}
-                />
-              }
-              label="Yes"
-            />
-            <FormControlLabel
-              value="N"
-              control={
-                <Radio
-                  color="error"
-                  icon={<RadioButtonUnchecked />}
-                  checkedIcon={<RadioButtonChecked />}
-                />
-              }
-              label="No"
-            />
-          </RadioGroup>
-        </FormControl>
-        <br />
-        <FormControl>
-          <Typography
-            variant="body1"
-            color="primary"
-            id="demo-controlled-radio-buttons-group"
+          <RadioGroup
+            name="controlled-radio-buttons-group"
+            onChange={(event) => {
+              console.log("changed");
+              const val = event.target.value;
+              checkBtn();
+              finalData.data.StandardPackageMetabolicSampleCollect__customerConfirmationStatus = val;
+              setfinalData({ ...finalData });
+              console.log(finalData);
+            }}
           >
-            You Have Not confirmed yet if your preperation is done
-          </Typography>
-          <RadioGroup name="controlled-radio-buttons-group" onChange={(event) => {
-            console.log("changed");
-            const val = event.target.value;
-            checkBtn();
-            finalData.overAllPrepStatus = val;
-            setfinalData({ ...finalData });
-            console.log(finalData);
-          }}>
             <FormControlLabel
               value="Y"
               control={
@@ -382,6 +383,7 @@ const TestInstructionsComp = () => {
                   color="success"
                   icon={<RadioButtonUnchecked />}
                   checkedIcon={<RadioButtonChecked />}
+                  disabled={true}
                 />
               }
               label="Yes"
@@ -393,6 +395,7 @@ const TestInstructionsComp = () => {
                   color="error"
                   icon={<RadioButtonUnchecked />}
                   checkedIcon={<RadioButtonChecked />}
+                  disabled={true}
                 />
               }
               label="No"
@@ -402,7 +405,7 @@ const TestInstructionsComp = () => {
         <br />
         <FormControl>
           <Typography variant="body1" color="primary">
-            You have not confirmed yet if your sampling went ok.
+            Did your sampling went right?
           </Typography>
           <RadioGroup
             name="controlled-radio-buttons-group"
@@ -412,40 +415,36 @@ const TestInstructionsComp = () => {
             <FormControlLabel value="Y" control={<Radio />} label="Yes" />
             <FormControlLabel value="N" control={<Radio />} label="No" />
           </RadioGroup>
-
-          {/* Contact Form */}
-          {samplingConfirmed === "N" && (
+           {/* Contact Form */}
+           {samplingConfirmed === "N" && (
             <>
-              {/* <Typography variant="body1" color="primary">
-                Do you need to contact us regarding the issue that you had?
+              <Typography variant="body1" color="primary" sx={{ marginBottom: '10px' }}>
+                Do you want to contact us regarding the issue that you had?
               </Typography>
               <RadioGroup
                 name="contact-needed"
                 value={contactNeeded ? "yes" : "no"}
                 onChange={handleContactNeededChange}
+                sx={{ display: 'flex', flexDirection: 'row', gap: '10px', alignItems: 'center', marginBottom: '10px' }}
               >
-                <Button component={Link} href="/contact" sx={{ width: 'min-content', whiteSpace: 'nowrap' }} color="success">
-                  Contact Us
+                <Button variant="contained" component={Link} href="/contact" sx={{ width: 'min-content', whiteSpace: 'nowrap' }} color="success">
+                  Yes
                 </Button>
-              </RadioGroup> */}
-
-              {/* Resent Kits Form */}
-              {/* <Typography variant="body1" color="primary">
-                Will you require any of the kits re-sent to you?
-              </Typography>
-              <RadioGroup
-                name="kits-resent-needed"
-                value={kitsResentNeeded ? "yes" : "no"}
-                onChange={handleKitsResentNeededChange}
-              >
-                <FormControlLabel value="Y" control={<Radio />} label="Yes" />
-                <FormControlLabel value="N" control={<Radio />} label="No" />
-              </RadioGroup> */}
+                <Button variant="text" sx={{ width: 'min-content', whiteSpace: 'nowrap' }} color="success">
+                  No, Thanks
+                </Button>
+              </RadioGroup>
+              </>
+          )}
               {kitsResentNeeded && (
-
                 <>
+                <Typography variant="body1" color="primary" sx={{ marginBottom: '10px' }}>
+                Do you need Kits Again?
+              </Typography>
                   <FormControl style={{ marginTop: "10px" }}>
-                    <InputLabel id="demo-multiple-name-label">Select Multiple Kits</InputLabel>
+                    <InputLabel id="demo-multiple-name-label">
+                      Select Multiple Kits
+                    </InputLabel>
                     <Select
                       labelId="demo-multiple-name-label"
                       id="demo-multiple-name"
@@ -455,55 +454,36 @@ const TestInstructionsComp = () => {
                       input={<OutlinedInput label="Name" />}
                       MenuProps={MenuProps}
                       renderValue={(selected) => (
-                        <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
+                        <Box
+                          sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}
+                        >
                           {selected.map((value) => (
                             <Chip key={value} label={value} />
                           ))}
                         </Box>
                       )}
                     >
-                      {/* {names.map((name) => (
-                        <MenuItem
-                          key={name}
-                          value={name}
-                          style={getStyles(name, FreeKits, theme)}
-                        >
-                          {name}
-                        </MenuItem>
-                      ))} */}
-                      <MenuItem key={1} value={"Hormone Test"} > Hormone Test</MenuItem>
-                      <MenuItem key={2} value={"Metabloic Test"} > Metabolic Test</MenuItem>
-                      <MenuItem key={3} value={"Thyroid Test"} > Thyroid Test</MenuItem>
-                      <MenuItem key={4} value={"Immune Test"} > Immune Test</MenuItem>
+                      <MenuItem key={1} value={"Hormone Test"}>
+                        {" "}
+                        Hormone Test
+                      </MenuItem>
+                      <MenuItem key={2} value={"Metabloic Test"}>
+                        {" "}
+                        Metabolic Test
+                      </MenuItem>
+                      <MenuItem key={3} value={"Thyroid Test"}>
+                        {" "}
+                        Thyroid Test
+                      </MenuItem>
+                      <MenuItem key={4} value={"Immune Test"}>
+                        {" "}
+                        Immune Test
+                      </MenuItem>
                     </Select>
                   </FormControl>
-                  {/* <FormGroup>
-                    <Typography variant="body1" color="primary">
-                      Which test kits will you require? (tick all the ones you need)
-                    </Typography>
-                    <FormControlLabel
-                      control={<Checkbox color="primary" />}
-                      label="Hormone Test"
-                    />
-                    <FormControlLabel
-                      control={<Checkbox color="primary" />}
-                      label="Metabolic Test"
-                    />
-                    <FormControlLabel
-                      control={<Checkbox color="primary" />}
-                      label="Thyroid Test"
-                    />
-                    <FormControlLabel
-                      control={<Checkbox color="primary" />}
-                      label="Immune Test"
-                    />
-                  </FormGroup> */}
                 </>
               )}
-            </>
-          )}
         </FormControl>
-
       </div>
       <Box
         sx={{
@@ -516,7 +496,12 @@ const TestInstructionsComp = () => {
           marginTop: "-20px",
         }}
       >
-        <Button onClick={handleSubmit} disabled={form} variant="contained" color="warning">
+        <Button
+          onClick={handleSubmit}
+          disabled={form}
+          variant="contained"
+          color="warning"
+        >
           Submit
         </Button>
       </Box>
