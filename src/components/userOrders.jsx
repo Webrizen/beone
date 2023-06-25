@@ -6,7 +6,6 @@ import {
   Select,
   MenuItem,
   Box,
-  Skeleton,
 } from "@mui/material";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { Link, useNavigate, useParams } from "react-router-dom";
@@ -42,26 +41,22 @@ const UserOrders = () => {
 
   return (
     <>
-      {loading ? (
-        <Skeleton variant="rectangular" height={40} animation="wave" style={{ borderRadius: '10px' }} />
-      ) : (
-        <FormControl fullWidth>
-          <InputLabel id="demo-simple-select-label">Current Order</InputLabel>
-          <Select
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            label="Select Your Order"
-            defaultValue={localStorage.getItem("currOrder")}
-            onChange={changeOrder}
-          >
-            {all_orders.map((order, index) => (
-              <MenuItem key={order.orderId} value={order.orderId}>
-                {order.orderId}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-      )}
+      <FormControl fullWidth>
+        <InputLabel id="demo-simple-select-label">Current Order</InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          label="Select Your Order"
+          defaultValue={localStorage.getItem("currOrder")}
+          onChange={changeOrder}
+        >
+          {all_orders.map((order, index) => (
+            <MenuItem key={order.orderId} value={order.orderId}>
+              {order.orderId}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
       <Divider sx={{ margin: "1rem 0" }} />
     </>
   );
