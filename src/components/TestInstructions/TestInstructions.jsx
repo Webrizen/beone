@@ -257,7 +257,7 @@ const TestInstructionsComp = () => {
     </Grid>
       <br />
       <div
-        style={{ background: "#fff", borderRadius: "15px", padding: "20px" }}
+        style={{ background: "#fff", borderRadius: "15px", padding: "20px", overflowX: 'scroll' }}
       >
         <Typography variant="body1" gutterBottom>
           Answer Atleast One Question To Reach Next Step* <br />
@@ -267,7 +267,7 @@ const TestInstructionsComp = () => {
         <Table>
       <TableHead>
         <TableRow>
-          <TableCell>Question</TableCell>
+          <TableCell>Questions</TableCell>
           <TableCell>Options</TableCell>
         </TableRow>
       </TableHead>
@@ -276,13 +276,13 @@ const TestInstructionsComp = () => {
           <TableRow key={index}>
             <TableCell>{item.question}</TableCell>
             <TableCell>
-                {item.options.map((option, optionIndex) => (
-                  <>
-                  {/* <Alert severity="success" sx={{ width: 'min-content', whiteSpace: 'nowrap' }}>{option.label}</Alert> */}
-                  <Alert severity="info" sx={{ width: 'min-content', whiteSpace: 'nowrap' }}>Check Your Email</Alert>
-                  {/* <Alert severity="error" icon={<CloseIcon  fontSize="inherit" />} sx={{ width: 'min-content', whiteSpace: 'nowrap' }}>No</Alert> */}
-                  </>
-                ))}
+              {item.options.map((option, optionIndex) => (
+               <>
+               {/* <Alert severity="success" sx={{ width: 'min-content', whiteSpace: 'nowrap' }}>{option.label}</Alert> */}
+               <Alert severity="info" sx={{ width: 'min-content', whiteSpace: 'nowrap' }}>Check Your Email</Alert>
+               {/* <Alert severity="error" icon={<CloseIcon  fontSize="inherit" />} sx={{ width: 'min-content', whiteSpace: 'nowrap' }}>No</Alert> */}
+               </>
+              ))}
             </TableCell>
           </TableRow>
         ))}
