@@ -20,13 +20,19 @@ import {
   MenuItem,
   Divider,
   Chip,
+  Table,
+  TableHead,
+  TableBody,
+  TableRow,
+  TableCell,
+  Alert
 } from "@mui/material";
 import {
   RadioButtonUnchecked,
   RadioButtonChecked,
-  Email,
+  Email, 
 } from "@mui/icons-material";
-import SentimentVeryDissatisfiedIcon from "@mui/icons-material/SentimentVeryDissatisfied";
+import CloseIcon from '@mui/icons-material/Close';
 import CurrOrderContext from "../../utils/order_context";
 import baseApi, { Set_order } from "../../utils/common";
 import Swal from "sweetalert2";
@@ -179,6 +185,45 @@ const TestInstructionsComp = () => {
     },
   ];
 
+  const [data, setData] = useState([
+    {
+      question: "Are you prepared for the Hormone Test on {{hormoneSamplingDate1}}",
+      options: [
+        { value: "Y", label: "Yes" },
+      ],
+    },
+    {
+      question: "Are you prepared for Matabolic test on {{metabolicSamplingDate1}}",
+      options: [
+        { value: "Y", label: "Yes" },
+      ],
+    },
+    {
+      question: "Did you undergo the Hormone test on Date",
+      options: [
+        { value: "Y", label: "Yes" },
+      ],
+    },
+    {
+      question: "Did you undergo Matabolic Test on Date",
+      options: [
+        { value: "Y", label: "Yes" },
+      ],
+    },
+    {
+      question: "Did your sampling go right?",
+      options: [
+        { value: "Y", label: "Yes" },
+      ],
+    },
+  ]);
+
+  const handleOptionChange = (index, value) => {
+    const updatedData = [...data];
+    updatedData[index].selectedOption = value;
+    setData(updatedData);
+  };
+
   return (
     <>
     <Typography variant="h5" gutterBottom>Test Instructions</Typography>
@@ -219,293 +264,31 @@ const TestInstructionsComp = () => {
           <span style={{ color: 'silver', fontSize: 'small', display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '5px' }}><Email/>  Check Your Email For Reminders & Answering these questions.</span>
         </Typography>
         <Divider sx={{ margin: "1rem 0" }} />
-        <FormControl>
-          <Typography
-            variant="body1"
-            color="primary"
-            id="demo-controlled-radio-buttons-group"
-          >
-           Are you prepared for the Harmone Test on {" {{hormoneSamplingDate1}} "} 
-          </Typography>
-          <RadioGroup
-            name="controlled-radio-buttons-group"
-            onChange={(event) => {
-              console.log("changed");
-              const val = event.target.value;
-              checkBtn();
-              finalData.data.StandardPackageHormonePrep__customerConfirmationStatus = val;
-              setfinalData({ ...finalData });
-              console.log(finalData);
-            }}
-          >
-            <FormControlLabel
-              value="Y"
-              control={
-                <Radio
-                  color="success"
-                  icon={<RadioButtonUnchecked />}
-                  checkedIcon={<RadioButtonChecked />}
-                  disabled={true}
-                />
-              }
-              label="Yes"
-            />
-            <FormControlLabel
-              value="N"
-              control={
-                <Radio
-                  color="error"
-                  icon={<RadioButtonUnchecked />}
-                  checkedIcon={<RadioButtonChecked />}
-                  disabled={true}
-                />
-              }
-              label="No"
-            />
-          </RadioGroup>
-        </FormControl>
-        <br />
-        <FormControl>
-          <Typography
-            variant="body1"
-            color="primary"
-            id="demo-controlled-radio-buttons-group"
-          >
-            Are you prepared for Matabolic test on {" {{metabolicSamplingDate1}} "}
-          </Typography>
-          <RadioGroup
-            name="controlled-radio-buttons-group"
-            onChange={(event) => {
-              console.log("changed");
-              const val = event.target.value;
-              checkBtn();
-              finalData.data.StandardPackageMetabolicPrep__customerConfirmationStatus = val;
-              setfinalData({ ...finalData });
-              console.log(finalData);
-            }}
-          >
-            <FormControlLabel
-              value="Y"
-              control={
-                <Radio
-                  color="success"
-                  icon={<RadioButtonUnchecked />}
-                  checkedIcon={<RadioButtonChecked />}
-                  disabled={true}
-                />
-              }
-              label="Yes"
-            />
-            <FormControlLabel
-              value="N"
-              control={
-                <Radio
-                  color="error"
-                  icon={<RadioButtonUnchecked />}
-                  checkedIcon={<RadioButtonChecked />}
-                  disabled={true}
-                />
-              }
-              label="No"
-            />
-          </RadioGroup>
-        </FormControl>
-        <br />
-        <FormControl>
-          <Typography
-            variant="body1"
-            color="primary"
-            id="demo-controlled-radio-buttons-group"
-          >
-            Did you undergo the Hormone test on { "Date" }
-          </Typography>
-          <RadioGroup
-            name="controlled-radio-buttons-group"
-            onChange={(event) => {
-              console.log("changed");
-              const val = event.target.value;
-              checkBtn();
-              finalData.data.StandardPackageHormoneSampleCollect__customerConfirmationStatus = val;
-              setfinalData({ ...finalData });
-              console.log(finalData);
-            }}
-          >
-            <FormControlLabel
-              value="Y"
-              control={
-                <Radio
-                  color="success"
-                  icon={<RadioButtonUnchecked />}
-                  checkedIcon={<RadioButtonChecked />}
-                  disabled={true}
-                />
-              }
-              label="Yes"
-            />
-            <FormControlLabel
-              value="N"
-              control={
-                <Radio
-                  color="error"
-                  icon={<RadioButtonUnchecked />}
-                  checkedIcon={<RadioButtonChecked />}
-                  disabled={true}
-                />
-              }
-              label="No"
-            />
-          </RadioGroup>
-        </FormControl>
-        <br />
-        <FormControl>
-          <Typography
-            variant="body1"
-            color="primary"
-            id="demo-controlled-radio-buttons-group"
-          >
-            Did you undergo Matabolic Test on {" Date "}
-          </Typography>
-          <RadioGroup
-            name="controlled-radio-buttons-group"
-            onChange={(event) => {
-              console.log("changed");
-              const val = event.target.value;
-              checkBtn();
-              finalData.data.StandardPackageMetabolicSampleCollect__customerConfirmationStatus = val;
-              setfinalData({ ...finalData });
-              console.log(finalData);
-            }}
-          >
-            <FormControlLabel
-              value="Y"
-              control={
-                <Radio
-                  color="success"
-                  icon={<RadioButtonUnchecked />}
-                  checkedIcon={<RadioButtonChecked />}
-                  disabled={true}
-                />
-              }
-              label="Yes"
-            />
-            <FormControlLabel
-              value="N"
-              control={
-                <Radio
-                  color="error"
-                  icon={<RadioButtonUnchecked />}
-                  checkedIcon={<RadioButtonChecked />}
-                  disabled={true}
-                />
-              }
-              label="No"
-            />
-          </RadioGroup>
-        </FormControl>
-        <br />
-        <FormControl>
-          <Typography variant="body1" color="primary">
-            Did your sampling went right?
-          </Typography>
-          <RadioGroup
-            name="controlled-radio-buttons-group"
-            value={samplingConfirmed}
-            onChange={handleSamplingConfirmationChange}
-          >
-            <FormControlLabel value="Y" control={<Radio />} label="Yes" />
-            <FormControlLabel value="N" control={<Radio />} label="No" />
-          </RadioGroup>
-           {/* Contact Form */}
-           {samplingConfirmed === "N" && (
-            <>
-              <Typography variant="body1" color="primary" sx={{ marginBottom: '10px' }}>
-                Do you want to contact us regarding the issue that you had?
-              </Typography>
-              <RadioGroup
-                name="contact-needed"
-                value={contactNeeded ? "yes" : "no"}
-                onChange={handleContactNeededChange}
-                sx={{ display: 'flex', flexDirection: 'row', gap: '10px', alignItems: 'center', marginBottom: '10px' }}
-              >
-                <Button variant="contained" component={Link} href="/contact" sx={{ width: 'min-content', whiteSpace: 'nowrap' }} color="success">
-                  Yes
-                </Button>
-                <Button variant="text" sx={{ width: 'min-content', whiteSpace: 'nowrap' }} color="success">
-                  No, Thanks
-                </Button>
-              </RadioGroup>
-              </>
-          )}
-              {kitsResentNeeded && (
-                <>
-                <Typography variant="body1" color="primary" sx={{ marginBottom: '10px' }}>
-                Do you need Kits Again?
-              </Typography>
-                  <FormControl style={{ marginTop: "10px" }}>
-                    <InputLabel id="demo-multiple-name-label">
-                      Select Multiple Kits
-                    </InputLabel>
-                    <Select
-                      labelId="demo-multiple-name-label"
-                      id="demo-multiple-name"
-                      multiple
-                      value={FreeKits}
-                      onChange={handleChange}
-                      input={<OutlinedInput label="Name" />}
-                      MenuProps={MenuProps}
-                      renderValue={(selected) => (
-                        <Box
-                          sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}
-                        >
-                          {selected.map((value) => (
-                            <Chip key={value} label={value} />
-                          ))}
-                        </Box>
-                      )}
-                    >
-                      <MenuItem key={1} value={"Hormone Test"}>
-                        {" "}
-                        Hormone Test
-                      </MenuItem>
-                      <MenuItem key={2} value={"Metabloic Test"}>
-                        {" "}
-                        Metabolic Test
-                      </MenuItem>
-                      <MenuItem key={3} value={"Thyroid Test"}>
-                        {" "}
-                        Thyroid Test
-                      </MenuItem>
-                      <MenuItem key={4} value={"Immune Test"}>
-                        {" "}
-                        Immune Test
-                      </MenuItem>
-                    </Select>
-                  </FormControl>
-                </>
-              )}
-        </FormControl>
+        <Table>
+      <TableHead>
+        <TableRow>
+          <TableCell>Question</TableCell>
+          <TableCell>Options</TableCell>
+        </TableRow>
+      </TableHead>
+      <TableBody>
+        {data.map((item, index) => (
+          <TableRow key={index}>
+            <TableCell>{item.question}</TableCell>
+            <TableCell>
+                {item.options.map((option, optionIndex) => (
+                  <>
+                  {/* <Alert severity="success" sx={{ width: 'min-content', whiteSpace: 'nowrap' }}>{option.label}</Alert> */}
+                  <Alert severity="info" sx={{ width: 'min-content', whiteSpace: 'nowrap' }}>Check Your Email</Alert>
+                  {/* <Alert severity="error" icon={<CloseIcon  fontSize="inherit" />} sx={{ width: 'min-content', whiteSpace: 'nowrap' }}>No</Alert> */}
+                  </>
+                ))}
+            </TableCell>
+          </TableRow>
+        ))}
+      </TableBody>
+    </Table>
       </div>
-      <Box
-        sx={{
-          width: "100%",
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "right",
-          paddingRight: "20px",
-          marginBottom: "20px",
-          marginTop: "-20px",
-        }}
-      >
-        <Button
-          onClick={handleSubmit}
-          disabled={form}
-          variant="contained"
-          color="warning"
-        >
-          Submit
-        </Button>
-      </Box>
-
       {/* SHow This After Form Submit  */}
       <instructionsData />
     </>
