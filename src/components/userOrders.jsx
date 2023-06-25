@@ -22,8 +22,14 @@ const UserOrders = () => {
     baseApi
       .get("/dashboard")
       .then((response) => {
-        console.log("calling Dashboard API two times", response.data);
-        setall_orders(response.data.reverse()); // Reverse the order array to show the latest order first
+        // console.log("calling Dashboard API two times", response.data);
+        const arr = response.data;
+        arr.sort((a, b) => a.createdAt - b.createdAt);
+        console.log("calling Dashboard API after soting", arr);
+        arr.map((elem) => {
+          console.log(new Date(elem.createdAt).toLocaleDateString());
+        })
+        setall_orders(arr.reverse());
         setLoading(false);
       })
       .catch((error) => {

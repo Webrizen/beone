@@ -24,7 +24,7 @@ const Layout = ({ children }) => {
     // Simulate loading data
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 2000);
+    }, 100);
 
     // Check internet connection
     const checkInternetConnection = () => {
@@ -81,11 +81,11 @@ const Layout = ({ children }) => {
           )}
         </div>
       </div>
-      <Snackbar
+      {/* <Snackbar
         open={slowInternet}
         onClose={handleSlowInternetClose}
         message="Slow internet connection detected."
-      />
+      /> */}
       <Snackbar
         open={noInternet}
         onClose={handleNoInternetClose}

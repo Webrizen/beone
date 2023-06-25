@@ -49,14 +49,14 @@ const DynamicForm = () => {
 
   return (
     <Grid spacing={4} container>
-    <FormRenderer
-      componentMapper={componentMapper}
-      FormTemplate={FormTemplateCanReset}
-      schema={schema}
-      onSubmit={console.log}
-      onCancel={() => console.log('Cancel action')}
-    />
-  </Grid>
+      <FormRenderer
+        componentMapper={componentMapper}
+        FormTemplate={FormTemplateCanReset}
+        schema={schema}
+        onSubmit={console.log}
+        onCancel={() => console.log('Cancel action')}
+      />
+    </Grid>
   );
 
 };

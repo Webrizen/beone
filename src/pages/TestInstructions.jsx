@@ -23,7 +23,7 @@ import Layout from '../components/Layout/layout';
 import UserOrders from '../components/userOrders';
 import { Avatar } from '@mui/material';
 import Calendar from '../components/calendar';
-import InstructionsData from '../components/TestInstructions/instructionsData';
+import InstructionsData from '../components/TestInstructions/InstructionsData';
 import CurrOrderContext from '../utils/order_context';
 // import CurrOrderContext from '../utils/order_context';
 // import CurrOrderContext from '../utils/order_context';
@@ -52,7 +52,7 @@ const TestInstructions = () => {
     <>
       <Layout>
         <RouteGuard />
-            {instruction.status === "Done" ? <InstructionsData data={instruction.data} /> : <TestInstructionsComp />}
+        {instruction.status === "Done" ? <InstructionsData data={instruction.data} /> : <TestInstructionsComp data={instruction.data} />}
       </Layout >
     </>
   );

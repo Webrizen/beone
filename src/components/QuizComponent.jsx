@@ -14,9 +14,12 @@ import {
 const QuizComponent = () => {
 
   return (
-    <>
-    <DynamicForm/>
-    </>
+    <Box sx={{ p: 2, background: "white", borderRadius: '15px' }}>
+      <Typography variant="h6" gutterBottom>
+        Health Questionare
+      </Typography>
+      <DynamicForm />
+    </Box>
   );
 };
 
