@@ -55,12 +55,11 @@ const kitarrival = () => {
       <Layout>
         <RouteGuard />
         <Typography
-          variant="body1"
-          gutterBottom
-          sx={{ color: "rgba(0,0,0,0.3)" }}
-        >
-          The package is with you now
-        </Typography>
+        variant="h4"
+        gutterBottom
+      >
+        Kit Arrival
+      </Typography>
         {order.status == "Done" ? <KitArrivalData data={order.data} /> : <KitArrivalForm setOrder={setCurrOrder} />}
       </Layout >
     </>

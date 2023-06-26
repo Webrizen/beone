@@ -17,17 +17,6 @@ const TestInstructions = () => {
     // console.log("instructions", instruction)
   }, [currOrder]);
 
-  function ToggleLeftSideBar() {
-
-
-    const LeftBar = document.getElementById('Left-Bar');
-    if (LeftBar.style.transform == "translateX(0%)") {
-      LeftBar.style.transform = "translateX(-200%)"
-    } else {
-      LeftBar.style.transform = "translateX(0%)"
-    }
-  }
-
   return (
     <>
       <Layout>

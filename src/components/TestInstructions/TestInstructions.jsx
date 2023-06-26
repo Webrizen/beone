@@ -13,11 +13,13 @@ import {
   TableRow,
   TableCell,
   Alert,
+  IconButton,
 } from "@mui/material";
-import {
-  Email,
-} from "@mui/icons-material";
+import { Email } from "@mui/icons-material";
 import CurrOrderContext from "../../utils/order_context";
+import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
+import GetAppIcon from "@mui/icons-material/GetApp";
+import ReplayIcon from "@mui/icons-material/Replay";
 
 const TestInstructionsComp = ({ data, planningData }) => {
   const [main_data, setmain_data] = useState({ ...data });
@@ -111,6 +113,23 @@ const TestInstructionsComp = ({ data, planningData }) => {
                     {video.title}
                   </Link>
                 </Typography>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    marginTop: "10px",
+                  }}
+                >
+                  <IconButton aria-label="Download" size="small">
+                    <GetAppIcon />
+                  </IconButton>
+                  <IconButton aria-label="Play" size="small">
+                    <PlayCircleOutlineIcon />
+                  </IconButton>
+                  <IconButton aria-label="Replay" size="small">
+                    <ReplayIcon />
+                  </IconButton>
+                </div>
               </CardContent>
             </Card>
           </Grid>
@@ -126,7 +145,7 @@ const TestInstructionsComp = ({ data, planningData }) => {
         }}
       >
         <Typography variant="body1" gutterBottom>
-          Test Instruction Questions <br />
+          Test Instruction Queries <br />
           <span
             style={{
               color: "silver",
@@ -145,7 +164,7 @@ const TestInstructionsComp = ({ data, planningData }) => {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell>Questions</TableCell>
+              <TableCell>Queries</TableCell>
               <TableCell>Options</TableCell>
             </TableRow>
           </TableHead>
@@ -222,10 +241,12 @@ const TestInstructionsComp = ({ data, planningData }) => {
                 </TableCell>
               </TableRow>
             ) : null}
-            {!(main_data.StandardPackageHormonePrep__customerConfirmationStatus ||
+            {!(
+              main_data.StandardPackageHormonePrep__customerConfirmationStatus ||
               main_data.StandardPackageHormoneSampleCollect__customerConfirmationStatus ||
               main_data.StandardPackageMetabolicPrep__customerConfirmationStatus ||
-              main_data.StandardPackageMetabolicSampleCollect__customerConfirmationStatus) && (
+              main_data.StandardPackageMetabolicSampleCollect__customerConfirmationStatus
+            ) && (
               <TableRow>
                 <TableCell colSpan={2} align="center">
                   No Data Available

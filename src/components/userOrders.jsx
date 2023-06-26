@@ -6,6 +6,7 @@ import {
   Select,
   MenuItem,
   Box,
+  Skeleton, // Import the Skeleton component from MUI
 } from "@mui/material";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { Link, useNavigate, useParams } from "react-router-dom";
@@ -19,25 +20,20 @@ const UserOrders = () => {
   const [all_orders, setall_orders] = useState([]);
   const [loading, setLoading] = useState(true);
   const { AllOrder, setAllOrder } = useContext(AllOrderContext);
-  // useEffect(() => {
-  //   baseApi
-  //     .get("/dashboard")
-  //     .then((response) => {
-  //       // console.log("calling Dashboard API two times", response.data);
-  //       const arr = response.data;
-  //       arr.sort((a, b) => a.createdAt - b.createdAt);
-  //       console.log("calling Dashboard API after soting", arr);
-  //       arr.map((elem) => {
-  //         console.log(elem.orderId, new Date(elem.createdAt).toLocaleDateString());
-  //       })
-  //       setall_orders(arr.reverse());
-  //       setLoading(false);
-  //     })
-  //     .catch((error) => {
-  //       console.error(error);
-  //       setLoading(false);
-  //     });
-  // }, []);
+  useEffect(() => {
+    baseApi
+      .get("/dashboard")
+      .then((response) => {
+        const arr = response.data;
+        arr.sort((a, b) => a.createdAt - b.createdAt);
+        setall_orders(arr.reverse());
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error(error);
+        setLoading(false);
+      });
+  }, []);
 
   const navigate = useNavigate();
 
@@ -48,22 +44,29 @@ const UserOrders = () => {
 
   return (
     <>
-      <FormControl fullWidth>
-        <InputLabel id="demo-simple-select-label">Current Order</InputLabel>
-        <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          label="Select Your Order"
-          defaultValue={localStorage.getItem("currOrder")}
-          onChange={changeOrder}
-        >
-          {AllOrder.map((order, index) => (
-            <MenuItem key={order} value={order}>
-              {order}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
+      {loading ? ( // Render Skeleton component if loading is true
+        <Box>
+          <Skeleton variant="rectangular" height={56} sx={{ borderRadius: '10px' }} />
+          <Divider sx={{ margin: "1rem 0" }} />
+        </Box>
+      ) : ( // Render the actual FormControl if loading is false
+        <FormControl fullWidth>
+          <InputLabel id="demo-simple-select-label">Current Order</InputLabel>
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            label="Select Your Order"
+            defaultValue={localStorage.getItem("currOrder")}
+            onChange={changeOrder}
+          >
+            {AllOrder.map((order, index) => (
+              <MenuItem key={order} value={order}>
+                {order}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+      )}
       <Divider sx={{ margin: "1rem 0" }} />
     </>
   );

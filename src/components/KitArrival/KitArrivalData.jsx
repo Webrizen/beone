@@ -27,6 +27,13 @@ const KitArrivalData = ({ data }) => {
       >
         The package arrived!
       </Typography>
+      <Typography
+        variant="body1"
+        gutterBottom
+        sx={{ color: "rgba(0,0,0,0.3)" }}
+      >
+        The package is with you now
+      </Typography>
       <Box
         sx={{
           maxWidth: "100%",
@@ -74,7 +81,9 @@ const KitArrivalData = ({ data }) => {
                     </Typography>
                   </TableCell>
                   <TableCell align="right">
-                    <Typography variant="body1">{data.productPackageType}</Typography>
+                    <Typography variant="body1">
+                      {data.productPackageType}
+                    </Typography>
                   </TableCell>
                 </TableRow>
               </TableBody>
@@ -83,18 +92,16 @@ const KitArrivalData = ({ data }) => {
           <div className="two-col-kit" style={{ color: "lightgray" }}>
             <div className="left-data-kit">
               <Typography variant="body1">Completed At:</Typography>
-              <Typography variant="body1">
-                {data.completedAt}
-              </Typography>
+              <Typography variant="body1">{data.completedAt}</Typography>
             </div>
-            {'completedIn' in data ? <div className="right-data-kit">
-
-              <Typography variant="body1">Completed In:</Typography>
-              <Typography variant="body1">
-                {data.completedIn}
-              </Typography>
-            </div> : ""}
-
+            {"completedIn" in data ? (
+              <div className="right-data-kit">
+                <Typography variant="body1">Completed In:</Typography>
+                <Typography variant="body1">{data.completedIn}</Typography>
+              </div>
+            ) : (
+              ""
+            )}
           </div>
         </Box>
       </Box>

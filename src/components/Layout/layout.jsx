@@ -4,7 +4,7 @@ import "../../styles/dashboard.css";
 import MenuOpenIcon from "@mui/icons-material/MenuOpen";
 import VerticalStepper from "../verticalstepper";
 import UserOrders from "../userOrders";
-import { Skeleton, Snackbar } from "@mui/material";
+import { Skeleton } from "@mui/material";
 
 const Layout = ({ children }) => {
   function ToggleLeftSideBar() {
@@ -17,43 +17,17 @@ const Layout = ({ children }) => {
   }
 
   const [loading, setLoading] = useState(true);
-  const [slowInternet, setSlowInternet] = useState(false);
-  const [noInternet, setNoInternet] = useState(false);
 
   useEffect(() => {
     // Simulate loading data
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 100);
-
-    // Check internet connection
-    const checkInternetConnection = () => {
-      if (!navigator.onLine) {
-        setNoInternet(true);
-      }
-    };
-
-    // Check for slow internet after 3 seconds
-    const slowInternetTimeout = setTimeout(() => {
-      checkInternetConnection();
-      if (loading) {
-        setSlowInternet(true);
-      }
-    }, 10000);
+    }, 1000);
 
     return () => {
       clearTimeout(timer);
-      clearTimeout(slowInternetTimeout);
     };
   }, []);
-
-  const handleSlowInternetClose = () => {
-    setSlowInternet(false);
-  };
-
-  const handleNoInternetClose = () => {
-    setNoInternet(false);
-  };
 
   return (
     <div>
@@ -70,27 +44,33 @@ const Layout = ({ children }) => {
         </div>
         <div className="middle-dashboard">
           {loading ? (
-            <Skeleton
-              variant="rectangular"
-              height={500}
-              animation="wave"
-              style={{ borderRadius: "10px" }}
-            />
+            <>
+              <Skeleton
+                variant="rectangular"
+                animation="wave"
+                style={{ borderRadius: "10px", height: '100%' }}
+              />
+              <Skeleton
+                variant="text"
+                animation="wave"
+                style={{ width: '80%', marginBottom: '1rem' }}
+              />
+              <Skeleton
+                variant="text"
+                animation="wave"
+                style={{ width: '90%', marginBottom: '1rem' }}
+              />
+              <Skeleton
+                variant="text"
+                animation="wave"
+                style={{ width: '70%', marginBottom: '1rem' }}
+              />
+            </>
           ) : (
             children
           )}
         </div>
       </div>
-      {/* <Snackbar
-        open={slowInternet}
-        onClose={handleSlowInternetClose}
-        message="Slow internet connection detected."
-      /> */}
-      <Snackbar
-        open={noInternet}
-        onClose={handleNoInternetClose}
-        message="No internet connection. Please check your network."
-      />
     </div>
   );
 };
