@@ -62,3 +62,16 @@ export const Set_order = (id, setCurrOrder, navigate) => {
     })
 
 }
+
+export function toCamelCaseWithSpacing(str) {
+    // Split the string by uppercase characters
+    var words = str.split(/(?=[A-Z])/);
+
+    // Capitalize the first character of each word
+    for (var i = 0; i < words.length; i++) {
+        words[i] = words[i][0].toUpperCase() + words[i].slice(1);
+    }
+
+    // Join the words with spaces in between
+    return words.join(' ');
+}

@@ -38,13 +38,16 @@ import baseApi, { Set_order } from "../../utils/common";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 
-const TestInstructionsComp = ({ data }) => {
+const TestInstructionsComp = ({ data, planningData }) => {
   const [main_data, setmain_data] = useState({ ...data });
+  const [plan, setplan] = useState({ ...planningData });
   useEffect(() => {
+    console.log("planning data", planningData);
     setmain_data({ ...data });
+    setplan({ ...planningData });
     console.log("data form intrcutions", main_data);
     console.log(data);
-  }, [data]);
+  }, [data, planningData]);
   // const [samplingConfirmed, setSamplingConfirmed] = useState("");
   // const [contactNeeded, setContactNeeded] = useState(false);
   // const [kitsResentNeeded, setKitsResentNeeded] = useState(false);
@@ -228,15 +231,15 @@ const TestInstructionsComp = ({ data }) => {
           <TableBody>
             {/* {data1.map((item, index) => ( */}
             {!(main_data.StandardPackageHormonePrep__customerConfirmationStatus) ? <TableRow>
-              <TableCell>You have not confirmed yet if you are prepared for the Hormone test on {"hormoneSamplingDate1"}
-                Please check you email for a reminder. Select "Yes" or "No" depending on how your test preparation happened.
+              <TableCell>You have not confirmed yet if you are prepared for the Hormone test on {plan.hormoneTestSamplingDate}
+                . Please check you email for a reminder. Select "Yes" or "No" depending on how your test preparation happened.
               </TableCell>
               <TableCell>
                 <Alert severity="info" sx={{ width: 'min-content', whiteSpace: 'nowrap' }}>Check Your Email</Alert>
               </TableCell>
             </TableRow> : ""}
             {!(main_data.StandardPackageHormoneSampleCollect__customerConfirmationStatus) ? <TableRow>
-              <TableCell>Your Hormone sampling date is on {"hormoneSamplingDate1"}. You can confirm only after that date.
+              <TableCell>Your Hormone sampling date is on {plan.hormoneTestSamplingDate}. You can confirm only after that date.
                 Please check you email for a reminder. Select "Yes" or "No" depending on how your test sampling happened.
               </TableCell>
               <TableCell>
@@ -244,15 +247,15 @@ const TestInstructionsComp = ({ data }) => {
               </TableCell>
             </TableRow> : ""}
             {!(main_data.StandardPackageMetabolicPrep__customerConfirmationStatus) ? <TableRow>
-              <TableCell>You have not confirmed yet if you are prepared for the Metabolic test on {"metabolicSamplingDate1 "}
-                Please check you email for a reminder. Select "Yes" or "No" depending on how your test preparation happened.
+              <TableCell>You have not confirmed yet if you are prepared for the Metabolic test on {plan.metabolicTestDate}
+                . Please check you email for a reminder. Select "Yes" or "No" depending on how your test preparation happened.
               </TableCell>
               <TableCell>
                 <Alert severity="info" sx={{ width: 'min-content', whiteSpace: 'nowrap' }}>Check Your Email</Alert>
               </TableCell>
             </TableRow> : ""}
             {!(main_data.StandardPackageMetabolicSampleCollect__customerConfirmationStatus) ? <TableRow>
-              <TableCell>Your Metabolic sampling date is on {"metabolicSamplingDate1"}. You can confirm only after that date.
+              <TableCell>Your Metabolic sampling date is on {plan.metabolicTestDate} . You can confirm only after that date.
                 Please check you email for a reminder. Select "Yes" or "No" depending on how your test sampling happened.
               </TableCell>
               <TableCell>

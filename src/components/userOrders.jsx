@@ -11,32 +11,33 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import baseApi, { Set_order } from "../utils/common";
 import CurrOrderContext from "../utils/order_context";
+import AllOrderContext from "../utils/AllOrderContext";
 
 const UserOrders = () => {
   const { currOrder, setCurrOrder } = useContext(CurrOrderContext);
   const [order_id, setorder_id] = useState();
   const [all_orders, setall_orders] = useState([]);
   const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    baseApi
-      .get("/dashboard")
-      .then((response) => {
-        // console.log("calling Dashboard API two times", response.data);
-        const arr = response.data;
-        arr.sort((a, b) => a.createdAt - b.createdAt);
-        console.log("calling Dashboard API after soting", arr);
-        arr.map((elem) => {
-          console.log(new Date(elem.createdAt).toLocaleDateString());
-        })
-        setall_orders(arr.reverse());
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error(error);
-        setLoading(false);
-      });
-  }, []);
+  const { AllOrder, setAllOrder } = useContext(AllOrderContext);
+  // useEffect(() => {
+  //   baseApi
+  //     .get("/dashboard")
+  //     .then((response) => {
+  //       // console.log("calling Dashboard API two times", response.data);
+  //       const arr = response.data;
+  //       arr.sort((a, b) => a.createdAt - b.createdAt);
+  //       console.log("calling Dashboard API after soting", arr);
+  //       arr.map((elem) => {
+  //         console.log(elem.orderId, new Date(elem.createdAt).toLocaleDateString());
+  //       })
+  //       setall_orders(arr.reverse());
+  //       setLoading(false);
+  //     })
+  //     .catch((error) => {
+  //       console.error(error);
+  //       setLoading(false);
+  //     });
+  // }, []);
 
   const navigate = useNavigate();
 
@@ -56,9 +57,9 @@ const UserOrders = () => {
           defaultValue={localStorage.getItem("currOrder")}
           onChange={changeOrder}
         >
-          {all_orders.map((order, index) => (
-            <MenuItem key={order.orderId} value={order.orderId}>
-              {order.orderId}
+          {AllOrder.map((order, index) => (
+            <MenuItem key={order} value={order}>
+              {order}
             </MenuItem>
           ))}
         </Select>

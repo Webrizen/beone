@@ -18,17 +18,23 @@ import Lifestyle from './pages/lifestyle';
 import baseApi, { Set_order } from './utils/common';
 import ProfileEdit from './pages/edits/profileEdits';
 import {
+  BrowserRouter,
   createBrowserRouter,
+  redirect,
   RouterProvider,
+  useNavigate,
   useParams,
   useSearchParams,
 } from "react-router-dom";
 import CurrOrderContext from './utils/order_context';
 import TestInstructions from './pages/TestInstructions';
+import AllOrderContext from './utils/AllOrderContext';
 function App() {
   let params = useParams();
   const [main_user, setmain_user] = useState({});
   const [currOrder, setCurrOrder] = useState([]);
+  const [AllOrder, setAllOrder] = useState([]);
+  // const navigate = useNavigate();
   useEffect(() => {
     if (localStorage.getItem("token")) {
       baseApi
@@ -38,7 +44,21 @@ function App() {
           console.log("response data", response.data);
           setmain_user({ ...response.data });
           console.log({ "main_user": main_user });
-          Set_order(localStorage.getItem("currOrder"), setCurrOrder)
+          baseApi.get(`/dashboard`).then((response) => {
+            console.log(response)
+            const orders = response.data;
+            // const arr = response.data;
+            // orders.sort((a, b) => a.createdAt - b.createdAt);
+            const AllOrderId = orders.map(function (el) {
+              return el.orderId;
+            });
+            setAllOrder(AllOrderId.reverse());
+            // Set_order(AllOrderId[0], setCurrOrder, navigate);
+            console.log("AllOrder", AllOrderId);
+          }).catch((error) => {
+            console.log("All Order fetching error:", error)
+          })
+          Set_order(localStorage.getItem("currOrder"), setCurrOrder, redirect);
         })
         .catch((error) => {
           console.error(error);
@@ -119,9 +139,13 @@ function App() {
   ]);
   return (
     <UserContext.Provider value={{ main_user, setmain_user }}>
-      <CurrOrderContext.Provider value={{ currOrder, setCurrOrder }}>
-        <RouterProvider router={router} />
-      </CurrOrderContext.Provider>
+      <AllOrderContext.Provider value={{ AllOrder, setAllOrder }}>
+        <CurrOrderContext.Provider value={{ currOrder, setCurrOrder }}>
+          {/* <BrowserRouter> */}
+          <RouterProvider router={router} />
+          {/* </BrowserRouter> */}
+        </CurrOrderContext.Provider>
+      </AllOrderContext.Provider>
     </UserContext.Provider>
   );
 }

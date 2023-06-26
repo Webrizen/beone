@@ -14,6 +14,19 @@ import {
 const KitArrivalData = ({ data }) => {
   return (
     <>
+      <Typography
+        variant="h4"
+        gutterBottom
+        sx={{
+          fontWeight: 700,
+          background: "linear-gradient(50deg, #45d9c9, #84b3c7)",
+          WebkitTextFillColor: "transparent",
+          WebkitBackgroundClip: "text",
+          backgroundClip: "text",
+        }}
+      >
+        The package arrived!
+      </Typography>
       <Box
         sx={{
           maxWidth: "100%",

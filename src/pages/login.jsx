@@ -10,6 +10,7 @@ import Swal from 'sweetalert2';
 import '../styles/login.css';
 import UserContext from '../utils/user_context';
 import CurrOrderContext from '../utils/order_context';
+import AllOrderContext from '../utils/AllOrderContext';
 // import { error } from 'console';
 // import UserContext from '../utils/user_context';
 
@@ -18,7 +19,7 @@ import CurrOrderContext from '../utils/order_context';
 const Login = () => {
   const { main_user, setmain_user } = useContext(UserContext);
   const { currOrder, setCurrOrder } = useContext(CurrOrderContext);
-
+  const { AllOrder, setAllOrder } = useContext(AllOrderContext);
   const [showPass, setShowPass] = useState(false);
   const [email, setEmail] = useState(null);
   const [pass, setPass] = useState(null);
@@ -31,6 +32,9 @@ const Login = () => {
     }
   }, []);
   // Set_order()
+  useEffect(() => {
+    console.log("order context changed", AllOrder);
+  }, [AllOrder]);
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -53,21 +57,16 @@ const Login = () => {
         baseApi.get(`/dashboard`).then((response) => {
           console.log(response)
           const orders = response.data;
-          for (var i = 0; i < orders.length; i++) {
-            if (orders[i].status == "PENDING") {
-              Set_order(orders[i].orderId, setCurrOrder, navigate);
-              // navigate(`/order/${orders[i].orderId}/welcome`);
-              break;
-            }
-          }
-          // response.data.map((order, index) => {
-          //   if (order.status == "PENDING") {
-          //     Set_order(order.orderId);
-          //     break;
-          //   }
-          // })
+          // const arr = response.data;
+          orders.sort((a, b) => a.createdAt - b.createdAt);
+          const AllOrderId = orders.map(function (el) {
+            return el.orderId;
+          });
+          setAllOrder(AllOrderId.reverse());
+          Set_order(AllOrderId[0], setCurrOrder, navigate);
+          console.log("AllOrder", AllOrderId);
         }).catch((error) => {
-          console.log("dashboard api error:", error)
+          console.log("All Order fetching error:", error)
         })
 
 
