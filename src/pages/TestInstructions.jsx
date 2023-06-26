@@ -31,10 +31,12 @@ import CurrOrderContext from '../utils/order_context';
 const TestInstructions = () => {
   const { currOrder, setCurrOrder } = useContext(CurrOrderContext);
   const [instruction, setinstruction] = useState({ ...currOrder[3] });
+  const [Planning, setPlanning] = useState({ ...currOrder[2] });
   useEffect(() => {
-    setinstruction({ ...currOrder[3] })
-    console.log("order from instructions", currOrder[3]);
-    console.log("instructions", instruction)
+    setinstruction({ ...currOrder[3] });
+    setPlanning({ ...currOrder[2] });
+    // console.log("order from instructions", currOrder[3]);
+    // console.log("instructions", instruction)
   }, [currOrder]);
 
   function ToggleLeftSideBar() {
@@ -52,7 +54,8 @@ const TestInstructions = () => {
     <>
       <Layout>
         <RouteGuard />
-        {instruction.status === "Done" ? <InstructionsData data={instruction.data} /> : <TestInstructionsComp data={instruction.data} />}
+        <TestInstructionsComp data={instruction.data} planningData={Planning.data} />}
+        {/* {instruction.status === "Done" ? <InstructionsData data={instruction.data} /> : <TestInstructionsComp data={instruction.data} planningData={Planning.data} />} */}
       </Layout >
     </>
   );

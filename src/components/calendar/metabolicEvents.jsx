@@ -37,18 +37,6 @@ const MetaBolicEvents = ({ events }) => {
             textColor: "black",
         },
         {
-            title: "Reminder 1",
-            start: formteD(events.StandardPackageMetabolic__reminder1Time),
-            backgroundColor: "#CDC2AE",
-            textColor: "black",
-        },
-        {
-            title: "Reminder 2",
-            start: formteD(events.StandardPackageMetabolic__reminder2Time),
-            backgroundColor: "#CDC2AE",
-            textColor: "black",
-        },
-        {
             title: "Test 1",
             start: formteD(events.StandardPackageMetabolic__testDate1),
             backgroundColor: "#ECE5C7",
@@ -58,12 +46,6 @@ const MetaBolicEvents = ({ events }) => {
             title: "Test 2",
             start: formteD(events.StandardPackageMetabolic__testDate2),
             backgroundColor: "#ECE5C7",
-            textColor: "black",
-        },
-        {
-            title: "Test Sampling",
-            start: formteD(events.metabolicTestDate),
-            backgroundColor: "#C2DEDC",
             textColor: "black",
         },
         // Add more events as needed

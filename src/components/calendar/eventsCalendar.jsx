@@ -37,18 +37,6 @@ const EventsCalendar = ({ events }) => {
       backgroundColor: "#CDC2AE",
     },
     {
-      title: "Reminder 1",
-      start: formteD(events.StandardPackageHormone__reminder1Time),
-      backgroundColor: "#CDC2AE",
-      textColor: "black",
-    },
-    {
-      title: "Reminder 2",
-      start: formteD(events.StandardPackageHormone__reminder2Time),
-      backgroundColor: "#CDC2AE",
-      textColor: "black",
-    },
-    {
       title: "Test 1",
       start: formteD(events.StandardPackageHormone__testDate1),
       backgroundColor: "green",
@@ -61,12 +49,6 @@ const EventsCalendar = ({ events }) => {
       backgroundColor: "green",
       textColor: "black",
       backgroundColor: "#ECE5C7",
-    },
-    {
-      title: "Test Sampling",
-      start: formteD(events.hormoneTestSamplingDate),
-      backgroundColor: "#C2DEDC",
-      textColor: "black",
     },
     // Add more events as needed
   ];
