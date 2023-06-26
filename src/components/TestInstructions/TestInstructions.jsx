@@ -18,7 +18,7 @@ import {
 import { Email } from "@mui/icons-material";
 import CurrOrderContext from "../../utils/order_context";
 import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
-import GetAppIcon from "@mui/icons-material/GetApp";
+import CloudDownloadIcon from '@mui/icons-material/CloudDownload';
 import ReplayIcon from "@mui/icons-material/Replay";
 
 const TestInstructionsComp = ({ data, planningData }) => {
@@ -120,13 +120,13 @@ const TestInstructionsComp = ({ data, planningData }) => {
                     marginTop: "10px",
                   }}
                 >
-                  <IconButton aria-label="Download" size="small">
-                    <GetAppIcon />
+                  <IconButton aria-label="Download" size="medium">
+                    <CloudDownloadIcon />
                   </IconButton>
-                  <IconButton aria-label="Play" size="small">
+                  <IconButton aria-label="Play" size="medium">
                     <PlayCircleOutlineIcon />
                   </IconButton>
-                  <IconButton aria-label="Replay" size="small">
+                  <IconButton aria-label="Replay" size="medium">
                     <ReplayIcon />
                   </IconButton>
                 </div>

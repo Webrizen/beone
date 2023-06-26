@@ -44,7 +44,7 @@ const VerticalStepper = () => {
     <Box>
       <Stepper activeStep={activeStep} orientation="vertical">
         {currOrder.map((step, index) => (
-          <Step disabled={true} key={step.stepId} completed={true}>
+          <Step disabled={true} key={step.stepId} completed={true} sx={{ whiteSpace: 'nowrap' }}>
             <StepLabel
               StepIconComponent={StepIcon}
               StepIconProps={{
