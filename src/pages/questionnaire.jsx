@@ -43,7 +43,6 @@ const Questionnaire = () => {
     <>
       <Layout>
         <RouteGuard />
-        {/* Health Questionnaire  */}
         <QuizComponent />
       </Layout>
     </>

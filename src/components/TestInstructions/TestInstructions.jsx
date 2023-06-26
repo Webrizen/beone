@@ -25,14 +25,14 @@ import {
   TableBody,
   TableRow,
   TableCell,
-  Alert
+  Alert,
 } from "@mui/material";
 import {
   RadioButtonUnchecked,
   RadioButtonChecked,
   Email,
 } from "@mui/icons-material";
-import CloseIcon from '@mui/icons-material/Close';
+import CloseIcon from "@mui/icons-material/Close";
 import CurrOrderContext from "../../utils/order_context";
 import baseApi, { Set_order } from "../../utils/common";
 import Swal from "sweetalert2";
@@ -65,7 +65,6 @@ const TestInstructionsComp = ({ data, planningData }) => {
   //   overAllPrepStatus: null,
   //   reorderData: [],
   // });
-
 
   const o_id = localStorage.getItem("currOrder");
   // const handleSubmit = () => {
@@ -183,7 +182,9 @@ const TestInstructionsComp = ({ data, planningData }) => {
 
   return (
     <>
-      <Typography variant="h5" gutterBottom>Test Instructions</Typography>
+      <Typography variant="h5" gutterBottom>
+        Test Instructions
+      </Typography>
       <Divider sx={{ margin: "1rem 0" }} />
       <Typography variant="body1" gutterBottom>
         The kits you received come with fully comprehensive instructions. For
@@ -196,16 +197,47 @@ const TestInstructionsComp = ({ data, planningData }) => {
       <Grid container spacing={2}>
         {videos.map((video, index) => (
           <Grid item xs={12} sm={6} md={3} key={index}>
-            <Card style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', background: 'transparent', boxShadow: 'none', borderRadius: '8px', height: '100%' }}>
+            <Card
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                background: "transparent",
+                boxShadow: "none",
+                borderRadius: "8px",
+                height: "100%",
+              }}
+            >
               <CardMedia
                 component="img"
                 image={video.imageUrl}
                 alt={video.title}
-                style={{ height: '180px', width: '100%', objectFit: 'cover', borderRadius: '8px' }}
+                style={{
+                  height: "180px",
+                  width: "100%",
+                  objectFit: "cover",
+                  borderRadius: "8px",
+                }}
               />
-              <CardContent sx={{ paddingTop: '10px', background: 'white', width: '100%', marginBottom: '0' }}>
-                <Typography variant="body1" style={{ fontWeight: 'bold', textAlign: 'center', fontSize: 'small' }}>
-                  <Link href='/' style={{ textDecoration: 'none' }}>{video.title}</Link>
+              <CardContent
+                sx={{
+                  paddingTop: "10px",
+                  background: "white",
+                  width: "100%",
+                  marginBottom: "0",
+                }}
+              >
+                <Typography
+                  variant="body1"
+                  style={{
+                    fontWeight: "bold",
+                    textAlign: "center",
+                    fontSize: "small",
+                  }}
+                >
+                  <Link href="/" style={{ textDecoration: "none" }}>
+                    {video.title}
+                  </Link>
                 </Typography>
               </CardContent>
             </Card>
@@ -214,11 +246,28 @@ const TestInstructionsComp = ({ data, planningData }) => {
       </Grid>
       <br />
       <div
-        style={{ background: "#fff", borderRadius: "15px", padding: "20px", overflowX: 'scroll' }}
+        style={{
+          background: "#fff",
+          borderRadius: "15px",
+          padding: "20px",
+          overflowX: "scroll",
+        }}
       >
         <Typography variant="body1" gutterBottom>
           Test Intruction Questions <br />
-          <span style={{ color: 'silver', fontSize: 'small', display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '5px' }}><Email />  Check Your Email For Reminders & Answering these questions.</span>
+          <span
+            style={{
+              color: "silver",
+              fontSize: "small",
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              gap: "5px",
+            }}
+          >
+            <Email /> Check Your Email For Reminders & Answering these
+            questions.
+          </span>
         </Typography>
         <Divider sx={{ margin: "1rem 0" }} />
         <Table>
@@ -229,44 +278,89 @@ const TestInstructionsComp = ({ data, planningData }) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {/* {data1.map((item, index) => ( */}
-            {!(main_data.StandardPackageHormonePrep__customerConfirmationStatus) ? <TableRow>
-              <TableCell>You have not confirmed yet if you are prepared for the Hormone test on {plan.hormoneTestSamplingDate}
-                . Please check you email for a reminder. Select "Yes" or "No" depending on how your test preparation happened.
-              </TableCell>
-              <TableCell>
-                <Alert severity="info" sx={{ width: 'min-content', whiteSpace: 'nowrap' }}>Check Your Email</Alert>
-              </TableCell>
-            </TableRow> : ""}
-            {!(main_data.StandardPackageHormoneSampleCollect__customerConfirmationStatus) ? <TableRow>
-              <TableCell>Your Hormone sampling date is on {plan.hormoneTestSamplingDate}. You can confirm only after that date.
-                Please check you email for a reminder. Select "Yes" or "No" depending on how your test sampling happened.
-              </TableCell>
-              <TableCell>
-                <Alert severity="info" sx={{ width: 'min-content', whiteSpace: 'nowrap' }}>Check Your Email</Alert>
-              </TableCell>
-            </TableRow> : ""}
-            {!(main_data.StandardPackageMetabolicPrep__customerConfirmationStatus) ? <TableRow>
-              <TableCell>You have not confirmed yet if you are prepared for the Metabolic test on {plan.metabolicTestDate}
-                . Please check you email for a reminder. Select "Yes" or "No" depending on how your test preparation happened.
-              </TableCell>
-              <TableCell>
-                <Alert severity="info" sx={{ width: 'min-content', whiteSpace: 'nowrap' }}>Check Your Email</Alert>
-              </TableCell>
-            </TableRow> : ""}
-            {!(main_data.StandardPackageMetabolicSampleCollect__customerConfirmationStatus) ? <TableRow>
-              <TableCell>Your Metabolic sampling date is on {plan.metabolicTestDate} . You can confirm only after that date.
-                Please check you email for a reminder. Select "Yes" or "No" depending on how your test sampling happened.
-              </TableCell>
-              <TableCell>
-                <Alert severity="info" sx={{ width: 'min-content', whiteSpace: 'nowrap' }}>Check Your Email</Alert>
-              </TableCell>
-            </TableRow> : ""}
-
+            {!main_data.StandardPackageHormonePrep__customerConfirmationStatus ? (
+              <TableRow>
+                <TableCell>
+                  You have not confirmed yet if you are prepared for the Hormone
+                  test on {plan.hormoneTestSamplingDate}. Please check your
+                  email for a reminder. Select "Yes" or "No" depending on how
+                  your test preparation happened.
+                </TableCell>
+                <TableCell>
+                  <Alert
+                    severity="info"
+                    sx={{ width: "min-content", whiteSpace: "nowrap" }}
+                  >
+                    Check Your Email
+                  </Alert>
+                </TableCell>
+              </TableRow>
+            ) : (
+              ""
+            )}
+            {!main_data.StandardPackageHormoneSampleCollect__customerConfirmationStatus ? (
+              <TableRow>
+                <TableCell>
+                  Your Hormone sampling date is on{" "}
+                  {plan.hormoneTestSamplingDate}. You can confirm only after
+                  that date. Please check your email for a reminder. Select
+                  "Yes" or "No" depending on how your test sampling happened.
+                </TableCell>
+                <TableCell>
+                  <Alert
+                    severity="info"
+                    sx={{ width: "min-content", whiteSpace: "nowrap" }}
+                  >
+                    Check Your Email
+                  </Alert>
+                </TableCell>
+              </TableRow>
+            ) : (
+              ""
+            )}
+            {!main_data.StandardPackageMetabolicPrep__customerConfirmationStatus ? (
+              <TableRow>
+                <TableCell>
+                  You have not confirmed yet if you are prepared for the
+                  Metabolic test on {plan.metabolicTestDate}. Please check your
+                  email for a reminder. Select "Yes" or "No" depending on how
+                  your test preparation happened.
+                </TableCell>
+                <TableCell>
+                  <Alert
+                    severity="info"
+                    sx={{ width: "min-content", whiteSpace: "nowrap" }}
+                  >
+                    Check Your Email
+                  </Alert>
+                </TableCell>
+              </TableRow>
+            ) : (
+              ""
+            )}
+            {!main_data.StandardPackageMetabolicSampleCollect__customerConfirmationStatus ? (
+              <TableRow>
+                <TableCell>
+                  Your Metabolic sampling date is on {plan.metabolicTestDate} .
+                  You can confirm only after that date. Please check your email
+                  for a reminder. Select "Yes" or "No" depending on how your
+                  test sampling happened.
+                </TableCell>
+                <TableCell>
+                  <Alert
+                    severity="info"
+                    sx={{ width: "min-content", whiteSpace: "nowrap" }}
+                  >
+                    Check Your Email
+                  </Alert>
+                </TableCell>
+              </TableRow>
+            ) : (
+              ""
+            )}
           </TableBody>
         </Table>
       </div>
-      {/* SHow This After Form Submit  */}
       <instructionsData />
     </>
   );
