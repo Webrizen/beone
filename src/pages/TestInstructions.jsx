@@ -4,6 +4,7 @@ import '../styles/dashboard.css';
 import BackgroundImage from '../Assets/images/bg-login-01.png';
 import RouteGuard from '../components/routeguard';
 import TestInstructionsComp from '../components/TestInstructions/TestInstructions';
+import InstructionsData from '../components/TestInstructions/instructionsData';
 import {
   Typography,
   Divider,
@@ -23,7 +24,6 @@ import Layout from '../components/Layout/layout';
 import UserOrders from '../components/userOrders';
 import { Avatar } from '@mui/material';
 import Calendar from '../components/calendar';
-import InstructionsData from '../components/TestInstructions/InstructionsData';
 import CurrOrderContext from '../utils/order_context';
 // import CurrOrderContext from '../utils/order_context';
 // import CurrOrderContext from '../utils/order_context';

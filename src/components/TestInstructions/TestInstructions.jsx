@@ -222,12 +222,12 @@ const TestInstructionsComp = ({ data, planningData }) => {
         </Typography>
         <Divider sx={{ margin: "1rem 0" }} />
         <Table>
-          {/* <TableHead>
+          <TableHead>
             <TableRow>
               <TableCell>Questions</TableCell>
               <TableCell>Options</TableCell>
             </TableRow>
-          </TableHead> */}
+          </TableHead>
           <TableBody>
             {/* {data1.map((item, index) => ( */}
             {!(main_data.StandardPackageHormonePrep__customerConfirmationStatus) ? <TableRow>
