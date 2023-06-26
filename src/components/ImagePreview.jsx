@@ -12,7 +12,7 @@ const ImagePreview = ({ id }) => {
   return (
     <>
      <Box sx={{ p: 2, background: "white", borderRadius: '15px', width: '100%' }}>
-      <Typography variant="h5" gutterBottom>
+      <Typography variant="h5" gutterBottom sx={{ borderBottom: '0.1px solid rgba(0,0,0,0.1)', padding: '10px', marginBottom: '10px' }}>
         Immune test picture
       </Typography>
       <Typography variant="body1" gutterBottom>
