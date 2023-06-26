@@ -214,7 +214,7 @@ const TestInstructionsComp = ({ data }) => {
         style={{ background: "#fff", borderRadius: "15px", padding: "20px", overflowX: 'scroll' }}
       >
         <Typography variant="body1" gutterBottom>
-          Answer Atleast One Question To Reach Next Step* <br />
+          Test Intruction Questions <br />
           <span style={{ color: 'silver', fontSize: 'small', display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '5px' }}><Email />  Check Your Email For Reminders & Answering these questions.</span>
         </Typography>
         <Divider sx={{ margin: "1rem 0" }} />

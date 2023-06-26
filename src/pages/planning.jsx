@@ -233,6 +233,7 @@ const Planning = (props) => {
       <Layout>
         <RouteGuard />
             <Box sx={{ width: "100%" }}>
+              <Typography variant="h5">Plaining</Typography>
               <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
                 <Tabs
                   value={value}
