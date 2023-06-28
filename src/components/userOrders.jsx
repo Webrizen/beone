@@ -6,7 +6,7 @@ import {
   Select,
   MenuItem,
   Box,
-  Skeleton, // Import the Skeleton component from MUI
+  Skeleton,
 } from "@mui/material";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { Link, useNavigate, useParams } from "react-router-dom";
@@ -19,7 +19,9 @@ const UserOrders = () => {
   const [order_id, setorder_id] = useState();
   const [all_orders, setall_orders] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null); // State to track server error
   const { AllOrder, setAllOrder } = useContext(AllOrderContext);
+
   useEffect(() => {
     baseApi
       .get("/dashboard")
@@ -31,6 +33,13 @@ const UserOrders = () => {
       })
       .catch((error) => {
         console.error(error);
+        if (error.response && error.response.status === 401) {
+          setError("Unauthorized access"); // Set error message for 401 status
+        } else if (error.response && error.response.status === 404) {
+          setError("Data not found"); // Set error message for 404 status
+        } else {
+          setError("Unauthorized access, please try again."); // Set generic error message for other error codes
+        }
         setLoading(false);
       });
   }, []);
@@ -44,12 +53,22 @@ const UserOrders = () => {
 
   return (
     <>
-      {loading ? ( // Render Skeleton component if loading is true
+      {error ? ( // Render error message if error state is not null
         <Box>
-          <Skeleton variant="rectangular" height={56} sx={{ borderRadius: '10px' }} />
+          <p style={{ textAlign: 'center' }}>{error}</p>
           <Divider sx={{ margin: "1rem 0" }} />
         </Box>
-      ) : ( // Render the actual FormControl if loading is false
+      ) : loading ? ( // Render Skeleton component if loading is true and error state is null
+        <Box>
+          <Skeleton
+            variant="rectangular"
+            height={56}
+            sx={{ borderRadius: "10px" }}
+          />
+          <Divider sx={{ margin: "1rem 0" }} />
+        </Box>
+      ) : (
+        // Render the actual FormControl if loading is false and error state is null
         <FormControl fullWidth>
           <InputLabel id="demo-simple-select-label">Current Order</InputLabel>
           <Select

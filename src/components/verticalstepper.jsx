@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Box from "@mui/material/Box";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
@@ -12,11 +12,44 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import UpdateIcon from "@mui/icons-material/Update";
 import { Link, useParams } from "react-router-dom";
 import CurrOrderContext from "../utils/order_context";
+import Skeleton from "@mui/material/Skeleton";
 
 const VerticalStepper = () => {
   const [activeStep, setActiveStep] = useState(0);
+  const [dataLoaded, setDataLoaded] = useState(false);
+  const [loading, setLoading] = useState(true); // Loading state
+  const [error, setError] = useState(false); // Error state
   const { currOrder, setCurrOrder } = useContext(CurrOrderContext);
   const params = useParams();
+
+  useEffect(() => {
+    // Simulating data fetching from the backend
+    fetchData()
+      .then((data) => {
+        setCurrOrder(data);
+        setLoading(false);
+        setDataLoaded(true);
+      })
+      .catch((error) => {
+        setError(true);
+        setLoading(false);
+        setDataLoaded(true);
+      });
+  }, [setCurrOrder]);
+
+  const fetchData = () => {
+    // Simulated async fetch
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        const data = []; // Replace with your actual data retrieval logic
+        if (data.length === 0) {
+          reject("No data available");
+        } else {
+          resolve(data);
+        }
+      }, 2000); // Simulating a delay of 2 seconds
+    });
+  };
 
   const StepIcon = ({ id, step, completed }) => {
     if (completed) {
@@ -78,6 +111,8 @@ const VerticalStepper = () => {
       </Stepper>
     </Box>
   );
+
+
 };
 
 export default VerticalStepper;
