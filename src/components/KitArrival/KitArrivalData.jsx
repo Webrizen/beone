@@ -86,6 +86,18 @@ const KitArrivalData = ({ data }) => {
                     </Typography>
                   </TableCell>
                 </TableRow>
+                <TableRow>
+                  <TableCell>
+                    <Typography variant="body1">
+                    Package Received on:
+                    </Typography>
+                  </TableCell>
+                  <TableCell align="right">
+                    <Typography variant="body1">
+                      {data.completedAt}
+                    </Typography>
+                  </TableCell>
+                </TableRow>
               </TableBody>
             </Table>
           </TableContainer>

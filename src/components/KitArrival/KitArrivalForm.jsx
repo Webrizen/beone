@@ -22,7 +22,6 @@ const KitArrivalForm = ({ setOrder }) => {
   };
 
   const handleDoneButtonClick = () => {
-
     const o_id = localStorage.getItem("currOrder");
     baseApi
       .post(`/dashboard/${o_id}/complete-confirm-shipment`,
@@ -46,12 +45,24 @@ const KitArrivalForm = ({ setOrder }) => {
       .catch((error) => {
         console.error("kit arrival error", error);
       });
-
   };
 
   return (
     <>
       <Box sx={{ flexGrow: 1, background: 'white', borderRadius: '7px', padding: '20px' }}>
+        <Typography
+          variant="h4"
+          gutterBottom
+          sx={{
+            fontWeight: 700,
+            background: "linear-gradient(50deg, #45d9c9, #84b3c7)",
+            WebkitTextFillColor: "transparent",
+            WebkitBackgroundClip: "text",
+            backgroundClip: "text",
+          }}
+        >
+          {packageArrived ? "You are confirming that you have received the package." : "Package arrival not confirmed yet!"}
+        </Typography>
         <FormGroup>
           <FormControlLabel
             control={
@@ -74,7 +85,7 @@ const KitArrivalForm = ({ setOrder }) => {
             onClick={handleDoneButtonClick}
             disabled={!packageArrived}
           >
-            Done
+            Submit
           </Button>
         </Grid>
       </Box>
