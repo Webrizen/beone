@@ -10,7 +10,7 @@ import {
   TableRow,
   TableCell,
 } from "@mui/material";
-
+import { change_format } from "../../utils/common";
 const KitArrivalData = ({ data }) => {
   return (
     <>
@@ -89,12 +89,12 @@ const KitArrivalData = ({ data }) => {
                 <TableRow>
                   <TableCell>
                     <Typography variant="body1">
-                    Package Received on:
+                      Package Received on:
                     </Typography>
                   </TableCell>
                   <TableCell align="right">
                     <Typography variant="body1">
-                      {data.completedAt}
+                      {change_format(data.packageReceiptStatusDate)}
                     </Typography>
                   </TableCell>
                 </TableRow>
@@ -104,7 +104,7 @@ const KitArrivalData = ({ data }) => {
           <div className="two-col-kit" style={{ color: "lightgray" }}>
             <div className="left-data-kit">
               <Typography variant="body1">Completed At:</Typography>
-              <Typography variant="body1">{data.completedAt}</Typography>
+              <Typography variant="body1">{change_format(data.completedAt)}</Typography>
             </div>
             {"completedIn" in data ? (
               <div className="right-data-kit">

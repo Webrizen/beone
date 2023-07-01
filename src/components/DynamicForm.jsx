@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Grid from "@mui/material/Grid";
 import FormRenderer from "@data-driven-forms/react-form-renderer/form-renderer";
 import componentTypes from "@data-driven-forms/react-form-renderer/component-types";
@@ -9,7 +9,7 @@ import TextArea from "@data-driven-forms/mui-component-mapper/textarea";
 import SubForm from "@data-driven-forms/mui-component-mapper/sub-form";
 import Checkbox from "@data-driven-forms/mui-component-mapper/checkbox";
 import Radio from "@data-driven-forms/mui-component-mapper/radio";
-
+import baseApi from "../utils/common";
 const componentMapper = {
   [componentTypes.TEXT_FIELD]: TextField,
   [componentTypes.TEXTAREA]: TextArea,
@@ -105,6 +105,20 @@ const schema = {
 const FormTemplateCanReset = (props) => <FormTemplate {...props} canReset />;
 
 const DynamicForm = () => {
+  const [FormSchema, setFormSchema] = useState({});
+  useEffect(() => {
+    console.log("form schems", FormSchema);
+  }, [FormSchema]);
+  useEffect(() => {
+    baseApi.get(`/questionnaires`).then((response) => {
+      console.log("questionare data", response.data.questionJson);
+      setFormSchema(response.data.questionJson);
+      console.log("form schems", FormSchema);
+    }).catch((error) => {
+      console.log("questionare error:", error)
+    })
+  }, []);
+
   return (
     <Grid spacing={4} container>
       <FormRenderer

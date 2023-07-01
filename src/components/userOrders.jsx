@@ -21,28 +21,31 @@ const UserOrders = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null); // State to track server error
   const { AllOrder, setAllOrder } = useContext(AllOrderContext);
-
   useEffect(() => {
-    baseApi
-      .get("/dashboard")
-      .then((response) => {
-        const arr = response.data;
-        arr.sort((a, b) => a.createdAt - b.createdAt);
-        setall_orders(arr.reverse());
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error(error);
-        if (error.response && error.response.status === 401) {
-          setError("Unauthorized access"); // Set error message for 401 status
-        } else if (error.response && error.response.status === 404) {
-          setError("Data not found"); // Set error message for 404 status
-        } else {
-          setError("Unauthorized access, please try again."); // Set generic error message for other error codes
-        }
-        setLoading(false);
-      });
-  }, []);
+    console.log("all orders from userorders", AllOrder);
+
+  }, [AllOrder]);
+  // useEffect(() => {
+  //   baseApi
+  //     .get("/dashboard")
+  //     .then((response) => {
+  //       const arr = response.data;
+  //       arr.sort((a, b) => a.createdAt - b.createdAt);
+  //       setall_orders(arr.reverse());
+  //       setLoading(false);
+  //     })
+  //     .catch((error) => {
+  //       console.error(error);
+  //       if (error.response && error.response.status === 401) {
+  //         setError("Unauthorized access"); // Set error message for 401 status
+  //       } else if (error.response && error.response.status === 404) {
+  //         setError("Data not found"); // Set error message for 404 status
+  //       } else {
+  //         setError("Unauthorized access, please try again."); // Set generic error message for other error codes
+  //       }
+  //       setLoading(false);
+  //     });
+  // }, []);
 
   const navigate = useNavigate();
 
@@ -53,39 +56,22 @@ const UserOrders = () => {
 
   return (
     <>
-      {error ? ( // Render error message if error state is not null
-        <Box>
-          <p style={{ textAlign: 'center' }}>{error}</p>
-          <Divider sx={{ margin: "1rem 0" }} />
-        </Box>
-      ) : loading ? ( // Render Skeleton component if loading is true and error state is null
-        <Box>
-          <Skeleton
-            variant="rectangular"
-            height={56}
-            sx={{ borderRadius: "10px" }}
-          />
-          <Divider sx={{ margin: "1rem 0" }} />
-        </Box>
-      ) : (
-        // Render the actual FormControl if loading is false and error state is null
-        <FormControl fullWidth>
-          <InputLabel id="demo-simple-select-label">Current Order</InputLabel>
-          <Select
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            label="Select Your Order"
-            defaultValue={localStorage.getItem("currOrder")}
-            onChange={changeOrder}
-          >
-            {AllOrder.map((order, index) => (
-              <MenuItem key={order} value={order}>
-                {order}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-      )}
+      <FormControl fullWidth>
+        <InputLabel id="demo-simple-select-label">Current Order</InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          label="Select Your Order"
+          defaultValue={localStorage.getItem("currOrder")}
+          onChange={changeOrder}
+        >
+          {AllOrder.map((order, index) => (
+            <MenuItem key={order} value={order}>
+              {order}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
       <Divider sx={{ margin: "1rem 0" }} />
     </>
   );

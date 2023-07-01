@@ -169,6 +169,7 @@ const TestInstructionsComp = ({ data, planningData }) => {
             </TableRow>
           </TableHead>
           <TableBody>
+            {/* homrone prep status  */}
             {!main_data.StandardPackageHormonePrep__customerConfirmationStatus ? (
               <TableRow>
                 <TableCell>
@@ -187,6 +188,21 @@ const TestInstructionsComp = ({ data, planningData }) => {
                 </TableCell>
               </TableRow>
             ) : null}
+            {main_data.StandardPackageHormonePrep__customerConfirmationStatus === "Y" ? (
+              <TableRow>
+                <TableCell style={{ color: "green" }}>
+                  You confirmed that you are ready to go ahead with the sampling on date.
+                </TableCell>
+              </TableRow>
+            ) : null}
+            {main_data.StandardPackageHormonePrep__customerConfirmationStatus === "N" ? (
+              <TableRow>
+                <TableCell style={{ color: "red" }}>
+                  It seems that uou need to reschedule your sampling correct ?
+                </TableCell>
+              </TableRow>
+            ) : null}
+            {/* hormone Sampling status  */}
             {!main_data.StandardPackageHormoneSampleCollect__customerConfirmationStatus ? (
               <TableRow>
                 <TableCell>
@@ -205,6 +221,22 @@ const TestInstructionsComp = ({ data, planningData }) => {
                 </TableCell>
               </TableRow>
             ) : null}
+            {main_data.StandardPackageHormoneSampleCollect__customerConfirmationStatus === "Y" ? (
+              <TableRow>
+                <TableCell style={{ color: "green" }}>
+                  You confirmed on date that your sampling was succesfull.Great!!
+                </TableCell>
+              </TableRow>
+            ) : null}
+            {main_data.StandardPackageHormoneSampleCollect__customerConfirmationStatus === "N" ? (
+              <TableRow>
+                <TableCell style={{ color: "red" }}>
+                  It seems that you ran into some problems with sampling correct?
+                </TableCell>
+
+              </TableRow>
+            ) : null}
+            {/* metabolic prep status  */}
             {!main_data.StandardPackageMetabolicPrep__customerConfirmationStatus ? (
               <TableRow>
                 <TableCell>
@@ -223,6 +255,23 @@ const TestInstructionsComp = ({ data, planningData }) => {
                 </TableCell>
               </TableRow>
             ) : null}
+            {main_data.StandardPackageMetabolicPrep__customerConfirmationStatus === "Y" ? (
+              <TableRow>
+                <TableCell style={{ color: "green" }}>
+                  You confirmed that you are ready to go ahead with the sampling on date.
+                </TableCell>
+
+              </TableRow>
+            ) : null}
+            {main_data.StandardPackageMetabolicPrep__customerConfirmationStatus === "N" ? (
+              <TableRow>
+                <TableCell style={{ color: "red" }}>
+                  It seems that you need to reschedule your sampling correct ?
+                </TableCell>
+
+              </TableRow>
+            ) : null}
+            {/* metabolic sample status */}
             {!main_data.StandardPackageMetabolicSampleCollect__customerConfirmationStatus ? (
               <TableRow>
                 <TableCell>
@@ -241,18 +290,23 @@ const TestInstructionsComp = ({ data, planningData }) => {
                 </TableCell>
               </TableRow>
             ) : null}
-            {!(
-              main_data.StandardPackageHormonePrep__customerConfirmationStatus ||
-              main_data.StandardPackageHormoneSampleCollect__customerConfirmationStatus ||
-              main_data.StandardPackageMetabolicPrep__customerConfirmationStatus ||
-              main_data.StandardPackageMetabolicSampleCollect__customerConfirmationStatus
-            ) && (
+            {main_data.StandardPackageMetabolicSampleCollect__customerConfirmationStatus === "Y" ? (
               <TableRow>
-                <TableCell colSpan={2} align="center">
-                  No Data Available
+                <TableCell style={{ color: "green" }}>
+                  You confirmed on date that your sampling was succesfull.Great!!
                 </TableCell>
               </TableRow>
-            )}
+            ) : null}
+            {main_data.StandardPackageMetabolicSampleCollect__customerConfirmationStatus === "N" ? (
+              <TableRow>
+                <TableCell style={{ color: "red" }}>
+                  It seems that you ran into some problems with sampling correct?
+                </TableCell>
+
+              </TableRow>
+            ) : null}
+
+            {/* end  */}
           </TableBody>
         </Table>
       </div>

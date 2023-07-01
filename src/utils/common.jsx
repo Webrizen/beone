@@ -50,8 +50,8 @@ export const Set_order = (id, setCurrOrder, navigate) => {
                     findFirstNotDone = true
                     foundData = element
                 } else {
-                    console.log(element);
-                    console.log("no redirecting");
+                    // console.log(element);
+                    // console.log("no redirecting");
                 }
             }
         };
@@ -75,3 +75,17 @@ export function toCamelCaseWithSpacing(str) {
     // Join the words with spaces in between
     return words.join(' ');
 }
+export const change_format = (val) => {
+    // return
+    // var mydate = new Date(val);
+    const date = new Date(val);
+
+    const options = {
+        weekday: "long",
+        month: "long",
+        day: "numeric",
+        year: "numeric",
+    };
+    const formattedDate = date.toLocaleDateString("en-US", options);
+    return formattedDate;
+};

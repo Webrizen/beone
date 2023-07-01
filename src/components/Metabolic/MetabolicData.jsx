@@ -10,22 +10,9 @@ import {
   TableHead,
   TableRow,
 } from "@mui/material";
-
+import { change_format } from "../../utils/common";
 const MetabolicData = ({ data }) => {
-  const change_format = (val) => {
-    // return
-    // var mydate = new Date(val);
-    const date = new Date(val);
 
-    const options = {
-      weekday: "long",
-      month: "long",
-      day: "numeric",
-      year: "numeric",
-    };
-    const formattedDate = date.toLocaleDateString("en-US", options);
-    return formattedDate;
-  };
 
   const convertMicrosecondsToDays = (microseconds) => {
     const milliseconds = microseconds / 1000;
