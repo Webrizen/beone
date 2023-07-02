@@ -8,6 +8,8 @@ import CircularStatic from "./circularprogresswithlabel";
 import UserContext from "../utils/user_context";
 import { BASE_API } from "../utils/common";
 import CurrOrderContext from "../utils/order_context";
+import NotificationsIcon from '@mui/icons-material/Notifications';
+import Notifications from "./Notifications";
 
 const Navbar = (props) => {
   const { main_user, setmain_user } = useContext(UserContext);
@@ -40,6 +42,11 @@ const Navbar = (props) => {
           <Tooltip title="Status">
             <div className="ico">
               <CircularStatic order={currOrder} />
+            </div>
+          </Tooltip>
+          <Tooltip title="Notifications">
+            <div className="ico">
+              <Notifications/>
             </div>
           </Tooltip>
           <Tooltip title="User Controls">

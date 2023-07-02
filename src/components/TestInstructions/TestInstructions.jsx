@@ -24,6 +24,7 @@ import CurrOrderContext from "../../utils/order_context";
 import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
 import CloudDownloadIcon from "@mui/icons-material/CloudDownload";
 import ReplayIcon from "@mui/icons-material/Replay";
+import EmailTemplate from '../EmailTemplate';
 
 const TestInstructionsComp = ({ data, planningData }) => {
   const [main_data, setmain_data] = useState({ ...data });
@@ -326,18 +327,10 @@ const TestInstructionsComp = ({ data, planningData }) => {
               </TableRow>
             ) : null}
             {/* end  */}
-            {/* form wala component  */}
-            <TableRow>
-              <TableCell>Choose Something</TableCell>
-              <TableCell>
-                <RadioGroup sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '10px' }}>
-                  <FormControlLabel value="yes" control={<Radio />} label="Yes"/>
-                  <FormControlLabel value="no" control={<Radio />} label="No" />
-                </RadioGroup>
-              </TableCell>
-            </TableRow>
           </TableBody>
         </Table>
+            {/* form wala component  */}
+            <EmailTemplate/>
       </div>
       <instructionsData />
     </>
