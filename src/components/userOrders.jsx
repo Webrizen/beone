@@ -64,6 +64,14 @@ const UserOrders = () => {
           label="Select Your Order"
           defaultValue={localStorage.getItem("currOrder")}
           onChange={changeOrder}
+          MenuProps={{
+            PaperProps: {
+              sx: {
+                height: '500px', 
+                overflowY: 'scroll'
+              },
+            },
+          }}
         >
           {AllOrder.map((order, index) => (
             <MenuItem key={order} value={order}>

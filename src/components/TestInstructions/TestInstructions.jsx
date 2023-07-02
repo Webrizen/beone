@@ -14,11 +14,15 @@ import {
   TableCell,
   Alert,
   IconButton,
+  RadioGroup,
+  FormControlLabel,
+  Radio,
+  FormControl,
 } from "@mui/material";
 import { Email } from "@mui/icons-material";
 import CurrOrderContext from "../../utils/order_context";
 import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
-import CloudDownloadIcon from '@mui/icons-material/CloudDownload';
+import CloudDownloadIcon from "@mui/icons-material/CloudDownload";
 import ReplayIcon from "@mui/icons-material/Replay";
 
 const TestInstructionsComp = ({ data, planningData }) => {
@@ -53,6 +57,12 @@ const TestInstructionsComp = ({ data, planningData }) => {
       imageUrl: "https://placehold.co/400",
     },
   ];
+
+  const [selectedOption, setSelectedOption] = useState("");
+
+  const handleChange = (event) => {
+    setSelectedOption(event.target.value);
+  };
 
   return (
     <>
@@ -188,14 +198,17 @@ const TestInstructionsComp = ({ data, planningData }) => {
                 </TableCell>
               </TableRow>
             ) : null}
-            {main_data.StandardPackageHormonePrep__customerConfirmationStatus === "Y" ? (
+            {main_data.StandardPackageHormonePrep__customerConfirmationStatus ===
+            "Y" ? (
               <TableRow>
                 <TableCell style={{ color: "green" }}>
-                  You confirmed that you are ready to go ahead with the sampling on date.
+                  You confirmed that you are ready to go ahead with the sampling
+                  on date.
                 </TableCell>
               </TableRow>
             ) : null}
-            {main_data.StandardPackageHormonePrep__customerConfirmationStatus === "N" ? (
+            {main_data.StandardPackageHormonePrep__customerConfirmationStatus ===
+            "N" ? (
               <TableRow>
                 <TableCell style={{ color: "red" }}>
                   It seems that uou need to reschedule your sampling correct ?
@@ -221,19 +234,22 @@ const TestInstructionsComp = ({ data, planningData }) => {
                 </TableCell>
               </TableRow>
             ) : null}
-            {main_data.StandardPackageHormoneSampleCollect__customerConfirmationStatus === "Y" ? (
+            {main_data.StandardPackageHormoneSampleCollect__customerConfirmationStatus ===
+            "Y" ? (
               <TableRow>
                 <TableCell style={{ color: "green" }}>
-                  You confirmed on date that your sampling was succesfull.Great!!
+                  You confirmed on date that your sampling was
+                  succesfull.Great!!
                 </TableCell>
               </TableRow>
             ) : null}
-            {main_data.StandardPackageHormoneSampleCollect__customerConfirmationStatus === "N" ? (
+            {main_data.StandardPackageHormoneSampleCollect__customerConfirmationStatus ===
+            "N" ? (
               <TableRow>
                 <TableCell style={{ color: "red" }}>
-                  It seems that you ran into some problems with sampling correct?
+                  It seems that you ran into some problems with sampling
+                  correct?
                 </TableCell>
-
               </TableRow>
             ) : null}
             {/* metabolic prep status  */}
@@ -255,20 +271,21 @@ const TestInstructionsComp = ({ data, planningData }) => {
                 </TableCell>
               </TableRow>
             ) : null}
-            {main_data.StandardPackageMetabolicPrep__customerConfirmationStatus === "Y" ? (
+            {main_data.StandardPackageMetabolicPrep__customerConfirmationStatus ===
+            "Y" ? (
               <TableRow>
                 <TableCell style={{ color: "green" }}>
-                  You confirmed that you are ready to go ahead with the sampling on date.
+                  You confirmed that you are ready to go ahead with the sampling
+                  on date.
                 </TableCell>
-
               </TableRow>
             ) : null}
-            {main_data.StandardPackageMetabolicPrep__customerConfirmationStatus === "N" ? (
+            {main_data.StandardPackageMetabolicPrep__customerConfirmationStatus ===
+            "N" ? (
               <TableRow>
                 <TableCell style={{ color: "red" }}>
                   It seems that you need to reschedule your sampling correct ?
                 </TableCell>
-
               </TableRow>
             ) : null}
             {/* metabolic sample status */}
@@ -290,23 +307,35 @@ const TestInstructionsComp = ({ data, planningData }) => {
                 </TableCell>
               </TableRow>
             ) : null}
-            {main_data.StandardPackageMetabolicSampleCollect__customerConfirmationStatus === "Y" ? (
+            {main_data.StandardPackageMetabolicSampleCollect__customerConfirmationStatus ===
+            "Y" ? (
               <TableRow>
                 <TableCell style={{ color: "green" }}>
-                  You confirmed on date that your sampling was succesfull.Great!!
+                  You confirmed on date that your sampling was
+                  succesfull.Great!!
                 </TableCell>
               </TableRow>
             ) : null}
-            {main_data.StandardPackageMetabolicSampleCollect__customerConfirmationStatus === "N" ? (
+            {main_data.StandardPackageMetabolicSampleCollect__customerConfirmationStatus ===
+            "N" ? (
               <TableRow>
                 <TableCell style={{ color: "red" }}>
-                  It seems that you ran into some problems with sampling correct?
+                  It seems that you ran into some problems with sampling
+                  correct?
                 </TableCell>
-
               </TableRow>
             ) : null}
-
             {/* end  */}
+            {/* form wala component  */}
+            <TableRow>
+              <TableCell>Choose Something</TableCell>
+              <TableCell>
+                <RadioGroup sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '10px' }}>
+                  <FormControlLabel value="yes" control={<Radio />} label="Yes"/>
+                  <FormControlLabel value="no" control={<Radio />} label="No" />
+                </RadioGroup>
+              </TableCell>
+            </TableRow>
           </TableBody>
         </Table>
       </div>
