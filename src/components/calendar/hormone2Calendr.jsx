@@ -242,7 +242,7 @@ const Hormone2Calendr = ({
               >
                 .
               </span>{" "}
-              Prepartion Dates{" "}
+              Preparation  Dates{" "}
             </li>
             <li
               style={{
