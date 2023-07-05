@@ -15,37 +15,37 @@ const MetaBolicEvents = ({ events }) => {
         {
             title: "Prep 1",
             start: formteD(events.StandardPackageMetabolic__PrepDate1),
-            backgroundColor: "#CDC2AE",
+            backgroundColor: "#63a7ff",
             textColor: "black",
         },
         {
             title: "Prep 2",
             start: formteD(events.StandardPackageMetabolic__PrepDate2),
-            backgroundColor: "#CDC2AE",
+            backgroundColor: "#63a7ff",
             textColor: "black",
         },
         {
             title: "Prep 3",
             start: formteD(events.StandardPackageMetabolic__PrepDate3),
-            backgroundColor: "#CDC2AE",
+            backgroundColor: "#63a7ff",
             textColor: "black",
         },
         {
             title: "Prep 4",
             start: formteD(events.StandardPackageMetabolic__PrepDate4),
-            backgroundColor: "#CDC2AE",
+            backgroundColor: "#63a7ff",
             textColor: "black",
         },
         {
             title: "Test 1",
             start: formteD(events.StandardPackageMetabolic__testDate1),
-            backgroundColor: "#ECE5C7",
+            backgroundColor: "#FFA000",
             textColor: "black",
         },
         {
             title: "Test 2",
             start: formteD(events.StandardPackageMetabolic__testDate2),
-            backgroundColor: "#ECE5C7",
+            backgroundColor: "#FFA000",
             textColor: "black",
         },
         // Add more events as needed

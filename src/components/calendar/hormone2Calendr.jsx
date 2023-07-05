@@ -107,7 +107,7 @@ const Hormone2Calendr = ({
       {
         start: getFutDte("P", 0, selectInfo.dateStr),
         title: "Test Day 1",
-        backgroundColor: "#a0dcff",
+        backgroundColor: "#FFA000",
         textColor: "black",
       },
       {
@@ -219,6 +219,54 @@ const Hormone2Calendr = ({
                 .
               </span>{" "}
               Enabled Dates{" "}
+            </li>
+            <li
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+                gap: "10px",
+              }}
+            >
+              <span
+                style={{
+                  backgroundColor: "#63a7ff",
+                  height: "20px",
+                  width: "50px",
+                  color: "#63a7ff",
+                  display: "flex",
+                  flexDirection: "row",
+                  border: "0.1px solid rgba(0,0,0,0.1)",
+                  borderRadius: "4px",
+                }}
+              >
+                .
+              </span>{" "}
+              Prepartion Dates{" "}
+            </li>
+            <li
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+                gap: "10px",
+              }}
+            >
+              <span
+                style={{
+                  backgroundColor: "#FFA000",
+                  height: "20px",
+                  width: "50px",
+                  color: "#FFA000",
+                  display: "flex",
+                  flexDirection: "row",
+                  border: "0.1px solid rgba(0,0,0,0.1)",
+                  borderRadius: "4px",
+                }}
+              >
+                .
+              </span>{" "}
+              Test Dates{" "}
             </li>
             <br />
             {showAlert && (

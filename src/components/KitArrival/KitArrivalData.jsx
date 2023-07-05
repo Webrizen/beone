@@ -101,7 +101,7 @@ const KitArrivalData = ({ data }) => {
               </TableBody>
             </Table>
           </TableContainer>
-          <div className="two-col-kit" style={{ color: "lightgray" }}>
+          <div className="two-col-kit" style={{ color: "silver" }}>
             <div className="left-data-kit">
               <Typography variant="body1">Completed At:</Typography>
               <Typography variant="body1">{change_format(data.completedAt)}</Typography>
