@@ -18,13 +18,17 @@ import {
   FormControlLabel,
   Radio,
   FormControl,
+  Button,
+  Checkbox,
 } from "@mui/material";
 import { Email } from "@mui/icons-material";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import PriorityHighIcon from "@mui/icons-material/PriorityHigh";
 import CurrOrderContext from "../../utils/order_context";
 import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
 import CloudDownloadIcon from "@mui/icons-material/CloudDownload";
 import ReplayIcon from "@mui/icons-material/Replay";
-import EmailTemplate from '../EmailTemplate';
+import EmailTemplate from "../EmailTemplate";
 
 const TestInstructionsComp = ({ data, planningData }) => {
   const [main_data, setmain_data] = useState({ ...data });
@@ -63,6 +67,22 @@ const TestInstructionsComp = ({ data, planningData }) => {
 
   const handleChange = (event) => {
     setSelectedOption(event.target.value);
+  };
+
+  const [confirmed, setConfirmed] = useState(false);
+
+  const handleCheckboxChange = (event) => {
+    setConfirmed(event.target.checked);
+  };
+
+  const handleProceedClick = () => {
+    if (confirmed) {
+      // Proceed with the necessary actions
+      console.log("Proceeding...");
+    } else {
+      // Display an error or warning message
+      console.log("Please confirm that all queries have been answered.");
+    }
   };
 
   return (
@@ -206,13 +226,23 @@ const TestInstructionsComp = ({ data, planningData }) => {
                   You confirmed that you are ready to go ahead with the sampling
                   on date.
                 </TableCell>
+                <TableCell>
+                  <CheckCircleIcon
+                    sx={{ color: "green", textAlign: "center" }}
+                  />
+                </TableCell>
               </TableRow>
             ) : null}
             {main_data.StandardPackageHormonePrep__customerConfirmationStatus ===
             "N" ? (
               <TableRow>
                 <TableCell style={{ color: "red" }}>
-                  It seems that uou need to reschedule your sampling correct ?
+                  It seems that you need to reschedule your sampling correct ?
+                </TableCell>
+                <TableCell>
+                  <PriorityHighIcon
+                    sx={{ color: "red", textAlign: "center" }}
+                  />
                 </TableCell>
               </TableRow>
             ) : null}
@@ -242,6 +272,11 @@ const TestInstructionsComp = ({ data, planningData }) => {
                   You confirmed on date that your sampling was
                   succesfull.Great!!
                 </TableCell>
+                <TableCell>
+                  <CheckCircleIcon
+                    sx={{ color: "green", textAlign: "center" }}
+                  />
+                </TableCell>
               </TableRow>
             ) : null}
             {main_data.StandardPackageHormoneSampleCollect__customerConfirmationStatus ===
@@ -250,6 +285,11 @@ const TestInstructionsComp = ({ data, planningData }) => {
                 <TableCell style={{ color: "red" }}>
                   It seems that you ran into some problems with sampling
                   correct?
+                </TableCell>
+                <TableCell>
+                  <PriorityHighIcon
+                    sx={{ color: "red", textAlign: "center" }}
+                  />
                 </TableCell>
               </TableRow>
             ) : null}
@@ -279,6 +319,11 @@ const TestInstructionsComp = ({ data, planningData }) => {
                   You confirmed that you are ready to go ahead with the sampling
                   on date.
                 </TableCell>
+                <TableCell>
+                  <CheckCircleIcon
+                    sx={{ color: "green", textAlign: "center" }}
+                  />
+                </TableCell>
               </TableRow>
             ) : null}
             {main_data.StandardPackageMetabolicPrep__customerConfirmationStatus ===
@@ -286,6 +331,11 @@ const TestInstructionsComp = ({ data, planningData }) => {
               <TableRow>
                 <TableCell style={{ color: "red" }}>
                   It seems that you need to reschedule your sampling correct ?
+                </TableCell>
+                <TableCell>
+                  <PriorityHighIcon
+                    sx={{ color: "red", textAlign: "center" }}
+                  />
                 </TableCell>
               </TableRow>
             ) : null}
@@ -315,6 +365,11 @@ const TestInstructionsComp = ({ data, planningData }) => {
                   You confirmed on date that your sampling was
                   succesfull.Great!!
                 </TableCell>
+                <TableCell>
+                  <CheckCircleIcon
+                    sx={{ color: "green", textAlign: "center" }}
+                  />
+                </TableCell>
               </TableRow>
             ) : null}
             {main_data.StandardPackageMetabolicSampleCollect__customerConfirmationStatus ===
@@ -324,13 +379,36 @@ const TestInstructionsComp = ({ data, planningData }) => {
                   It seems that you ran into some problems with sampling
                   correct?
                 </TableCell>
+                <TableCell>
+                  <PriorityHighIcon
+                    sx={{ color: "red", textAlign: "center" }}
+                  />
+                </TableCell>
               </TableRow>
             ) : null}
             {/* end  */}
           </TableBody>
         </Table>
-            {/* form wala component  */}
-            <EmailTemplate/>
+        <FormControlLabel
+        sx={{ margin: '20px 0px' }}
+          control={
+            <Checkbox
+              checked={confirmed}
+              onChange={handleCheckboxChange}
+              color="primary"
+            />
+          }
+          label="I hereby confirm that I have addressed all the aforementioned queries to the best of my abilities."
+        />
+        <br />
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={handleProceedClick}
+          disabled={!confirmed}
+        >
+          Proceed
+        </Button>
       </div>
       <instructionsData />
     </>

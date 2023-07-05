@@ -31,7 +31,7 @@ const DissatisfactionForm = () => {
   };
 
   return (
-    <Box sx={{ width: '100%', margin: '0 auto', border: '0.1px solid rgba(0,0,0,0.1)', borderRadius: '20px', padding: '10px' }}>
+    <Box sx={{ width: '100%', margin: '0 auto', border: '0.1px solid rgba(0,0,0,0.1)', borderRadius: '20px', padding: '20px', background: '#fff' }}>
       <Typography variant="h5" gutterBottom sx={{ textAlign: 'center' }}>
         Patient Feedback - We are sorry to hear that you had some problems.
       </Typography>
