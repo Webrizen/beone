@@ -1,116 +1,33 @@
-import React, { useState } from 'react';
-import {
-  FormControl,
-  FormControlLabel,
-  FormLabel,
-  Radio,
-  RadioGroup,
-  Typography,
-  Button,
-} from '@mui/material';
+import React from 'react';
+import Button from '@mui/material/Button';
 
 const EmailTemplate = () => {
-  const [answers, setAnswers] = useState({
-    question1: '',
-    question2: '',
-    question3: '',
-  });
-
-  const handleAnswerChange = (event) => {
-    setAnswers((prevAnswers) => ({
-      ...prevAnswers,
-      [event.target.name]: event.target.value,
-    }));
+  const handleButtonClick = (url) => {
+    // Open a new browser window with the specified URL
+    window.open(url);
   };
 
-  const handleFormSubmit = (event) => {
-    event.preventDefault();
-    // Handle form submission logic here
+  const handleButton1Click = () => {
+    const url = 'https://example.com/notification-view?message=Registering your response...';
+    handleButtonClick(url);
+  };
+
+  const handleButton2Click = () => {
+    const url = 'https://example.com/other-notification-view?message=Registering your response...';
+    handleButtonClick(url);
   };
 
   return (
-    <>
-      <Typography variant="h6" gutterBottom>
-        Email Template
-      </Typography>
-      <form onSubmit={handleFormSubmit}>
-        <FormControl component="fieldset">
-          <FormLabel component="legend">Questions:</FormLabel>
-          <RadioGroup>
-            <FormControlLabel
-              control={
-                <Radio
-                  checked={answers.question1 === 'yes'}
-                  onChange={handleAnswerChange}
-                  value="yes"
-                  name="question1"
-                />
-              }
-              label="Question 1: Dummy Question?"
-            />
-            <FormControlLabel
-              control={
-                <Radio
-                  checked={answers.question1 === 'no'}
-                  onChange={handleAnswerChange}
-                  value="no"
-                  name="question1"
-                />
-              }
-              label="No"
-            />
-            <FormControlLabel
-              control={
-                <Radio
-                  checked={answers.question2 === 'yes'}
-                  onChange={handleAnswerChange}
-                  value="yes"
-                  name="question2"
-                />
-              }
-              label="Question 2: Dummy Question?"
-            />
-            <FormControlLabel
-              control={
-                <Radio
-                  checked={answers.question2 === 'no'}
-                  onChange={handleAnswerChange}
-                  value="no"
-                  name="question2"
-                />
-              }
-              label="No"
-            />
-            <FormControlLabel
-              control={
-                <Radio
-                  checked={answers.question3 === 'yes'}
-                  onChange={handleAnswerChange}
-                  value="yes"
-                  name="question3"
-                />
-              }
-              label="Question 3: Dummy Question?"
-            />
-            <FormControlLabel
-              control={
-                <Radio
-                  checked={answers.question3 === 'no'}
-                  onChange={handleAnswerChange}
-                  value="no"
-                  name="question3"
-                />
-              }
-              label="No"
-            />
-          </RadioGroup>
-        </FormControl>
-        <Button type="submit" variant="contained" color="primary">
-          Send Email
-        </Button>
-      </form>
-    </>
+    <div>
+      <p>Message content of your email.</p>
+      <Button variant="contained" color="primary" onClick={handleButton1Click}>
+        Ok
+      </Button>
+      <Button variant="contained" color="secondary" onClick={handleButton2Click}>
+        Not Ok
+      </Button>
+    </div>
   );
-}
+};
 
 export default EmailTemplate;

@@ -16,6 +16,7 @@ import Results from './pages/results';
 import Settings from './pages/settings';
 import Lifestyle from './pages/lifestyle';
 import baseApi, { Set_order } from './utils/common';
+import Notification from './pages/Notification';
 import ProfileEdit from './pages/edits/profileEdits';
 import {
   BrowserRouter,
@@ -131,6 +132,10 @@ function App() {
     {
       path: "/order/:id/resultsAndPersonalizedProtocol",
       element: <Results />,
+    },
+    {
+      path: "/notification",
+      element: <Notification />,
     },
     {
       path: "*",
