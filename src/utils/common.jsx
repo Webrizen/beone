@@ -55,6 +55,7 @@ export const Set_order = (id, setCurrOrder, navigate) => {
                 }
             }
         };
+        if (foundData === null) foundData.stepId = "Welcome";
         navigate(`/order/${id}/${foundData.stepId}`);
 
     }).catch((error) => {

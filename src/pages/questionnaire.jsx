@@ -29,8 +29,13 @@ import KitArrivalData from "../components/KitArrival/KitArrivalData";
 import HormoneTest from "../components/planning/hormoneTest";
 import KitArrivalForm from "../components/KitArrival/KitArrivalForm";
 import QuizComponent from "../components/QuizComponent";
-
+import CurrOrderContext from "../utils/order_context";
 const Questionnaire = () => {
+  const { currOrder, setCurrOrder } = useContext(CurrOrderContext);
+  const [questionare, setquestionare] = useState({ ...currOrder[5] });
+  useEffect(() => {
+    setquestionare({ ...currOrder[5] });
+  }, [currOrder]);
   function ToggleLeftSideBar() {
     const LeftBar = document.getElementById("Left-Bar");
     if (LeftBar.style.transform == "translateX(0%)") {
@@ -43,7 +48,8 @@ const Questionnaire = () => {
     <>
       <Layout>
         <RouteGuard />
-        <QuizComponent />
+        {questionare.data.questionnaireCompletedStatus === "Y" ? "completed" : <QuizComponent />}
+
       </Layout>
     </>
   );
