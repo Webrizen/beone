@@ -10,9 +10,34 @@ import {
 } from "@mui/material";
 import Layout from "../components/Layout/layout";
 import SearchIcon from "@mui/icons-material/Search";
-
+import baseApi, { Set_order } from "../utils/common";
+import Swal from "sweetalert2";
+import CurrOrderContext from "../utils/order_context";
+import { useNavigate } from "react-router-dom";
 const Lifestyle = () => {
+  const { currOrder, setCurrOrder } = useContext(CurrOrderContext);
+  const navigate = useNavigate();
+  const o_id = localStorage.getItem("currOrder");
+  const handlesubmit = () => {
+    baseApi
+      .post(`/dashboard/${o_id}/complete-lifestyle-program`, {})
+      .then((response) => {
+        console.log("after liferstyle task", response.data);
 
+
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Lifestyle Program  Done",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        Set_order(o_id, setCurrOrder, navigate);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
   return (
     <Layout>
       <div>
@@ -46,43 +71,7 @@ const Lifestyle = () => {
 
         <Card variant="outlined" sx={{ margin: '10px 0' }}>
           <Box p={3} sx={{ padding: '10px' }}>
-            <Typography variant="h4" component="h2" gutterBottom>
-              Key Features
-            </Typography>
-            <ul>
-              <li>
-                <Typography variant="body1" gutterBottom>
-                  Customized workout plans based on your fitness level and
-                  goals
-                </Typography>
-              </li>
-              <li>
-                <Typography variant="body1" gutterBottom>
-                  Personalized nutrition recommendations and meal plans
-                </Typography>
-              </li>
-              <li>
-                <Typography variant="body1" gutterBottom>
-                  Mindfulness and stress management techniques
-                </Typography>
-              </li>
-              <li>
-                <Typography variant="body1" gutterBottom>
-                  Access to a supportive community of like-minded individuals
-                </Typography>
-              </li>
-              <li>
-                <Typography variant="body1" gutterBottom>
-                  Regular progress tracking and check-ins with our team
-                </Typography>
-              </li>
-            </ul>
-          </Box>
-        </Card>
-
-        <Card variant="outlined" sx={{ margin: '10px 0' }}>
-          <Box p={3} sx={{ padding: '10px' }}>
-            <Typography variant="h4" component="h2" gutterBottom>
+            {/* <Typography variant="h4" component="h2" gutterBottom>
               Get Started
             </Typography>
             <Typography variant="body1" gutterBottom>
@@ -111,9 +100,9 @@ const Lifestyle = () => {
               variant="outlined"
               fullWidth
               margin="normal"
-            />
+            /> */}
 
-            <Button variant="contained" color="primary">
+            <Button onClick={handlesubmit} variant="contained" color="primary">
               Submit
             </Button>
           </Box>

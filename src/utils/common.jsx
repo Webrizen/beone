@@ -35,7 +35,7 @@ export const Set_order = (id, setCurrOrder, navigate) => {
             response.data
         );
         const steps = response.data;
-        // console.log("current order", id, response.data)
+        console.log("current order", id, response.data)
         setCurrOrder(response.data);
         localStorage.setItem("currOrder", id);
         // navigate("/order/404040/planning")
@@ -78,6 +78,16 @@ export function toCamelCaseWithSpacing(str) {
 export const change_format = (val) => {
     // return
     // var mydate = new Date(val);
+    // if (val.includes("T")) {
+    // console.log(val.indexOf("T"));
+    // console.log("val dta,", val);
+    // var i = val.split("T");
+    // val = val.substring(0, i);
+    // }
+    // alert("val" + val);
+    // const time = val;
+    // alert(time);
+    // const datePart = time.split('T')[0];
     const date = new Date(val);
 
     const options = {

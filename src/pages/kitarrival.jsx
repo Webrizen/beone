@@ -33,15 +33,15 @@ import CurrOrderContext from "../utils/order_context";
 const kitarrival = () => {
   const { currOrder, setCurrOrder } = useContext(CurrOrderContext);
   // console.log("kit arrival page", currOrder);
-  const [order, setorder] = useState({ ...currOrder[1] });
+  const [order, setorder] = useState({});
   useEffect(() => {
     setorder({ ...currOrder[1] });
-    // console.log(order);
+    console.log(order);
   }, [currOrder]);
 
-  // useEffect(() => {
-  //   console.log("checking order is changed", order);
-  // }, [order]);
+  useEffect(() => {
+    console.log("checking order is changed", order);
+  }, [order]);
   function ToggleLeftSideBar() {
     const LeftBar = document.getElementById("Left-Bar");
     if (LeftBar.style.transform == "translateX(0%)") {
@@ -65,7 +65,7 @@ const kitarrival = () => {
         >
           Kit Arrival
         </Typography>
-        {order.status == "Done" ? (
+        {order.status === "Done" ? (
           <KitArrivalData data={order.data} />
         ) : (
           <KitArrivalForm setOrder={setCurrOrder} />

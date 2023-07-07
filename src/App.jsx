@@ -61,7 +61,9 @@ function App() {
           Set_order(localStorage.getItem("currOrder"), setCurrOrder, redirect);
         })
         .catch((error) => {
-          console.error(error);
+          console.error("session expired or auto login user error", error);
+          localStorage.removeItem("token");
+          redirect("/login");
         });
 
       // alert(localStorage.getItem("currOrder"))

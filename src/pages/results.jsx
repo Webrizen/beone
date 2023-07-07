@@ -2,12 +2,40 @@ import React, { useState, useEffect, useContext } from 'react';
 import '../styles/dashboard.css';
 import RouteGuard from '../components/routeguard';
 import Layout from '../components/Layout/layout';
+import baseApi, { Set_order } from '../utils/common';
+import CurrOrderContext from '../utils/order_context';
+import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
+import { Box, Button } from '@mui/material';
 
 const Results = () => {
+  const { currOrder, setCurrOrder } = useContext(CurrOrderContext);
+  const navigate = useNavigate();
+  const o_id = localStorage.getItem("currOrder");
+  const handlesubmit = () => {
+    baseApi
+      .post(`/dashboard/${o_id}/complete-results-and-protocols`, {})
+      .then((response) => {
+        console.log("after liferstyle task", response.data);
+
+
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Result and Protocol Program  Done",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        Set_order(o_id, setCurrOrder, navigate);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
   return (
     <div>
       <Layout>
-        <RouteGuard />
+        {/* <RouteGuard /> */}
         <div
           style={{
             padding: '2rem',
@@ -74,6 +102,11 @@ const Results = () => {
             Join BeOne today and unlock the power of personalized health. Take control of your well-being with our Results and Personalized Protocol, and embark on a journey towards a healthier, happier you.
           </p>
         </div>
+        <Box>
+          <Button onClick={handlesubmit} variant="contained" color="primary">
+            Submit
+          </Button>
+        </Box>
       </Layout>
     </div>
   );

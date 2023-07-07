@@ -29,20 +29,27 @@ import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
 import CloudDownloadIcon from "@mui/icons-material/CloudDownload";
 import ReplayIcon from "@mui/icons-material/Replay";
 import EmailTemplate from "../EmailTemplate";
-
+import { useNavigate } from "react-router-dom";
+import baseApi, { Set_order } from "../../utils/common";
+import Swal from "sweetalert2";
 const TestInstructionsComp = ({ data, planningData }) => {
-  const [main_data, setmain_data] = useState({ ...data });
+  const navigate = useNavigate();
+  const { currOrder, setCurrOrder } = useContext(CurrOrderContext);
+  const [main_data, setmain_data] = useState({ ...data.data });
   const [plan, setplan] = useState({ ...planningData });
+  const [allData, setallData] = useState({ ...data });
   useEffect(() => {
     console.log("planning data", planningData);
-    setmain_data({ ...data });
+    setmain_data({ ...data.data });
     setplan({ ...planningData });
+    setallData({ ...data });
     console.log("data form intrcutions", main_data);
     console.log(data);
+
   }, [data, planningData]);
 
-  const { currOrder, setCurrOrder } = useContext(CurrOrderContext);
-  const o_id = localStorage.getItem("currOrder");
+  // const { currOrder, setCurrOrder } = useContext(CurrOrderContext);
+  // const o_id = localStorage.getItem("currOrder");
 
   const videos = [
     {
@@ -64,7 +71,24 @@ const TestInstructionsComp = ({ data, planningData }) => {
   ];
 
   const [selectedOption, setSelectedOption] = useState("");
-
+  const [formshow, setformshow] = useState(false);
+  // useEffect(() => {
+  //   alert(allData.status);
+  //   if (allData.status === "Active") {
+  //     alert("vhkg");
+  //     setformshow(false)
+  //   };
+  // }, [allData]);
+  useEffect(() => {
+    // alert(data.status);
+    if (!(main_data.StandardPackageHormonePrep__customerConfirmationStatus === null || main_data.StandardPackageHormoneSampleCollect__customerConfirmationStatus === null || main_data.StandardPackageMetabolicPrep__customerConfirmationStatus === null || main_data.StandardPackageMetabolicSampleCollect__customerConfirmationStatus === null)) {
+      // if (data.status != "Active") {
+      if (allData.status === "Active") {
+        // alert(allData.status);
+        setformshow(true)
+      }
+    }
+  }, [main_data, allData]);
   const handleChange = (event) => {
     setSelectedOption(event.target.value);
   };
@@ -74,11 +98,29 @@ const TestInstructionsComp = ({ data, planningData }) => {
   const handleCheckboxChange = (event) => {
     setConfirmed(event.target.checked);
   };
-
+  const o_id = localStorage.getItem("currOrder");
   const handleProceedClick = () => {
     if (confirmed) {
       // Proceed with the necessary actions
       console.log("Proceeding...");
+      baseApi
+        .post(`/dashboard/${o_id}/complete-confirm-sampling-ok`, { overallSamplingStatus: "Y" })
+        .then((response) => {
+          console.log("after instructions task", response.data);
+
+
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Test Instructions Done",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          Set_order(o_id, setCurrOrder, navigate);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
     } else {
       // Display an error or warning message
       console.log("Please confirm that all queries have been answered.");
@@ -220,7 +262,7 @@ const TestInstructionsComp = ({ data, planningData }) => {
               </TableRow>
             ) : null}
             {main_data.StandardPackageHormonePrep__customerConfirmationStatus ===
-            "Y" ? (
+              "Y" ? (
               <TableRow>
                 <TableCell style={{ color: "green" }}>
                   You confirmed that you are ready to go ahead with the sampling
@@ -234,7 +276,7 @@ const TestInstructionsComp = ({ data, planningData }) => {
               </TableRow>
             ) : null}
             {main_data.StandardPackageHormonePrep__customerConfirmationStatus ===
-            "N" ? (
+              "N" ? (
               <TableRow>
                 <TableCell style={{ color: "red" }}>
                   It seems that you need to reschedule your sampling correct ?
@@ -266,7 +308,7 @@ const TestInstructionsComp = ({ data, planningData }) => {
               </TableRow>
             ) : null}
             {main_data.StandardPackageHormoneSampleCollect__customerConfirmationStatus ===
-            "Y" ? (
+              "Y" ? (
               <TableRow>
                 <TableCell style={{ color: "green" }}>
                   You confirmed on date that your sampling was
@@ -280,7 +322,7 @@ const TestInstructionsComp = ({ data, planningData }) => {
               </TableRow>
             ) : null}
             {main_data.StandardPackageHormoneSampleCollect__customerConfirmationStatus ===
-            "N" ? (
+              "N" ? (
               <TableRow>
                 <TableCell style={{ color: "red" }}>
                   It seems that you ran into some problems with sampling
@@ -313,7 +355,7 @@ const TestInstructionsComp = ({ data, planningData }) => {
               </TableRow>
             ) : null}
             {main_data.StandardPackageMetabolicPrep__customerConfirmationStatus ===
-            "Y" ? (
+              "Y" ? (
               <TableRow>
                 <TableCell style={{ color: "green" }}>
                   You confirmed that you are ready to go ahead with the sampling
@@ -327,7 +369,7 @@ const TestInstructionsComp = ({ data, planningData }) => {
               </TableRow>
             ) : null}
             {main_data.StandardPackageMetabolicPrep__customerConfirmationStatus ===
-            "N" ? (
+              "N" ? (
               <TableRow>
                 <TableCell style={{ color: "red" }}>
                   It seems that you need to reschedule your sampling correct ?
@@ -359,7 +401,7 @@ const TestInstructionsComp = ({ data, planningData }) => {
               </TableRow>
             ) : null}
             {main_data.StandardPackageMetabolicSampleCollect__customerConfirmationStatus ===
-            "Y" ? (
+              "Y" ? (
               <TableRow>
                 <TableCell style={{ color: "green" }}>
                   You confirmed on date that your sampling was
@@ -373,7 +415,7 @@ const TestInstructionsComp = ({ data, planningData }) => {
               </TableRow>
             ) : null}
             {main_data.StandardPackageMetabolicSampleCollect__customerConfirmationStatus ===
-            "N" ? (
+              "N" ? (
               <TableRow>
                 <TableCell style={{ color: "red" }}>
                   It seems that you ran into some problems with sampling
@@ -389,8 +431,8 @@ const TestInstructionsComp = ({ data, planningData }) => {
             {/* end  */}
           </TableBody>
         </Table>
-        <FormControlLabel
-        sx={{ margin: '20px 0px' }}
+        {formshow ? <><FormControlLabel
+          sx={{ margin: '20px 0px' }}
           control={
             <Checkbox
               checked={confirmed}
@@ -398,17 +440,18 @@ const TestInstructionsComp = ({ data, planningData }) => {
               color="primary"
             />
           }
-          label="I hereby confirm that I have addressed all the aforementioned queries to the best of my abilities."
+          label="I hereby confirm that the overall sampling status was great."
         />
-        <br />
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={handleProceedClick}
-          disabled={!confirmed}
-        >
-          Proceed
-        </Button>
+          <br />
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={handleProceedClick}
+            disabled={!confirmed}
+          >
+            Proceed
+          </Button></> : " "}
+
       </div>
       <instructionsData />
     </>

@@ -44,21 +44,21 @@ const ImmunePic = () => {
     <>
       <Layout>
         <RouteGuard />
-            {ImmunePic.status === "Done" ? (
-              <Box
-                sx={{
-                  mt: 2,
-                  width: "100%",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
-                <ImagePreview id={ImmunePic.data.immuneBalanceTestFileId} />
-              </Box>
-            ) : (
-              <ImmunePicComp />
-            )}
+        {ImmunePic.status === "Done" ? (
+          <Box
+            sx={{
+              mt: 2,
+              width: "100%",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <ImagePreview id={ImmunePic.data.immuneBalanceTestFileId} time={ImmunePic.data.completedAt} />
+          </Box>
+        ) : (
+          <ImmunePicComp />
+        )}
       </Layout>
     </>
   );

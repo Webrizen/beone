@@ -21,7 +21,7 @@ const TestInstructions = () => {
     <>
       <Layout>
         <RouteGuard />
-        <TestInstructionsComp data={instruction.data} planningData={Planning.data} />
+        <TestInstructionsComp data={instruction} planningData={Planning.data} />
       </Layout >
     </>
   );
