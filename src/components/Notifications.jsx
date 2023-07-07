@@ -22,35 +22,9 @@ const Notifications = () => {
 
   return (
     <>
-      <IconButton color="inherit" onClick={handleOpenMenu}>
-        <Badge badgeContent={4} color="error">
+      <IconButton color="inherit">
           <NotificationsIcon />
-        </Badge>
       </IconButton>
-      <Menu
-        anchorEl={anchorEl}
-        open={Boolean(anchorEl)}
-        onClose={handleCloseMenu}
-      >
-        <MenuItem onClick={handleCloseMenu}>
-          <ListItemIcon>
-            <NotificationsIcon fontSize="small" />
-          </ListItemIcon>
-          <ListItemText primary="Notification 1" />
-        </MenuItem>
-        <MenuItem onClick={handleCloseMenu}>
-          <ListItemIcon>
-            <NotificationsIcon fontSize="small" />
-          </ListItemIcon>
-          <ListItemText primary="Notification 2" />
-        </MenuItem>
-        <MenuItem onClick={handleCloseMenu}>
-          <ListItemIcon>
-            <NotificationsIcon fontSize="small" />
-          </ListItemIcon>
-          <ListItemText primary="Notification 3" />
-        </MenuItem>
-      </Menu>
     </>
   );
 };
