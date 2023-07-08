@@ -6,7 +6,7 @@ import {
   TextField,
   InputAdornment,
   IconButton,
-  Button
+  Button,
 } from "@mui/material";
 import Layout from "../components/Layout/layout";
 import SearchIcon from "@mui/icons-material/Search";
@@ -24,7 +24,6 @@ const Lifestyle = () => {
       .then((response) => {
         console.log("after liferstyle task", response.data);
 
-
         Swal.fire({
           position: "center",
           icon: "success",
@@ -37,16 +36,18 @@ const Lifestyle = () => {
       .catch((error) => {
         console.error(error);
       });
-  }
+  };
   return (
     <Layout>
-      <div>
+      <div
+        style={{ padding: "20px", background: "#fff", borderRadius: "10px" }}
+      >
         <Typography variant="h2" component="h1" gutterBottom>
           Begin Lifestyle Program by BeOne
         </Typography>
 
-        <Card variant="outlined" sx={{ margin: '10px 0' }}>
-          <Box p={3} sx={{ padding: '10px' }}>
+        <Card variant="outlined" sx={{ margin: "10px 0" }}>
+          <Box p={3} sx={{ padding: "10px" }}>
             <Typography variant="h4" component="h2" gutterBottom>
               Introduction
             </Typography>
@@ -69,39 +70,9 @@ const Lifestyle = () => {
           </Box>
         </Card>
 
-        <Card variant="outlined" sx={{ margin: '10px 0' }}>
-          <Box p={3} sx={{ padding: '10px' }}>
-            {/* <Typography variant="h4" component="h2" gutterBottom>
-              Get Started
-            </Typography>
-            <Typography variant="body1" gutterBottom>
-              To join the Begin Lifestyle Program, simply fill out the form
-              below and our team will get in touch with you to discuss your
-              goals and create a personalized plan. Take the first step towards
-              a healthier and happier you with BeOne.
-            </Typography>
-
-            <TextField
-              label="Full Name"
-              variant="outlined"
-              fullWidth
-              margin="normal"
-            />
-
-            <TextField
-              label="Email Address"
-              variant="outlined"
-              fullWidth
-              margin="normal"
-            />
-
-            <TextField
-              label="Phone Number"
-              variant="outlined"
-              fullWidth
-              margin="normal"
-            /> */}
-
+        <Card sx={{ margin: "10px 0", boxShadow: 'none' }}>
+          <Box p={3} sx={{ padding: "10px" }}>
+            {" "}
             <Button onClick={handlesubmit} variant="contained" color="primary">
               Submit
             </Button>
