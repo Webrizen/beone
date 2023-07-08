@@ -44,13 +44,6 @@ const Navbar = (props) => {
               <CircularStatic order={currOrder} />
             </div>
           </Tooltip>
-          <Tooltip title="Notifications">
-            <Link to="/notification">
-            <div className="ico">
-              <Notifications/>
-            </div>
-            </Link>
-          </Tooltip>
           <Tooltip title="User Controls">
             <IconButton onClick={handleClick} size="small">
               <Avatar
