@@ -31,7 +31,7 @@ import CloudDownloadIcon from "@mui/icons-material/CloudDownload";
 import ReplayIcon from "@mui/icons-material/Replay";
 import EmailTemplate from "../EmailTemplate";
 import { useNavigate } from "react-router-dom";
-import baseApi, { Set_order } from "../../utils/common";
+import baseApi, { Set_order, change_format } from "../../utils/common";
 import Swal from "sweetalert2";
 const TestInstructionsComp = ({ data, planningData }) => {
   const navigate = useNavigate();
@@ -84,13 +84,13 @@ const TestInstructionsComp = ({ data, planningData }) => {
     if (
       !(
         main_data.StandardPackageHormonePrep__customerConfirmationStatus ===
-          null ||
+        null ||
         main_data.StandardPackageHormoneSampleCollect__customerConfirmationStatus ===
-          null ||
+        null ||
         main_data.StandardPackageMetabolicPrep__customerConfirmationStatus ===
-          null ||
+        null ||
         main_data.StandardPackageMetabolicSampleCollect__customerConfirmationStatus ===
-          null
+        null
       )
     ) {
       // if (data.status != "Active") {
@@ -110,33 +110,29 @@ const TestInstructionsComp = ({ data, planningData }) => {
     setConfirmed(event.target.checked);
   };
   const o_id = localStorage.getItem("currOrder");
-  const handleProceedClick = () => {
-    if (confirmed) {
-      // Proceed with the necessary actions
-      console.log("Proceeding...");
-      baseApi
-        .post(`/dashboard/${o_id}/complete-confirm-sampling-ok`, {
-          overallSamplingStatus: "Y",
-        })
-        .then((response) => {
-          console.log("after instructions task", response.data);
+  const [payload, setpayload] = useState({});
 
-          Swal.fire({
-            position: "center",
-            icon: "success",
-            title: "Test Instructions Done",
-            showConfirmButton: false,
-            timer: 1500,
-          });
-          Set_order(o_id, setCurrOrder, navigate);
-        })
-        .catch((error) => {
-          console.error(error);
+  const handleProceedClick = () => {
+    // Proceed with the necessary actions
+    console.log("Proceeding...");
+    baseApi
+      .post(`/dashboard/${o_id}/complete-confirm-sampling-ok`, payload)
+      .then((response) => {
+        console.log("after instructions task", response.data);
+
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Test Instructions Done",
+          showConfirmButton: false,
+          timer: 1500,
         });
-    } else {
-      // Display an error or warning message
-      console.log("Please confirm that all queries have been answered.");
-    }
+        Set_order(o_id, setCurrOrder, navigate);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+
   };
 
   const [selectedTests, setSelectedTests] = useState({
@@ -145,17 +141,33 @@ const TestInstructionsComp = ({ data, planningData }) => {
     thyroidTest: false,
     immuneTest: false
   });
-
+  useEffect(() => {
+    console.log(selectedTests);
+    const trueTests = Object.entries(selectedTests)
+      .filter(([_, value]) => value === true)
+      .map(([key]) => key);
+    console.log(trueTests);
+    payload.reorderData = trueTests;
+    setpayload({ ...payload });
+  }, [selectedTests]);
+  useEffect(() => {
+    console.log("confirmation", payload);
+  }, [payload]);
   const handleChangeLast = (event) => {
     setSelectedTests({ ...selectedTests, [event.target.name]: event.target.checked });
+    // console.log(selectedTests);
+
   };
 
   //Last Radio Buttons Ka:
 
   const [confirmation, setConfirmation] = useState('');
-  
+
   const handleConfirmationChange = (event) => {
     setConfirmation(event.target.value);
+    payload.overallSamplingStatus = (event.target.value === "yes" ? "Y" : "N");
+    setpayload({ ...payload });
+
   };
 
   return (
@@ -293,11 +305,11 @@ const TestInstructionsComp = ({ data, planningData }) => {
               </TableRow>
             ) : null}
             {main_data.StandardPackageHormonePrep__customerConfirmationStatus ===
-            "Y" ? (
+              "Y" ? (
               <TableRow>
                 <TableCell style={{ color: "green" }}>
-                  You confirmed that you are ready to go ahead with the sampling
-                  on date.
+                  You confirmed that you are ready to go ahead with the HormoneTest sampling
+                  on {change_format(main_data.StandardPackageHormonePrep__customerConfirmationDate)}.
                 </TableCell>
                 <TableCell>
                   <CheckCircleIcon
@@ -307,7 +319,7 @@ const TestInstructionsComp = ({ data, planningData }) => {
               </TableRow>
             ) : null}
             {main_data.StandardPackageHormonePrep__customerConfirmationStatus ===
-            "N" ? (
+              "N" ? (
               <TableRow>
                 <TableCell style={{ color: "red" }}>
                   It seems that you need to reschedule your sampling correct ?
@@ -339,10 +351,10 @@ const TestInstructionsComp = ({ data, planningData }) => {
               </TableRow>
             ) : null}
             {main_data.StandardPackageHormoneSampleCollect__customerConfirmationStatus ===
-            "Y" ? (
+              "Y" ? (
               <TableRow>
                 <TableCell style={{ color: "green" }}>
-                  You confirmed on date that your sampling was
+                  You confirmed on {change_format(main_data.StandardPackageHormoneSampleCollect__customerConfirmationDate)} that your sampling for HromoneTest was
                   succesfull.Great!!
                 </TableCell>
                 <TableCell>
@@ -353,7 +365,7 @@ const TestInstructionsComp = ({ data, planningData }) => {
               </TableRow>
             ) : null}
             {main_data.StandardPackageHormoneSampleCollect__customerConfirmationStatus ===
-            "N" ? (
+              "N" ? (
               <TableRow>
                 <TableCell style={{ color: "red" }}>
                   It seems that you ran into some problems with sampling
@@ -386,11 +398,11 @@ const TestInstructionsComp = ({ data, planningData }) => {
               </TableRow>
             ) : null}
             {main_data.StandardPackageMetabolicPrep__customerConfirmationStatus ===
-            "Y" ? (
+              "Y" ? (
               <TableRow>
                 <TableCell style={{ color: "green" }}>
-                  You confirmed that you are ready to go ahead with the sampling
-                  on date.
+                  You confirmed that you are ready to go ahead with the Metabolic Test sampling
+                  on {change_format(main_data.StandardPackageMetabolicPrep__customerConfirmationDate)}.
                 </TableCell>
                 <TableCell>
                   <CheckCircleIcon
@@ -400,7 +412,7 @@ const TestInstructionsComp = ({ data, planningData }) => {
               </TableRow>
             ) : null}
             {main_data.StandardPackageMetabolicPrep__customerConfirmationStatus ===
-            "N" ? (
+              "N" ? (
               <TableRow>
                 <TableCell style={{ color: "red" }}>
                   It seems that you need to reschedule your sampling correct ?
@@ -432,10 +444,10 @@ const TestInstructionsComp = ({ data, planningData }) => {
               </TableRow>
             ) : null}
             {main_data.StandardPackageMetabolicSampleCollect__customerConfirmationStatus ===
-            "Y" ? (
+              "Y" ? (
               <TableRow>
                 <TableCell style={{ color: "green" }}>
-                  You confirmed on date that your sampling was
+                  You confirmed on {change_format(main_data.StandardPackageMetabolicSampleCollect__customerConfirmationDate)} that your sampling for Metabolictest was
                   succesfull.Great!!
                 </TableCell>
                 <TableCell>
@@ -446,7 +458,7 @@ const TestInstructionsComp = ({ data, planningData }) => {
               </TableRow>
             ) : null}
             {main_data.StandardPackageMetabolicSampleCollect__customerConfirmationStatus ===
-            "N" ? (
+              "N" ? (
               <TableRow>
                 <TableCell style={{ color: "red" }}>
                   It seems that you ran into some problems with sampling
@@ -464,60 +476,61 @@ const TestInstructionsComp = ({ data, planningData }) => {
         </Table>
         {formshow ? (
           <>
-          <div style={{ padding: '20px' }}>
-          <Typography variant="p" gutterBottom>
-          Confirm that the overall sampling status was great.
-      </Typography>
-      <RadioGroup value={confirmation} onChange={handleConfirmationChange} sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '10px' }}>
-        <FormControlLabel
-          value="yes"
-          control={<Radio color="primary" />}
-          label="YES"
-        />
-        <FormControlLabel
-          value="no"
-          control={<Radio color="primary" />}
-          label="NO"
-        />
-      </RadioGroup>
-      <Button
-        variant="contained"
-        color="primary"
-        onClick={handleProceedClick}
-        disabled={!confirmation}
-      >
-        Proceed
-      </Button>
-          </div>
+            <div style={{ padding: '20px' }}>
+              <Typography variant="p" gutterBottom>
+                Confirm that the overall sampling status was great.
+              </Typography>
+              <RadioGroup value={confirmation} onChange={handleConfirmationChange} sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '10px' }}>
+                <FormControlLabel
+                  value="yes"
+                  control={<Radio color="primary" />}
+                  label="YES"
+                />
+                <FormControlLabel
+                  value="no"
+                  control={<Radio color="primary" />}
+                  label="NO"
+                />
+              </RadioGroup>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={handleProceedClick}
+                disabled={!confirmation}
+              >
+                Submit
+              </Button>
+            </div>
           </>
         ) : (
           " "
         )}
-        <div>
-      <Typography variant="h6" gutterBottom>
-        Which test kits will you require: (tick all the ones you need)
-      </Typography>
-      <FormGroup>
-        <FormControlLabel
-          control={<Checkbox checked={selectedTests.hormoneTest} onChange={handleChangeLast} name="hormoneTest" />}
-          label="Hormone Test"
-        />
-        <FormControlLabel
-          control={<Checkbox checked={selectedTests.metabolicTest} onChange={handleChangeLast} name="metabolicTest" />}
-          label="Metabolic Test"
-        />
-        <FormControlLabel
-          control={<Checkbox checked={selectedTests.thyroidTest} onChange={handleChangeLast} name="thyroidTest" />}
-          label="Thyroid Test"
-        />
-        <FormControlLabel
-          control={<Checkbox checked={selectedTests.immuneTest} onChange={handleChangeLast} name="immuneTest" />}
-          label="Immune Test"
-        />
-      </FormGroup>
-      <br />
-      <Alert severity="info">Please note that there will be a fee for this</Alert>
-    </div>
+        {confirmation === "no" ? <div>
+          <Typography variant="h6" gutterBottom>
+            Which test kits will you require: (tick all the ones you need)
+          </Typography>
+          <FormGroup>
+            <FormControlLabel
+              control={<Checkbox checked={selectedTests.hormoneTest} onChange={handleChangeLast} name="hormoneTest" />}
+              label="Hormone Test"
+            />
+            <FormControlLabel
+              control={<Checkbox checked={selectedTests.metabolicTest} onChange={handleChangeLast} name="metabolicTest" />}
+              label="Metabolic Test"
+            />
+            <FormControlLabel
+              control={<Checkbox checked={selectedTests.thyroidTest} onChange={handleChangeLast} name="thyroidTest" />}
+              label="Thyroid Test"
+            />
+            <FormControlLabel
+              control={<Checkbox checked={selectedTests.immuneTest} onChange={handleChangeLast} name="immuneTest" />}
+              label="Immune Test"
+            />
+          </FormGroup>
+          <br />
+          <Alert severity="info">Please note that there will be a fee for this</Alert>
+        </div> : " "}
+
       </div>
       <instructionsData />
     </>

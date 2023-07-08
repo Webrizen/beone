@@ -49,14 +49,22 @@ export const Set_order = (id, setCurrOrder, navigate) => {
                 if (element.status != "Done") {
                     findFirstNotDone = true
                     foundData = element
+                    // alert("null2");
                 } else {
                     // console.log(element);
                     // console.log("no redirecting");
                 }
             }
         };
-        if (foundData === null) foundData.stepId = "Welcome";
-        navigate(`/order/${id}/${foundData.stepId}`);
+        if (!(foundData.stepId)) {
+            // alert("null");
+            // foundData.stepId = "welcome";
+            navigate(`/order/${id}/welcome`);
+        } else {
+            // alert("null3");
+            navigate(`/order/${id}/${foundData.stepId}`);
+
+        }
 
     }).catch((error) => {
         console.log("set order api", error)
