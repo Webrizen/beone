@@ -150,6 +150,14 @@ const TestInstructionsComp = ({ data, planningData }) => {
     setSelectedTests({ ...selectedTests, [event.target.name]: event.target.checked });
   };
 
+  //Last Radio Buttons Ka:
+
+  const [confirmation, setConfirmation] = useState('');
+  
+  const handleConfirmationChange = (event) => {
+    setConfirmation(event.target.value);
+  };
+
   return (
     <>
       <Typography variant="h5" gutterBottom>
@@ -456,26 +464,31 @@ const TestInstructionsComp = ({ data, planningData }) => {
         </Table>
         {formshow ? (
           <>
-            <FormControlLabel
-              sx={{ margin: "20px 0px" }}
-              control={
-                <Checkbox
-                  checked={confirmed}
-                  onChange={handleCheckboxChange}
-                  color="primary"
-                />
-              }
-              label="I hereby confirm that the overall sampling status was great."
-            />
-            <br />
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={handleProceedClick}
-              disabled={!confirmed}
-            >
-              Proceed
-            </Button>
+          <div style={{ padding: '20px' }}>
+          <Typography variant="p" gutterBottom>
+          Confirm that the overall sampling status was great.
+      </Typography>
+      <RadioGroup value={confirmation} onChange={handleConfirmationChange} sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '10px' }}>
+        <FormControlLabel
+          value="yes"
+          control={<Radio color="primary" />}
+          label="YES"
+        />
+        <FormControlLabel
+          value="no"
+          control={<Radio color="primary" />}
+          label="NO"
+        />
+      </RadioGroup>
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={handleProceedClick}
+        disabled={!confirmation}
+      >
+        Proceed
+      </Button>
+          </div>
           </>
         ) : (
           " "
