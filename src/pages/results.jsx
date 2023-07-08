@@ -35,7 +35,7 @@ const Results = () => {
   return (
     <div>
       <Layout>
-        {/* <RouteGuard /> */}
+        <RouteGuard />
         <div
           style={{
             padding: '2rem',

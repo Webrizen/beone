@@ -136,7 +136,7 @@ function App() {
       element: <Results />,
     },
     {
-      path: "/notification",
+      path: "/notifications",
       element: <Notification />,
     },
     {

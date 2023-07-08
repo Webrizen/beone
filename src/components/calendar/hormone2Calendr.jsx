@@ -87,20 +87,26 @@ const Hormone2Calendr = ({
     if (selectInfo.dateStr < minDate) return;
     const prepEvents = [
       {
-        start: getFutDte("P", 3, selectInfo.dateStr),
+        start: getFutDte("P", 4, selectInfo.dateStr),
         title: "preparation Day 1",
         textColor: "black",
         backgroundColor: "#63a7ff",
       },
       {
-        start: getFutDte("P", 2, selectInfo.dateStr),
+        start: getFutDte("P", 3, selectInfo.dateStr),
         title: "preparation Day 2",
         textColor: "black",
         backgroundColor: "#63a7ff",
       },
       {
-        start: getFutDte("P", 1, selectInfo.dateStr),
+        start: getFutDte("P", 2, selectInfo.dateStr),
         title: "preparation Day 3",
+        textColor: "black",
+        backgroundColor: "#63a7ff",
+      },
+      {
+        start: getFutDte("P", 1, selectInfo.dateStr),
+        title: "preparation Day 4",
         textColor: "black",
         backgroundColor: "#63a7ff",
       },
@@ -161,7 +167,7 @@ const Hormone2Calendr = ({
                 type === "1" ? HormoneSamplingDateEvents : MetabolicEvents
               } // alternatively, use the `events` setting to fetch from a feed
 
-              // eventRender={eventRender}
+            // eventRender={eventRender}
             />
           </div>
         </Grid>

@@ -46,9 +46,9 @@ export const Set_order = (id, setCurrOrder, navigate) => {
             const element = steps[index];
 
             if (!findFirstNotDone) {
-                if (element.status != "Done") {
+                if (element.status === "Pending") {
                     findFirstNotDone = true
-                    foundData = element
+                    foundData = steps[index - 1]
                     // alert("null2");
                 } else {
                     // console.log(element);
@@ -59,7 +59,7 @@ export const Set_order = (id, setCurrOrder, navigate) => {
         if (!(foundData.stepId)) {
             // alert("null");
             // foundData.stepId = "welcome";
-            navigate(`/order/${id}/welcome`);
+            navigate(`/order/${id}/resultsAndPersonalizedProtocol`);
         } else {
             // alert("null3");
             navigate(`/order/${id}/${foundData.stepId}`);
@@ -96,7 +96,7 @@ export const change_format = (val) => {
     // alert("val" + val);
     // const time = val;
     // alert(time);
-    // const datePart = time.split('T')[0];
+
     const date = new Date(val);
 
     const options = {

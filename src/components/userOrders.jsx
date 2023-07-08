@@ -7,15 +7,20 @@ import {
   MenuItem,
   Box,
   Skeleton,
+  Chip,
 } from "@mui/material";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import baseApi, { Set_order } from "../utils/common";
+import baseApi, { Set_order, change_format } from "../utils/common";
 import CurrOrderContext from "../utils/order_context";
 import AllOrderContext from "../utils/AllOrderContext";
 
 const UserOrders = () => {
   const { currOrder, setCurrOrder } = useContext(CurrOrderContext);
+  const [planningStep, setplanningStep] = useState({ ...currOrder[2] });
+  useEffect(() => {
+    setplanningStep({ ...currOrder[2] });
+  }, [currOrder]);
   const [order_id, setorder_id] = useState();
   const [all_orders, setall_orders] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -67,20 +72,23 @@ const UserOrders = () => {
           MenuProps={{
             PaperProps: {
               sx: {
-                height: '500px', 
+                height: '500px',
                 overflowY: 'scroll'
               },
             },
           }}
         >
           {AllOrder.map((order, index) => (
-            <MenuItem key={order} value={order}>
+            <MenuItem key={index} value={order}>
               {order}
             </MenuItem>
           ))}
         </Select>
       </FormControl>
       <Divider sx={{ margin: "1rem 0" }} />
+      {planningStep.status === "Done" ? <><Chip label={"Hormone Test Date: " + change_format(planningStep.data.StandardPackageHormone__testDate1)} />
+        <Chip label={"Metabolic Test Date: " + change_format(planningStep.data.StandardPackageMetabolic__testDate1)} /></> : ""}
+
     </>
   );
 };
