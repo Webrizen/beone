@@ -42,7 +42,7 @@ const Lifestyle = () => {
       <div
         style={{ padding: "20px", background: "#fff", borderRadius: "10px" }}
       >
-        <Typography variant="h2" component="h1" gutterBottom>
+        <Typography variant="h5" gutterBottom sx={{ borderBottom: '0.1px solid rgba(0,0,0,0.1)', padding: '10px', marginBottom: '10px' }}>
           Begin Lifestyle Program by BeOne
         </Typography>
 

@@ -28,7 +28,6 @@ const UserOrders = () => {
   const { AllOrder, setAllOrder } = useContext(AllOrderContext);
   useEffect(() => {
     console.log("all orders from userorders", AllOrder);
-
   }, [AllOrder]);
   // useEffect(() => {
   //   baseApi
@@ -72,8 +71,8 @@ const UserOrders = () => {
           MenuProps={{
             PaperProps: {
               sx: {
-                height: '500px',
-                overflowY: 'scroll'
+                height: "500px",
+                overflowY: "scroll",
               },
             },
           }}
@@ -85,10 +84,27 @@ const UserOrders = () => {
           ))}
         </Select>
       </FormControl>
+      {planningStep.status === "Done" ? (
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '10px', margin: '10px auto' }}>
+          <Chip
+            label={
+              "Hormone Test Date: " +
+              change_format(planningStep.data.StandardPackageHormone__testDate1)
+            }
+          />
+          <Chip
+            label={
+              "Metabolic Test Date: " +
+              change_format(
+                planningStep.data.StandardPackageMetabolic__testDate1
+              )
+            }
+          />
+        </div>
+      ) : (
+        ""
+      )}
       <Divider sx={{ margin: "1rem 0" }} />
-      {planningStep.status === "Done" ? <><Chip label={"Hormone Test Date: " + change_format(planningStep.data.StandardPackageHormone__testDate1)} />
-        <Chip label={"Metabolic Test Date: " + change_format(planningStep.data.StandardPackageMetabolic__testDate1)} /></> : ""}
-
     </>
   );
 };

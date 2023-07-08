@@ -54,7 +54,7 @@ const Navbar = (props) => {
           <Tooltip title="User Controls">
             <IconButton onClick={handleClick} size="small">
               <Avatar
-                alt="Arshcode"
+                alt={main_user.firstName}
                 src={`${BASE_API}/files/${main_user.profilePic}/serve`}
                 loading="lazy"
               />
