@@ -25,6 +25,7 @@ const Login = () => {
   const [pass, setPass] = useState(null);
   const navigate = useNavigate();
   useEffect(() => {
+    // console.log("enf base url", process.env.REACT_APP_BASE_URL);
 
     if (localStorage.getItem("token")) {
       const id = localStorage.getItem("currOrder");
