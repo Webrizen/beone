@@ -3,7 +3,7 @@ import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import Layout from "../components/Layout/layout";
 import baseApi from "../utils/common";
-
+import RouteGuard from "../components/routeguard";
 const Notification = () => {
   const navigate = useNavigate();
 
@@ -37,17 +37,18 @@ const Notification = () => {
     baseApi
       .get(`/notifications?ac=${ac}&mc=${mc}`)
       .then((response) => {
-        console.log(response);
+        console.log("notification data", response);
         handleOkClick();
       })
       .catch((error) => {
         console.log("notification error", error);
-        handleNotOkClick();
+        // handleNotOkClick();
       });
   }, []);
 
   return (
     <Layout>
+      <RouteGuard />
       <div className="unique-section">
         <div className="modelBoxxx">
           <h2>Hey 👋, Your Response Is Being Recorded...</h2>
