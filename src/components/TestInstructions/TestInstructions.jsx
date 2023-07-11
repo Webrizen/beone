@@ -308,8 +308,7 @@ const TestInstructionsComp = ({ data, planningData }) => {
               "Y" ? (
               <TableRow>
                 <TableCell style={{ color: "green" }}>
-                  You confirmed that you are ready to go ahead with the HormoneTest sampling
-                  on {change_format(main_data.StandardPackageHormonePrep__customerConfirmationDate)}.
+                You confirmed on {change_format(main_data.StandardPackageHormonePrep__customerConfirmationDate)} that you are ready to go ahead with the Hormone Test sampling.
                 </TableCell>
                 <TableCell>
                   <CheckCircleIcon
@@ -354,8 +353,7 @@ const TestInstructionsComp = ({ data, planningData }) => {
               "Y" ? (
               <TableRow>
                 <TableCell style={{ color: "green" }}>
-                  You confirmed on {change_format(main_data.StandardPackageHormoneSampleCollect__customerConfirmationDate)} that your sampling for HromoneTest was
-                  succesfull.Great!!
+                  You confirmed on {change_format(main_data.StandardPackageHormoneSampleCollect__customerConfirmationDate)} that your sampling for Hormone Test was succesfull.Great!!
                 </TableCell>
                 <TableCell>
                   <CheckCircleIcon
@@ -401,8 +399,7 @@ const TestInstructionsComp = ({ data, planningData }) => {
               "Y" ? (
               <TableRow>
                 <TableCell style={{ color: "green" }}>
-                  You confirmed that you are ready to go ahead with the Metabolic Test sampling
-                  on {change_format(main_data.StandardPackageMetabolicPrep__customerConfirmationDate)}.
+                You confirmed on {change_format(main_data.StandardPackageMetabolicPrep__customerConfirmationDate)} that you are ready to go ahead with the Metabolic Test sampling.
                 </TableCell>
                 <TableCell>
                   <CheckCircleIcon
