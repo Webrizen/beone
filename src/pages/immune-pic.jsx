@@ -54,7 +54,7 @@ const ImmunePic = () => {
               justifyContent: "center",
             }}
           >
-            <ImagePreview id={ImmunePic.data.immuneBalanceTestFileId} time={ImmunePic.data.completedAt} />
+            <ImagePreview id={ImmunePic.data.immuneBalanceTestFileId} time={ImmunePic.data.createdAt} />
           </Box>
         ) : (
           <ImmunePicComp />

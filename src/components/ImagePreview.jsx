@@ -17,7 +17,7 @@ const ImagePreview = ({ id, time }) => {
         </Typography>
         <Typography variant="body1" gutterBottom>
           Status: <span style={{ color: 'green' }}>Done</span> <br />
-          Time Uploaded: <span style={{ color: 'silver' }}>{change_format(time)}</span>
+          Time Uploaded: {time != null ? <span style={{ color: 'silver' }}>{change_format(time)}</span> : "N/A"}
         </Typography>
         <Button onClick={save} variant='contained' sx={{ width: 'min-content', whiteSpace: 'nowrap' }} startIcon={<CloudDownloadIcon />}>
           Download File
