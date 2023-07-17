@@ -97,7 +97,12 @@ function a11yProps(index: number) {
 }
 const Planning = (props) => {
   const [value, setValue] = useState(0);
-
+  const { main_user, setmain_user } = useContext(UserContext);
+  const [CycleStep, setCycleStep] = useState(true);
+  useEffect(() => {
+    main_user.gender === "Male" ? setCycleStep(false) : setCycleStep(true);
+    console.log("user data", main_user);
+  }, [main_user]);
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     console.log("setting new value for tabs", newValue);
     setValue(newValue);
@@ -128,30 +133,30 @@ const Planning = (props) => {
     const formattedDate = date.toLocaleDateString("en-US", options);
     return formattedDate;
   };
-  function dateFormat(input_D, format_D) {
-    // input date parsed
-    const date = new Date(input_D);
+  // function dateFormat(input_D, format_D) {
+  //   // input date parsed
+  //   const date = new Date(input_D);
 
-    //extracting parts of date string
-    const day = date.getDate();
-    const month = date.getMonth() + 1;
-    const year = date.getFullYear();
+  //   //extracting parts of date string
+  //   const day = date.getDate();
+  //   const month = date.getMonth() + 1;
+  //   const year = date.getFullYear();
 
-    //to replace month
-    format_D = format_D.replace("MM", month.toString().padStart(2, "0"));
+  //   //to replace month
+  //   format_D = format_D.replace("MM", month.toString().padStart(2, "0"));
 
-    //to replace year
-    if (format_D.indexOf("yyyy") > -1) {
-      format_D = format_D.replace("yyyy", year.toString());
-    } else if (format_D.indexOf("yy") > -1) {
-      format_D = format_D.replace("yy", year.toString().substr(2, 2));
-    }
+  //   //to replace year
+  //   if (format_D.indexOf("yyyy") > -1) {
+  //     format_D = format_D.replace("yyyy", year.toString());
+  //   } else if (format_D.indexOf("yy") > -1) {
+  //     format_D = format_D.replace("yy", year.toString().substr(2, 2));
+  //   }
 
-    //to replace day
-    format_D = format_D.replace("dd", day.toString().padStart(2, "0"));
+  //   //to replace day
+  //   format_D = format_D.replace("dd", day.toString().padStart(2, "0"));
 
-    return format_D;
-  }
+  //   return format_D;
+  // }
 
   const data = {
     testOption: "OPTION_1",
@@ -181,6 +186,11 @@ const Planning = (props) => {
   const o_id = localStorage.getItem("currOrder");
   const navigate = useNavigate();
   const handlePlanning = () => {
+    if (CycleStep && FinalData.hormoneTestWindowStartDate == null) {
+      alert("please Select your period commencement date");
+      setExpandedIdH(1);
+      return;
+    }
     baseApi
       .post(`/dashboard/${o_id}/complete-planning-task`, FinalData)
       .then((response) => {
@@ -231,6 +241,11 @@ const Planning = (props) => {
   const [HormoneSamplingDateEvents, setHormoneSamplingDateEvents] = useState(
     []
   );
+  // useEffect(() => {
+  //   FinalData.hormoneTestSamplingDate = null;
+  //   FinalData.hormoneTestWindowStartDate = null;
+  //   FinalData.metabolismTestSamplingDate = null;
+  // }, []);
   const [MetabolicEvents, setMetabolicEvents] = useState([]);
   useEffect(() => {
     console.log("HormoneSamplingDateEvents", HormoneSamplingDateEvents);
@@ -559,14 +574,14 @@ const Planning = (props) => {
                       </Box>
                       <Button
                         variant="contained"
-                        onClick={() => handleNextClickH(0)}
+                        onClick={() => handleNextClickH(CycleStep ? 0 : 1)}
                       >
                         Next
                       </Button>
                     </Box>
                   </AccordionDetails>
                 </Accordion>
-                <Accordion
+                {CycleStep ? <Accordion
                   expanded={expandedIdH === 1}
                   onChange={() => setExpandedIdH(1)}
                   ref={(ref) => (accordionRefs.current[1] = ref)}
@@ -654,7 +669,18 @@ const Planning = (props) => {
                       </Button>
                     </Box>
                   </AccordionDetails>
-                </Accordion>
+                </Accordion> : ""}
+                {!(main_user.gender) ? <Accordion
+                  expanded={expandedIdH === 1}
+                  onChange={() => setExpandedIdH(1)}
+                  ref={(ref) => (accordionRefs.current[1] = ref)}
+                >
+                  <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                    <Alert severity="warning">Select Gender First</Alert>
+                  </AccordionSummary>
+
+                </Accordion> : ""}
+
                 <Accordion
                   expanded={expandedIdH === 2}
                   onChange={() => setExpandedIdH(2)}
@@ -892,8 +918,7 @@ const Planning = (props) => {
                             disabled={
                               !(
                                 FinalData.hormoneTestSamplingDate != null &&
-                                FinalData.hormoneTestWindowStartDate !=
-                                null &&
+
                                 FinalData.metabolismTestSamplingDate != null
                               )
                             }
@@ -909,8 +934,8 @@ const Planning = (props) => {
               </div>
             </Box>
           </TabPanel>
-        </Box>
-      </Layout>
+        </Box >
+      </Layout >
     </>
   );
 };

@@ -316,9 +316,15 @@ const ProfileEdit = () => {
                           Height Unit
                         </InputLabel>
                         <Select
+                          defaultValue={main_user.heightUnit}
                           labelId="Height-unit-label"
                           id="Height-unit-select"
                           label="Height Unit"
+                          onChange={(event) => {
+                            newValue.heightUnit = event.target.value;
+                            setnewValue({ ...newValue });
+                            console.log(newValue);
+                          }}
                         >
                           <MenuItem value="ft">ft</MenuItem>
                           <MenuItem value="cm">cm</MenuItem>
@@ -356,9 +362,15 @@ const ProfileEdit = () => {
                           Weight Unit
                         </InputLabel>
                         <Select
+                          defaultValue={main_user.weightUnit}
                           labelId="weight-unit-label"
                           id="weight-unit-select"
                           label="Weight Unit"
+                          onChange={(event) => {
+                            newValue.weightUnit = event.target.value;
+                            setnewValue({ ...newValue });
+                            console.log(newValue);
+                          }}
                         >
                           <MenuItem value="Kg">Kg</MenuItem>
                           <MenuItem value="Stones">Stones</MenuItem>
@@ -368,7 +380,7 @@ const ProfileEdit = () => {
                     </Grid>
 
                     <Grid item xs={12} sm={6}>
-                      <TextField
+                      {/* <TextField
                         label="Gender"
                         variant="outlined"
                         fullWidth
@@ -378,7 +390,27 @@ const ProfileEdit = () => {
                           setnewValue({ ...newValue });
                           console.log(newValue);
                         }}
-                      />
+                      /> */}
+                      <FormControl variant="outlined" fullWidth>
+                        <InputLabel id="Gender-label">
+                          Gender
+                        </InputLabel>
+                        <Select
+                          defaultValue={main_user.gender}
+                          labelId="Gender-label"
+                          id="Gender-select"
+                          label="Gender"
+                          onChange={(event) => {
+                            newValue.gender = event.target.value;
+                            setnewValue({ ...newValue });
+                            console.log(newValue);
+                          }}
+                        >
+                          <MenuItem value="Male">Male</MenuItem>
+                          <MenuItem value="Female">Female</MenuItem>
+                          <MenuItem value="Other">Other</MenuItem>
+                        </Select>
+                      </FormControl>
                     </Grid>
 
                     <Grid item xs={12}>

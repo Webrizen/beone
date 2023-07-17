@@ -42,7 +42,7 @@ function App() {
         .get("/user")
         .then((response) => {
 
-          console.log("response data", response.data);
+          // console.log("response data", response.data);
           setmain_user({ ...response.data });
           console.log({ "main_user": main_user });
           baseApi.get(`/dashboard`).then((response) => {
